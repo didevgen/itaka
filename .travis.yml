@@ -10,7 +10,7 @@ before_script:
   - npm install -g @angular/cli
 script:
   - ng lint
-  - ng build --prod
+  - ng build --prod --base-href https://didevgen.github.io/itaka/
 deploy:
   provider: pages
   skip_cleanup: true
