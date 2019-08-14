@@ -1,0 +1,19 @@
+<div class="container">
+  <div class="form">
+    <h2>Login</h2>
+    <form [formGroup]="authForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="username">Username</label>
+        <input type="text" id="username" formControlName="username"/>
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" formControlName="password" />
+      </div>
+      <div class="form-group">
+        <button>Login</button>
+        <a [routerLink]="['/register']" class="message" >Not registered? Create an account</a>
+      </div>
+    </form>
+  </div>
+</div>
