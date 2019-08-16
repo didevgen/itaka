@@ -18,7 +18,7 @@ public authForm: FormGroup;
       password: ['', Validators.required]
     });
   }
-  onSubmit() {
+  getRawData() {
     console.log(this.authForm); // get data from form
   }
 }
