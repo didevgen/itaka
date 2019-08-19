@@ -14,7 +14,7 @@ public authForm: FormGroup;
 
   ngOnInit() {
     this.authForm = this.formBuilder.group({
-      userName: ['', Validators.required],
+      email: ['', Validators.required],
       password: ['', Validators.required]
     });
   }
