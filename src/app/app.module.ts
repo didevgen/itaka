@@ -12,23 +12,22 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material.module';
 
-
 @NgModule({
-  declarations: [
-    AppComponent,
-    LoginComponent,
-    RegisterComponent,
-    HomeComponent
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    StoreModule.forRoot(fromApp.appReducer),
-    ReactiveFormsModule,
-    BrowserAnimationsModule,
-    MaterialModule,
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent,
+        LoginComponent,
+        RegisterComponent,
+        HomeComponent,
+    ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        StoreModule.forRoot(fromApp.appReducer),
+        ReactiveFormsModule,
+        BrowserAnimationsModule,
+        MaterialModule,
+    ],
+    providers: [],
+    bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

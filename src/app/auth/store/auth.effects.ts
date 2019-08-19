@@ -6,15 +6,12 @@ import { of } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 
-
 export interface AuthResponseData {
-  kind: string;
-  idToken: string;
-  email: string;
-  refreshToken: string;
-  expiresIn: string;
-  localId: string;
-  registered?: boolean;
+    kind: string;
+    idToken: string;
+    email: string;
+    refreshToken: string;
+    expiresIn: string;
+    localId: string;
+    registered?: boolean;
 }
-
-
