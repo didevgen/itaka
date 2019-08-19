@@ -1,15 +1,18 @@
 export class User {
-  constructor(
-    public email: string,
-    public id: string,
-    private token: string,
-    private tokenExpirationDate: Date
-  ) {}
+    constructor(
+        public email: string,
+        public id: string,
+        private token: string,
+        private tokenExpirationDate: Date,
+    ) {}
 
-  get checkToken() {
-    if (!this.tokenExpirationDate || new Date() > this.tokenExpirationDate) {
-      return null;
+    get checkToken() {
+        if (
+            !this.tokenExpirationDate ||
+            new Date() > this.tokenExpirationDate
+        ) {
+            return null
+        }
+        return this.token
     }
-    return this.token;
-  }
 }
