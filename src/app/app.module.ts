@@ -1,33 +1,30 @@
-import { BrowserModule } from "@angular/platform-browser";
-import { NgModule } from "@angular/core";
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NgModule } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
+import { StoreModule } from '@ngrx/store';
 
-import { AppRoutingModule } from "./app-routing.module";
-import { AppComponent } from "./app.component";
-import { StoreModule } from "@ngrx/store";
-import * as fromApp from "./store/app.reducer";
-import { LoginComponent } from "./login/login.component";
-import { RegisterComponent } from "./register/register.component";
-import { HomeComponent } from "./home/home.component";
-import { ReactiveFormsModule } from "@angular/forms";
-import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
-import { MaterialModule } from "./material.module";
-import { NotFoundComponent } from "./not-found/not-found.component";
+import { AppComponent } from './app.component';
+import { MaterialModule } from './material.module';
+import * as fromApp from './store/app.reducer';
+import { HomeModule } from './components/home/home.module';
+import { RegisterComponent } from './components/register/register.component';
+import { NotFoundComponent } from './components/not-found/not-found.component';
+import {LoginComponent} from './components/login/login.component';
+// import { LoginModule } from './components/login/login.module';
+import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
-    declarations: [
-        AppComponent,
-        LoginComponent,
-        RegisterComponent,
-        HomeComponent,
-        NotFoundComponent,
-    ],
+    declarations: [AppComponent, RegisterComponent, NotFoundComponent, LoginComponent], // LoginComponent,
     imports: [
         BrowserModule,
-        AppRoutingModule,
         StoreModule.forRoot(fromApp.appReducer),
         ReactiveFormsModule,
         BrowserAnimationsModule,
         MaterialModule,
+        HomeModule,
+        // LoginModule,
+        AppRoutingModule
     ],
     providers: [],
     bootstrap: [AppComponent],

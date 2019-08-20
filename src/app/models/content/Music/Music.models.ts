@@ -1,7 +1,7 @@
 interface Song {
-    title: string
+    title: string;
 }
 
 export interface MusicContent {
-    song: Song
+    song: Song;
 }
