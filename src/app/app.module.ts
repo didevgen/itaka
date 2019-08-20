@@ -9,6 +9,8 @@ import { HomeComponent } from './home/home.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material.module';
+import { TestUploadComponent } from './test-upload/test-upload.component';
+import {HttpClientModule} from '@angular/common/http'
 
 
 @NgModule({
@@ -16,7 +18,8 @@ import { MaterialModule } from './material.module';
     AppComponent,
     LoginComponent,
     RegisterComponent,
-    HomeComponent
+    HomeComponent,
+    TestUploadComponent
   ],
   imports: [
     BrowserModule,
@@ -24,6 +27,7 @@ import { MaterialModule } from './material.module';
     ReactiveFormsModule,
     BrowserAnimationsModule,
     MaterialModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
