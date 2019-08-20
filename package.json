@@ -6,13 +6,13 @@
         "start": "ng serve",
         "build": "ng build",
         "test": "ng test",
-        "lint": "ng lint",
+        "lint": "ng lint --fix",
         "e2e": "ng e2e",
         "format": "prettier --write \"**/*.{ts,js,json,css,md}\""
     },
     "husky": {
         "hooks": {
-            "pre-commit": "yarn format"
+            "pre-commit": "yarn format && yarn lint"
         }
     },
     "private": true,
