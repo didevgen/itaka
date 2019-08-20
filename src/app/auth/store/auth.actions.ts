@@ -1,57 +1,57 @@
-import { Action } from "@ngrx/store"
+import { Action } from '@ngrx/store';
 
 export const enum AuthTypes {
-    LOGIN_START = "[Auth] Login Start",
-    AUTHENTICATE_SUCCESS = "[Auth] Login",
-    AUTHENTICATE_FAIL = "[Auth] Login Fail",
-    SIGNUP_START = "[Auth] Signup Start",
-    CLEAR_ERROR = "[Auth] Clear Error",
-    AUTO_LOGIN = "[Auth] Auto Login",
-    LOGOUT = "[Auth] Logout",
+    LOGIN_START = '[Auth] Login Start',
+    AUTHENTICATE_SUCCESS = '[Auth] Login',
+    AUTHENTICATE_FAIL = '[Auth] Login Fail',
+    SIGNUP_START = '[Auth] Signup Start',
+    CLEAR_ERROR = '[Auth] Clear Error',
+    AUTO_LOGIN = '[Auth] Auto Login',
+    LOGOUT = '[Auth] Logout',
 }
 
 export class AuthenticateSuccess implements Action {
-    readonly type = AuthTypes.AUTHENTICATE_SUCCESS
+    readonly type = AuthTypes.AUTHENTICATE_SUCCESS;
 
     constructor(
         public payload: {
-            email: string
-            userId: string
-            token: string
-            expirationDate: Date
-            redirect: boolean
+            email: string;
+            userId: string;
+            token: string;
+            expirationDate: Date;
+            redirect: boolean;
         },
     ) {}
 }
 
 export class Logout implements Action {
-    readonly type = AuthTypes.LOGOUT
+    readonly type = AuthTypes.LOGOUT;
 }
 
 export class LoginStart implements Action {
-    readonly type = AuthTypes.LOGIN_START
+    readonly type = AuthTypes.LOGIN_START;
 
     constructor(public payload: { email: string; password: string }) {}
 }
 
 export class AuthenticateFail implements Action {
-    readonly type = AuthTypes.AUTHENTICATE_FAIL
+    readonly type = AuthTypes.AUTHENTICATE_FAIL;
 
     constructor(public payload: string) {}
 }
 
 export class SignupStart implements Action {
-    readonly type = AuthTypes.SIGNUP_START
+    readonly type = AuthTypes.SIGNUP_START;
 
     constructor(public payload: { email: string; password: string }) {}
 }
 
 export class ClearError implements Action {
-    readonly type = AuthTypes.CLEAR_ERROR
+    readonly type = AuthTypes.CLEAR_ERROR;
 }
 
 export class AutoLogin implements Action {
-    readonly type = AuthTypes.AUTO_LOGIN
+    readonly type = AuthTypes.AUTO_LOGIN;
 }
 
 export type AuthActions =
@@ -61,4 +61,4 @@ export type AuthActions =
     | AuthenticateFail
     | SignupStart
     | ClearError
-    | AutoLogin
+    | AutoLogin;

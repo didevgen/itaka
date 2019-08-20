@@ -1,10 +1,10 @@
-import { NgModule } from "@angular/core"
+import { NgModule } from '@angular/core';
 import {
     MatButtonModule,
     MatCardModule,
     MatIconModule,
     MatInputModule,
-} from "@angular/material"
+} from '@angular/material';
 
 @NgModule({
     imports: [MatInputModule, MatCardModule, MatButtonModule, MatIconModule],
