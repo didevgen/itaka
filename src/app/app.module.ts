@@ -1,30 +1,31 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { StoreModule } from '@ngrx/store';
 
-import { AppComponent } from './app.component';
-import { MaterialModule } from './material.module';
 import * as fromApp from './store/app.reducer';
+import { MaterialModule } from './material.module';
 import { HomeModule } from './components/home/home.module';
-import { RegisterComponent } from './components/register/register.component';
-import { NotFoundComponent } from './components/not-found/not-found.component';
-import {LoginComponent} from './components/login/login.component';
-// import { LoginModule } from './components/login/login.module';
+import { LoginModule } from './components/login/login.module';
+import { RegisterModule } from './components/register/register.module';
+import { NotFoundModule } from './components/not-found/not-found.module';
+import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
-    declarations: [AppComponent, RegisterComponent, NotFoundComponent, LoginComponent], // LoginComponent,
+    declarations: [AppComponent],
     imports: [
+        MaterialModule,
         BrowserModule,
         StoreModule.forRoot(fromApp.appReducer),
-        ReactiveFormsModule,
+        FormsModule,
         BrowserAnimationsModule,
-        MaterialModule,
         HomeModule,
-        // LoginModule,
-        AppRoutingModule
+        LoginModule,
+        RegisterModule,
+        NotFoundModule,
+        AppRoutingModule,
     ],
     providers: [],
     bootstrap: [AppComponent],

@@ -2,11 +2,11 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import {RouterModule} from '@angular/router';
-import { HomeComponent } from './home.component';
+import { NotFoundComponent } from './not-found.component';
 
 @NgModule({
-    declarations: [HomeComponent],
+    declarations: [NotFoundComponent],
     imports: [CommonModule, RouterModule],
-    exports: [HomeComponent],
+    exports: [NotFoundComponent],
 })
-export class HomeModule {}
+export class NotFoundModule {}
