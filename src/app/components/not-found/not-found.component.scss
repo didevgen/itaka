@@ -1,29 +1,22 @@
-div{
-  text-align: center;
-  //min-height: 100%;
-  //overflow: hidden;
-
-  h2{
-    color: red;
-    font-size: 10em;
-    margin: 0 auto;
-
-  }
-  h3{
-    color: red;
-    font-size: 5em;
-    margin: 0 auto;
-
-  }
-  p{
-    font-size: 2em;
-    margin: 0 auto;
-  }
-  a{
-    font-size: 2em;
-    margin-right: 1em;
-    padding: 0.3em;
-  }
+div {
+    text-align: center;
+    h2 {
+        color: red;
+        font-size: 10em;
+        margin: 0 auto;
+    }
+    h3 {
+        color: red;
+        font-size: 5em;
+        margin: 0 auto;
+    }
+    p {
+        font-size: 2em;
+        margin: 0 auto;
+    }
+    a {
+        font-size: 2em;
+        margin-right: 1em;
+        padding: 0.3em;
+    }
 }
-
-
