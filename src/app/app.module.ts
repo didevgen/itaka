@@ -11,6 +11,7 @@ import { HomeComponent } from './home/home.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material.module';
+import { ProfileEditComponent } from './profile-edit/profile-edit.component';
 
 @NgModule({
     declarations: [
@@ -18,6 +19,7 @@ import { MaterialModule } from './material.module';
         LoginComponent,
         RegisterComponent,
         HomeComponent,
+        ProfileEditComponent,
     ],
     imports: [
         BrowserModule,

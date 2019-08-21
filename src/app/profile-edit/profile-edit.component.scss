@@ -1,0 +1,56 @@
+.mat-checkbox {
+  margin: 0 10px;
+}
+.mat-form-field {
+  font-size: 18px;
+}
+.mat-card-actions {
+  text-align: center;
+}
+.mat-raised-button {
+  width: 180px;
+  font-size: 18px;
+}
+.custom-file-input::before {
+  content: 'Upload avatar';
+  display: inline-block;
+  background: #ff4081;
+  color: white;
+  padding: 8px;
+  -webkit-user-select: none;
+  cursor: pointer;
+  margin-left: 60px;
+}
+#upload {
+  visibility: hidden
+}
+.profile {
+  width: 90%;
+  margin: 0 auto 100px;
+  padding-bottom: 40px;
+}
+.profileInfo {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+}
+.profileAvatar {
+  display: flex;
+  flex-direction: column;
+}
+
+.profileUserSettings {
+  margin-left: 100px;
+  width: 60%;
+}
+.profileUserSettings > * {
+  width: 35%;
+  margin-right: 25px;
+}
+.profileUserName {
+  color: #ff4081;
+  font-size: 18px;
+  font-weight: 600;
+  margin: 15px;
+}
