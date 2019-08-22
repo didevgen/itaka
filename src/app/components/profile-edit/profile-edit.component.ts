@@ -19,7 +19,7 @@ export class ProfileEditComponent implements OnInit {
             password: ['', Validators.required],
             bio: ['', Validators.required],
             skills: [''],
-            avatar: ['']
+            avatar: [''],
         });
     }
 
@@ -28,18 +28,18 @@ export class ProfileEditComponent implements OnInit {
             const reader = new FileReader();
             reader.readAsDataURL(event.target.files[0]);
             reader.onload = (urlEvent: any) => {
-              this.url = urlEvent.target.result;
-              this.profileForm.get('avatar').setValue(event.target.files[0]);
+                this.url = urlEvent.target.result;
+                this.profileForm.get('avatar').setValue(event.target.files[0]);
             };
         }
     }
 
     getRawData(): void {
-      const formData = new FormData();
-      formData.append('email', this.profileForm.get('email').value);
-      formData.append('file', this.profileForm.get('avatar').value);
-      formData.append('password', this.profileForm.get('password').value);
-      formData.append('bio', this.profileForm.get('bio').value);
-      formData.append('avatar', this.profileForm.get('avatar').value);
+        const formData = new FormData();
+        formData.append('email', this.profileForm.get('email').value);
+        formData.append('file', this.profileForm.get('avatar').value);
+        formData.append('password', this.profileForm.get('password').value);
+        formData.append('bio', this.profileForm.get('bio').value);
+        formData.append('avatar', this.profileForm.get('avatar').value);
     }
 }
