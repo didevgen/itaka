@@ -1,15 +1,18 @@
-<mat-grid-list cols="1" rowHeight="4:3">
+<mat-grid-list cols="1">
     <mat-grid-tile>
         <div class="mat-figure">
-            <h2>404</h2>
-            <h3>NOT FOUND</h3>
-            <p>
-                in all likelihood the page you're looking for doesn't exist,
-                please check your address bar and try again...<br />
-                or you can go to the next pages:
-            </p>
-            <a [routerLink]="['']">Home page</a>
-            <a [routerLink]="['/login']">Login page</a>
+            <div>
+                <span>404</span>
+            </div>
+            <div>
+                <span>NOT FOUND</span>
+            </div>
+            <a [routerLink]="['']">
+                <span class="material-icons md-36">home</span>Home page</a
+            >
+            <a [routerLink]="['/login']">
+                <span class="material-icons md-36">input </span><span>Login page</span></a
+            >
         </div>
     </mat-grid-tile>
 </mat-grid-list>
