@@ -29,26 +29,25 @@
   margin: 0 auto 100px;
   padding-bottom: 40px;
 }
-.profileInfo {
+.profile__info {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   width: 100%;
 }
-.profileAvatar {
+.profile__avatar {
   display: flex;
   flex-direction: column;
 }
-
-.profileUserSettings {
+.profile__user-settings {
   margin-left: 100px;
   width: 60%;
 }
-.profileUserSettings > * {
+.profile__user-settings > * {
   width: 35%;
   margin-right: 25px;
 }
-.profileUserName {
+.profile__user-name{
   color: #ff4081;
   font-size: 18px;
   font-weight: 600;

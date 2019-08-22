@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { RegisterComponent } from './register/register.component';
-import { LoginComponent } from './login/login.component';
-import { HomeComponent } from './home/home.component';
-import { ProfileEditComponent } from './profile-edit/profile-edit.component';
+import { RegisterComponent } from './components/auth/register/register.component';
+import { LoginComponent } from './components/auth/login/login.component';
+import { HomeComponent } from './components/home/home.component';
+import { ProfileEditComponent } from './components/profile-edit/profile-edit.component';
 
 const routes: Routes = [
     { path: '', component: HomeComponent },

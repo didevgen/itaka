@@ -2,18 +2,20 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
-    selector: 'app-login',
-    templateUrl: './login.component.html',
-    styleUrls: ['./login.component.scss'],
+    selector: 'app-register',
+    templateUrl: './register.component.html',
+    styleUrls: ['../auth.component.scss'],
 })
-export class LoginComponent implements OnInit {
+export class RegisterComponent implements OnInit {
     public authForm: FormGroup;
     constructor(private formBuilder: FormBuilder) {}
 
     ngOnInit() {
         this.authForm = this.formBuilder.group({
+            name: ['', Validators.required],
             email: ['', Validators.required],
             password: ['', Validators.required],
+            confirmPassword: ['', Validators.required],
         });
     }
     getRawData() {

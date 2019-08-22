@@ -13,26 +13,33 @@ export class ProfileEditComponent implements OnInit {
 
     constructor(private formBuilder: FormBuilder) {}
 
-    ngOnInit() {
+    ngOnInit(): void {
         this.profileForm = this.formBuilder.group({
             email: ['', Validators.required],
             password: ['', Validators.required],
             bio: ['', Validators.required],
             skills: [''],
+            avatar: ['']
         });
     }
 
-    onSelectFile(event) {
+    addAvatar(event): void {
         if (event.target.files && event.target.files[0]) {
             const reader = new FileReader();
-            reader.readAsDataURL(event.target.files[0]); // read file as data url
+            reader.readAsDataURL(event.target.files[0]);
             reader.onload = (urlEvent: any) => {
-                // called once readAsDataURL is completed
-                this.url = urlEvent.target.result;
+              this.url = urlEvent.target.result;
+              this.profileForm.get('avatar').setValue(event.target.files[0]);
             };
         }
     }
-    getRawData() {
-        console.log(this.profileForm); // get data from form
+
+    getRawData(): void {
+      const formData = new FormData();
+      formData.append('email', this.profileForm.get('email').value);
+      formData.append('file', this.profileForm.get('avatar').value);
+      formData.append('password', this.profileForm.get('password').value);
+      formData.append('bio', this.profileForm.get('bio').value);
+      formData.append('avatar', this.profileForm.get('avatar').value);
     }
 }

@@ -6,14 +6,14 @@
     <hr>
     <form [formGroup]="profileForm" (ngSubmit)="getRawData()">
       <mat-card-content>
-        <div class="profileInfo">
-          <div class="profileAvatar">
+        <div class="profile__info">
+          <div class="profile__avatar">
             <img [src]="url || defaultImage"  alt="avatar" height="250" width="250">
             <label class="custom-file-input" for="upload"></label>
-            <input id="upload" type="file" (change)="onSelectFile($event)">
+            <input id="upload" type="file" (change)="addAvatar($event)" accept=".png, .pdf, .jpg, .jpeg">
           </div>
-          <div class="profileUserSettings">
-            <div class="profileUserName">
+          <div class="profile__user-settings">
+            <div class="profile__user-name">
               Alladin  <!--name from database -->
             </div>
             <mat-form-field>
