@@ -1,20 +1,23 @@
 .main__side-navigation {
-  position: fixed;
-  display: flex;
-  left: 0;
-  top: 20%;
-  align-items: center;
-  justify-content: space-around;
-  flex-direction: column;
-  width: 70px;
-  height: 40%;
+    position: fixed;
+    display: flex;
+    left: 0;
+    top: 20%;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: column;
+    width: 70px;
+    height: 40%;
 }
 .sidebar__button--base {
-  color: lightgrey;
+    color: lightgrey;
 }
 .sidebar__button:hover {
-  color: #ff4081;
+    color: #ff4081;
 }
-.sidebar__button--active {
-  color: #ff4081;
+.sidebar__button:focus {
+    color: #ff4081;
+}
+.sidebar__button--selected {
+    color: #ff4081;
 }

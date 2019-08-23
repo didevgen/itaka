@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import {
     MatButtonModule,
     MatCardModule,
-    MatIconModule,
     MatInputModule,
 } from '@angular/material';
 import { MatGridListModule } from '@angular/material/grid-list';
@@ -12,6 +11,7 @@ import { MatBadgeModule } from '@angular/material/badge';
 import { MatListModule } from '@angular/material/list';
 import { MatRippleModule } from '@angular/material/core';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatIconModule } from '@angular/material/icon';
 @NgModule({
     imports: [
         MatInputModule,

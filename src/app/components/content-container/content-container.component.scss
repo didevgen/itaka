@@ -1,48 +1,37 @@
 .main__content-container {
-  margin-top: 70px;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  max-width: 100vw;
-  overflow-x: hidden;
+    margin-top: 70px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    max-width: 100vw;
+    overflow-x: hidden;
 }
 
 .main__content-grid {
-  margin: 0 auto;
-  border: none;
-  display: grid;
-  grid-gap: 10px;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  grid-auto-rows: 200px;
-  height: 100%;
-  min-width: 70vw;
-  max-width: 95vw;
+    margin: 0 auto;
+    border: none;
+    display: grid;
+    grid-gap: 10px;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    grid-auto-rows: 200px;
+    height: 100%;
+    min-width: 70vw;
+    max-width: 95vw;
 }
 
 .video {
-  grid-row-end: span 2;
-  width: 100%;
+    grid-row-end: span 2;
+    width: 100%;
 }
 .photo {
-  width: 100%;
-  grid-row-end: span 2;
+    width: 100%;
+    grid-row-end: span 2;
 }
 .music {
-  width: 100%;
-  grid-row-end: span 1;
+    width: 100%;
+    grid-row-end: span 1;
 }
 .blog {
-  width: 100%;
-  grid-row-end: span 3;
-}
-
-.main__add-button {
-  position: fixed;
-  display: flex;
-  right: 0;
-  top: 50%;
-  align-items: center;
-  flex-direction: column;
-  width: 70px;
-  height: 100%;
+    width: 100%;
+    grid-row-end: span 3;
 }
