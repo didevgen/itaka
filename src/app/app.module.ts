@@ -7,7 +7,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material.module';
 import { HeaderComponent } from './components/header/header.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
-import { ContentContainerComponent } from './components/content-container/content-container.component';
+import { ContentContainerComponent } from './components/home page/content-container/content-container.component';
 import { StoreModule } from '@ngrx/store';
 import * as fromApp from './store/app.reducer';
 import { LoginComponent } from './components/auth/login/login.component';
