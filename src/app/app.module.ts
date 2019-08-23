@@ -13,25 +13,28 @@ import * as fromApp from './store/app.reducer';
 import { LoginComponent } from './components/auth/login/login.component';
 import { RegisterComponent } from './components/auth/register/register.component';
 import { HomeComponent } from './components/home/home.component';
+import { AdminModule } from './admin.module';
+
 @NgModule({
-  declarations: [
-    AppComponent,
-    HeaderComponent,
-    SidebarComponent,
-    ContentContainerComponent,
-    LoginComponent,
-    RegisterComponent,
-    HomeComponent,
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    ReactiveFormsModule,
-    BrowserAnimationsModule,
-    MaterialModule,
-    StoreModule.forRoot(fromApp.appReducer)
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent,
+        LoginComponent,
+        RegisterComponent,
+        HomeComponent,
+        HeaderComponent,
+        SidebarComponent,
+        ContentContainerComponent,
+    ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        StoreModule.forRoot(fromApp.appReducer),
+        ReactiveFormsModule,
+        BrowserAnimationsModule,
+        MaterialModule,
+        AdminModule,
+    ],
+    providers: [],
+    bootstrap: [AppComponent],
 })
 export class AppModule {}
