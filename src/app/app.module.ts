@@ -38,6 +38,9 @@ import { ContentBlogComponent } from './components/admin-page/content-blog/conte
         ContentAudioComponent,
         ContentVideoComponent,
         ContentBlogComponent,
+        HeaderComponent,
+        SidebarComponent,
+        ContentContainerComponent,
     ],
     imports: [
         BrowserModule,
@@ -49,25 +52,5 @@ import { ContentBlogComponent } from './components/admin-page/content-blog/conte
     ],
     providers: [],
     bootstrap: [AppComponent],
-@NgModule({
-  declarations: [
-    AppComponent,
-    HeaderComponent,
-    SidebarComponent,
-    ContentContainerComponent,
-    LoginComponent,
-    RegisterComponent,
-    HomeComponent,
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    ReactiveFormsModule,
-    BrowserAnimationsModule,
-    MaterialModule,
-    StoreModule.forRoot(fromApp.appReducer)
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
 })
 export class AppModule {}
