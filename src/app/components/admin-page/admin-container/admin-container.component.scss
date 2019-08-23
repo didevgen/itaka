@@ -1,0 +1,41 @@
+.admin-container {
+    display: flex;
+}
+
+.users-container {
+    background-color: white;
+    width: 50vw;
+    height: 100vh;
+}
+.users {
+    overflow: auto;
+    height: 93.3vh;
+}
+
+.content-container {
+    background-color: white;
+    width: 50vw;
+    height: 100vh;
+}
+.content {
+    overflow: auto;
+    height: 93.3vh;
+}
+
+.icons:hover {
+    color: #ff4081;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+::-webkit-scrollbar-track {
+    background: #ffffff;
+}
+::-webkit-scrollbar-thumb {
+    background: #888888;
+}
+::-webkit-scrollbar-thumb:hover {
+    border: 1px solid #2e2e2e;
+}
