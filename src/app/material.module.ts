@@ -6,6 +6,11 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatBadgeModule } from '@angular/material/badge';
+import { MatListModule } from '@angular/material/list';
+import { MatRippleModule } from '@angular/material/core';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import {
     MatButtonModule,
     MatCardModule,
@@ -26,6 +31,12 @@ import {
         MatMenuModule,
         MatTabsModule,
         MatExpansionModule,
+        MatToolbarModule,
+        MatSidenavModule,
+        MatBadgeModule,
+        MatListModule,
+        MatRippleModule,
+        MatTooltipModule,
     ],
     exports: [
         MatInputModule,
@@ -39,6 +50,12 @@ import {
         MatMenuModule,
         MatTabsModule,
         MatExpansionModule,
+        MatToolbarModule,
+        MatSidenavModule,
+        MatBadgeModule,
+        MatListModule,
+        MatRippleModule,
+        MatTooltipModule,
     ],
 })
 export class MaterialModule {}
