@@ -15,6 +15,9 @@
             "pre-commit": "yarn format && yarn lint"
         }
     },
+    "publishConfig": {
+      "registry": "https://registry.npmjs.org"
+    },
     "private": true,
     "dependencies": {
         "@angular/animations": "~8.2.0",
