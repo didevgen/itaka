@@ -22,18 +22,25 @@
 .video {
   grid-row-end: span 2;
   width: 100%;
+  background-color: aquamarine
 }
 .photo {
   width: 100%;
   grid-row-end: span 2;
+  
+  background-color: red
 }
 .music {
   width: 100%;
   grid-row-end: span 1;
+  
+  background-color: blue
 }
 .blog {
   width: 100%;
   grid-row-end: span 3;
+  
+  background-color: greenyellow
 }
 
 .main__add-button {
