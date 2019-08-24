@@ -7,11 +7,11 @@ import { UploaderComponent } from '../app/components/test-upload/uploader/upload
 import { AdminContainerComponent } from './components/admin-page/admin-container/admin-container.component';
 
 const routes: Routes = [
-  { path: '', component: HomeComponent },
-  { path: 'register', component: RegisterComponent },
-  { path: 'login', component: LoginComponent },
-  { path: 'admin', component: AdminContainerComponent },
-  { path: 'uploadFile', component: UploaderComponent},
+    { path: '', component: HomeComponent },
+    { path: 'register', component: RegisterComponent },
+    { path: 'login', component: LoginComponent },
+    { path: 'admin', component: AdminContainerComponent },
+    { path: 'uploadFile', component: UploaderComponent },
 ];
 
 @NgModule({
