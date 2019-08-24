@@ -13,7 +13,7 @@ const routes: Routes = [
     { path: 'login', component: LoginComponent },
     { path: 'admin', component: AdminContainerComponent },
     { path: 'uploadFile', component: UploaderComponent },
-    { path: '**', component: NotFoundComponent }
+    { path: '**', component: NotFoundComponent },
 ];
 
 @NgModule({
