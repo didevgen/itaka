@@ -57,6 +57,13 @@ MIT
 @angular/core
 MIT
 
+@angular/fire
+MIT
+
+@angular/fire/firestore
+
+@angular/fire/storage
+
 @angular/forms
 MIT
 
@@ -101,6 +108,8 @@ THE SOFTWARE.
 
 @angular/material/menu
 
+@angular/material/progress-bar
+
 @angular/material/tabs
 
 @angular/material/toolbar
@@ -112,6 +121,18 @@ MIT
 
 @angular/router
 MIT
+
+@firebase/app
+Apache-2.0
+
+@firebase/logger
+Apache-2.0
+
+@firebase/storage
+Apache-2.0
+
+@firebase/util
+Apache-2.0
 
 @ngrx/store
 MIT
@@ -138,6 +159,10 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
+
+firebase/app
+
+firebase/storage
 
 rxjs
 Apache-2.0
