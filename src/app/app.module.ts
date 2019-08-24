@@ -6,13 +6,10 @@ import { StoreModule } from '@ngrx/store';
 
 import * as fromApp from './store/app.reducer';
 import { MaterialModule } from './material.module';
-<<<<<<< HEAD
 import { HeaderComponent } from './components/homepage/header/header.component';
 import { SidebarComponent } from './components/homepage/sidebar/sidebar.component';
 import { ContentContainerComponent } from './components/homepage/content-container/content-container.component';
-import { StoreModule } from '@ngrx/store';
-import * as fromApp from './store/app.reducer';
-=======
+
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireStorageModule } from 'angularfire2/storage';
 import { AngularFirestore } from 'angularfire2/firestore';
@@ -20,10 +17,6 @@ import { DropzoneDirective } from './components/test-upload/upload.directive';
 import { UploaderComponent } from './components/test-upload/uploader/uploader.component';
 import { UploadTaskComponent } from './components/test-upload/upload-task/upload-task.component';
 import { environment } from '../environments/environment';
-import { HeaderComponent } from './components/header/header.component';
-import { SidebarComponent } from './components/sidebar/sidebar.component';
-import { ContentContainerComponent } from './components/content-container/content-container.component';
->>>>>>> d9f95a4af7b3566f1fdc90c2cdc242b7ef1b21b6
 import { LoginComponent } from './components/auth/login/login.component';
 import { RegisterComponent } from './components/auth/register/register.component';
 import { HomeComponent } from './components/home/home.component';
