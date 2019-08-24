@@ -13,6 +13,8 @@ import * as fromApp from './store/app.reducer';
 import { LoginComponent } from './components/auth/login/login.component';
 import { RegisterComponent } from './components/auth/register/register.component';
 import { HomeComponent } from './components/home/home.component';
+import { CallbackComponent } from './components/auth/callback/callback.component'
+import { ProfileComponent } from './components/auth/profile/profile.component'
 @NgModule({
   declarations: [
     AppComponent,
@@ -22,6 +24,8 @@ import { HomeComponent } from './components/home/home.component';
     LoginComponent,
     RegisterComponent,
     HomeComponent,
+    CallbackComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
