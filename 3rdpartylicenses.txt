@@ -98,6 +98,8 @@ THE SOFTWARE.
 
 @angular/material/checkbox
 
+@angular/material/dialog
+
 @angular/material/divider
 
 @angular/material/expansion
@@ -167,6 +169,9 @@ THE SOFTWARE.
 firebase/app
 
 firebase/storage
+
+ngx-image-cropper
+MIT
 
 rxjs
 Apache-2.0
