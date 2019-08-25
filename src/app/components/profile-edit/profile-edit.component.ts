@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
+import { ModalDialogComponent } from './modal-dialog/modal-dialog.component';
 
 @Component({
     selector: 'app-profile-edit',
@@ -11,7 +13,7 @@ export class ProfileEditComponent implements OnInit {
     url: string;
     defaultImage = '../../assets/avatarDefault.png';
 
-    constructor(private formBuilder: FormBuilder) {}
+    constructor(private formBuilder: FormBuilder, public dialog: MatDialog) {}
 
     ngOnInit(): void {
         this.profileForm = this.formBuilder.group({
@@ -23,23 +25,20 @@ export class ProfileEditComponent implements OnInit {
         });
     }
 
-    addAvatar(event): void {
-        if (event.target.files && event.target.files[0]) {
-            const reader = new FileReader();
-            reader.readAsDataURL(event.target.files[0]);
-            reader.onload = (urlEvent: any) => {
-                this.url = urlEvent.target.result;
-                this.profileForm.get('avatar').setValue(event.target.files[0]);
-            };
-        }
+  addAvatar(event) {
+        const dialogRef = this.dialog.open(ModalDialogComponent, {
+            height: '500px',
+            width: '500px',
+            data: event,
+        });
+
+        dialogRef.afterClosed().subscribe(result => {
+            this.url = result;
+            this.profileForm.get('avatar').setValue(event.target.files[0]);
+        });
     }
 
     getRawData(): void {
-        const formData = new FormData();
-        formData.append('email', this.profileForm.get('email').value);
-        formData.append('file', this.profileForm.get('avatar').value);
-        formData.append('password', this.profileForm.get('password').value);
-        formData.append('bio', this.profileForm.get('bio').value);
-        formData.append('avatar', this.profileForm.get('avatar').value);
+        console.log(this.profileForm);
     }
 }

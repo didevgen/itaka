@@ -5,6 +5,7 @@ import {
     MatIconModule,
     MatInputModule,
     MatCheckboxModule,
+    MatDialogModule,
 } from '@angular/material';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -27,6 +28,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
         MatRippleModule,
         MatTooltipModule,
         MatCheckboxModule,
+        MatDialogModule,
     ],
     exports: [
         MatInputModule,
@@ -41,6 +43,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
         MatRippleModule,
         MatTooltipModule,
         MatCheckboxModule,
+        MatDialogModule,
     ],
 })
 export class MaterialModule {}

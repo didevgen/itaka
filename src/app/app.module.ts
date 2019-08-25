@@ -14,6 +14,9 @@ import { LoginComponent } from './components/auth/login/login.component';
 import { RegisterComponent } from './components/auth/register/register.component';
 import { HomeComponent } from './components/home/home.component';
 import { ProfileEditComponent } from './components/profile-edit/profile-edit.component';
+import { ImageCropperModule } from 'ngx-image-cropper';
+import { ModalDialogComponent } from './components/profile-edit/modal-dialog/modal-dialog.component';
+
 @NgModule({
     declarations: [
         AppComponent,
@@ -24,6 +27,7 @@ import { ProfileEditComponent } from './components/profile-edit/profile-edit.com
         RegisterComponent,
         HomeComponent,
         ProfileEditComponent,
+        ModalDialogComponent,
     ],
     imports: [
         BrowserModule,
@@ -31,9 +35,11 @@ import { ProfileEditComponent } from './components/profile-edit/profile-edit.com
         ReactiveFormsModule,
         BrowserAnimationsModule,
         MaterialModule,
+        ImageCropperModule,
         StoreModule.forRoot(fromApp.appReducer),
     ],
     providers: [],
     bootstrap: [AppComponent],
+    entryComponents: [ModalDialogComponent],
 })
 export class AppModule {}
