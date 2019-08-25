@@ -1,0 +1,46 @@
+<div class="admin-container">
+    <div class="users-container">
+        <ita-user-header class="users__header"></ita-user-header>
+        <div class="users">
+            <ita-user></ita-user>
+        </div>
+    </div>
+
+    <div class="content-container">
+        <ita-content-header></ita-content-header>
+        <div class="content">
+            <mat-tab-group class="content__group">
+                <mat-tab label="Blog">
+                    <ng-template mat-tab-label
+                        ><mat-icon class="icons">book</mat-icon></ng-template
+                    >
+                    <ita-content-blog></ita-content-blog>
+                </mat-tab>
+                <mat-tab label="Images">
+                    <ng-template mat-tab-label
+                        ><mat-icon class="icons"
+                            >collections</mat-icon
+                        ></ng-template
+                    >
+                    <ita-content-img></ita-content-img>
+                </mat-tab>
+                <mat-tab label="Audio">
+                    <ng-template mat-tab-label
+                        ><mat-icon class="icons"
+                            >queue_music</mat-icon
+                        ></ng-template
+                    >
+                    <ita-content-audio></ita-content-audio>
+                </mat-tab>
+                <mat-tab label="Video">
+                    <ng-template mat-tab-label
+                        ><mat-icon class="icons"
+                            >video_library</mat-icon
+                        ></ng-template
+                    >
+                    <ita-content-video></ita-content-video>
+                </mat-tab>
+            </mat-tab-group>
+        </div>
+    </div>
+</div>

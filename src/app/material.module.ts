@@ -4,9 +4,17 @@ import {
     MatCardModule,
     MatIconModule,
     MatInputModule,
+    MatProgressBarModule,
+    MatProgressSpinnerModule,
+    MatDialogModule,
 } from '@angular/material';
 import { MatGridListModule } from '@angular/material/grid-list';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatExpansionModule } from '@angular/material/expansion';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatListModule } from '@angular/material/list';
@@ -19,12 +27,21 @@ import { MatTooltipModule } from '@angular/material/tooltip';
         MatButtonModule,
         MatIconModule,
         MatGridListModule,
+        MatCheckboxModule,
+        MatToolbarModule,
+        MatDividerModule,
+        MatMenuModule,
+        MatTabsModule,
+        MatExpansionModule,
         MatToolbarModule,
         MatSidenavModule,
         MatBadgeModule,
         MatListModule,
         MatRippleModule,
         MatTooltipModule,
+        MatDialogModule,
+        MatProgressBarModule,
+        MatProgressSpinnerModule,
     ],
     exports: [
         MatInputModule,
@@ -32,12 +49,21 @@ import { MatTooltipModule } from '@angular/material/tooltip';
         MatButtonModule,
         MatIconModule,
         MatGridListModule,
+        MatCheckboxModule,
+        MatToolbarModule,
+        MatDividerModule,
+        MatMenuModule,
+        MatTabsModule,
+        MatExpansionModule,
         MatToolbarModule,
         MatSidenavModule,
         MatBadgeModule,
         MatListModule,
         MatRippleModule,
         MatTooltipModule,
+        MatProgressBarModule,
+        MatProgressSpinnerModule,
+        MatDialogModule,
     ],
 })
 export class MaterialModule {}

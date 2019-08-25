@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AuthService } from '../googleIn_with_auth0/auth.service';
+import { AuthService } from '../googlein-with-auth0/auth.service';
 
 @Component({
-    selector: 'app-login',
+    selector: 'ita-login',
     templateUrl: './login.component.html',
-    styleUrls: ['./login.component.scss'],
+    styleUrls: ['../auth.component.scss'],
 })
 export class LoginComponent implements OnInit {
     public authForm: FormGroup;

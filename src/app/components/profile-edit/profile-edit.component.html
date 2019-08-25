@@ -1,0 +1,49 @@
+<div class="container">
+  <mat-card class="profile">
+    <mat-card-header>
+      <h2>Edit Profile:</h2>
+    </mat-card-header>
+    <hr>
+    <form [formGroup]="profileForm" (ngSubmit)="getRawData()">
+      <mat-card-content>
+        <div class="profile__info">
+          <div class="profile__avatar">
+            <img [src]="url || defaultImage"  alt="avatar" height="250" width="250">
+            <label class="custom-file-input" for="upload"></label>
+            <input id="upload" type="file" (change)="addAvatar($event)" accept=".png, .pdf, .jpg, .jpeg">
+          </div>
+          <div class="profile__user-settings">
+            <div class="profile__user-name">
+              Alladin  <!--name from database -->
+            </div>
+            <mat-form-field>
+              <mat-label>Email</mat-label>
+              <input matInput type="text" value="dsfsdf@mail.ru" formControlName="email"/> <!--value from database -->
+            </mat-form-field>
+            <h3>Change password:</h3>
+            <mat-form-field>
+              <mat-label>Current password</mat-label>
+              <input matInput type="password"/>
+            </mat-form-field>
+            <mat-form-field>
+              <mat-label>New password</mat-label>
+              <input matInput type="password" formControlName="password"/>
+            </mat-form-field>
+          </div>
+        </div>
+        <mat-form-field class="form-group">
+          <mat-label>Biography</mat-label>
+          <textarea matInput placeholder="Write here information about yourself" cdkTextareaAutosize formControlName="bio"></textarea>
+        </mat-form-field>
+        <h3>Skills:</h3>
+        <mat-checkbox formControlName="skills">Sing </mat-checkbox>
+        <mat-checkbox formControlName="skills">Paint</mat-checkbox>
+        <mat-checkbox formControlName="skills">Write poems or songs</mat-checkbox>
+        <mat-checkbox formControlName="skills">Dance</mat-checkbox>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-raised-button color="accent">Update profile</button>
+      </mat-card-actions>
+    </form>
+  </mat-card>
+</div>
