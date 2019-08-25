@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-    selector: 'app-uploader',
+    selector: 'ita-uploader',
     templateUrl: './uploader.component.html',
     styleUrls: ['./uploader.component.scss'],
 })

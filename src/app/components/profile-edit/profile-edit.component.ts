@@ -4,7 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ModalDialogComponent } from './modal-dialog/modal-dialog.component';
 
 @Component({
-    selector: 'app-profile-edit',
+    selector: 'ita-profile-edit',
     templateUrl: './profile-edit.component.html',
     styleUrls: ['./profile-edit.component.scss'],
 })

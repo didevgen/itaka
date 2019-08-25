@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 import { finalize, tap } from 'rxjs/operators';
 
 @Component({
-    selector: 'app-upload-task',
+    selector: 'ita-upload-task',
     templateUrl: './upload-task.component.html',
     styleUrls: ['./upload-task.component.scss'],
 })

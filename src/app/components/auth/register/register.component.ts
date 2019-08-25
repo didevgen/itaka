@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
-    selector: 'app-register',
+    selector: 'ita-register',
     templateUrl: './register.component.html',
     styleUrls: ['../auth.component.scss'],
 })

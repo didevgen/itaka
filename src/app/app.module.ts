@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { StoreModule } from '@ngrx/store';
 import * as fromApp from './store/app.reducer';
+
 import { MaterialModule } from './material.module';
 import { HeaderComponent } from './components/homepage/header/header.component';
 import { SidebarComponent } from './components/homepage/sidebar/sidebar.component';
@@ -26,6 +27,8 @@ import { ImageCropperModule } from 'ngx-image-cropper';
 import { ModalDialogComponent } from './components/profile-edit/modal-dialog/modal-dialog.component';
 import { ProfileEditComponent } from './components/profile-edit/profile-edit.component';
 import { RouterContainerComponent } from './components/router-container/router-container.component';
+import { CallbackComponent } from './components/auth/callback/callback.component';
+import { ProfileComponent } from './components/auth/profile/profile.component';
 
 @NgModule({
     declarations: [
@@ -39,6 +42,8 @@ import { RouterContainerComponent } from './components/router-container/router-c
         ProfileEditComponent,
         ModalDialogComponent,
         RouterContainerComponent,
+        CallbackComponent,
+        ProfileComponent,
     ],
     imports: [
         BrowserModule,
