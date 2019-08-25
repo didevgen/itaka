@@ -25,7 +25,7 @@ export class ProfileEditComponent implements OnInit {
         });
     }
 
-  addAvatar(event) {
+    addAvatar(event) {
         const dialogRef = this.dialog.open(ModalDialogComponent, {
             height: '500px',
             width: '500px',

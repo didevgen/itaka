@@ -25,42 +25,40 @@ import { NotFoundModule } from './components/not-found/not-found.module';
 import { ImageCropperModule } from 'ngx-image-cropper';
 import { ModalDialogComponent } from './components/profile-edit/modal-dialog/modal-dialog.component';
 import { ProfileEditComponent } from './components/profile-edit/profile-edit.component';
-import {RouterContainerComponent} from './components/router-container/router-container.component';
+import { RouterContainerComponent } from './components/router-container/router-container.component';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    HeaderComponent,
-    SidebarComponent,
-    ContentContainerComponent,
-    DropzoneDirective,
-    UploaderComponent,
-    UploadTaskComponent,
-    ProfileEditComponent,
-    ModalDialogComponent,
-    RouterContainerComponent
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    StoreModule.forRoot(fromApp.appReducer),
-    ReactiveFormsModule,
-    BrowserAnimationsModule,
-    MaterialModule,
-    AdminModule,
-    AngularFireModule.initializeApp(environment.firebaseConfig),
-    AngularFireStorageModule,
-    LoginModule,
-    RegisterModule,
-    NotFoundModule,
-    AppRoutingModule,
-    ImageCropperModule,
-  ],
-  providers: [AngularFirestore],
-  bootstrap: [AppComponent],
-  entryComponents: [ModalDialogComponent],
-  exports: [
-    ContentContainerComponent
-  ]
+    declarations: [
+        AppComponent,
+        HeaderComponent,
+        SidebarComponent,
+        ContentContainerComponent,
+        DropzoneDirective,
+        UploaderComponent,
+        UploadTaskComponent,
+        ProfileEditComponent,
+        ModalDialogComponent,
+        RouterContainerComponent,
+    ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        StoreModule.forRoot(fromApp.appReducer),
+        ReactiveFormsModule,
+        BrowserAnimationsModule,
+        MaterialModule,
+        AdminModule,
+        AngularFireModule.initializeApp(environment.firebaseConfig),
+        AngularFireStorageModule,
+        LoginModule,
+        RegisterModule,
+        NotFoundModule,
+        AppRoutingModule,
+        ImageCropperModule,
+    ],
+    providers: [AngularFirestore],
+    bootstrap: [AppComponent],
+    entryComponents: [ModalDialogComponent],
+    exports: [ContentContainerComponent],
 })
 export class AppModule {}
