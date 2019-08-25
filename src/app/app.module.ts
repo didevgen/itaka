@@ -3,7 +3,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { StoreModule } from '@ngrx/store';
-
 import * as fromApp from './store/app.reducer';
 import { MaterialModule } from './material.module';
 import { AngularFireModule } from 'angularfire2';
@@ -17,12 +16,15 @@ import { HeaderComponent } from './components/header/header.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { ContentContainerComponent } from './components/content-container/content-container.component';
 import { AdminModule } from './admin.module';
-import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
 import { HomeModule } from './components/home/home.module';
 import { LoginModule } from './components/auth/login/login.module';
 import { RegisterModule } from './components/auth/register/register.module';
 import { NotFoundModule } from './components/not-found/not-found.module';
+import { ImageCropperModule } from 'ngx-image-cropper';
+import { ModalDialogComponent } from './components/profile-edit/modal-dialog/modal-dialog.component';
+import { ProfileEditComponent } from './components/profile-edit/profile-edit.component';
 
 @NgModule({
     declarations: [
@@ -33,6 +35,8 @@ import { NotFoundModule } from './components/not-found/not-found.module';
         DropzoneDirective,
         UploaderComponent,
         UploadTaskComponent,
+        ProfileEditComponent,
+        ModalDialogComponent,
     ],
     imports: [
         BrowserModule,
@@ -49,8 +53,10 @@ import { NotFoundModule } from './components/not-found/not-found.module';
         RegisterModule,
         NotFoundModule,
         AppRoutingModule,
+        ImageCropperModule,
     ],
     providers: [AngularFirestore],
     bootstrap: [AppComponent],
+    entryComponents: [ModalDialogComponent],
 })
 export class AppModule {}

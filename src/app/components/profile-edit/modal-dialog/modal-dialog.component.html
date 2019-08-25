@@ -1,0 +1,13 @@
+<image-cropper
+  [imageChangedEvent]="data"
+  [maintainAspectRatio]="true"
+  [aspectRatio]="1 / 1"
+  [resizeToWidth]="0"
+  format="png"
+  (imageCropped)="imageCropped($event)"
+  (imageLoaded)="imageLoaded()"
+  (cropperReady)="cropperReady()"
+  (loadImageFailed)="loadImageFailed()"
+></image-cropper>
+
+<button mat-raised-button color="accent" [mat-dialog-close]="croppedImage" >Click to save your avatar</button>

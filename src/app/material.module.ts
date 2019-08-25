@@ -1,4 +1,13 @@
 import { NgModule } from '@angular/core';
+import {
+    MatButtonModule,
+    MatCardModule,
+    MatIconModule,
+    MatInputModule,
+    MatProgressBarModule,
+    MatProgressSpinnerModule,
+    MatDialogModule,
+} from '@angular/material';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -11,15 +20,6 @@ import { MatBadgeModule } from '@angular/material/badge';
 import { MatListModule } from '@angular/material/list';
 import { MatRippleModule } from '@angular/material/core';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import {
-    MatButtonModule,
-    MatCardModule,
-    MatIconModule,
-    MatInputModule,
-    MatProgressBarModule,
-    MatProgressSpinnerModule,
-} from '@angular/material';
-
 @NgModule({
     imports: [
         MatInputModule,
@@ -39,6 +39,7 @@ import {
         MatListModule,
         MatRippleModule,
         MatTooltipModule,
+        MatDialogModule,
         MatProgressBarModule,
         MatProgressSpinnerModule,
     ],
@@ -62,6 +63,7 @@ import {
         MatTooltipModule,
         MatProgressBarModule,
         MatProgressSpinnerModule,
+        MatDialogModule,
     ],
 })
 export class MaterialModule {}
