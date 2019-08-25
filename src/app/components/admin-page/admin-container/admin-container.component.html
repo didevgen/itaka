@@ -1,0 +1,46 @@
+<div class="admin-container">
+    <div class="users-container">
+        <app-user-header class="users__header"></app-user-header>
+        <div class="users">
+            <app-user></app-user>
+        </div>
+    </div>
+
+    <div class="content-container">
+        <app-content-header></app-content-header>
+        <div class="content">
+            <mat-tab-group class="content__group">
+                <mat-tab label="Blog">
+                    <ng-template mat-tab-label
+                        ><mat-icon class="icons">book</mat-icon></ng-template
+                    >
+                    <app-content-blog></app-content-blog>
+                </mat-tab>
+                <mat-tab label="Images">
+                    <ng-template mat-tab-label
+                        ><mat-icon class="icons"
+                            >collections</mat-icon
+                        ></ng-template
+                    >
+                    <app-content-img></app-content-img>
+                </mat-tab>
+                <mat-tab label="Audio">
+                    <ng-template mat-tab-label
+                        ><mat-icon class="icons"
+                            >queue_music</mat-icon
+                        ></ng-template
+                    >
+                    <app-content-audio></app-content-audio>
+                </mat-tab>
+                <mat-tab label="Video">
+                    <ng-template mat-tab-label
+                        ><mat-icon class="icons"
+                            >video_library</mat-icon
+                        ></ng-template
+                    >
+                    <app-content-video></app-content-video>
+                </mat-tab>
+            </mat-tab-group>
+        </div>
+    </div>
+</div>

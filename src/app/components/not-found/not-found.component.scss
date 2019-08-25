@@ -1,0 +1,38 @@
+.md-36 { font-size: 36px; }
+.material-icons{
+  vertical-align: bottom;
+  margin-right: 5px;
+}
+.mat-grid-list {
+    padding-bottom: 0 !important;
+    text-align: center;
+    color: #ff4081;
+
+    .mat-grid-tile {
+        padding-top: 0 !important;
+        height: 100vh;
+
+        .mat-figure {
+            flex-direction: column;
+            overflow: auto;
+
+            div:first-child {
+                font-size: 10em;
+            }
+            div + div {
+                font-size: 5em;
+            }
+            a {
+                display: inline-block;
+                margin-top: 5px;
+                font-size: 2em;
+                text-decoration: none;
+                color: #506eff;
+
+                &:hover {
+                    color: #b52d5b;
+                }
+            }
+        }
+    }
+}
