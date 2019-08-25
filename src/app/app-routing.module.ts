@@ -1,15 +1,15 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-import { RegisterComponent } from '../app/components/auth/register/register.component';
-import { LoginComponent } from '../app/components/auth/login/login.component';
-import { HomeComponent } from '../app/components/home/home.component';
-import { UploaderComponent } from '../app/components/test-upload/uploader/uploader.component';
-import { AdminContainerComponent } from './components/admin-page/admin-container/admin-container.component';
-import { NotFoundComponent } from './components/not-found/not-found.component';
-import { ProfileEditComponent } from './components/profile-edit/profile-edit.component';
+import {NgModule} from '@angular/core';
+import {RouterModule, Routes} from '@angular/router';
+import {RegisterComponent} from './components/auth/register/register.component';
+import {LoginComponent} from './components/auth/login/login.component';
+import {UploaderComponent} from './components/test-upload/uploader/uploader.component';
+import {AdminContainerComponent} from './components/admin-page/admin-container/admin-container.component';
+import {NotFoundComponent} from './components/not-found/not-found.component';
+import {ProfileEditComponent} from './components/profile-edit/profile-edit.component';
+import {ContentContainerComponent} from './components/homepage/content-container/content-container.component';
 
 const routes: Routes = [
-    { path: '', component: HomeComponent },
+    { path: '', component: ContentContainerComponent },
     { path: 'register', component: RegisterComponent },
     { path: 'login', component: LoginComponent },
     { path: 'admin', component: AdminContainerComponent },
