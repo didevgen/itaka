@@ -4851,6 +4851,13 @@ neo-async@^2.5.0, neo-async@^2.6.0:
   resolved "https://registry.npmjs.org/neo-async/-/neo-async-2.6.1.tgz#ac27ada66167fa8849a6addd837f6b189ad2081c"
   integrity sha512-iyam8fBuCUpWeKPGpaNMetEocMt364qkCsfL9JuhjXX6dRnguRVOfk2GZaDpPjcOKiiXCPINZC1GczQ7iTq3Zw==
 
+ngx-image-cropper@^1.4.1:
+  version "1.4.1"
+  resolved "https://registry.yarnpkg.com/ngx-image-cropper/-/ngx-image-cropper-1.4.1.tgz#66d9bd05b588322407fe1f7b845aa80c7e8dac2e"
+  integrity sha512-AeCIXj65V3V8jaYFc6MycRa/BCBv5CtIydSuVFnRQKL6LZzbqnyLvyEmpYvKJ4k9BuspfjeCkBeQXQWUVp0QqQ==
+  dependencies:
+    tslib "^1.9.0"
+
 nice-try@^1.0.4:
   version "1.0.5"
   resolved "https://registry.npmjs.org/nice-try/-/nice-try-1.0.5.tgz#a3378a7696ce7d223e88fc9b764bd7ef1089e366"

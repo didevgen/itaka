@@ -37,11 +37,9 @@
         "@ngrx/store-devtools": "^8.2.0",
         "angularfire2": "^5.2.1",
         "firebase": "^6.4.0",
-<<<<<<< HEAD
         "material-icons": "^0.3.1",
-=======
+        "ngx-image-cropper": "^1.4.1",
         "husky": "^3.0.4",
->>>>>>> d9f95a4af7b3566f1fdc90c2cdc242b7ef1b21b6
         "normalize.css": "^8.0.1",
         "prettier": "^1.18.2",
         "rxjs": "~6.4.0",
