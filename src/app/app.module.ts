@@ -9,9 +9,9 @@ import { MaterialModule } from './material.module';
 import { HeaderComponent } from './components/homepage/header/header.component';
 import { SidebarComponent } from './components/homepage/sidebar/sidebar.component';
 import { ContentContainerComponent } from './components/homepage/content-container/content-container.component';
-import {CardsContainerComponent} from './components/homepage/cards-container/cards-container.component';
-import {GoogleInWithAuth0Component} from './components/auth/googlein-with-auth0/googleIn-with-auth0.component';
-import {GoogleAuthComponent} from './components/auth/google-auth/google-auth.component';
+import { CardsContainerComponent } from './components/homepage/cards-container/cards-container.component';
+import { GoogleInWithAuth0Component } from './components/auth/googlein-with-auth0/googleIn-with-auth0.component';
+import { GoogleAuthComponent } from './components/auth/google-auth/google-auth.component';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireStorageModule } from 'angularfire2/storage';
 import { AngularFirestore } from 'angularfire2/firestore';
@@ -47,8 +47,8 @@ import { ProfileComponent } from './components/auth/profile/profile.component';
         CallbackComponent,
         ProfileComponent,
         CardsContainerComponent,
-GoogleInWithAuth0Component,
-GoogleAuthComponent
+        GoogleInWithAuth0Component,
+        GoogleAuthComponent
     ],
     imports: [
         BrowserModule,
@@ -71,4 +71,4 @@ GoogleAuthComponent
     entryComponents: [ModalDialogComponent],
     exports: [ContentContainerComponent],
 })
-export class AppModule {}
+export class AppModule { }
