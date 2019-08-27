@@ -50,7 +50,7 @@ import { UserPageComponent } from './components/user-page/user-page.component';
         CardsContainerComponent,
         GoogleInWithAuth0Component,
         GoogleAuthComponent,
-        UserPageComponent
+        UserPageComponent,
     ],
     imports: [
         BrowserModule,
