@@ -10,4 +10,8 @@ export class SidebarComponent implements OnInit {
     constructor(public router: Router) {}
 
     ngOnInit() {}
+
+    isAdminPage() {
+        return this.router.url !== '/admin';
+    }
 }
