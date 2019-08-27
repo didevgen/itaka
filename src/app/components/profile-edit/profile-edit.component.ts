@@ -4,7 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ModalDialogComponent } from './modal-dialog/modal-dialog.component';
 
 @Component({
-    selector: 'app-profile-edit',
+    selector: 'ita-profile-edit',
     templateUrl: './profile-edit.component.html',
     styleUrls: ['./profile-edit.component.scss'],
 })
@@ -25,7 +25,7 @@ export class ProfileEditComponent implements OnInit {
         });
     }
 
-  addAvatar(event) {
+    addAvatar(event) {
         const dialogRef = this.dialog.open(ModalDialogComponent, {
             height: '500px',
             width: '500px',

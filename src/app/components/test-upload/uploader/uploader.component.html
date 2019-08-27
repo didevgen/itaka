@@ -1,6 +1,6 @@
 <div
     class="dropzone"
-    appDropzone
+    itaDropzone
     (hovered)="toggleHover($event)"
     (dropped)="onDrop($event)"
     [class.hovering]="isHovering"
@@ -28,5 +28,5 @@
 <h3>Your uploading process</h3>
 
 <div *ngFor="let file of files">
-    <app-upload-task [file]="file"></app-upload-task>
+    <ita-upload-task [file]="file"></ita-upload-task>
 </div>

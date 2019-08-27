@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { StoreModule } from '@ngrx/store';
 import * as fromApp from './store/app.reducer';
+
 import { MaterialModule } from './material.module';
 import { HeaderComponent } from './components/homepage/header/header.component';
 import { SidebarComponent } from './components/homepage/sidebar/sidebar.component';
@@ -16,19 +17,18 @@ import { DropzoneDirective } from './components/test-upload/upload.directive';
 import { UploaderComponent } from './components/test-upload/uploader/uploader.component';
 import { UploadTaskComponent } from './components/test-upload/upload-task/upload-task.component';
 import { environment } from '../environments/environment';
-import { LoginComponent } from './components/auth/login/login.component';
-import { RegisterComponent } from './components/auth/register/register.component';
-import { HomeComponent } from './components/home/home.component';
 import { AdminModule } from './admin.module';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HomeModule } from './components/home/home.module';
 import { LoginModule } from './components/auth/login/login.module';
 import { RegisterModule } from './components/auth/register/register.module';
 import { NotFoundModule } from './components/not-found/not-found.module';
 import { ImageCropperModule } from 'ngx-image-cropper';
 import { ModalDialogComponent } from './components/profile-edit/modal-dialog/modal-dialog.component';
 import { ProfileEditComponent } from './components/profile-edit/profile-edit.component';
+import { RouterContainerComponent } from './components/router-container/router-container.component';
+import { CallbackComponent } from './components/auth/callback/callback.component';
+import { ProfileComponent } from './components/auth/profile/profile.component';
 
 @NgModule({
     declarations: [
@@ -41,6 +41,9 @@ import { ProfileEditComponent } from './components/profile-edit/profile-edit.com
         UploadTaskComponent,
         ProfileEditComponent,
         ModalDialogComponent,
+        RouterContainerComponent,
+        CallbackComponent,
+        ProfileComponent,
     ],
     imports: [
         BrowserModule,
@@ -52,7 +55,6 @@ import { ProfileEditComponent } from './components/profile-edit/profile-edit.com
         AdminModule,
         AngularFireModule.initializeApp(environment.firebaseConfig),
         AngularFireStorageModule,
-        HomeModule,
         LoginModule,
         RegisterModule,
         NotFoundModule,
@@ -62,5 +64,6 @@ import { ProfileEditComponent } from './components/profile-edit/profile-edit.com
     providers: [AngularFirestore],
     bootstrap: [AppComponent],
     entryComponents: [ModalDialogComponent],
+    exports: [ContentContainerComponent],
 })
 export class AppModule {}

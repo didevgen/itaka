@@ -16,10 +16,19 @@
       </mat-card-content>
       <mat-card-actions>
         <button mat-raised-button color="accent">LOGIN</button>
+        
         <div class="message">
           <a [routerLink]="['/register']" >Not registered? Create an account</a>
         </div>
       </mat-card-actions>
     </form>
+    <header>
+      <button (click)="auth.login()" *ngIf="!auth.loggedIn">Log In With Google</button>
+      <button (click)="auth.logout()" *ngIf="auth.loggedIn">Log Out</button>
+      <a routerLink="/">Home</a>&nbsp;
+      <a routerLink="profile" *ngIf="auth.loggedIn">Profile</a>
+    </header>
   </mat-card>
 </div>
+
+

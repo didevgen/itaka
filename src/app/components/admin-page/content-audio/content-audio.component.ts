@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-    selector: 'app-content-audio',
+    selector: 'ita-content-audio',
     templateUrl: './content-audio.component.html',
     styleUrls: ['./content-audio.component.scss'],
 })
