@@ -29,6 +29,8 @@ import { ProfileEditComponent } from './components/profile-edit/profile-edit.com
 import { RouterContainerComponent } from './components/router-container/router-container.component';
 import { CallbackComponent } from './components/auth/callback/callback.component';
 import { ProfileComponent } from './components/auth/profile/profile.component';
+import { GoogleInWithAuth0Component } from './components/auth/googlein-with-auth0/googleIn-with-auth0.component';
+import { GoogleAuthComponent } from './components/auth/google-auth/google-auth.component';
 
 @NgModule({
     declarations: [
@@ -44,6 +46,8 @@ import { ProfileComponent } from './components/auth/profile/profile.component';
         RouterContainerComponent,
         CallbackComponent,
         ProfileComponent,
+        GoogleInWithAuth0Component,
+        GoogleAuthComponent,
     ],
     imports: [
         BrowserModule,
