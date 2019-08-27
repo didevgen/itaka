@@ -1,0 +1,36 @@
+
+.user-container {
+    width: 90%;
+    margin: 100px 80px 0px;
+    padding-bottom: 70px;
+  }
+
+  .user__info {
+      padding-left: 50px;
+      display: flex;
+
+      img {
+          border-radius: 100%;
+      }
+
+      .user__name {
+        color: #252525;
+        font-size: 30px;
+        font-weight: 600;
+        display: flex;
+        flex-grow: 3;
+        font-family: 'Heebo', sans-serif;
+
+
+        span {
+            align-self:  center;
+            padding-left: 15px;
+        }
+       
+      }
+
+    //   .user__edit {
+    //     // display: none;
+    //   }
+  }
+ 
