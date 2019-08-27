@@ -19,7 +19,7 @@ import { DropzoneDirective } from './components/test-upload/upload.directive';
 import { UploaderComponent } from './components/test-upload/uploader/uploader.component';
 import { UploadTaskComponent } from './components/test-upload/upload-task/upload-task.component';
 import { environment } from '../environments/environment';
-import { AdminModule } from './admin.module';
+import { AdminModule } from './components/admin-page/admin.module';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginModule } from './components/auth/login/login.module';
@@ -48,7 +48,7 @@ import { ProfileComponent } from './components/auth/profile/profile.component';
         ProfileComponent,
         CardsContainerComponent,
         GoogleInWithAuth0Component,
-        GoogleAuthComponent
+        GoogleAuthComponent,
     ],
     imports: [
         BrowserModule,
@@ -71,4 +71,4 @@ import { ProfileComponent } from './components/auth/profile/profile.component';
     entryComponents: [ModalDialogComponent],
     exports: [ContentContainerComponent],
 })
-export class AppModule { }
+export class AppModule {}
