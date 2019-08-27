@@ -4,27 +4,27 @@
     border: none;
     display: grid;
     grid-gap: 10px;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    grid-auto-rows: 200px;
+    grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+    grid-auto-rows: 100px;
     height: 100%;
     min-width: 70vw;
     max-width: 95vw;
 }
 
 .video {
-    grid-row-end: span 2;
+    grid-row-end: span 3;
     width: 100%;
     background: red;
 }
 .photo {
     width: 100%;
-    grid-row-end: span 2;
+    grid-row-end: span 3;
 }
 .music {
     width: 100%;
-    grid-row-end: span 1;
+    grid-row-end: span 2;
 }
 .blog {
     width: 100%;
-    grid-row-end: span 3;
+    grid-row-end: span 4;
 }
