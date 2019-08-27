@@ -46,6 +46,9 @@ import { ProfileComponent } from './components/auth/profile/profile.component';
         RouterContainerComponent,
         CallbackComponent,
         ProfileComponent,
+        CardsContainerComponent,
+GoogleInWithAuth0Component,
+GoogleAuthComponent
     ],
     imports: [
         BrowserModule,
