@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-cards-container',
+  selector: 'ita-cards-container',
   templateUrl: './cards-container.component.html',
   styleUrls: ['./cards-container.component.scss']
 })
