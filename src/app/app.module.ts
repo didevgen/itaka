@@ -9,7 +9,9 @@ import { MaterialModule } from './material.module';
 import { HeaderComponent } from './components/homepage/header/header.component';
 import { SidebarComponent } from './components/homepage/sidebar/sidebar.component';
 import { ContentContainerComponent } from './components/homepage/content-container/content-container.component';
-
+import { CardsContainerComponent } from './components/homepage/cards-container/cards-container.component';
+import { GoogleInWithAuth0Component } from './components/auth/googlein-with-auth0/googleIn-with-auth0.component';
+import { GoogleAuthComponent } from './components/auth/google-auth/google-auth.component';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireStorageModule } from 'angularfire2/storage';
 import { AngularFirestore } from 'angularfire2/firestore';
@@ -17,7 +19,7 @@ import { DropzoneDirective } from './components/test-upload/upload.directive';
 import { UploaderComponent } from './components/test-upload/uploader/uploader.component';
 import { UploadTaskComponent } from './components/test-upload/upload-task/upload-task.component';
 import { environment } from '../environments/environment';
-import { AdminModule } from './admin.module';
+import { AdminModule } from './components/admin-page/admin.module';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginModule } from './components/auth/login/login.module';
@@ -45,7 +47,10 @@ import { UserPageComponent } from './components/user-page/user-page.component';
         RouterContainerComponent,
         CallbackComponent,
         ProfileComponent,
-        UserPageComponent,
+        CardsContainerComponent,
+        GoogleInWithAuth0Component,
+        GoogleAuthComponent,
+        UserPageComponent
     ],
     imports: [
         BrowserModule,
