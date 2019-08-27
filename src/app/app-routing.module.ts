@@ -11,7 +11,7 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
 import { ProfileEditComponent } from './components/profile-edit/profile-edit.component';
 import { ContentContainerComponent } from './components/homepage/content-container/content-container.component';
 import { UserPageComponent } from './components/user-page/user-page.component';
- 
+
 const routes: Routes = [
     { path: '', component: ContentContainerComponent },
     { path: 'register', component: RegisterComponent },
