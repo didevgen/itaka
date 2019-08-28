@@ -50,7 +50,7 @@ import { UserPageModule } from './components/user-page/user.module';
         CardsContainerComponent,
         GoogleInWithAuth0Component,
         GoogleAuthComponent,
-        UserPageComponent
+        UserPageComponent,
     ],
     imports: [
         BrowserModule,
@@ -67,7 +67,7 @@ import { UserPageModule } from './components/user-page/user.module';
         NotFoundModule,
         AppRoutingModule,
         ImageCropperModule,
-        UserPageModule
+        UserPageModule,
     ],
     providers: [AngularFirestore],
     bootstrap: [AppComponent],
