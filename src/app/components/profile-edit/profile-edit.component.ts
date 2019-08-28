@@ -17,11 +17,15 @@ export class ProfileEditComponent implements OnInit {
 
     ngOnInit(): void {
         this.profileForm = this.formBuilder.group({
-            email: ['', Validators.required],
-            password: ['', Validators.required],
-            bio: ['', Validators.required],
-            skills: [''],
-            avatar: [''],
+            userName: this.formBuilder.control('', [Validators.required]),
+            email: this.formBuilder.control('', [
+                Validators.required,
+                Validators.email,
+            ]),
+            password: this.formBuilder.control('', [Validators.required]),
+            bio: this.formBuilder.control(''),
+            skills: this.formBuilder.control(''),
+            avatar: this.formBuilder.control(''),
         });
     }
 
@@ -38,7 +42,8 @@ export class ProfileEditComponent implements OnInit {
         });
     }
 
-    getRawData(): void {
+    getRawData(img: string): void {
         console.log(this.profileForm);
+        console.log('src:', img);
     }
 }
