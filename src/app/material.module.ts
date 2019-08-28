@@ -6,8 +6,7 @@ import {
     MatInputModule,
     MatProgressBarModule,
     MatProgressSpinnerModule,
-    MatDialogModule,
-} from '@angular/material';
+    MatDialogModule  } from '@angular/material';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatToolbarModule } from '@angular/material/toolbar';

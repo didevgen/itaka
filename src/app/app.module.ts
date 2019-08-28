@@ -32,7 +32,7 @@ import { RouterContainerComponent } from './components/router-container/router-c
 import { CallbackComponent } from './components/auth/callback/callback.component';
 import { ProfileComponent } from './components/auth/profile/profile.component';
 import { UserPageComponent } from './components/user-page/user-page.component';
-
+import { UserPageModule } from './components/user-page/user.module';
 @NgModule({
     declarations: [
         AppComponent,
@@ -50,7 +50,7 @@ import { UserPageComponent } from './components/user-page/user-page.component';
         CardsContainerComponent,
         GoogleInWithAuth0Component,
         GoogleAuthComponent,
-        UserPageComponent,
+        UserPageComponent
     ],
     imports: [
         BrowserModule,
@@ -67,6 +67,7 @@ import { UserPageComponent } from './components/user-page/user-page.component';
         NotFoundModule,
         AppRoutingModule,
         ImageCropperModule,
+        UserPageModule
     ],
     providers: [AngularFirestore],
     bootstrap: [AppComponent],

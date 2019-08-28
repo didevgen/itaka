@@ -1,20 +1,20 @@
-<ita-content-container></ita-content-container>
-<div class="user-container">
-    <div class="user__info">
+
+    <div class="user-container">
+        <div class="user__info">
             <div class="user__avatar">
-                <img [src]="url || defaultImage" alt="avatar" width="75">
-    </div>
-    <div class="user__name">
-        <span>User_name</span>
-    </div>
-    <div class="user__edit">
-            <mat-icon class="icons">edit</mat-icon><span>Edit Profile</span>
+                <img [src]="url || defaultImage" alt="avatar" width="75" />
+            </div>
+            <div class="user__name">
+                <span>User_name</span>
+            </div>
+            <div class="user__edit">
+                <a [routerLink]="['/editProfile']">
+                    <mat-icon class="icons">edit</mat-icon
+                    ><span>Edit Profile</span>
+                </a>
+            </div>
         </div>
     </div>
-    <ita-content-container></ita-content-container>
-</div>
-
-
-
+    <ita-cards-container></ita-cards-container>
 
 
