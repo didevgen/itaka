@@ -4,7 +4,7 @@
 export interface EditProfile {
     email: string;
     password: string;
+    avatar: string;
     bio?: string;
-    skills: string[];
-    avatar?: string;
+    skills?: string[];
 }

@@ -22,10 +22,13 @@ export class ProfileEditComponent implements OnInit {
                 Validators.required,
                 Validators.email,
             ]),
-            password: this.formBuilder.control('', [Validators.required]),
+            password: this.formBuilder.control('', [
+                Validators.required,
+                Validators.minLength(5),
+            ]),
             bio: this.formBuilder.control(''),
-            skills: this.formBuilder.control(''),
             avatar: this.formBuilder.control(''),
+            // skills: this.formBuilder.control(''),
         });
     }
 
