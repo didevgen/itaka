@@ -16,7 +16,7 @@ export function profileEditReducer(
     switch (action.type) {
         case ProfEdAct.ProfileEditTypes.Set_Current:
             return {
-                currentProfileEdit: { ...action.payload }
+                currentProfileEdit: { ...action.payload },
             };
         default:
             return state;
