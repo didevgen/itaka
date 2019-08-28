@@ -31,7 +31,8 @@ import { ProfileEditComponent } from './components/profile-edit/profile-edit.com
 import { RouterContainerComponent } from './components/router-container/router-container.component';
 import { CallbackComponent } from './components/auth/callback/callback.component';
 import { ProfileComponent } from './components/auth/profile/profile.component';
-
+import { UserPageComponent } from './components/user-page/user-page.component';
+import { UserPageModule } from './components/user-page/user.module';
 @NgModule({
     declarations: [
         AppComponent,
@@ -49,6 +50,7 @@ import { ProfileComponent } from './components/auth/profile/profile.component';
         CardsContainerComponent,
         GoogleInWithAuth0Component,
         GoogleAuthComponent,
+        UserPageComponent,
     ],
     imports: [
         BrowserModule,
@@ -65,6 +67,7 @@ import { ProfileComponent } from './components/auth/profile/profile.component';
         NotFoundModule,
         AppRoutingModule,
         ImageCropperModule,
+        UserPageModule,
     ],
     providers: [AngularFirestore],
     bootstrap: [AppComponent],
