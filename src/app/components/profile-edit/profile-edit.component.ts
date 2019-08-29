@@ -40,6 +40,5 @@ export class ProfileEditComponent implements OnInit {
         console.log(this.profileForm);
         this.pic = img;
         console.log(this.pic);
-
     }
 }
