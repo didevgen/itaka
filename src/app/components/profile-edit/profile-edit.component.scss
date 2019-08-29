@@ -3,6 +3,7 @@
 }
 .mat-form-field {
   font-size: 18px;
+  display: block;
 }
 .mat-card-actions {
   text-align: center;
@@ -40,8 +41,9 @@
   flex-direction: column;
 }
 .profile__user-settings {
-  margin-left: 100px;
+  //margin-left: 100px;
   width: 60%;
+  margin: 10px auto;
 }
 .profile__user-settings > * {
   width: 35%;

@@ -4,13 +4,13 @@
             <h2>Edit Profile:</h2>
         </mat-card-header>
         <hr />
-        <form [formGroup]="profileForm" (ngSubmit)="getRawData(image.src)">
+        <form [formGroup]="profileForm" (ngSubmit)="getRawData(image)">
             <mat-card-content>
                 <div class="profile__info">
                     <div class="profile__avatar">
                         <img
-                            [src]="url || defaultImage"
                             #image
+                            [src]="url || defaultImage"
                             alt="avatar"
                             height="250"
                             width="250"
@@ -25,7 +25,7 @@
                     </div>
                     <div class="profile__user-settings">
                         <mat-form-field>
-                            <mat-label>User name</mat-label>
+                            <mat-label>Name</mat-label>
                             <input
                                 matInput
                                 type="text"
@@ -34,49 +34,21 @@
                             />
                         </mat-form-field>
                         <mat-form-field>
-                            <mat-label>Email</mat-label>
+                            <mat-label>Surname</mat-label>
                             <input
                                 matInput
                                 type="text"
-                                value="{{ email }}"
-                                formControlName="email"
-                            />
-                            <!--value from database -->
-                        </mat-form-field>
-                        <h3>Change password:</h3>
-                        <mat-form-field>
-                            <mat-label>Current password</mat-label>
-                            <input matInput type="password" />
-                        </mat-form-field>
-                        <mat-form-field>
-                            <mat-label>New password</mat-label>
-                            <input
-                                matInput
-                                type="password"
-                                formControlName="password"
+                                value="{{ userSurname }}"
+                                formControlName="userSurname"
                             />
                         </mat-form-field>
                     </div>
                 </div>
-                <mat-form-field class="form-group">
-                    <mat-label>Biography</mat-label>
-                    <textarea
-                        matInput
-                        placeholder="Write the information about yourself here"
-                        cdkTextareaAutosize
-                        formControlName="bio"
-                    ></textarea>
-                </mat-form-field>
-                <!--<h3>Skills:</h3>
-                <mat-checkbox formControlName="skills">Sing </mat-checkbox>
-                <mat-checkbox formControlName="skills">Paint</mat-checkbox>
-                <mat-checkbox formControlName="skills"
-                    >Write poems or songs</mat-checkbox
-                >
-                <mat-checkbox formControlName="skills">Dance</mat-checkbox>-->
             </mat-card-content>
             <mat-card-actions>
-                <button type="submit" mat-raised-button color="accent">Update profile</button>
+                <button type="submit" mat-raised-button color="accent">
+                    Update profile
+                </button>
             </mat-card-actions>
         </form>
     </mat-card>

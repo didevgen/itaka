@@ -12,23 +12,14 @@ export class ProfileEditComponent implements OnInit {
     public profileForm: FormGroup;
     url: string;
     defaultImage = '../../assets/avatarDefault.png';
+    private pic;
 
     constructor(private formBuilder: FormBuilder, public dialog: MatDialog) {}
 
     ngOnInit(): void {
         this.profileForm = this.formBuilder.group({
             userName: this.formBuilder.control('', [Validators.required]),
-            email: this.formBuilder.control('', [
-                Validators.required,
-                Validators.email,
-            ]),
-            password: this.formBuilder.control('', [
-                Validators.required,
-                Validators.minLength(5),
-            ]),
-            bio: this.formBuilder.control(''),
-            avatar: this.formBuilder.control(''),
-            // skills: this.formBuilder.control(''),
+            userSurname: this.formBuilder.control('', [Validators.required]),
         });
     }
 
@@ -41,12 +32,14 @@ export class ProfileEditComponent implements OnInit {
 
         dialogRef.afterClosed().subscribe(result => {
             this.url = result;
-            this.profileForm.get('avatar').setValue(event.target.files[0]);
+            // this.profileForm.get('avatar').setValue(event.target.files[0]);
         });
     }
 
     getRawData(img: string): void {
         console.log(this.profileForm);
-        console.log('src:', img);
+        this.pic = img;
+        console.log(this.pic);
+
     }
 }
