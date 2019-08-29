@@ -1,0 +1,4 @@
+.music {
+    width: 100%;
+    grid-row-end: span 2;
+}

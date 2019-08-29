@@ -1,0 +1,4 @@
+.blog {
+    width: 100%;
+    grid-row-end: span 4;
+}

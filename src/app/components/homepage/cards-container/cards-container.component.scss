@@ -19,6 +19,7 @@
 .photo {
     width: 100%;
     grid-row-end: span 3;
+    background: green;
 }
 .music {
     width: 100%;
@@ -27,4 +28,5 @@
 .blog {
     width: 100%;
     grid-row-end: span 4;
+    background-color: blue
 }
