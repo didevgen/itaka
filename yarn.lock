@@ -1803,6 +1803,14 @@ circular-dependency-plugin@5.0.2:
   resolved "https://registry.npmjs.org/circular-dependency-plugin/-/circular-dependency-plugin-5.0.2.tgz#da168c0b37e7b43563fb9f912c1c007c213389ef"
   integrity sha512-oC7/DVAyfcY3UWKm0sN/oVoDedQDQiw/vIiAnuTWTpE5s0zWf7l3WY417Xw/Fbi/QbAjctAkxgMiS9P0s3zkmA==
 
+ckeditor4-angular@^1.0.0-beta.2:
+  version "1.0.0-beta.2"
+  resolved "https://registry.npmjs.org/ckeditor4-angular/-/ckeditor4-angular-1.0.0-beta.2.tgz#bcbad51a5b7de9db9e3c9718dd10b3ed662fe8d4"
+  integrity sha512-fMAe2jMnf087eljy+aYK+AVVRJWxmEPHH5d7t/LiNJnZfEIEnp94jHN3E3QdJx0flrPzk5FifHBrpq4NMpC8Gw==
+  dependencies:
+    load-script "^1.0.0"
+    tslib "^1.9.0"
+
 class-utils@^0.3.5:
   version "0.3.6"
   resolved "https://registry.npmjs.org/class-utils/-/class-utils-0.3.6.tgz#f93369ae8b9a7ce02fd41faad0ca83033190c463"
@@ -4421,6 +4429,11 @@ lines-and-columns@^1.1.6:
   version "1.1.6"
   resolved "https://registry.npmjs.org/lines-and-columns/-/lines-and-columns-1.1.6.tgz#1c00c743b433cd0a4e80758f7b64a57440d9ff00"
   integrity sha1-HADHQ7QzzQpOgHWPe2SldEDZ/wA=
+
+load-script@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.npmjs.org/load-script/-/load-script-1.0.0.tgz#0491939e0bee5643ee494a7e3da3d2bac70c6ca4"
+  integrity sha1-BJGTngvuVkPuSUp+PaPSuscMbKQ=
 
 loader-runner@^2.3.0:
   version "2.4.0"

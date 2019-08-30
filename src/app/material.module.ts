@@ -20,6 +20,7 @@ import { MatBadgeModule } from '@angular/material/badge';
 import { MatListModule } from '@angular/material/list';
 import { MatRippleModule } from '@angular/material/core';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import {MatFormFieldModule} from '@angular/material/form-field';
 @NgModule({
     imports: [
         MatInputModule,
@@ -42,6 +43,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
         MatDialogModule,
         MatProgressBarModule,
         MatProgressSpinnerModule,
+        MatFormFieldModule
     ],
     exports: [
         MatInputModule,
@@ -64,6 +66,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
         MatProgressBarModule,
         MatProgressSpinnerModule,
         MatDialogModule,
+        MatFormFieldModule
     ],
 })
 export class MaterialModule {}
