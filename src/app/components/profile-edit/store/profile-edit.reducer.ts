@@ -2,11 +2,11 @@ import { EditProfile } from '../../../models/edit-profile/edit-profile.model';
 import * as ProfEdAct from './profile-edit.actions';
 
 export interface ProfileEditState {
-    currentProfileEdit: EditProfile;
+    ProfileEdit: EditProfile;
 }
 
 const initialState: ProfileEditState = {
-    currentProfileEdit: null, // will be initialized by service from database
+    ProfileEdit: null,
 };
 
 export function profileEditReducer(
@@ -14,9 +14,13 @@ export function profileEditReducer(
     action: ProfEdAct.ProfileEditActions,
 ): ProfileEditState {
     switch (action.type) {
-        case ProfEdAct.ProfileEditTypes.Set_Current:
+        case ProfEdAct.ProfileEditTypes.ProfileEdit_Set:
             return {
-                currentProfileEdit: { ...action.payload },
+                ProfileEdit: { ...action.payload },
+            };
+        case ProfEdAct.ProfileEditTypes.ProfileEdit_Update:
+            return {
+                ProfileEdit: { ...action.payload },
             };
         default:
             return state;

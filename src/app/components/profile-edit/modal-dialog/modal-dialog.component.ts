@@ -1,5 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
+import { ImageCropperComponent } from 'ngx-image-cropper/src/component/image-cropper.component';
 
 @Component({
     selector: 'ita-dialog-component',
@@ -11,10 +12,13 @@ export class ModalDialogComponent {
     constructor(
         public dialogRef: MatDialogRef<ModalDialogComponent>,
         @Inject(MAT_DIALOG_DATA) public data: any,
+        // @Inject(ImageCropperComponent) private ICC,
     ) {}
 
     imageCropped(image: any) {
         this.croppedImage = image.base64;
+        // create canvas image instead base64????
+        // this.ICC.getCanvasBlob(cropCanvas);
     }
     imageLoaded() {
         // show cropper
