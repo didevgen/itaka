@@ -15,24 +15,22 @@
 .video {
     grid-row-end: span 3;
     width: 100%;
-    margin-bottom: 10px;
     //background: red;
 }
 .photo {
     width: 100%;
     grid-row-end: span 3;
     //background: green;
-    margin-bottom: 10px;
+
 }
 .music {
     width: 100%;
     grid-row-end: span 2;
-    margin-bottom: 10px;
-    height: 25%;
+    
 }
 .blog {
     width: 100%;
     grid-row-end: span 4;
     //background-color: blue;
-    margin-bottom: 10px;
+    
 }

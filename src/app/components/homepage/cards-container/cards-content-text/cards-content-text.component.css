@@ -1,10 +1,14 @@
-.mat-card {
-    height: 50%;
-    display: block;
-    margin: 10px 0;
+ /* .mat-card {
+    height: 400px;
+    overflow: hidden;
+} */
+.mat-card-content {
+    overflow: hidden;
+    height: 350px;
 }
 
 .mat-card-title {
-    text-align: center;
+    text-align: center; 
+    height: 50px;
     vertical-align: center;
-}
+} 

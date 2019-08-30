@@ -1,9 +1,15 @@
 .mat-card {
-    padding: 0;
-    margin: 0;
     height: 100%;
+    padding: 0;
 }
-
-.playerSize {
-    height: 100% !important;
+.mat-video {
+    height: 262.5px;
+}
+.mat-card-title {
+    height: 37.5px;
+    text-align: center;
+    vertical-align: center;
+}
+.header .visible {
+    text-align: justify;
 }

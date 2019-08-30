@@ -1,13 +1,14 @@
-.mat-card {
-    height: 50%;
-    /* display: block; */
+/* .mat-card {
     
+ 
+} */
+.mat-card>:first-child {
+    position: relative ;
+    height: 135px;
+    width: 100%;
 }
 
 .mat-card-title {
     text-align: center;
     vertical-align: center;
-}
-.mar-card-content {
-    position: inherit;
 }
