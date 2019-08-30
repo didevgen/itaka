@@ -33,7 +33,7 @@ import { CallbackComponent } from './components/auth/callback/callback.component
 import { ProfileComponent } from './components/auth/profile/profile.component';
 import { UserPageComponent } from './components/user-page/user-page.component';
 import { UserPageModule } from './components/user-page/user.module';
-import {TextEditorModule} from './components/editors/text-editor/text-editor.module';
+import { TextEditorModule } from './components/editors/text-editor/text-editor.module';
 @NgModule({
     declarations: [
         AppComponent,
@@ -69,7 +69,7 @@ import {TextEditorModule} from './components/editors/text-editor/text-editor.mod
         AppRoutingModule,
         ImageCropperModule,
         UserPageModule,
-        TextEditorModule
+        TextEditorModule,
     ],
     providers: [AngularFirestore],
     bootstrap: [AppComponent],
