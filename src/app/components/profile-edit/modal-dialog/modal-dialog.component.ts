@@ -12,7 +12,6 @@ export class ModalDialogComponent {
     constructor(
         public dialogRef: MatDialogRef<ModalDialogComponent>,
         @Inject(MAT_DIALOG_DATA) public data: any,
-        // @Inject(ImageCropperComponent) private ICC,
     ) {}
 
     imageCropped(image: any) {
