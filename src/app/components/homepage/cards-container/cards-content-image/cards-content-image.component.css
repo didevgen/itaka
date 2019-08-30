@@ -1,4 +1,12 @@
-.photo {
-    width: 100%;
-    grid-row-end: span 3;
+.mat-card {
+   height: 100%;
+    display: block;
+    
+}
+/* .mat-card-image {
+    
+} */
+.mat-card-title {
+    text-align: center;
+    vertical-align: center;
 }

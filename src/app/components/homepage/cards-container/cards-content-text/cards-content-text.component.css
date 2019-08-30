@@ -1,4 +1,10 @@
-.blog {
-    width: 100%;
-    grid-row-end: span 4;
+.mat-card {
+    height: 50%;
+    display: block;
+    margin: 10px 0;
+}
+
+.mat-card-title {
+    text-align: center;
+    vertical-align: center;
 }

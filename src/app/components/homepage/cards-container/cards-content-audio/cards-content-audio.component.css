@@ -1,4 +1,13 @@
-.music {
-    width: 100%;
-    grid-row-end: span 2;
+.mat-card {
+    height: 50%;
+    /* display: block; */
+    
+}
+
+.mat-card-title {
+    text-align: center;
+    vertical-align: center;
+}
+.mar-card-content {
+    position: inherit;
 }
