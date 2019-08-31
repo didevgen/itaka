@@ -44,11 +44,8 @@ import { MatVideoModule } from 'mat-video';
         MatDialogModule,
         MatProgressBarModule,
         MatProgressSpinnerModule,
-<<<<<<< HEAD
         MatFormFieldModule,
-=======
         MatVideoModule,
->>>>>>> 9e81bd22293441ef5ab7b6b87059d55e9387fde8
     ],
     exports: [
         MatInputModule,
@@ -71,11 +68,8 @@ import { MatVideoModule } from 'mat-video';
         MatProgressBarModule,
         MatProgressSpinnerModule,
         MatDialogModule,
-<<<<<<< HEAD
         MatFormFieldModule,
-=======
         MatVideoModule,
->>>>>>> 9e81bd22293441ef5ab7b6b87059d55e9387fde8
     ],
 })
 export class MaterialModule {}
