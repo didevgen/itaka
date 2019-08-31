@@ -4,7 +4,7 @@ import { Component, OnInit } from '@angular/core';
     selector: 'ita-cards-content-video',
     templateUrl: './cards-content-video.component.html',
     styleUrls: [
-        './cards-content-video.component.css',
+        './cards-content-video.component.scss',
         '../cards-container.component.scss',
     ],
 })

@@ -37,7 +37,6 @@ import { CardsContentAudioComponent } from './components/homepage/cards-containe
 import { CardsContentImageComponent } from './components/homepage/cards-container/cards-content-image/cards-content-image.component';
 import { CardsContentTextComponent } from './components/homepage/cards-container/cards-content-text/cards-content-text.component';
 import { CardContentDetailComponent } from './components/homepage/cards-container/card-content-detail/card-content-detail.component';
-import { MatVideoModule } from 'mat-video';
 
 @NgModule({
     declarations: [
@@ -78,7 +77,6 @@ import { MatVideoModule } from 'mat-video';
         AppRoutingModule,
         ImageCropperModule,
         UserPageModule,
-        MatVideoModule,
     ],
     providers: [AngularFirestore],
     bootstrap: [AppComponent],
