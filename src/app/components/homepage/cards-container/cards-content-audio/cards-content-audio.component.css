@@ -1,5 +1,5 @@
 .mat-card {
-    height: 220px; 
+    height: 220px;
     padding: 0px 16px;
 }
 .mat-card > :nth-child(2) {
@@ -19,7 +19,7 @@
 }
 .mat-card > :nth-child(1) {
     font-size: 50px;
-    
+
     margin-right: 107.5px;
     margin-left: 107.5px;
     margin-bottom: 10px;
@@ -31,8 +31,7 @@
     position: relative;
     bottom: -3px;
     left: 16px;
-    float: right;  
-    
+    float: right;
 }
 .points {
     position: relative;
