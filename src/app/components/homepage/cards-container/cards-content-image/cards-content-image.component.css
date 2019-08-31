@@ -3,10 +3,33 @@
     display: block;
 } */
 .mat-card-image {
-    height: 262.5px;
+    height: 236px;
+    width: 100%;
+    margin: 0 0 16px 0;
 }
 .mat-card-title {
-   height: 37.5px;
     text-align: center;
     vertical-align: center;
+    overflow-y: hidden;
+    height: 67px;
+    margin: 0;
+    font-size: 16px;
+    padding-bottom: 5px;
+}
+.mat-icon-button {
+    height: 32px;
+    width: 32px;
+    position: relative;
+    bottom: 16px;
+    left: 16px;
+    float: right;  
+    
+}
+.points {
+    position: relative;
+    bottom: 8px;
+    height: 32px;
+    width: 32px;
+    font-size: 18px;
+    font-weight: 900;
 }
