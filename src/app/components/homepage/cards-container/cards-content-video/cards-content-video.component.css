@@ -1,0 +1,29 @@
+.mat-card {
+    height: 100%;
+    padding: 0;
+}
+.mat-video {
+    height: 262.5px;
+}
+.mat-card-title {
+    height: 37.5px;
+    text-align: center;
+    vertical-align: center;
+}
+
+.mat-icon-button {
+    height: 32px;
+    width: 32px;
+    position: relative;
+    bottom: 100px;
+    float: right;
+}
+.points {
+    position: relative;
+    color: white;
+    bottom: 8px;
+    height: 32px;
+    width: 32px;
+    font-size: 18px;
+    font-weight: 900;
+}

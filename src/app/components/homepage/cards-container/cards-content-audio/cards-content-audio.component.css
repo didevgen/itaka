@@ -1,0 +1,43 @@
+.mat-card {
+    height: 220px;
+    padding: 0px 16px;
+}
+.mat-card > :nth-child(2) {
+    position: relative;
+    margin: 0;
+    width: 100%;
+}
+
+.mat-card-title {
+    text-align: center;
+    vertical-align: center;
+    overflow-y: hidden;
+    height: 67px;
+    margin: 0;
+    font-size: 16px;
+    padding-bottom: 5px;
+}
+.mat-card > :nth-child(1) {
+    font-size: 50px;
+
+    margin-right: 107.5px;
+    margin-left: 107.5px;
+    margin-bottom: 10px;
+}
+
+.mat-icon-button {
+    height: 32px;
+    width: 32px;
+    position: relative;
+    bottom: -3px;
+    left: 16px;
+    float: right;
+}
+.points {
+    position: relative;
+    bottom: 8px;
+    height: 32px;
+    width: 32px;
+    font-size: 18px;
+    font-weight: 900;
+}
