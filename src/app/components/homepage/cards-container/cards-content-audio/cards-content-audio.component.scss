@@ -1,12 +1,12 @@
 .card__audio {
-    // background: lightblue;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 .mat-card-title {
-    padding-top: 1vh;
+    padding-top: 3vh;
     font-size: 18px;
+    text-transform: uppercase;
 }
 .music__icon {
     transform: scale(2);
