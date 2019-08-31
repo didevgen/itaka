@@ -6,6 +6,7 @@ import { Store } from '@ngrx/store';
 
 import { ProfileEditState } from './store/profile-edit.reducer';
 import { ProfileEditSet, Update } from './store/profile-edit.actions';
+import { EditProfile } from '../../models/edit-profile/edit-profile.model';
 
 @Component({
     selector: 'ita-profile-edit',
@@ -16,6 +17,7 @@ export class ProfileEditComponent implements OnInit {
     public profileForm: FormGroup;
     url: string;
     defaultImage = '../../assets/avatarDefault.png';
+    private data: EditProfile;
     private pic;
 
     constructor(
@@ -30,14 +32,17 @@ export class ProfileEditComponent implements OnInit {
             userName: this.formBuilder.control('', [Validators.required]),
             userSurname: this.formBuilder.control('', [Validators.required]),
         });
-        // this.store.select
+        /*        this.data.avatar = this.pic;
+        this.data.name = this.profileForm.get('userName').value;
+        this.data.name = this.profileForm.get('userSurname').value;*/
 
+        // this.store.select
         this.store.subscribe(state => console.log(state));
 
         this.store.dispatch(
             new ProfileEditSet({
-                name: 'someName first',
-                surName: 'someSurname first',
+                name: this.profileForm.get('userName').value,
+                surName: this.profileForm.get('userSurname').value,
                 avatar: this.pic,
             }),
         );
@@ -59,13 +64,19 @@ export class ProfileEditComponent implements OnInit {
     getRawData(img): void {
         // console.log(this.profileForm);
         this.pic = 'imageNew'; // img.src;
+
+        /*this.data.avatar = this.pic;
+        this.data.name = this.profileForm.get('userName').value;
+        this.data.name = this.profileForm.get('userSurname').value;*/
+
         this.store.dispatch(
             new Update({
-                name: 'someName new',
-                surName: 'someSurname new',
+                name: this.profileForm.get('userName').value,
+                surName: this.profileForm.get('userSurname').value,
                 avatar: this.pic,
             }),
         );
+
         // console.log(this.pic);
         // this.store
     }
