@@ -21,7 +21,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatRippleModule } from '@angular/material/core';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatFormFieldModule } from '@angular/material/form-field';
-
+import { MatVideoModule } from 'mat-video';
 @NgModule({
     imports: [
         MatInputModule,
@@ -44,7 +44,11 @@ import { MatFormFieldModule } from '@angular/material/form-field';
         MatDialogModule,
         MatProgressBarModule,
         MatProgressSpinnerModule,
+<<<<<<< HEAD
         MatFormFieldModule,
+=======
+        MatVideoModule,
+>>>>>>> 9e81bd22293441ef5ab7b6b87059d55e9387fde8
     ],
     exports: [
         MatInputModule,
@@ -67,7 +71,11 @@ import { MatFormFieldModule } from '@angular/material/form-field';
         MatProgressBarModule,
         MatProgressSpinnerModule,
         MatDialogModule,
+<<<<<<< HEAD
         MatFormFieldModule,
+=======
+        MatVideoModule,
+>>>>>>> 9e81bd22293441ef5ab7b6b87059d55e9387fde8
     ],
 })
 export class MaterialModule {}
