@@ -1,0 +1,22 @@
+<div class="text-editor__wrapper">
+    <form>
+        <mat-form-field color="accent" class="text-editor__title">
+            <input matInput placeholder="Input" type="text" />
+        </mat-form-field>
+        <ckeditor
+            [(ngModel)]="model.editorData"
+            class="text-editor__editor"
+            debounce="500"
+            [ngModelOptions]="{ standalone: true }"
+        ></ckeditor>
+    </form>
+
+    <button
+        class="text-editor__button"
+        mat-raised-button
+        color="accent"
+        type="submit"
+    >
+        Accent
+    </button>
+</div>

@@ -1,0 +1,21 @@
+.text-editor__title {
+    width: 100%;
+    text-align: center;
+}
+.text-editor__wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    justify-items: stretch;
+    width: 80%;
+    height: 100%;
+    margin: 0 auto;
+}
+.text-editor__button {
+    margin: 15px 0;
+    width: 15%;
+    align-self: center;
+}
+.text-editor__editor {
+    // min-height: 300px;
+}
