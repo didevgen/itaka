@@ -1,22 +1,37 @@
 <div class="text-editor__wrapper">
-    <form>
-        <mat-form-field color="accent" class="text-editor__title">
-            <input matInput placeholder="Input" type="text" />
+    <form class="text-editor__form">
+        <mat-form-field required color="accent" class="text-editor__title">
+            <input matInput placeholder="Title" type="text" />
         </mat-form-field>
         <ckeditor
-            [(ngModel)]="model.editorData"
-            class="text-editor__editor"
-            debounce="500"
-            [ngModelOptions]="{ standalone: true }"
-        ></ckeditor>
-    </form>
+            [editor]="Editor"
+            [config]="{
+                toolbar: [
+                    'undo',
+                    'redo',
+                    '|',
+                    'heading',
+                    '|',
+                    'bold',
 
-    <button
-        class="text-editor__button"
-        mat-raised-button
-        color="accent"
-        type="submit"
-    >
-        Accent
-    </button>
+                    'italic',
+                    '|',
+                    'link',
+                    'bulletedList',
+                    'numberedList',
+                    'blockQuote'
+                ],
+                placeholder: 'Type the content here!'
+            }"
+            [data]="model.editorData"
+        ></ckeditor>
+        <button
+            class="text-editor__button"
+            mat-raised-button
+            color="accent"
+            type="submit"
+        >
+            Send
+        </button>
+    </form>
 </div>

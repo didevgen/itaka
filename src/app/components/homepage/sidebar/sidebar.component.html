@@ -65,6 +65,7 @@
         >
     </button>
     <button
+        [matMenuTriggerFor]="menu"
         color="white"
         mat-mini-fab
         aria-label="Add content button"
@@ -74,4 +75,15 @@
     >
         <mat-icon color="accent">add</mat-icon>
     </button>
+    <mat-menu #menu="matMenu" xPosition="after" class="sidebar__menu">
+        <button mat-menu-item [routerLink]="['/addText']">
+            <mat-icon>receipt</mat-icon>
+            <span>Text</span>
+        </button>
+
+        <button mat-menu-item>
+            <mat-icon>color_lens</mat-icon>
+            <span>Media</span>
+        </button>
+    </mat-menu>
 </aside>

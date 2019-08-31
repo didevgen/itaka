@@ -9,6 +9,7 @@
     <div class="header__user-tools">
         <div class="header__user-buttons">
             <button
+                [matMenuTriggerFor]="menu"
                 mat-icon-button
                 color="accent"
                 matRipple="disabled"
@@ -16,6 +17,17 @@
             >
                 <mat-icon>add_circle_outline</mat-icon>
             </button>
+            <mat-menu #menu="matMenu" xPosition="after">
+                <button mat-menu-item [routerLink]="['/addText']">
+                    <mat-icon>receipt</mat-icon>
+                    <span>Text</span>
+                </button>
+
+                <button mat-menu-item>
+                    <mat-icon>color_lens</mat-icon>
+                    <span>Media</span>
+                </button>
+            </mat-menu>
         </div>
         <div class="header__user-info">
             <button mat-flat-button color="accent">Log in</button>

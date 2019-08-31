@@ -16,6 +16,8 @@
     width: 15%;
     align-self: center;
 }
-.text-editor__editor {
-    // min-height: 300px;
+ 
+.text-editor__form {
+    display: flex;
+    flex-direction: column;
 }

@@ -11,7 +11,7 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
 import { ProfileEditComponent } from './components/profile-edit/profile-edit.component';
 import { ContentContainerComponent } from './components/homepage/content-container/content-container.component';
 import { UserPageComponent } from './components/user-page/user-page.component';
-
+import { TextEditorComponent } from './components/editors/text-editor/text-editor.component';
 const routes: Routes = [
     { path: '', component: ContentContainerComponent },
     { path: 'register', component: RegisterComponent },
@@ -22,6 +22,7 @@ const routes: Routes = [
     { path: 'uploadFile', component: UploaderComponent },
     { path: 'editProfile', component: ProfileEditComponent },
     { path: 'userPage', component: UserPageComponent },
+    { path: 'addText', component: TextEditorComponent },
     { path: '**', component: NotFoundComponent },
 ];
 

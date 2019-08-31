@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 @Component({
     selector: 'ita-text-editor',
@@ -6,19 +7,28 @@ import { Component, OnInit } from '@angular/core';
     styleUrls: ['./text-editor.component.scss'],
 })
 export class TextEditorComponent implements OnInit {
+    public Editor = ClassicEditor;
+
     public model = {
-        editorData: '<p>Hello, world!</p>',
+        editorData: '',
     };
     public config = {
-        extraPlugins: 'autogrow',
-
-        autoGrow_minHeight: 200,
-        autoGrow_maxHeight: 600,
-        autoGrow_onStartup: true,
-        toolbar: [['Bold', 'Italic', '', 'Font', 'Color']],
+        toolbar: [
+            'bold',
+            'italic',
+            'underline',
+            'strikethrough',
+            'code',
+            'subscript',
+            'superscript',
+        ],
 
         language: 'en',
     };
 
-    ngOnInit(): void {}
+    ngOnInit(): void {
+        console.log(
+            this.Editor.builtinPlugins.map(plugin => plugin.pluginName),
+        );
+    }
 }
