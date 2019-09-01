@@ -9,6 +9,6 @@ export interface AppState {
 }
 
 export const appReducer: ActionReducerMap<AppState> = {
-  auth: fromAuth.authReducer,
-  editProfile: profEdit.profileEditReducer,
+    auth: fromAuth.authReducer,
+    editProfile: profEdit.profileEditReducer,
 };

@@ -6,7 +6,7 @@ export const enum ProfileEditTypes {
     ProfileEdit_SetSuccess = '[ProfileEdit] Set Success',
     ProfileEdit_SetError = '[ProfileEdit] Set Error',
 
-/*    ProfileEdit_Update = '[ProfileEdit] Update',
+    /*    ProfileEdit_Update = '[ProfileEdit] Update',
     ProfileEdit_UpdateSuccess = '[ProfileEdit] Update Success',
     ProfileEdit_UpdateError = '[ProfileEdit] Update Error',*/
 }
@@ -43,6 +43,6 @@ export type ProfileEditActions =
     | ProfileEditSet
     | ProfileEditSetSuccess
     | ProfileEditSetError;
-   /* | Update
+/* | Update
     | UpdateSuccess
     | UpdateError;*/

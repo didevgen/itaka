@@ -10,7 +10,8 @@ export class ProfileEditEffect {
         this.actions$.pipe(
             ofType(EdProfActions.ProfileEditTypes.ProfileEdit_Set),
             mergeMap(act =>
-                this.imgSaveService.getUrl(act.payload.avatar).pipe( // needs to add service saveData??
+                this.imgSaveService.getUrl(act.payload.avatar).pipe(
+                    // needs to add service saveData??
                     map(
                         url =>
                             new EdProfActions.ProfileEditSetSuccess({
