@@ -5,9 +5,15 @@ import { Component, OnInit } from '@angular/core';
     templateUrl: './header.component.html',
     styleUrls: ['./header.component.scss'],
 })
-export class HeaderComponent implements OnInit {
-    value = 'Clear me';
+export class HeaderComponent {
+    private uName = '';
+    isUserAuthenticated = true;
     constructor() {}
-
-    ngOnInit() {}
+    getUserAvatar() {
+        return '';
+    }
+    // set userName() {}
+    get userName() {
+        return this.uName;
+    }
 }

@@ -1,37 +1,39 @@
-<div class="text-editor__wrapper">
-    <form class="text-editor__form">
-        <mat-form-field required color="accent" class="text-editor__title">
-            <input matInput placeholder="Title" type="text" />
-        </mat-form-field>
-        <ckeditor
-            [editor]="Editor"
-            [config]="{
-                toolbar: [
-                    'undo',
-                    'redo',
-                    '|',
-                    'heading',
-                    '|',
-                    'bold',
+<div class="container">
+    <div class="text-editor__wrapper ">
+        <form class="text-editor__form">
+            <mat-form-field required color="accent" class="text-editor__title">
+                <input matInput placeholder="Title" type="text" />
+            </mat-form-field>
+            <ckeditor
+                [editor]="Editor"
+                [config]="{
+                    toolbar: [
+                        'undo',
+                        'redo',
+                        '|',
+                        'heading',
+                        '|',
+                        'bold',
 
-                    'italic',
-                    '|',
-                    'link',
-                    'bulletedList',
-                    'numberedList',
-                    'blockQuote'
-                ],
-                placeholder: 'Type the content here!'
-            }"
-            [data]="model.editorData"
-        ></ckeditor>
-        <button
-            class="text-editor__button"
-            mat-raised-button
-            color="accent"
-            type="submit"
-        >
-            Send
-        </button>
-    </form>
+                        'italic',
+                        '|',
+                        'link',
+                        'bulletedList',
+                        'numberedList',
+                        'blockQuote'
+                    ],
+                    placeholder: 'Type the content here!'
+                }"
+                [data]="model.editorData"
+            ></ckeditor>
+            <button
+                class="text-editor__button"
+                mat-raised-button
+                color="accent"
+                type="submit"
+            >
+                Send
+            </button>
+        </form>
+    </div>
 </div>
