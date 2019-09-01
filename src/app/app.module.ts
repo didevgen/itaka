@@ -34,6 +34,8 @@ import { RouterContainerComponent } from './components/router-container/router-c
 import { CallbackComponent } from './components/auth/callback/callback.component';
 import { ProfileComponent } from './components/auth/profile/profile.component';
 import { ProfileEditEffect } from './components/profile-edit/store/profile-edit.effects';
+import { ProfileEditService } from './components/profile-edit/profile-edit.service';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
     declarations: [
@@ -56,8 +58,9 @@ import { ProfileEditEffect } from './components/profile-edit/store/profile-edit.
     imports: [
         BrowserModule,
         AppRoutingModule,
-        StoreModule.forRoot(fromApp.appReducer),
+        HttpClientModule,
         EffectsModule.forRoot([ProfileEditEffect]),
+        StoreModule.forRoot(fromApp.appReducer),
         StoreDevtoolsModule.instrument({
             maxAge: 25,
             logOnly: environment.production,
@@ -74,7 +77,7 @@ import { ProfileEditEffect } from './components/profile-edit/store/profile-edit.
         AppRoutingModule,
         ImageCropperModule,
     ],
-    providers: [AngularFirestore],
+    providers: [AngularFirestore, ProfileEditService],
     bootstrap: [AppComponent],
     entryComponents: [ModalDialogComponent],
     exports: [ContentContainerComponent],

@@ -5,13 +5,15 @@ import { ModalDialogComponent } from './modal-dialog/modal-dialog.component';
 import { Store } from '@ngrx/store';
 
 import { ProfileEditState } from './store/profile-edit.reducer';
-import { ProfileEditSet, Update } from './store/profile-edit.actions';
+import { ProfileEditSet } from './store/profile-edit.actions';
 import { EditProfile } from '../../models/edit-profile/edit-profile.model';
+import { ProfileEditService } from './profile-edit.service';
 
 @Component({
     selector: 'ita-profile-edit',
     templateUrl: './profile-edit.component.html',
     styleUrls: ['./profile-edit.component.scss'],
+    // providers: [ProfileEditService],
 })
 export class ProfileEditComponent implements OnInit {
     public profileForm: FormGroup;
@@ -66,7 +68,7 @@ export class ProfileEditComponent implements OnInit {
         this.data.name = this.profileForm.get('userSurname').value;*/
 
         this.store.dispatch(
-            new Update({
+            new ProfileEditSet({
                 name: this.profileForm.get('userName').value,
                 surName: this.profileForm.get('userSurname').value,
                 avatar: this.pic,
