@@ -35,7 +35,7 @@ export class ProfileEditEffect {
             mergeMap(act =>
                 this.dataService.saveData(act.payload).pipe(
                     map(
-                      ({payload}) =>
+                        ({ payload }) =>
                             new EdProfActions.ProfileEditSetSuccess({
                                 name: payload.name,
                                 surName: payload.surName,
