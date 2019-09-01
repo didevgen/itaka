@@ -4,6 +4,8 @@ import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { StoreModule } from '@ngrx/store';
 import * as fromApp from './store/app.reducer';
+import {EffectsModule} from '@ngrx/effects';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 import { MaterialModule } from './material.module';
 import { HeaderComponent } from './components/homepage/header/header.component';
@@ -31,6 +33,7 @@ import { ProfileEditComponent } from './components/profile-edit/profile-edit.com
 import { RouterContainerComponent } from './components/router-container/router-container.component';
 import { CallbackComponent } from './components/auth/callback/callback.component';
 import { ProfileComponent } from './components/auth/profile/profile.component';
+import { ProfileEditEffect } from './components/profile-edit/store/profile-edit.effect';
 
 @NgModule({
     declarations: [
@@ -54,6 +57,11 @@ import { ProfileComponent } from './components/auth/profile/profile.component';
         BrowserModule,
         AppRoutingModule,
         StoreModule.forRoot(fromApp.appReducer),
+        EffectsModule.forRoot([ProfileEditEffect]),
+        StoreDevtoolsModule.instrument({
+            maxAge: 25,
+            logOnly: environment.production,
+        }),
         ReactiveFormsModule,
         BrowserAnimationsModule,
         MaterialModule,

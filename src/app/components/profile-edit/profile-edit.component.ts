@@ -32,11 +32,7 @@ export class ProfileEditComponent implements OnInit {
             userName: this.formBuilder.control('', [Validators.required]),
             userSurname: this.formBuilder.control('', [Validators.required]),
         });
-        /*        this.data.avatar = this.pic;
-        this.data.name = this.profileForm.get('userName').value;
-        this.data.name = this.profileForm.get('userSurname').value;*/
 
-        // this.store.select
         this.store.subscribe(state => console.log(state));
 
         this.store.dispatch(
