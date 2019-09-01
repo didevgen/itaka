@@ -8,9 +8,9 @@ export interface ProfileEditState {
 }
 
 const initialState: ProfileEditState = {
-    name: '',
-    surName: '',
-    avatar: '',
+    name: null,
+    surName: null,
+    avatar: null,
 };
 
 export function profileEditReducer(
@@ -24,12 +24,12 @@ export function profileEditReducer(
                 surName: action.payload.surName,
                 avatar: action.payload.avatar,
             };
-        case ProfEdAct.ProfileEditTypes.ProfileEdit_Update:
+        /*case ProfEdAct.ProfileEditTypes.ProfileEdit_Update:
             return {
                 name: action.payload.name,
                 surName: action.payload.surName,
                 avatar: action.payload.avatar,
-            };
+            };*/
         default:
             return state;
     }

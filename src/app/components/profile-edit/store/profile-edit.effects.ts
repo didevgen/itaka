@@ -4,18 +4,18 @@ import { catchError, map, mergeMap } from 'rxjs/operators';
 import { EMPTY, of } from 'rxjs';
 import * as EdProfActions from 'profile-edit.actions';
 
-@Injectable
+@Injectable()
 export class ProfileEditEffect {
     loadEditProfile$ = createEffect(() =>
         this.actions$.pipe(
             ofType(EdProfActions.ProfileEditTypes.ProfileEdit_Set),
-            mergeMap(val =>
-                this.imgUrlService.getUrl(val.payload.avatar).pipe(
+            mergeMap(act =>
+                this.imgSaveService.getUrl(act.payload.avatar).pipe( // needs to add service saveData??
                     map(
                         url =>
                             new EdProfActions.ProfileEditSetSuccess({
-                                name: val.name,
-                                surName: val.surName,
+                                name: act.payload.name,
+                                surName: act.payload.surName,
                                 avatar: url,
                             }),
                     ),

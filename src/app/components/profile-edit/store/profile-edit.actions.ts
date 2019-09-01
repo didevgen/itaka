@@ -6,9 +6,9 @@ export const enum ProfileEditTypes {
     ProfileEdit_SetSuccess = '[ProfileEdit] Set Success',
     ProfileEdit_SetError = '[ProfileEdit] Set Error',
 
-    ProfileEdit_Update = '[ProfileEdit] Update',
+/*    ProfileEdit_Update = '[ProfileEdit] Update',
     ProfileEdit_UpdateSuccess = '[ProfileEdit] Update Success',
-    ProfileEdit_UpdateError = '[ProfileEdit] Update Error',
+    ProfileEdit_UpdateError = '[ProfileEdit] Update Error',*/
 }
 
 export class ProfileEditSet implements Action {
@@ -25,7 +25,7 @@ export class ProfileEditSetError implements Action {
     readonly type = ProfileEditTypes.ProfileEdit_SetError;
 }
 
-export class Update implements Action {
+/*export class Update implements Action {
     readonly type = ProfileEditTypes.ProfileEdit_Update;
 
     constructor(public payload: EditProfile) {}
@@ -37,11 +37,12 @@ export class UpdateSuccess implements Action {
 }
 export class UpdateError implements Action {
     readonly type = ProfileEditTypes.ProfileEdit_UpdateError;
-}
+}*/
+
 export type ProfileEditActions =
     | ProfileEditSet
     | ProfileEditSetSuccess
-    | ProfileEditSetError
-    | Update
+    | ProfileEditSetError;
+   /* | Update
     | UpdateSuccess
-    | UpdateError;
+    | UpdateError;*/
