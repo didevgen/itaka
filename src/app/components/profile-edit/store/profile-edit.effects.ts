@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { catchError, map, mergeMap } from 'rxjs/operators';
-import {Observable, of} from 'rxjs';
+import { Observable, of } from 'rxjs';
 import * as EdProfActions from './profile-edit.actions';
 import { ProfileEditService } from '../profile-edit.service';
 

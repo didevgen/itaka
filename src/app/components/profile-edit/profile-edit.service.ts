@@ -7,6 +7,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 export class ProfileEditService {
     readonly requestURL = '';
     data: EditProfile;
+    userID = 0;
     savedInfo: Observable<any>;
 
     constructor(
@@ -23,10 +24,18 @@ export class ProfileEditService {
         );
         // return this.savedInfo;
         return this.data;*/
-        return from(
+        /*return from(
             this.db.collection('/Users').add({
                 ...this.data,
             }),
+        );*/
+        return from(
+            this.db
+                .collection('/Users')
+                .doc(this.userID++)
+                .set({
+                    ...this.data,
+                }),
         );
     }
 }
