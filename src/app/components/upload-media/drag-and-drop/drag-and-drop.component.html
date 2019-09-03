@@ -1,0 +1,33 @@
+<div class="container">
+    <form class="upload__media">
+        <mat-form-field class="upload__media-title" color="accent">
+            <input matInput placeholder="Title..." />
+        </mat-form-field>
+        <mat-form-field class="upload__media-description" color="accent">
+            <textarea matInput placeholder="Description..."></textarea>
+        </mat-form-field>
+        <mat-form-field class="upload__media-file" color="accent">
+            <ngx-mat-file-input
+                formControlName="basicfile"
+                placeholder="Сlick to select file"
+                (change)="onDrop($event.target.files)"
+            ></ngx-mat-file-input>
+        </mat-form-field>
+    </form>
+
+    <mat-card>
+        <div
+            class="drag-and-drop-zone"
+            itaDragAndDropZone
+            (hovered)="toggleHover($event)"
+            (dropped)="onDrop($event)"
+            [class.hovering]="isHovering"
+        >
+            <mat-card-title>Or drop your files here</mat-card-title>
+        </div>
+    </mat-card>
+
+    <div class="upload__media--progress-bar" *ngFor="let file of files">
+        <ita-progress-bar [file]="file"></ita-progress-bar>
+    </div>
+</div>

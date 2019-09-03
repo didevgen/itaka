@@ -21,6 +21,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatRippleModule } from '@angular/material/core';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatVideoModule } from 'mat-video';
+import { MaterialFileInputModule } from 'ngx-material-file-input';
 @NgModule({
     imports: [
         MatInputModule,
@@ -44,6 +45,7 @@ import { MatVideoModule } from 'mat-video';
         MatProgressBarModule,
         MatProgressSpinnerModule,
         MatVideoModule,
+        MaterialFileInputModule,
     ],
     exports: [
         MatInputModule,
@@ -67,6 +69,7 @@ import { MatVideoModule } from 'mat-video';
         MatProgressSpinnerModule,
         MatDialogModule,
         MatVideoModule,
+        MaterialFileInputModule,
     ],
 })
 export class MaterialModule {}

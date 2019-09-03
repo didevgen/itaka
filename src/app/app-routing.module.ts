@@ -5,12 +5,12 @@ import { LoginComponent } from './components/auth/login/login.component';
 import { CallbackComponent } from './components/auth/callback/callback.component';
 import { ProfileComponent } from './components/auth/profile/profile.component';
 import { AuthGuard } from './auth.guard';
-import { UploaderComponent } from './components/test-upload/uploader/uploader.component';
 import { AdminContainerComponent } from './components/admin-page/admin-container/admin-container.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { ProfileEditComponent } from './components/profile-edit/profile-edit.component';
 import { ContentContainerComponent } from './components/homepage/content-container/content-container.component';
 import { UserPageComponent } from './components/user-page/user-page.component';
+import { DragAndDropComponent } from './components/upload-media/drag-and-drop/drag-and-drop.component';
 
 const routes: Routes = [
     { path: '', component: ContentContainerComponent },
@@ -19,7 +19,7 @@ const routes: Routes = [
     { path: 'callback', component: CallbackComponent },
     { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
     { path: 'admin', component: AdminContainerComponent },
-    { path: 'uploadFile', component: UploaderComponent },
+    { path: 'uploadMedia', component: DragAndDropComponent },
     { path: 'editProfile', component: ProfileEditComponent },
     { path: 'userPage', component: UserPageComponent },
     { path: '**', component: NotFoundComponent },

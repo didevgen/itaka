@@ -14,9 +14,6 @@ import { GoogleInWithAuth0Component } from './components/auth/googlein-with-auth
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireStorageModule } from 'angularfire2/storage';
 import { AngularFirestore } from 'angularfire2/firestore';
-import { DropzoneDirective } from './components/test-upload/upload.directive';
-import { UploaderComponent } from './components/test-upload/uploader/uploader.component';
-import { UploadTaskComponent } from './components/test-upload/upload-task/upload-task.component';
 import { environment } from '../environments/environment';
 import { AdminModule } from './components/admin-page/admin.module';
 import { AppRoutingModule } from './app-routing.module';
@@ -37,6 +34,7 @@ import { CardsContentAudioComponent } from './components/homepage/cards-containe
 import { CardsContentImageComponent } from './components/homepage/cards-container/cards-content-image/cards-content-image.component';
 import { CardsContentTextComponent } from './components/homepage/cards-container/cards-content-text/cards-content-text.component';
 import { CardContentDetailComponent } from './components/homepage/cards-container/card-content-detail/card-content-detail.component';
+import { UploadMediaModule } from './components/upload-media/upload-media.module';
 
 @NgModule({
     declarations: [
@@ -44,9 +42,6 @@ import { CardContentDetailComponent } from './components/homepage/cards-containe
         HeaderComponent,
         SidebarComponent,
         ContentContainerComponent,
-        DropzoneDirective,
-        UploaderComponent,
-        UploadTaskComponent,
         ProfileEditComponent,
         ModalDialogComponent,
         RouterContainerComponent,
@@ -74,9 +69,9 @@ import { CardContentDetailComponent } from './components/homepage/cards-containe
         LoginModule,
         RegisterModule,
         NotFoundModule,
-        AppRoutingModule,
         ImageCropperModule,
         UserPageModule,
+        UploadMediaModule,
     ],
     providers: [AngularFirestore],
     bootstrap: [AppComponent],
