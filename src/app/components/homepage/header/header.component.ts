@@ -15,28 +15,26 @@ import * as AuthActions from '../../auth/store/auth.actions';
 export class HeaderComponent implements OnInit, OnDestroy {
     value = 'Clear me';
     isAuthenticated = false;
-  private userSub: Subscription;
+    private userSub: Subscription;
 
-  constructor(
-    private store: Store<fromApp.AppState>
-  ) {}
+    constructor(private store: Store<fromApp.AppState>) {}
 
-  ngOnInit() {
-    this.userSub = this.store
-      .select('auth')
-      .pipe(map(authState => authState.user))
-      .subscribe(user => {
-        this.isAuthenticated = !!user;
-        console.log(!user);
-        console.log(!!user);
-      });
-  }
+    ngOnInit() {
+        this.userSub = this.store
+            .select('auth')
+            .pipe(map(authState => authState.user))
+            .subscribe(user => {
+                this.isAuthenticated = !!user;
+                console.log(!user);
+                console.log(!!user);
+            });
+    }
 
-  onLogout() {
-    this.store.dispatch(new AuthActions.Logout());
-  }
+    onLogout() {
+        this.store.dispatch(new AuthActions.Logout());
+    }
 
-  ngOnDestroy() {
-    this.userSub.unsubscribe();
-  }
+    ngOnDestroy() {
+        this.userSub.unsubscribe();
+    }
 }

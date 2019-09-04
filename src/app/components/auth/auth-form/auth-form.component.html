@@ -1,14 +1,6 @@
 <ng-template itaPlaceholder></ng-template>
 
-<div class="container"> 
-      <!-- <div class="alert alert-danger" *ngIf="error">
-         <p>{{ error }}</p>
-       </div>
-     <app-alert
-      [message]="error"
-      *ngIf="error"
-      (close)="onHandleError()"
-    ></app-alert> -->
+<div class="container">
     <div *ngIf="isLoading" class="loading-spinner">
         <mat-progress-spinner 
           mode="indeterminate"

@@ -21,9 +21,21 @@ const routes: Routes = [
     // { path: 'callback', component: CallbackComponent },
     // { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
     { path: 'admin', component: AdminContainerComponent },
-    { path: 'uploadFile', component: UploaderComponent, canActivate: [AuthGuard] },
-    { path: 'editProfile', component: ProfileEditComponent, canActivate: [AuthGuard] },
-    { path: 'userPage', component: UserPageComponent, canActivate: [AuthGuard] },
+    {
+        path: 'uploadFile',
+        component: UploaderComponent,
+        canActivate: [AuthGuard],
+    },
+    {
+        path: 'editProfile',
+        component: ProfileEditComponent,
+        canActivate: [AuthGuard],
+    },
+    {
+        path: 'userPage',
+        component: UserPageComponent,
+        canActivate: [AuthGuard],
+    },
     { path: 'auth', component: AuthFormComponent },
     { path: '**', component: NotFoundComponent },
 ];

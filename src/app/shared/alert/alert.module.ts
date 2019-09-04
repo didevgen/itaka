@@ -3,11 +3,10 @@ import { CommonModule } from '@angular/common';
 
 import { MaterialModule } from '../../material.module';
 
-
 @NgModule({
-  declarations: [],
-  imports: [CommonModule, MaterialModule],
-  exports: [],
-  entryComponents: [],
+    declarations: [],
+    imports: [CommonModule, MaterialModule],
+    exports: [],
+    entryComponents: [],
 })
 export class AlertModule {}

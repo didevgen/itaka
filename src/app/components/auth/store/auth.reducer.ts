@@ -1,6 +1,6 @@
 import { User } from '../user.model';
 // import * as AuthActions from './auth.actions';
-import {AuthTypes, AuthActions} from './auth.actions';
+import { AuthTypes, AuthActions } from './auth.actions';
 
 export interface State {
     user: User;
@@ -62,11 +62,10 @@ const initialState: State = {
 //     }
 // }
 
-
 export function authReducer(
     state = initialState,
     // action: AuthActions.AuthActions,
-    action: AuthActions
+    action: AuthActions,
 ) {
     switch (action.type) {
         case AuthTypes.AUTHENTICATE_SUCCESS:

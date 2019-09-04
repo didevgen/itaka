@@ -1,9 +1,9 @@
 import {
-  Component,
-  ComponentFactoryResolver,
-  ViewChild,
-  OnDestroy,
-  OnInit
+    Component,
+    ComponentFactoryResolver,
+    ViewChild,
+    OnDestroy,
+    OnInit,
 } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Subscription } from 'rxjs';
@@ -15,89 +15,88 @@ import * as fromApp from '../../../store/app.reducer';
 import * as AuthActions from '../store/auth.actions';
 
 @Component({
-  selector: 'ita-auth-form',
-  templateUrl: './auth-form.component.html',
-  styleUrls: ['./auth-form.component.scss']
+    selector: 'ita-auth-form',
+    templateUrl: './auth-form.component.html',
+    styleUrls: ['./auth-form.component.scss'],
 })
-export class AuthFormComponent implements OnInit, OnDestroy  {
+export class AuthFormComponent implements OnInit, OnDestroy {
+    isLoginMode = true;
+    isLoading = false;
+    error: string = null;
+    @ViewChild(PlaceholderDirective, { static: false })
+    alertHost: PlaceholderDirective;
 
-  isLoginMode = true;
-  isLoading = false;
-  error: string = null;
-  @ViewChild(PlaceholderDirective, { static: false }) alertHost: PlaceholderDirective;
+    private closeSub: Subscription;
+    private storeSub: Subscription;
 
-  private closeSub: Subscription;
-  private storeSub: Subscription;
+    constructor(
+        private componentFactoryResolver: ComponentFactoryResolver,
+        private store: Store<fromApp.AppState>,
+    ) {}
 
-  constructor(
-    private componentFactoryResolver: ComponentFactoryResolver,
-    private store: Store<fromApp.AppState>
-  ) {}
-
-  ngOnInit() {
-    this.storeSub = this.store.select('auth').subscribe(authState => {
-      console.log(authState);
-      this.isLoading = authState.loading;
-      this.error = authState.authError;
-      if (this.error) {
-        this.showErrorAlert(this.error);
-      }
-    });
-    console.log('hello from ngInit', this.storeSub);
-  }
-
-  onSwitchMode() {
-    this.isLoginMode = !this.isLoginMode;
-  }
-
-  onSubmit(form: NgForm) {
-    console.log('hi from Submit');
-    if (!form.valid) {
-      return;
-    }
-    const email = form.value.email;
-    const password = form.value.password;
-    console.log('Form',  email, password);
-    if (this.isLoginMode) {
-      this.store.dispatch(
-        new AuthActions.LoginStart({ email, password })
-      );
-    } else {
-      this.store.dispatch(
-        new AuthActions.SignupStart({ email, password })
-      );
+    ngOnInit() {
+        this.storeSub = this.store.select('auth').subscribe(authState => {
+            console.log(authState);
+            this.isLoading = authState.loading;
+            this.error = authState.authError;
+            if (this.error) {
+                this.showErrorAlert(this.error);
+            }
+        });
+        console.log('hello from ngInit', this.storeSub);
     }
 
-    form.reset();
-  }
-
-  onHandleError() {
-    this.store.dispatch(new AuthActions.ClearError());
-  }
-
-  ngOnDestroy() {
-    if (this.closeSub) {
-      this.closeSub.unsubscribe();
+    onSwitchMode() {
+        this.isLoginMode = !this.isLoginMode;
     }
-    if (this.storeSub) {
-      this.storeSub.unsubscribe();
+
+    onSubmit(form: NgForm) {
+        if (!form.valid) {
+            return;
+        }
+        const email = form.value.email;
+        const password = form.value.password;
+        if (this.isLoginMode) {
+            this.store.dispatch(
+                new AuthActions.LoginStart({ email, password }),
+            );
+        } else {
+            this.store.dispatch(
+                new AuthActions.SignupStart({ email, password }),
+            );
+        }
+
+        form.reset();
     }
-  }
 
-  private showErrorAlert(message: string) {
-    console.log('hello from Error');
-    const alertCmpFactory = this.componentFactoryResolver.resolveComponentFactory(
-      AlertComponent
-    );
-    const hostViewContainerRef = this.alertHost.viewContainerRef;
-    hostViewContainerRef.clear();
+    onHandleError() {
+        this.store.dispatch(new AuthActions.ClearError());
+    }
 
-    const componentRef = hostViewContainerRef.createComponent(alertCmpFactory);
+    ngOnDestroy() {
+        if (this.closeSub) {
+            this.closeSub.unsubscribe();
+        }
+        if (this.storeSub) {
+            this.storeSub.unsubscribe();
+        }
+    }
 
-    componentRef.instance.message = message;
-    this.closeSub = componentRef.instance.closed.subscribe(() => {
-      this.closeSub.unsubscribe();
-      hostViewContainerRef.clear();
-    });
- }
+    private showErrorAlert(message: string) {
+        const alertCmpFactory = this.componentFactoryResolver.resolveComponentFactory(
+            AlertComponent,
+        );
+        const hostViewContainerRef = this.alertHost.viewContainerRef;
+        hostViewContainerRef.clear();
+
+        const componentRef = hostViewContainerRef.createComponent(
+            alertCmpFactory,
+        );
+
+        componentRef.instance.message = message;
+        this.closeSub = componentRef.instance.closed.subscribe(() => {
+            this.closeSub.unsubscribe();
+            hostViewContainerRef.clear();
+        });
+    }
 }

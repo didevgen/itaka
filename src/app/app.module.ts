@@ -91,8 +91,8 @@ import { AlertModule } from '../app/shared/alert/alert.module';
         AuthModule,
         SharedModule,
         HttpClientModule,
-        AlertModule
-        ],
+        AlertModule,
+    ],
     providers: [AngularFirestore, AuthEffects],
     bootstrap: [AppComponent],
     entryComponents: [ModalDialogComponent],
