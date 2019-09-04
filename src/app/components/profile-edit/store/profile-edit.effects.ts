@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { catchError, map, mergeMap } from 'rxjs/operators';
+import { catchError, map, mergeMap, switchMap } from 'rxjs/operators';
 import { Observable, of } from 'rxjs';
 import * as EdProfActions from './profile-edit.actions';
 import { ProfileEditService } from '../profile-edit.service';
@@ -10,7 +10,7 @@ export class ProfileEditEffect {
     loadEditProfile$ = createEffect(() =>
         this.actions$.pipe(
             ofType(EdProfActions.ProfileEditTypes.ProfileEdit_Set),
-            mergeMap((act: EdProfActions.ProfileEditSetSuccess) =>
+            switchMap((act: EdProfActions.ProfileEditSetSuccess) =>
                 this.dataService.saveData(act.payload).pipe(
                     map(
                         ({ payload }) =>
@@ -18,11 +18,13 @@ export class ProfileEditEffect {
                                 name: payload.name,
                                 surName: payload.surName,
                                 avatar: payload.avatar,
+                                isError: payload.isError,
                             }),
                     ),
-                    catchError(() =>
-                        of(new EdProfActions.ProfileEditSetError()),
-                    ),
+                    catchError(err => {
+                        console.log('!!! dataService error from effect', err);
+                        return of(new EdProfActions.ProfileEditSetError());
+                    }),
                 ),
             ),
         ),
