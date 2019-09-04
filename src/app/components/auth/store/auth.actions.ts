@@ -30,7 +30,7 @@ export class Logout implements Action {
 }
 
 export class LoginWithGoogle implements Action {
-  readonly type = AuthTypes.LOGIN_WITH_GOOGLE;
+    readonly type = AuthTypes.LOGIN_WITH_GOOGLE;
 }
 
 export class LoginStart implements Action {
