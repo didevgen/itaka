@@ -7,27 +7,6 @@ import { ProfileEditService } from '../profile-edit.service';
 
 @Injectable()
 export class ProfileEditEffect {
-    /*saveImageUrlProfile$ = createEffect(() =>
-        this.actions$.pipe(
-            ofType(EdProfActions.ProfileEditTypes.ProfileEdit_Set),
-            mergeMap(act =>
-                this.imgSaveService.getUrl(act.payload.avatar).pipe(
-                    // needs to add service saveData??
-                    map(
-                        url =>
-                            new EdProfActions.ProfileEditSetSuccess({
-                                name: act.payload.name,
-                                surName: act.payload.surName,
-                                avatar: url,
-                            }),
-                    ),
-                    catchError(() =>
-                        of(new EdProfActions.ProfileEditSetError()),
-                    ),
-                ),
-            ),
-        ),
-    );*/
 
     loadEditProfile$ = createEffect(() =>
         this.actions$.pipe(

@@ -7,19 +7,16 @@ import { Store } from '@ngrx/store';
 import { ProfileEditState } from './store/profile-edit.reducer';
 import { ProfileEditSet } from './store/profile-edit.actions';
 import { EditProfile } from '../../models/edit-profile/edit-profile.model';
-import { ProfileEditService } from './profile-edit.service';
 
 @Component({
     selector: 'ita-profile-edit',
     templateUrl: './profile-edit.component.html',
     styleUrls: ['./profile-edit.component.scss'],
-    // providers: [ProfileEditService],
 })
 export class ProfileEditComponent implements OnInit {
     public profileForm: FormGroup;
     url: string;
     defaultImage = '../../assets/avatarDefault.png';
-    private data: EditProfile;
     private pic;
 
     constructor(
@@ -60,12 +57,7 @@ export class ProfileEditComponent implements OnInit {
     }
 
     getRawData(img): void {
-        // console.log(this.profileForm);
-        this.pic = 'imageNew'; // img.src;
-
-        /*this.data.avatar = this.pic;
-        this.data.name = this.profileForm.get('userName').value;
-        this.data.name = this.profileForm.get('userSurname').value;*/
+        this.pic = 'imageNew';
 
         this.store.dispatch(
             new ProfileEditSet({
@@ -74,8 +66,5 @@ export class ProfileEditComponent implements OnInit {
                 avatar: this.pic,
             }),
         );
-
-        // console.log(this.pic);
-        // this.store
     }
 }

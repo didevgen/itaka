@@ -5,10 +5,8 @@ import { AngularFireStorage } from '@angular/fire/storage';
 import { AngularFirestore } from '@angular/fire/firestore';
 
 export class ProfileEditService {
-    readonly requestURL = '';
     data: EditProfile;
     userID = 0;
-    savedInfo: Observable<any>;
 
     constructor(
         private http: HttpClient,
@@ -18,21 +16,11 @@ export class ProfileEditService {
 
     saveData(payload: EditProfile): Observable<any> {
         this.data = payload;
-        /*this.savedInfo = this.http.post(
-            this.requestURL + '/users',
-            this.data.name,
-        );
-        // return this.savedInfo;
-        return this.data;*/
-        /*return from(
-            this.db.collection('/Users').add({
-                ...this.data,
-            }),
-        );*/
+
         return from(
             this.db
                 .collection('/Users')
-                .doc(this.userID++)
+                .doc('' + this.userID++)
                 .set({
                     ...this.data,
                 }),
