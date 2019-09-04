@@ -13,10 +13,7 @@ const initialState: State = {
     loading: false,
 };
 
-export function authReducer(
-    state = initialState,
-    action: AuthActions,
-) {
+export function authReducer(state = initialState, action: AuthActions) {
     switch (action.type) {
         case AuthTypes.AUTHENTICATE_SUCCESS:
             const user = new User(
