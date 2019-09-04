@@ -7,7 +7,6 @@ import { Component } from '@angular/core';
 })
 export class DragAndDropComponent {
     isHovering: boolean;
-
     files: File[] = [];
 
     toggleHover(event: boolean) {

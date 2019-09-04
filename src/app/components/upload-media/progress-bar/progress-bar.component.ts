@@ -12,10 +12,13 @@ import { finalize, tap } from 'rxjs/operators';
     styleUrls: ['./progress-bar.component.scss'],
 })
 export class ProgressBarComponent implements OnInit {
-    @Input() file: File;
-
+    @Input()
+    file: File;
+    @Input()
+    title: string;
+    @Input()
+    description: string;
     task: AngularFireUploadTask;
-
     percentage: Observable<number>;
     snapshot: Observable<any>;
     urlOfUploadedFile: string;
@@ -38,9 +41,13 @@ export class ProgressBarComponent implements OnInit {
             tap(console.log),
             finalize(async () => {
                 this.urlOfUploadedFile = await ref.getDownloadURL().toPromise();
-                this.db
-                    .collection('Posts')
-                    .add({ url: this.urlOfUploadedFile, path });
+                this.db.collection('Posts').add({
+                    url: this.urlOfUploadedFile,
+                    path,
+                    date: Date.now(),
+                    title: this.title,
+                    description: this.description,
+                });
             }),
         );
     }
