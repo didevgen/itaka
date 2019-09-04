@@ -1,5 +1,11 @@
 export const environment = {
     production: true,
+    urlAuthConfig: {
+        singUP:
+            'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=',
+        signIn:
+            'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=',
+    },
     firebaseConfig: {
         apiKey: 'AIzaSyCPGOjrEl6_UhjQbKLYeb8vlOGOfjDSh8w',
         authDomain: 'itaka-9db8e.firebaseapp.com',

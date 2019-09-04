@@ -18,7 +18,23 @@
             </button>
         </div>
         <div class="header__user-info">
-            <button mat-flat-button color="accent">Log in</button>
+            <button
+                routerLinkActive="active"
+                *ngIf="!isAuthenticated"
+                mat-flat-button
+                color="accent"
+                routerLink="/auth"
+            >
+                LOG IN
+            </button>
+            <button
+                *ngIf="isAuthenticated"
+                mat-flat-button
+                color="accent"
+                (click)="onLogout()"
+            >
+                LOG OUT
+            </button>
         </div>
     </div>
 </mat-toolbar>
