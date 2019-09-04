@@ -43,7 +43,6 @@ export class AuthFormComponent implements OnInit, OnDestroy {
                 this.showErrorAlert(this.error);
             }
         });
-        console.log('hello from ngInit', this.storeSub);
     }
 
     onSwitchMode() {

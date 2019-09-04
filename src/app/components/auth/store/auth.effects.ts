@@ -64,7 +64,7 @@ export class AuthEffects {
         switchMap((signupAction: AuthActions.SignupStart) => {
             return this.http
                 .post<AuthResponseData>(
-                    'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyCPGOjrEl6_UhjQbKLYeb8vlOGOfjDSh8w',
+                    `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${environment.firebaseConfig.apiKey}`,
                     {
                         email: signupAction.payload.email,
                         password: signupAction.payload.password,
@@ -103,7 +103,7 @@ export class AuthEffects {
         switchMap((authData: AuthActions.LoginStart) => {
             return this.http
                 .post<AuthResponseData>(
-                    'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyCPGOjrEl6_UhjQbKLYeb8vlOGOfjDSh8w',
+                    `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${environment.firebaseConfig.apiKey}`,
                     {
                         email: authData.payload.email,
                         password: authData.payload.password,

@@ -18,8 +18,6 @@ const routes: Routes = [
     { path: '', component: ContentContainerComponent },
     { path: 'register', component: RegisterComponent },
     { path: 'login', component: LoginComponent },
-    // { path: 'callback', component: CallbackComponent },
-    // { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
     { path: 'admin', component: AdminContainerComponent },
     {
         path: 'uploadFile',
