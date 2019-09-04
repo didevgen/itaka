@@ -1,14 +1,16 @@
-import { Injectable } from '@angular/core';
+import {Injectable, NgZone} from '@angular/core';
 import { Router } from '@angular/router';
 import { Actions, ofType, Effect } from '@ngrx/effects';
 import { switchMap, catchError, map, tap } from 'rxjs/operators';
-import { of } from 'rxjs';
+import { from, of } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../../environments/environment';
 import * as AuthActions from './auth.actions';
 import { User } from '../user.model';
 import { AuthService } from '../auth-form/auth-form.service';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFireAuth } from '@angular/fire/auth';
+import * as firebase from 'firebase/app';
 
 export interface AuthResponseData {
     kind: string;
@@ -135,7 +137,9 @@ export class AuthEffects {
         ofType(AuthActions.AuthTypes.AUTHENTICATE_SUCCESS),
         tap((authSuccessAction: AuthActions.AuthenticateSuccess) => {
             if (authSuccessAction.payload.redirect) {
+              this.zone.run(() => {
                 this.router.navigate(['userPage']);
+              });
             }
         }),
     );
@@ -175,6 +179,35 @@ export class AuthEffects {
         }),
     );
 
+  @Effect()
+  signInGoogle$ = this.actions$.pipe(
+    ofType(AuthActions.AuthTypes.LOGIN_WITH_GOOGLE),
+    switchMap((authData: AuthActions.LoginWithGoogle) => {
+      return from(
+        this.firebaseAuth.auth.signInWithPopup(
+          new firebase.auth.GoogleAuthProvider()
+        )
+      ).pipe(
+        tap(resData => {
+          this.db.collection('Users').add({
+            email: resData.user.email,
+          });
+        }),
+        map(resData => {
+          return handleAuthentication(
+            3600,
+            resData.user.email,
+            resData.user.uid,
+            (resData as any).credential.idToken
+          );
+        }),
+        catchError(err => {
+          return handleError('An error occurred when login using Google!');
+        })
+      );
+    })
+  );
+
     @Effect({ dispatch: false })
     authLogout = this.actions$.pipe(
         ofType(AuthActions.AuthTypes.LOGOUT),
@@ -190,5 +223,7 @@ export class AuthEffects {
         private router: Router,
         private authService: AuthService,
         private db: AngularFirestore,
+        private firebaseAuth: AngularFireAuth,
+        private zone: NgZone
     ) {}
 }

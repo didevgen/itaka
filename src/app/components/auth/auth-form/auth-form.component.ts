@@ -68,6 +68,10 @@ export class AuthFormComponent implements OnInit, OnDestroy {
         form.reset();
     }
 
+    loginWithGoogle() {
+      this.store.dispatch( new AuthActions.LoginWithGoogle());
+    }
+
     onHandleError() {
         this.store.dispatch(new AuthActions.ClearError());
     }

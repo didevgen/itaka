@@ -2,7 +2,7 @@
 
 <div class="container">
     <div *ngIf="isLoading" class="loading-spinner">
-        <mat-progress-spinner 
+        <mat-progress-spinner
           mode="indeterminate"
           mat-raised-button color="accent"
         ></mat-progress-spinner>
@@ -32,7 +32,7 @@
             name="password"
             required
             minlength="6"/>
-          </mat-form-field> 
+          </mat-form-field>
         </mat-card-content>
         <mat-card-actions>
             <button
@@ -45,8 +45,9 @@
           <button mat-raised-button color="accent" (click)="onSwitchMode()" type="button">
             Go to {{ isLoginMode ? 'Sign Up' : 'Login' }}
           </button>
+          <p>OR</p>
+          <button mat-raised-button class="google" (click)="loginWithGoogle()"><img src="../../../../assets/google.png" alt="google">Sign in with Google</button>
         </mat-card-actions>
       </form>
     </mat-card>
   </div>
-  
