@@ -7,7 +7,6 @@ import { ProfileEditService } from '../profile-edit.service';
 
 @Injectable()
 export class ProfileEditEffect {
-
     loadEditProfile$ = createEffect(() =>
         this.actions$.pipe(
             ofType(EdProfActions.ProfileEditTypes.ProfileEdit_Set),
