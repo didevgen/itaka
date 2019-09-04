@@ -114,6 +114,8 @@ THE SOFTWARE.
 
 @angular/material/progress-bar
 
+@angular/material/progress-spinner
+
 @angular/material/slider
 
 @angular/material/tabs
@@ -163,6 +165,9 @@ Apache-2.0
 
 @firebase/util
 Apache-2.0
+
+@ngrx/effects
+MIT
 
 @ngrx/store
 MIT
