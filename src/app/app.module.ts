@@ -37,6 +37,14 @@ import { CardsContentAudioComponent } from './components/homepage/cards-containe
 import { CardsContentImageComponent } from './components/homepage/cards-container/cards-content-image/cards-content-image.component';
 import { CardsContentTextComponent } from './components/homepage/cards-container/cards-content-text/cards-content-text.component';
 import { CardContentDetailComponent } from './components/homepage/cards-container/card-content-detail/card-content-detail.component';
+import { AuthFormComponent } from './components/auth/auth-form/auth-form.component';
+import { AlertComponent } from './shared/alert/alert.component';
+import { AuthModule } from '../app/components/auth/auth-form/auth-form.module';
+import { SharedModule } from '../app/shared/shared.module';
+import { EffectsModule } from '@ngrx/effects';
+import { AuthEffects } from '../app/components/auth/store/auth.effects';
+import { HttpClientModule } from '@angular/common/http';
+import { AlertModule } from '../app/shared/alert/alert.module';
 
 @NgModule({
     declarations: [
@@ -60,10 +68,13 @@ import { CardContentDetailComponent } from './components/homepage/cards-containe
         CardsContentImageComponent,
         CardsContentTextComponent,
         CardContentDetailComponent,
+        // AuthFormComponent,
+        // AlertComponent,
     ],
     imports: [
         BrowserModule,
         AppRoutingModule,
+        EffectsModule.forRoot([AuthEffects]),
         StoreModule.forRoot(fromApp.appReducer),
         ReactiveFormsModule,
         BrowserAnimationsModule,
@@ -77,8 +88,12 @@ import { CardContentDetailComponent } from './components/homepage/cards-containe
         AppRoutingModule,
         ImageCropperModule,
         UserPageModule,
-    ],
-    providers: [AngularFirestore],
+        AuthModule,
+        SharedModule,
+        HttpClientModule,
+        AlertModule
+        ],
+    providers: [AngularFirestore, AuthEffects],
     bootstrap: [AppComponent],
     entryComponents: [ModalDialogComponent],
     exports: [ContentContainerComponent],

@@ -1,0 +1,60 @@
+<ng-template itaPlaceholder></ng-template>
+
+<div class="container"> 
+      <!-- <div class="alert alert-danger" *ngIf="error">
+         <p>{{ error }}</p>
+       </div>
+     <app-alert
+      [message]="error"
+      *ngIf="error"
+      (close)="onHandleError()"
+    ></app-alert> -->
+    <div *ngIf="isLoading" class="loading-spinner">
+        <mat-progress-spinner 
+          mode="indeterminate"
+          mat-raised-button color="accent"
+        ></mat-progress-spinner>
+    </div>
+    <mat-card class="form" *ngIf="!isLoading">
+      <mat-card-header>
+        <mat-card-title>Authentication</mat-card-title>
+      </mat-card-header>
+      <form #authForm="ngForm" (ngSubmit)="onSubmit(authForm)">
+        <mat-card-content>
+          <mat-form-field class="form-group" appearance="outline">
+            <mat-label>Email</mat-label>
+            <input matInput type="email"
+            id="email"
+            class="form-control"
+            ngModel
+            name="email"
+            required
+            email/>
+        </mat-form-field>
+         <mat-form-field class="form-group" appearance="outline">
+            <mat-label>Password</mat-label>
+            <input matInput type="password"
+            id="password"
+            class="form-control"
+            ngModel
+            name="password"
+            required
+            minlength="6"/>
+          </mat-form-field> 
+        </mat-card-content>
+        <mat-card-actions>
+            <button
+              mat-raised-button color="accent"
+              matInput type="submit"
+              [disabled]="!authForm.valid"
+          >
+            {{ isLoginMode ? 'Log in' : 'Sign Up' }}
+          </button>
+          <button mat-raised-button color="accent" (click)="onSwitchMode()" type="button">
+            Go to {{ isLoginMode ? 'Sign Up' : 'Login' }}
+          </button>
+        </mat-card-actions>
+      </form>
+    </mat-card>
+  </div>
+  

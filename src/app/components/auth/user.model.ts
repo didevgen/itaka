@@ -6,13 +6,11 @@ export class User {
         private tokenExpirationDate: Date,
     ) {}
 
-    get checkToken() {
-        if (
-            !this.tokenExpirationDate ||
-            new Date() > this.tokenExpirationDate
-        ) {
-            return null;
+    get authToken() {
+        if (!this.tokenExpirationDate || new Date() > this.tokenExpirationDate) {
+          return null;
         }
         return this.token;
+      }
     }
-}
+
