@@ -1,0 +1,20 @@
+.card__audio {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.mat-card-title {
+    padding-top: 3vh;
+    font-size: 18px;
+    text-transform: uppercase;
+}
+.music__icon {
+    transform: scale(2);
+    margin-bottom: 1vh;
+}
+.more__icon {
+    align-self: flex-end;
+}
+.card__audio--palyer {
+    outline: none;
+}

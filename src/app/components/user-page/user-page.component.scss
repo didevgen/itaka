@@ -1,0 +1,52 @@
+.user-container {
+    width: 90%;
+    font-family: ' Montserrat', sans-serif;
+    color: #252525;
+    margin-bottom: 3vh;
+}
+
+.user__info {
+    padding-left: 20px;
+    display: flex;
+    flex-wrap: wrap;
+
+    img {
+        border-radius: 100%;
+    }
+
+    .user__name {
+        font-size: 30px;
+        font-weight: 600;
+        display: flex;
+        flex-grow: 3;
+
+        span {
+            align-self: center;
+            padding-left: 15px;
+        }
+    }
+
+    .user__edit {
+        display: flex;
+
+        .icons:hover {
+            color: #ff4081;
+            cursor: pointer;
+        }
+        span:hover {
+            color: #ff4081;
+            cursor: pointer;
+        }
+
+        a {
+            text-decoration: none;
+            align-self: center;
+            font-size: 18px;
+        }
+
+        a,
+        span {
+            color: inherit;
+        }
+    }
+}

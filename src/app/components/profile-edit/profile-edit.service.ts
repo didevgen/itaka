@@ -5,7 +5,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 
 export class ProfileEditService {
     data: EditProfile;
-    userID = 0;
+    userID: string;
 
     constructor(
         private storage: AngularFireStorage,
@@ -14,9 +14,10 @@ export class ProfileEditService {
 
     saveData(payload: EditProfile): Observable<EditProfile> {
         this.data = payload;
+        this.userID = localStorage.getItem('id') || '404 :)';
         let newDataForEffect: EditProfile;
-        const docR = this.db.doc<EditProfile>('Users/' + this.userID++);
-        docR.set({ ...this.data }).catch(err =>
+        const docR = this.db.doc<EditProfile>('Users/' + this.userID);
+        docR.set(this.data ).catch(err =>
             console.log(
                 '!!! error from promise in service to set fb data: ',
                 err,

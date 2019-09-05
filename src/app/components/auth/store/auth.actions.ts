@@ -8,6 +8,7 @@ export const enum AuthTypes {
     CLEAR_ERROR = '[Auth] Clear Error',
     AUTO_LOGIN = '[Auth] Auto Login',
     LOGOUT = '[Auth] Logout',
+    LOGIN_WITH_GOOGLE = '[Auth] Login With Google',
 }
 
 export class AuthenticateSuccess implements Action {
@@ -26,6 +27,10 @@ export class AuthenticateSuccess implements Action {
 
 export class Logout implements Action {
     readonly type = AuthTypes.LOGOUT;
+}
+
+export class LoginWithGoogle implements Action {
+    readonly type = AuthTypes.LOGIN_WITH_GOOGLE;
 }
 
 export class LoginStart implements Action {
@@ -61,4 +66,5 @@ export type AuthActions =
     | AuthenticateFail
     | SignupStart
     | ClearError
-    | AutoLogin;
+    | AutoLogin
+    | LoginWithGoogle;

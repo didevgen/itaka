@@ -1,0 +1,12 @@
+.card__photo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.more__icon {
+    align-self: flex-end;
+}
+.mat-card-title {
+    font-size: 18px;
+    text-transform: uppercase;
+}
