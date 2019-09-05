@@ -40,10 +40,10 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
             ]),
         });
 
-        this.store.pipe(takeUntil(this.subscription$)).subscribe(state => {
-            console.log(state);
-            this.profileForm.get('userName').setValue(state.name);
-            this.profileForm.get('userSurname').setValue(state.name);
+        this.store.pipe(takeUntil(this.subscription$)).subscribe(inf => {
+            console.log(inf.editProfile);
+            this.profileForm.get('userName').setValue(inf.editProfile.name);
+            this.profileForm.get('userSurname').setValue(inf.editProfile.surName);
             this.url = localStorage.getItem('imgUrl') || this.defaultImage;
         });
     }

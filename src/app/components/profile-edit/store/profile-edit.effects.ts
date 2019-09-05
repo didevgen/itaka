@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { catchError, map, mergeMap, switchMap } from 'rxjs/operators';
-import { Observable, of } from 'rxjs';
+import { of } from 'rxjs';
 import * as EdProfActions from './profile-edit.actions';
 import { ProfileEditService } from '../profile-edit.service';
 
@@ -13,7 +13,7 @@ export class ProfileEditEffect {
             switchMap((act: EdProfActions.ProfileEditSetSuccess) =>
                 this.dataService.saveData(act.payload).pipe(
                     map(
-                        ({ payload }) =>
+                        (payload) =>
                             new EdProfActions.ProfileEditSetSuccess({
                                 name: payload.name,
                                 surName: payload.surName,
