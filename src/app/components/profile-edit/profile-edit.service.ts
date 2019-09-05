@@ -17,7 +17,7 @@ export class ProfileEditService {
         this.userID = localStorage.getItem('id') || '404 :)';
         let newDataForEffect: EditProfile;
         const docR = this.db.doc<EditProfile>('Users/' + this.userID);
-        docR.set(this.data ).catch(err =>
+        docR.set(this.data).catch(err =>
             console.log(
                 '!!! error from promise in service to set fb data: ',
                 err,
