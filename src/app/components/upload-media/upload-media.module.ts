@@ -4,6 +4,7 @@ import { UploadMediaDirective } from './upload-media.directive';
 import { DragAndDropComponent } from './drag-and-drop/drag-and-drop.component';
 import { ProgressBarComponent } from './progress-bar/progress-bar.component';
 import { MaterialModule } from 'src/app/material.module';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 @NgModule({
     declarations: [
@@ -11,7 +12,7 @@ import { MaterialModule } from 'src/app/material.module';
         DragAndDropComponent,
         ProgressBarComponent,
     ],
-    imports: [CommonModule, MaterialModule],
+    imports: [CommonModule, MaterialModule, FormsModule, ReactiveFormsModule],
     exports: [UploadMediaDirective, DragAndDropComponent, ProgressBarComponent],
 })
 export class UploadMediaModule {}

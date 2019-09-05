@@ -25,13 +25,18 @@
     display: inline;
     text-align: center;
 }
+.upload__media--contentType {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 3vh;
+}
 .drag-and-drop-zone {
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
     background: #fefbfb;
-    height: 40vh;
+    height: 35vh;
     width: 60vw;
     border: 2px dashed #ff4081;
     &.hovering {

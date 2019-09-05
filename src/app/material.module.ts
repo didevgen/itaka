@@ -22,6 +22,7 @@ import { MatRippleModule } from '@angular/material/core';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatVideoModule } from 'mat-video';
 import { MaterialFileInputModule } from 'ngx-material-file-input';
+import { MatRadioModule } from '@angular/material/radio';
 @NgModule({
     imports: [
         MatInputModule,
@@ -46,6 +47,7 @@ import { MaterialFileInputModule } from 'ngx-material-file-input';
         MatProgressSpinnerModule,
         MatVideoModule,
         MaterialFileInputModule,
+        MatRadioModule,
     ],
     exports: [
         MatInputModule,
@@ -70,6 +72,7 @@ import { MaterialFileInputModule } from 'ngx-material-file-input';
         MatDialogModule,
         MatVideoModule,
         MaterialFileInputModule,
+        MatRadioModule,
     ],
 })
 export class MaterialModule {}

@@ -18,6 +18,9 @@ export class ProgressBarComponent implements OnInit {
     title: string;
     @Input()
     description: string;
+    @Input()
+    contentType: string;
+
     task: AngularFireUploadTask;
     percentage: Observable<number>;
     snapshot: Observable<any>;
@@ -47,6 +50,7 @@ export class ProgressBarComponent implements OnInit {
                     date: Date.now(),
                     title: this.title,
                     description: this.description,
+                    contentType: this.contentType,
                 });
             }),
         );
