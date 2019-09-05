@@ -13,7 +13,7 @@ export class ProfileEditEffect {
             switchMap((act: EdProfActions.ProfileEditSetSuccess) =>
                 this.dataService.saveData(act.payload).pipe(
                     map(
-                        (payload) =>
+                        payload =>
                             new EdProfActions.ProfileEditSetSuccess({
                                 name: payload.name,
                                 surName: payload.surName,
