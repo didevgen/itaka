@@ -6,8 +6,8 @@ import { takeUntil } from 'rxjs/operators';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalDialogComponent } from './modal-dialog/modal-dialog.component';
 
-import { ProfileEditState } from './store/profile-edit.reducer';
 import { ProfileEditSet } from './store/profile-edit.actions';
+import {AppState} from '../../store/app.reducer';
 
 @Component({
     selector: 'ita-profile-edit',
@@ -24,7 +24,7 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
     constructor(
         private formBuilder: FormBuilder,
         public dialog: MatDialog,
-        private store: Store<ProfileEditState>,
+        private store: Store<AppState>,
     ) {}
 
     ngOnInit(): void {
@@ -41,7 +41,7 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
         });
 
         this.store.pipe(takeUntil(this.subscription$)).subscribe(inf => {
-            console.log(inf.editProfile);
+            // console.log(inf.editProfile);
             this.profileForm.get('userName').setValue(inf.editProfile.name);
             this.profileForm
                 .get('userSurname')
@@ -64,7 +64,6 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
 
         dialogRef.afterClosed().subscribe(result => {
             this.url = result;
-            // this.profileForm.get('avatar').setValue(event.target.files[0]);
         });
     }
 
