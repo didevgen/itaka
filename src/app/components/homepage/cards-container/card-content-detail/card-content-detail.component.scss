@@ -1,0 +1,38 @@
+.card-content-detail {
+    width: 95%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+.card__buttons {
+    align-self: flex-end;
+}
+.content-page__title {
+    font-size: 3rem;
+    color: rgb(110, 110, 110);
+    text-transform: capitalize;
+}
+.content-page__content {
+    width: 90%;
+    display: flex;
+    justify-content: center;
+}
+.content-page__content > div {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+.content-page__picture {
+    max-width: 550px;
+    max-height: 550px;
+}
+.content-page__content-description {
+    text-align: center;
+    font-size: 2rem;
+}
+.content-page__content > .content-page__text-content {
+    text-align: unset;
+    display: block;
+}

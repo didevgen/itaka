@@ -24,18 +24,31 @@
                 </button>
 
                 <button mat-menu-item>
-                    <mat-icon>color_lens</mat-icon>
-                    <span>Media</span>
+                    <mat-icon>volume_up</mat-icon>
+                    <span>Audio</span>
+                </button>
+                <button mat-menu-item>
+                    <mat-icon>videocam</mat-icon>
+                    <span>Video</span>
+                </button>
+                <button mat-menu-item>
+                    <mat-icon>crop_original</mat-icon>
+                    <span>Photo</span>
                 </button>
             </mat-menu>
         </div>
         <div class="header__user-info">
-            <button mat-flat-button color="accent" [routerLink]="['/login']" *ngIf="!isUserAuthenticated">
+            <button
+                mat-flat-button
+                color="accent"
+                [routerLink]="['/login']"
+                *ngIf="!isUserAuthenticated"
+            >
                 Log in
             </button>
 
             <div class="header__user-avatar" *ngIf="isUserAuthenticated">
-                <p>{{userName}}</p>
+                <p>{{ userName }}</p>
                 <button
                     class="header__user-avatar-button"
                     [matMenuTriggerFor]="useravatar"
