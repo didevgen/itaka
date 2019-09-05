@@ -11,7 +11,7 @@ export class DragAndDropComponent {
     files: File[] = [];
     public uploadMediaForm: FormGroup;
 
-    selectedContent: string = '';
+    selectedContent = '';
     contentType: string[] = ['image', 'audio', 'video'];
 
     constructor() {
@@ -33,6 +33,5 @@ export class DragAndDropComponent {
     }
     selectedContentType(event) {
         this.selectedContent = event.value;
-        console.log(this.selectedContent);
     }
 }
