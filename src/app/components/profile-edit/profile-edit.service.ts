@@ -16,13 +16,12 @@ export class ProfileEditService {
         this.data = payload;
         let newDataForEffect: EditProfile;
         const docR = this.db.doc<EditProfile>('Users/' + this.userID++);
-        docR.set({ ...this.data })
-            .catch(err =>
-                console.log(
-                    '!!! error from promise in service to set fb data: ',
-                    err,
-                ),
-            );
+        docR.set({ ...this.data }).catch(err =>
+            console.log(
+                '!!! error from promise in service to set fb data: ',
+                err,
+            ),
+        );
         newDataForEffect = this.data;
         return of(newDataForEffect);
     }
