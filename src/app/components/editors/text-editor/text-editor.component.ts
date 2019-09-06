@@ -13,8 +13,17 @@ export class TextEditorComponent implements OnInit {
     private Editor = ClassicEditor;
     private config = Config;
     textContent: Text;
+    public uploadMediaForm: FormGroup;
+    constructor() {
+        this.uploadMediaForm = new FormGroup({
+            content: new FormControl(),
+            title: new FormControl(),
+            description: new FormControl(),
+            file: new FormControl(),
+        });
+    }
 
-    constructor() {}
+    
 
     ngOnInit(): void {}
 
