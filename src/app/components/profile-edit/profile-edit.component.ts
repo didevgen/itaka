@@ -40,14 +40,15 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
             ]),
         });
 
-        this.store.select('editProfile').pipe(takeUntil(this.subscription$)).subscribe(inf => {
-            console.log(inf); // .editProfile
-            this.profileForm.get('userName').setValue(inf.name);
-            this.profileForm
-                .get('userSurname')
-                .setValue(inf.surName);
-            this.url = this.defaultImage;
-        });
+        this.store
+            .select('editProfile')
+            .pipe(takeUntil(this.subscription$))
+            .subscribe(inf => {
+                console.log(inf); // .editProfile
+                this.profileForm.get('userName').setValue(inf.name);
+                this.profileForm.get('userSurname').setValue(inf.surName);
+                this.url = this.defaultImage;
+            });
     }
 
     ngOnDestroy() {
