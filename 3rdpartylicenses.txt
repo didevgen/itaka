@@ -118,6 +118,8 @@ THE SOFTWARE.
 
 @angular/material/progress-spinner
 
+@angular/material/radio
+
 @angular/material/slider
 
 @angular/material/tabs
@@ -436,6 +438,9 @@ SOFTWARE.
 
 
 ngx-image-cropper
+MIT
+
+ngx-material-file-input
 MIT
 
 rxjs
