@@ -15,14 +15,16 @@
                 [config]="config"
                 [data]="editorData"
                 (change)="onChange($event)"
-                [(ngModel)]="content"
+                [(ngModel)]="description"
             ></ckeditor>
             <button
                 class="text-editor__button"
                 mat-raised-button
                 color="accent"
                 type="submit"
-                (click)="getTextContent({ title: title, content: content })"
+                (click)="
+                    startUpload({ title: title, description: description })
+                "
             >
                 Send
             </button>

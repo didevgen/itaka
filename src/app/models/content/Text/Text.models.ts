@@ -1,6 +1,6 @@
 interface TextContent {
     title: string;
-    content: string;
+    description: string;
 }
 export interface Text {
     text: TextContent;

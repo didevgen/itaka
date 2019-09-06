@@ -1,0 +1,19 @@
+.progress__bar--container {
+    margin-top: 3vh;
+    display: flex;
+    justify-content: center;
+}
+.mat-progress-bar {
+    height: 5px;
+    width: 60vw;
+    margin-bottom: 1vh;
+}
+.progress__bar--link {
+    margin-top: 2vh;
+    text-decoration: none;
+    color: white;
+}
+.buttons {
+    margin-top: 2vh;
+    display: flex;
+}

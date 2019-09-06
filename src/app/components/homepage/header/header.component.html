@@ -23,15 +23,15 @@
                     <span>Text</span>
                 </button>
 
-                <button mat-menu-item>
+                <button mat-menu-item [routerLink]="['/uploadMedia']">
                     <mat-icon>volume_up</mat-icon>
                     <span>Audio</span>
                 </button>
-                <button mat-menu-item>
+                <button mat-menu-item [routerLink]="['/uploadMedia']">
                     <mat-icon>videocam</mat-icon>
                     <span>Video</span>
                 </button>
-                <button mat-menu-item>
+                <button mat-menu-item [routerLink]="['/uploadMedia']">
                     <mat-icon>crop_original</mat-icon>
                     <span>Photo</span>
                 </button>
@@ -57,7 +57,7 @@
                     [ngStyle]="{ 'background-image': getUserAvatar() }"
                 ></button>
                 <mat-menu #useravatar="matMenu">
-                    <button mat-menu-item [routerLink]="['/profile']">
+                    <button mat-menu-item [routerLink]="['/userPage']">
                         <mat-icon>account_circle</mat-icon> View profile
                     </button>
                     <button mat-menu-item [routerLink]="['/editProfile']">
