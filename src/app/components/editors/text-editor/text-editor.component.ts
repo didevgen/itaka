@@ -10,8 +10,8 @@ import { AngularFirestore } from '@angular/fire/firestore';
     styleUrls: ['./text-editor.component.scss'],
 })
 export class TextEditorComponent implements OnInit {
-    private Editor = ClassicEditor;
-    private config = Config;
+    public Editor = ClassicEditor;
+    public config = Config;
     constructor(private db: AngularFirestore) {}
     ngOnInit(): void {}
 
