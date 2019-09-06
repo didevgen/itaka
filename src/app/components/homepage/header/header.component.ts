@@ -14,6 +14,8 @@ import * as AuthActions from '../../auth/store/auth.actions';
 })
 export class HeaderComponent implements OnInit, OnDestroy {
     value = 'Clear me';
+    userName: string;
+ 
     isAuthenticated = false;
     private userSub: Subscription;
 
@@ -37,4 +39,5 @@ export class HeaderComponent implements OnInit, OnDestroy {
     ngOnDestroy() {
         this.userSub.unsubscribe();
     }
+    getUserAvatar() {}
 }
