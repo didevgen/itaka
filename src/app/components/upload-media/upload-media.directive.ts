@@ -1,9 +1,9 @@
 import { Directive, HostListener, Output, EventEmitter } from '@angular/core';
 
 @Directive({
-    selector: '[itaDropzone]',
+    selector: '[itaDragAndDropZone]',
 })
-export class DropzoneDirective {
+export class UploadMediaDirective {
     @Output() dropped = new EventEmitter<FileList>();
     @Output() hovered = new EventEmitter<boolean>();
 

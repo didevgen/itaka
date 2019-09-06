@@ -14,9 +14,6 @@ import { CardsContainerComponent } from './components/homepage/cards-container/c
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireStorageModule } from 'angularfire2/storage';
 import { AngularFirestore } from 'angularfire2/firestore';
-import { DropzoneDirective } from './components/test-upload/upload.directive';
-import { UploaderComponent } from './components/test-upload/uploader/uploader.component';
-import { UploadTaskComponent } from './components/test-upload/upload-task/upload-task.component';
 import { environment } from '../environments/environment';
 import { AdminModule } from './components/admin-page/admin.module';
 import { AppRoutingModule } from './app-routing.module';
@@ -35,8 +32,7 @@ import { CardsContentAudioComponent } from './components/homepage/cards-containe
 import { CardsContentImageComponent } from './components/homepage/cards-container/cards-content-image/cards-content-image.component';
 import { CardsContentTextComponent } from './components/homepage/cards-container/cards-content-text/cards-content-text.component';
 import { CardContentDetailComponent } from './components/homepage/cards-container/card-content-detail/card-content-detail.component';
-import { AuthFormComponent } from './components/auth/auth-form/auth-form.component';
-import { AlertComponent } from './shared/alert/alert.component';
+import { UploadMediaModule } from './components/upload-media/upload-media.module';
 import { AuthModule } from '../app/components/auth/auth-form/auth-form.module';
 import { SharedModule } from '../app/shared/shared.module';
 import { EffectsModule } from '@ngrx/effects';
@@ -50,9 +46,6 @@ import { AlertModule } from '../app/shared/alert/alert.module';
         HeaderComponent,
         SidebarComponent,
         ContentContainerComponent,
-        DropzoneDirective,
-        UploaderComponent,
-        UploadTaskComponent,
         ProfileEditComponent,
         ModalDialogComponent,
         RouterContainerComponent,
@@ -63,8 +56,6 @@ import { AlertModule } from '../app/shared/alert/alert.module';
         CardsContentImageComponent,
         CardsContentTextComponent,
         CardContentDetailComponent,
-        // AuthFormComponent,
-        // AlertComponent,
     ],
     imports: [
         BrowserModule,
@@ -82,9 +73,9 @@ import { AlertModule } from '../app/shared/alert/alert.module';
         AngularFireModule.initializeApp(environment.firebaseConfig),
         AngularFireStorageModule,
         NotFoundModule,
-        AppRoutingModule,
         ImageCropperModule,
         UserPageModule,
+        UploadMediaModule,
         AuthModule,
         SharedModule,
         HttpClientModule,
