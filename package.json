@@ -43,6 +43,7 @@
         "mat-video": "^2.7.2",
         "material-icons": "^0.3.1",
         "ngx-image-cropper": "^1.4.1",
+        "ngx-material-file-input": "^2.0.0",
         "normalize.css": "^8.0.1",
         "prettier": "^1.18.2",
         "rxjs": "~6.4.0",
