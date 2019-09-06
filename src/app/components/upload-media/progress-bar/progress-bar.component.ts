@@ -47,7 +47,7 @@ export class ProgressBarComponent implements OnInit {
                 this.db.collection('Posts').add({
                     url: this.urlOfUploadedFile,
                     path,
-                    date: Date.now(),
+                    date: new Date(),
                     title: this.title,
                     description: this.description,
                     contentType: this.contentType,
