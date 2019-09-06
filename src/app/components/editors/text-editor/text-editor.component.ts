@@ -12,7 +12,7 @@ import { ChangeEvent } from '@ckeditor/ckeditor5-angular/ckeditor.component';
 export class TextEditorComponent implements OnInit {
     private Editor = ClassicEditor;
     private config = Config;
-    textContent: Text;
+
     title: string;
     content: string;
     public uploadMediaForm: FormGroup;
