@@ -22,8 +22,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
     constructor(private store: Store<fromApp.AppState>) {}
     getUserAvatar(): string {
         if (!this.avatar) {
-            return "url('../../assets/avatarDefault.png')";
-        } else return `url(${this.avatar})`;
+            return 'url(\'../../assets/avatarDefault.png\')';
+        } else {
+            return `url(\'${this.avatar}\')`;
+        }
     }
 
     ngOnInit() {

@@ -17,13 +17,11 @@ export class TextEditorComponent implements OnInit {
 
     public startUpload(textContent: Text) {
         const { title, description } = textContent.text;
-        console.log(title);
-        console.log(description);
 
         this.db.collection('Posts').add({
             date: new Date(),
-            title: title,
-            description: description,
+            title,
+            description,
             contentType: 'text',
         });
     }
