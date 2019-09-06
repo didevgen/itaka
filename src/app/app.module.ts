@@ -6,7 +6,6 @@ import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 import * as fromApp from './store/app.reducer';
-
 import { MaterialModule } from './material.module';
 import { HeaderComponent } from './components/homepage/header/header.component';
 import { SidebarComponent } from './components/homepage/sidebar/sidebar.component';
