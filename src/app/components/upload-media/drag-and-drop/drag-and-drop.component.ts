@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 
 @Component({
@@ -6,7 +6,7 @@ import { FormGroup, FormControl } from '@angular/forms';
     templateUrl: './drag-and-drop.component.html',
     styleUrls: ['./drag-and-drop.component.scss'],
 })
-export class DragAndDropComponent {
+export class DragAndDropComponent implements OnInit {
     isHovering: boolean;
     files: File[] = [];
     public uploadMediaForm: FormGroup;
@@ -14,9 +14,8 @@ export class DragAndDropComponent {
     selectedContent = '';
     contentType: string[] = ['image', 'audio', 'video'];
 
-    constructor() {
+    ngOnInit() {
         this.uploadMediaForm = new FormGroup({
-            content: new FormControl(),
             title: new FormControl(),
             description: new FormControl(),
             file: new FormControl(),
