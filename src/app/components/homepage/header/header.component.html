@@ -39,15 +39,17 @@
         </div>
         <div class="header__user-info">
             <button
+                HEAD
+                routerLinkActive="active"
+                *ngIf="!isAuthenticated"
                 mat-flat-button
                 color="accent"
-                [routerLink]="['/login']"
-                *ngIf="!isUserAuthenticated"
+                routerLink="/auth"
             >
-                Log in
+                Log In
             </button>
 
-            <div class="header__user-avatar" *ngIf="isUserAuthenticated">
+            <div class="header__user-avatar" *ngIf="isAuthenticated">
                 <p>{{ userName }}</p>
                 <button
                     class="header__user-avatar-button"
@@ -56,12 +58,14 @@
                 ></button>
                 <mat-menu #useravatar="matMenu">
                     <button mat-menu-item [routerLink]="['/profile']">
-                        View profile
+                        <mat-icon>account_circle</mat-icon> View profile
                     </button>
                     <button mat-menu-item [routerLink]="['/editProfile']">
-                        Edit profile
+                        <mat-icon>build</mat-icon> Edit profile
                     </button>
-                    <button mat-menu-item>Log out</button>
+                    <button mat-menu-item color="accent" (click)="onLogout()">
+                        <mat-icon>exit_to_app</mat-icon> Log Out
+                    </button>
                 </mat-menu>
             </div>
         </div>
