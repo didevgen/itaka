@@ -12,12 +12,14 @@ import { AngularFirestore } from '@angular/fire/firestore';
 export class TextEditorComponent implements OnInit {
     public Editor = ClassicEditor;
     public config = Config;
+    public title: string;
+    public description: string;
     constructor(private db: AngularFirestore) {}
     ngOnInit(): void {}
 
-    public startUpload(textContent: Text) {
-        const { title, description } = textContent.text;
-
+    public startUpload(textContent) {
+        const { title, description } = textContent;
+        console.log(textContent);
         this.db.collection('Posts').add({
             date: new Date(),
             title,

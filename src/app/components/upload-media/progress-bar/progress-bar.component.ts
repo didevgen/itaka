@@ -47,12 +47,19 @@ export class ProgressBarComponent implements OnInit {
                 this.db.collection('Posts').add({
                     url: this.urlOfUploadedFile,
                     path,
-                    date: new Date(),
+                    date: Date.now(),
                     title: this.title,
                     description: this.description,
                     contentType: this.contentType,
                 });
             }),
+        );
+    }
+
+    isActive(snapshot) {
+        return (
+            snapshot.state === 'running' &&
+            snapshot.bytesTransferred < snapshot.totalBytes
         );
     }
 }
