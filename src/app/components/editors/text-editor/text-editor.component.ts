@@ -23,8 +23,6 @@ export class TextEditorComponent implements OnInit {
         });
     }
 
-    
-
     ngOnInit(): void {}
 
     public onChange({ editor }: ChangeEvent) {
