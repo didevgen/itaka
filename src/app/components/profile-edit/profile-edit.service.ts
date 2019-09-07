@@ -20,6 +20,6 @@ export class ProfileEditService {
         docR.set({ ...this.data }, { merge: true }).catch(err => {
             console.log('error from promise in service to set fb data: ', err);
         });
-        return from(docR.get().forEach(d => d.data() as EditProfile));
+        return of(this.data);
     }
 }
