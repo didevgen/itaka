@@ -43,7 +43,6 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
             .select('editProfile')
             .pipe(takeUntil(this.subscription$))
             .subscribe(inf => {
-                console.log(inf);
                 this.profileForm.get('userName').setValue(inf.name);
                 this.profileForm.get('userSurname').setValue(inf.surName);
                 this.url = this.defaultImage;

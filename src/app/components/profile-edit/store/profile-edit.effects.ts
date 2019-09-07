@@ -22,7 +22,6 @@ export class ProfileEditEffect {
                             }),
                     ),
                     catchError(err => {
-                        console.log('!!! dataService error from effect', err);
                         return of(new EdProfActions.ProfileEditSetError());
                     }),
                 ),
