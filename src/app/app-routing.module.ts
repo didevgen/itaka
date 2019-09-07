@@ -16,7 +16,11 @@ const routes: Routes = [
 
     { path: 'editProfile', component: ProfileEditComponent },
     { path: 'userPage', component: UserPageComponent },
-    { path: 'addText', component: TextEditorComponent },
+    {
+        path: 'addText',
+        component: TextEditorComponent,
+        canActivate: [AuthGuard],
+    },
     {
         path: 'uploadMedia',
         component: DragAndDropComponent,
