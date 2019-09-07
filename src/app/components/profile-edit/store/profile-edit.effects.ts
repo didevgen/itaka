@@ -18,7 +18,6 @@ export class ProfileEditEffect {
                                 name: payload.name,
                                 surName: payload.surName,
                                 avatar: payload.avatar,
-                                isError: payload.isError,
                             }),
                     ),
                     catchError(err => {

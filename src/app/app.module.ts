@@ -27,6 +27,7 @@ import { ProfileEditComponent } from './components/profile-edit/profile-edit.com
 import { RouterContainerComponent } from './components/router-container/router-container.component';
 import { UserPageComponent } from './components/user-page/user-page.component';
 import { UserPageModule } from './components/user-page/user.module';
+import { TextEditorModule } from './components/editors/text-editor/text-editor.module';
 import { CardsContentVideoComponent } from './components/homepage/cards-container/cards-content-video/cards-content-video.component';
 import { CardsContentAudioComponent } from './components/homepage/cards-container/cards-content-audio/cards-content-audio.component';
 import { CardsContentImageComponent } from './components/homepage/cards-container/cards-content-image/cards-content-image.component';
@@ -75,6 +76,7 @@ import { AlertModule } from '../app/shared/alert/alert.module';
         NotFoundModule,
         ImageCropperModule,
         UserPageModule,
+        TextEditorModule,
         UploadMediaModule,
         AuthModule,
         SharedModule,

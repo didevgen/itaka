@@ -1,5 +1,5 @@
 import { EditProfile } from '../../models/edit-profile/edit-profile.model';
-import { from, Observable } from 'rxjs';
+import { from, Observable, of } from 'rxjs';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { AngularFirestore } from '@angular/fire/firestore';
 

@@ -1,17 +1,17 @@
 import * as ProfEdAct from './profile-edit.actions';
+import { EditProfile } from '../../../models/edit-profile/edit-profile.model';
 
-export interface ProfileEditState {
+export interface ProfileEditState extends EditProfile {
     name: string | null;
     surName: string | null;
     avatar: string | Blob | null;
-    isError: boolean;
+    isError?: boolean;
 }
 
 const initialState: ProfileEditState = {
     name: null,
     surName: null,
     avatar: null,
-    isError: false,
 };
 
 export function profileEditReducer(
@@ -36,7 +36,6 @@ export function profileEditReducer(
         case ProfEdAct.ProfileEditTypes.ProfileEdit_SetError:
             return {
                 ...state,
-                isError: true,
             };
         default:
             return state;

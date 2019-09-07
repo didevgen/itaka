@@ -1,4 +1,11 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import {
+    AfterViewChecked,
+    AfterViewInit,
+    ChangeDetectorRef,
+    Component,
+    OnDestroy,
+    OnInit,
+} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Subject } from 'rxjs';
@@ -14,31 +21,33 @@ import { AppState } from '../../store/app.reducer';
     templateUrl: './profile-edit.component.html',
     styleUrls: ['./profile-edit.component.scss'],
 })
-export class ProfileEditComponent implements OnInit, OnDestroy {
+export class ProfileEditComponent
+    implements OnInit, AfterViewInit, AfterViewChecked, OnDestroy {
     public profileForm: FormGroup;
     url: string;
     defaultImage = '../../assets/avatarDefault.png';
     public subscription$ = new Subject();
-    private pic;
 
     constructor(
         private formBuilder: FormBuilder,
         public dialog: MatDialog,
+        private cdRef: ChangeDetectorRef,
         private store: Store<AppState>,
     ) {}
 
     ngOnInit(): void {
         this.profileForm = this.formBuilder.group({
-            userName: this.formBuilder.control('', [
+            userName: this.formBuilder.control(null, [
                 Validators.required,
                 Validators.minLength(2),
             ]),
-            userSurname: this.formBuilder.control('', [
+            userSurname: this.formBuilder.control(null, [
                 Validators.required,
                 Validators.minLength(2),
             ]),
         });
-
+    }
+    ngAfterViewInit() {
         this.store
             .select('editProfile')
             .pipe(takeUntil(this.subscription$))
@@ -48,7 +57,9 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
                 this.url = this.defaultImage;
             });
     }
-
+    ngAfterViewChecked() {
+        this.cdRef.detectChanges();
+    }
     ngOnDestroy() {
         this.subscription$.next();
         this.subscription$.complete();
@@ -75,7 +86,6 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
                 name: this.profileForm.get('userName').value,
                 surName: this.profileForm.get('userSurname').value,
                 avatar: '', // will be new img url
-                isError: false,
             }),
         );
     }
