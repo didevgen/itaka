@@ -28,7 +28,6 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
     ) {}
 
     ngOnInit(): void {
-        this.pic = 'imageDefault';
         this.profileForm = this.formBuilder.group({
             userName: this.formBuilder.control('', [
                 Validators.required,
@@ -71,14 +70,12 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
             });
     }
 
-    getRawData(img): void {
-        this.pic = 'imageNew';
-
+    getRawData(): void {
         this.store.dispatch(
             new ProfileEditSet({
                 name: this.profileForm.get('userName').value,
                 surName: this.profileForm.get('userSurname').value,
-                avatar: this.pic,
+                avatar: '', // will be new img url
                 isError: false,
             }),
         );

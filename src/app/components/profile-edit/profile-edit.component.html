@@ -4,12 +4,11 @@
             <h2>Edit Profile:</h2>
         </mat-card-header>
         <hr />
-        <form [formGroup]="profileForm" (ngSubmit)="getRawData(image)">
+        <form [formGroup]="profileForm" (ngSubmit)="getRawData()">
             <mat-card-content>
                 <div class="profile__info">
                     <div class="profile__avatar">
                         <img
-                            #image
                             [src]="url || defaultImage"
                             alt="avatar"
                             height="250"
