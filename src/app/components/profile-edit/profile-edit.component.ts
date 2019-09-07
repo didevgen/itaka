@@ -63,9 +63,12 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
             data: event,
         });
 
-        dialogRef.afterClosed().pipe(takeUntil(this.subscription$)).subscribe(result => {
-            this.url = result;
-        });
+        dialogRef
+            .afterClosed()
+            .pipe(takeUntil(this.subscription$))
+            .subscribe(result => {
+                this.url = result;
+            });
     }
 
     getRawData(img): void {
