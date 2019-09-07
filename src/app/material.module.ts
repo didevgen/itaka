@@ -20,6 +20,7 @@ import { MatBadgeModule } from '@angular/material/badge';
 import { MatListModule } from '@angular/material/list';
 import { MatRippleModule } from '@angular/material/core';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatVideoModule } from 'mat-video';
 import { MaterialFileInputModule } from 'ngx-material-file-input';
 import { MatRadioModule } from '@angular/material/radio';
@@ -45,6 +46,7 @@ import { MatRadioModule } from '@angular/material/radio';
         MatDialogModule,
         MatProgressBarModule,
         MatProgressSpinnerModule,
+        MatFormFieldModule,
         MatVideoModule,
         MaterialFileInputModule,
         MatRadioModule,
@@ -70,6 +72,7 @@ import { MatRadioModule } from '@angular/material/radio';
         MatProgressBarModule,
         MatProgressSpinnerModule,
         MatDialogModule,
+        MatFormFieldModule,
         MatVideoModule,
         MaterialFileInputModule,
         MatRadioModule,

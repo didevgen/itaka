@@ -14,10 +14,19 @@ import * as AuthActions from '../../auth/store/auth.actions';
 })
 export class HeaderComponent implements OnInit, OnDestroy {
     value = 'Clear me';
+    userName: string;
+    avatar: string;
     isAuthenticated = false;
     private userSub: Subscription;
 
     constructor(private store: Store<fromApp.AppState>) {}
+    getUserAvatar(): string {
+        if (!this.avatar) {
+            return 'url(\'../../assets/avatarDefault.png\')';
+        } else {
+            return `url(\'${this.avatar}\')`;
+        }
+    }
 
     ngOnInit() {
         this.userSub = this.store

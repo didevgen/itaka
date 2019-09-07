@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserPageComponent implements OnInit {
     url: string;
+    name: string;
     defaultImage = '../../assets/avatarDefault.png';
 
     constructor() {}

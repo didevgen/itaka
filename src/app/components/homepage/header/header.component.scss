@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Heebo:400,900&display=swap');
 
-.example-toolbar {
+.header {
     top: 0;
     position: fixed;
     display: flex;
@@ -74,6 +74,9 @@ h1 {
 }
 .header__user-info {
     margin-right: 1vw;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
 }
 .header__user-info > button {
     color: #ffff;
@@ -82,4 +85,20 @@ h1 {
 .header__logo > a {
     text-decoration: none;
     color: rgb(37, 37, 37);
+}
+.header__user-avatar-button {
+    cursor: pointer;
+    height: 45px;
+    width: 45px;
+    border: none;
+    border-radius: 50%;
+    background-size: contain;
+}
+.header__user-avatar-button:focus {
+    outline: none;
+}
+.header__user-avatar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
