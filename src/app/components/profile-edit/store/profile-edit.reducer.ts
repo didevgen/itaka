@@ -1,9 +1,9 @@
 import * as ProfEdAct from './profile-edit.actions';
 
 export interface ProfileEditState {
-    name: string;
-    surName: string;
-    avatar: string | Blob;
+    name: string | null;
+    surName: string | null;
+    avatar: string | Blob | null;
     isError: boolean;
 }
 

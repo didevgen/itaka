@@ -1,9 +1,7 @@
 export interface User {
-    firstName: string;
-    lastName: string;
+    name: string;
+    surame: string;
+    avatar: string;
     email: string;
-    nickName?: string;
-    avatarUrl: string;
-    isDeleted: boolean;
-    isBanned: boolean;
+    postID: string[];
 }
