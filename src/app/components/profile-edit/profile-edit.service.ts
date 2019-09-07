@@ -39,7 +39,9 @@ export class ProfileEditService {
                 err,
             );
         });
-        return from(docR.get().forEach(d => d.data() as EditProfile)); // .ref.get().then(); // .valueChanges();
+        // return from(docR.get().forEach(d => d.data() as EditProfile)); // .ref.get().then(); // .valueChanges()
+        return of(this.data);
+
         /*.pipe(
           map(data => {
             newDataForEffect = data;
