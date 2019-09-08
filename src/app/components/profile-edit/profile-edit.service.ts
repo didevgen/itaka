@@ -22,14 +22,12 @@ export class ProfileEditService {
         docR.set({ ...this.data }, { merge: true }).catch(err => {
             console.log('error from promise in service to set fb data: ', err);
         });
-        const newData$ = this.db
+        return this.db
             .collection<User>('Users')
             .valueChanges()
             .pipe(
                 find(val => val === val[this.userID]),
                 map(d => (d as unknown) as EditProfile),
             );
-        console.log(newData$);
-        return newData$;
     }
 }

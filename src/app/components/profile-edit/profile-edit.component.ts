@@ -40,10 +40,12 @@ export class ProfileEditComponent
             userName: this.formBuilder.control(null, [
                 Validators.required,
                 Validators.minLength(2),
+                Validators.maxLength(15),
             ]),
             userSurname: this.formBuilder.control(null, [
                 Validators.required,
                 Validators.minLength(2),
+                Validators.maxLength(15),
             ]),
         });
     }
@@ -52,8 +54,8 @@ export class ProfileEditComponent
             .select('editProfile')
             .pipe(takeUntil(this.subscription$))
             .subscribe(inf => {
-                this.profileForm.get('userName').setValue(inf.name);
-                this.profileForm.get('userSurname').setValue(inf.surname);
+                this.profileForm.value.userName = inf.name;
+                this.profileForm.value.userSurname = inf.surname;
                 this.url = this.defaultImage;
             });
     }
