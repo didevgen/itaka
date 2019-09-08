@@ -9,7 +9,8 @@
     </div>
     <mat-card class="form" *ngIf="!isLoading">
       <mat-card-header>
-        <mat-card-title>Authentication</mat-card-title>
+        <mat-card-title *ngIf="!isLoginMode">Registration</mat-card-title>
+        <mat-card-title *ngIf="isLoginMode">Login</mat-card-title>
       </mat-card-header>
       <form #authForm="ngForm" (ngSubmit)="onSubmit(authForm)">
         <mat-card-content>
