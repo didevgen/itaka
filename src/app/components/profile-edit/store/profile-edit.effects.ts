@@ -16,7 +16,7 @@ export class ProfileEditEffect {
                         payload =>
                             new EdProfActions.ProfileEditSetSuccess({
                                 name: payload.name,
-                                surName: payload.surName,
+                                surname: payload.surname,
                                 avatar: payload.avatar,
                             }),
                     ),

@@ -52,8 +52,9 @@ export class ProfileEditComponent
             .select('editProfile')
             .pipe(takeUntil(this.subscription$))
             .subscribe(inf => {
+                console.log(inf);
                 this.profileForm.get('userName').setValue(inf.name);
-                this.profileForm.get('userSurname').setValue(inf.surName);
+                this.profileForm.get('userSurname').setValue(inf.surname);
                 this.url = this.defaultImage;
             });
     }
@@ -84,7 +85,7 @@ export class ProfileEditComponent
         this.store.dispatch(
             new ProfileEditSet({
                 name: this.profileForm.get('userName').value,
-                surName: this.profileForm.get('userSurname').value,
+                surname: this.profileForm.get('userSurname').value,
                 avatar: '', // will be new img url
             }),
         );

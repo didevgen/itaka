@@ -3,14 +3,14 @@ import { EditProfile } from '../../../models/edit-profile/edit-profile.model';
 
 export interface ProfileEditState extends EditProfile {
     name: string | null;
-    surName: string | null;
+    surname: string | null;
     avatar: string | Blob | null;
     isError?: boolean;
 }
 
 const initialState: ProfileEditState = {
     name: null,
-    surName: null,
+    surname: null,
     avatar: null,
 };
 
@@ -23,14 +23,14 @@ export function profileEditReducer(
             return {
                 ...state,
                 name: action.payload.name,
-                surName: action.payload.surName,
+                surname: action.payload.surname,
                 avatar: action.payload.avatar,
             };
         case ProfEdAct.ProfileEditTypes.ProfileEdit_SetSuccess:
             return {
                 ...state,
                 name: action.payload.name,
-                surName: action.payload.surName,
+                surname: action.payload.surname,
                 avatar: action.payload.avatar,
             };
         case ProfEdAct.ProfileEditTypes.ProfileEdit_SetError:
