@@ -8,7 +8,6 @@ import { environment } from '../../../../environments/environment';
 import * as AuthActions from './auth.actions';
 import { User } from '../user.model';
 import { AuthService } from '../auth-form/auth-form.service';
-import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireAuth } from '@angular/fire/auth';
 import * as firebase from 'firebase/app';
 
@@ -75,12 +74,6 @@ export class AuthEffects {
                 )
                 .pipe(
                     tap(resData => {
-                        console.log(resData.email);
-                        this.db.collection('Users').add({
-                            email: resData.email,
-                            id: resData.localId,
-                        });
-
                         this.authService.setLogoutTimer(
                             +resData.expiresIn * 1000,
                         );
@@ -188,11 +181,6 @@ export class AuthEffects {
                     new firebase.auth.GoogleAuthProvider(),
                 ),
             ).pipe(
-                tap(resData => {
-                    this.db.collection('Users').add({
-                        email: resData.user.email,
-                    });
-                }),
                 map(resData => {
                     return handleAuthentication(
                         3600,
@@ -224,7 +212,6 @@ export class AuthEffects {
         private http: HttpClient,
         private router: Router,
         private authService: AuthService,
-        private db: AngularFirestore,
         private firebaseAuth: AngularFireAuth,
         private zone: NgZone,
     ) {}

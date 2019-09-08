@@ -4,6 +4,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 @Component({
     selector: 'ita-dialog-component',
     templateUrl: './modal-dialog.component.html',
+    styleUrls: ['../profile-edit.component.scss'],
 })
 export class ModalDialogComponent {
     croppedImage: any = '';
