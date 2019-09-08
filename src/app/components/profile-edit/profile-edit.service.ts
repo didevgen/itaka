@@ -27,7 +27,7 @@ export class ProfileEditService {
             .valueChanges()
             .pipe(
                 find(val => val === val[this.userID]),
-                map(d  => d as unknown as EditProfile),
+                map(d => (d as unknown) as EditProfile),
             );
         console.log(newData$);
         return newData$;

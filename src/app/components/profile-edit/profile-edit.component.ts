@@ -52,7 +52,6 @@ export class ProfileEditComponent
             .select('editProfile')
             .pipe(takeUntil(this.subscription$))
             .subscribe(inf => {
-                console.log(inf);
                 this.profileForm.get('userName').setValue(inf.name);
                 this.profileForm.get('userSurname').setValue(inf.surname);
                 this.url = this.defaultImage;
