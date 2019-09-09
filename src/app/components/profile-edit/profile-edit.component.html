@@ -4,12 +4,11 @@
             <h2>Edit Profile:</h2>
         </mat-card-header>
         <hr />
-        <form [formGroup]="profileForm" (ngSubmit)="getRawData(image)">
+        <form [formGroup]="profileForm" (ngSubmit)="getRawData()">
             <mat-card-content>
                 <div class="profile__info">
                     <div class="profile__avatar">
                         <img
-                            #image
                             [src]="url || defaultImage"
                             alt="avatar"
                             height="250"
@@ -29,7 +28,7 @@
                             <input
                                 matInput
                                 type="text"
-                                value="{{ userName }}"
+                                value="{{ profileForm.value.userName }}"
                                 formControlName="userName"
                             />
                         </mat-form-field>
@@ -38,7 +37,7 @@
                             <input
                                 matInput
                                 type="text"
-                                value="{{ userSurname }}"
+                                value="{{ profileForm.value.userSurname }}"
                                 formControlName="userSurname"
                             />
                         </mat-form-field>
@@ -46,7 +45,7 @@
                 </div>
             </mat-card-content>
             <mat-card-actions>
-                <button type="submit" mat-raised-button color="accent">
+                <button [disabled]="profileForm.invalid" type="submit" mat-raised-button color="accent">
                     Update profile
                 </button>
             </mat-card-actions>

@@ -1,9 +1,6 @@
-export interface User {
-    firstName: string;
-    lastName: string;
+import { EditProfile } from '../edit-profile/edit-profile.model';
+
+export interface User extends EditProfile {
     email: string;
-    nickName?: string;
-    avatarUrl: string;
-    isDeleted: boolean;
-    isBanned: boolean;
+    postID: string[];
 }

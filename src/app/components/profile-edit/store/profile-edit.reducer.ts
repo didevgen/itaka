@@ -1,15 +1,16 @@
-import { EditProfile } from '../../../models/edit-profile/edit-profile.model';
 import * as ProfEdAct from './profile-edit.actions';
+import { EditProfile } from '../../../models/edit-profile/edit-profile.model';
 
-export interface ProfileEditState {
-    name: string;
-    surName: string;
-    avatar: string | Blob;
+export interface ProfileEditState extends EditProfile {
+    name: string | null;
+    surname: string | null;
+    avatar: string | Blob | null;
+    isError?: boolean;
 }
 
 const initialState: ProfileEditState = {
     name: null,
-    surName: null,
+    surname: null,
     avatar: null,
 };
 
@@ -20,16 +21,22 @@ export function profileEditReducer(
     switch (action.type) {
         case ProfEdAct.ProfileEditTypes.ProfileEdit_Set:
             return {
+                ...state,
                 name: action.payload.name,
-                surName: action.payload.surName,
+                surname: action.payload.surname,
                 avatar: action.payload.avatar,
             };
-        /*case ProfEdAct.ProfileEditTypes.ProfileEdit_Update:
+        case ProfEdAct.ProfileEditTypes.ProfileEdit_SetSuccess:
             return {
+                ...state,
                 name: action.payload.name,
-                surName: action.payload.surName,
+                surname: action.payload.surname,
                 avatar: action.payload.avatar,
-            };*/
+            };
+        case ProfEdAct.ProfileEditTypes.ProfileEdit_SetError:
+            return {
+                ...state,
+            };
         default:
             return state;
     }

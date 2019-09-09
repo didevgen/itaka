@@ -1,0 +1,40 @@
+.backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.75);
+    z-index: 50;
+  }
+
+  .alert-box {
+    position: fixed;
+    top: 30vh;
+    left: 20vw;
+    width: 60vw;
+    padding: 16px;
+    z-index: 100;
+    background: white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+    font-family: ' Montserrat', sans-serif;
+  }
+
+  .alert-box-actions {
+    text-align: center;
+  }
+
+  p {
+    text-align: center;
+  }
+
+  button {
+    background-color: #ff4081;
+    border: 0;
+    color: #ffffff;
+    padding: 8px 12px;
+    border-radius: 3px;
+    box-shadow: 0 -3px rgba(255, 64, 129, 0.8) inset;
+    font-weight: bold;
+    font-size: 14px;
+  }

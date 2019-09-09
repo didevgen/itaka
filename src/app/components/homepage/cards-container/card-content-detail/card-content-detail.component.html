@@ -1,0 +1,78 @@
+<div class="container">
+    <mat-card class="card card-content-detail ">
+        <mat-card-header>
+            <mat-card-title
+                ><h1 class="content-page__title">
+                    {{ title }}
+                </h1></mat-card-title
+            >
+        </mat-card-header>
+        <div class="content-page__content">
+            <div *ngIf="type == 'image'">
+                <img
+                    mat-card-image
+                    [src]="url"
+                    alt="picture"
+                    class="content-page__picture"
+                />
+                <p class="content-page__content-description">
+                    {{ description }}
+                </p>
+            </div>
+
+            <div *ngIf="type == 'audio'">
+                <audio controls>
+                    <source [src]="url" type="audio/mp3" />
+                </audio>
+                <p class="content-page__content-description">
+                    {{ description }}
+                </p>
+            </div>
+
+            <div *ngIf="type == 'video'">
+                <div>
+                    <iframe
+                        class="responsive-video1"
+                        [src]="url"
+                        allowfullscreen
+                    ></iframe>
+                </div>
+                <p class="content-page__content-description">
+                    {{ description }}
+                </p>
+            </div>
+
+            <div
+                *ngIf="type == 'text'"
+                [innerHTML]="description"
+                class="content-page__text-content"
+            ></div>
+        </div>
+        <mat-card-actions class="card__buttons">
+            <button
+                mat-icon-button
+                color="accent"
+                matTooltip="Like"
+                matTooltipPosition="above"
+            >
+                <mat-icon>thumb_up_alt</mat-icon>
+            </button>
+            <button
+                mat-icon-button
+                color="base"
+                matTooltip="Dislike"
+                matTooltipPosition="above"
+            >
+                <mat-icon>thumb_down_alt</mat-icon>
+            </button>
+            <button
+                mat-icon-button
+                color="base"
+                matTooltip="Share"
+                matTooltipPosition="above"
+            >
+                <mat-icon>send</mat-icon>
+            </button>
+        </mat-card-actions>
+    </mat-card>
+</div>

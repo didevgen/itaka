@@ -3,6 +3,6 @@
  */
 export interface EditProfile {
     name: string | null;
-    surName: string | null;
+    surname: string | null;
     avatar: string | Blob | null;
 }

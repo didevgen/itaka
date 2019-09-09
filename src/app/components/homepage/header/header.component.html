@@ -1,4 +1,4 @@
-<mat-toolbar color="white" class="example-toolbar">
+<mat-toolbar color="white" class="header">
     <div class="header__heading">
         <h1 class="header__logo"><a href="#">ITaka</a></h1>
     </div>
@@ -9,6 +9,7 @@
     <div class="header__user-tools">
         <div class="header__user-buttons">
             <button
+                [matMenuTriggerFor]="menu"
                 mat-icon-button
                 color="accent"
                 matRipple="disabled"
@@ -16,9 +17,57 @@
             >
                 <mat-icon>add_circle_outline</mat-icon>
             </button>
+            <mat-menu #menu="matMenu" xPosition="after">
+                <button mat-menu-item [routerLink]="['/addText']">
+                    <mat-icon>receipt</mat-icon>
+                    <span>Text</span>
+                </button>
+
+                <button mat-menu-item [routerLink]="['/uploadMedia']">
+                    <mat-icon>volume_up</mat-icon>
+                    <span>Audio</span>
+                </button>
+                <button mat-menu-item [routerLink]="['/uploadMedia']">
+                    <mat-icon>videocam</mat-icon>
+                    <span>Video</span>
+                </button>
+                <button mat-menu-item [routerLink]="['/uploadMedia']">
+                    <mat-icon>crop_original</mat-icon>
+                    <span>Photo</span>
+                </button>
+            </mat-menu>
         </div>
         <div class="header__user-info">
-            <button mat-flat-button color="accent">Log in</button>
+            <button
+                HEAD
+                routerLinkActive="active"
+                *ngIf="!isAuthenticated"
+                mat-flat-button
+                color="accent"
+                routerLink="/auth"
+            >
+                Log In
+            </button>
+
+            <div class="header__user-avatar" *ngIf="isAuthenticated">
+                <p>{{ userName }}</p>
+                <button
+                    class="header__user-avatar-button"
+                    [matMenuTriggerFor]="useravatar"
+                    [ngStyle]="{ 'background-image': getUserAvatar() }"
+                ></button>
+                <mat-menu #useravatar="matMenu">
+                    <button mat-menu-item [routerLink]="['/userPage']">
+                        <mat-icon>account_circle</mat-icon> View profile
+                    </button>
+                    <button mat-menu-item [routerLink]="['/editProfile']">
+                        <mat-icon>build</mat-icon> Edit profile
+                    </button>
+                    <button mat-menu-item color="accent" (click)="onLogout()">
+                        <mat-icon>exit_to_app</mat-icon> Log Out
+                    </button>
+                </mat-menu>
+            </div>
         </div>
     </div>
 </mat-toolbar>

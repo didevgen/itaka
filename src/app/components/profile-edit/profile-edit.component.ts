@@ -1,49 +1,70 @@
-import { Component, OnInit } from '@angular/core';
+import {
+    AfterViewChecked,
+    AfterViewInit,
+    ChangeDetectorRef,
+    Component,
+    OnDestroy,
+    OnInit,
+} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Store } from '@ngrx/store';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalDialogComponent } from './modal-dialog/modal-dialog.component';
-import { Store } from '@ngrx/store';
 
-import { ProfileEditState } from './store/profile-edit.reducer';
 import { ProfileEditSet } from './store/profile-edit.actions';
-import { EditProfile } from '../../models/edit-profile/edit-profile.model';
-import { ProfileEditService } from './profile-edit.service';
+import { AppState } from '../../store/app.reducer';
 
 @Component({
     selector: 'ita-profile-edit',
     templateUrl: './profile-edit.component.html',
     styleUrls: ['./profile-edit.component.scss'],
-    // providers: [ProfileEditService],
 })
-export class ProfileEditComponent implements OnInit {
+export class ProfileEditComponent
+    implements OnInit, AfterViewInit, AfterViewChecked, OnDestroy {
     public profileForm: FormGroup;
     url: string;
     defaultImage = '../../assets/avatarDefault.png';
-    private data: EditProfile;
-    private pic;
+    public subscription$ = new Subject();
 
     constructor(
         private formBuilder: FormBuilder,
         public dialog: MatDialog,
-        private store: Store<ProfileEditState>,
+        private cdRef: ChangeDetectorRef,
+        private store: Store<AppState>,
     ) {}
 
     ngOnInit(): void {
-        this.pic = 'imageDefault';
         this.profileForm = this.formBuilder.group({
-            userName: this.formBuilder.control('', [Validators.required]),
-            userSurname: this.formBuilder.control('', [Validators.required]),
+            userName: this.formBuilder.control(null, [
+                Validators.required,
+                Validators.minLength(2),
+                Validators.maxLength(15),
+            ]),
+            userSurname: this.formBuilder.control(null, [
+                Validators.required,
+                Validators.minLength(2),
+                Validators.maxLength(15),
+            ]),
         });
-
-        this.store.subscribe(state => console.log(state));
-
-        this.store.dispatch(
-            new ProfileEditSet({
-                name: this.profileForm.get('userName').value,
-                surName: this.profileForm.get('userSurname').value,
-                avatar: this.pic,
-            }),
-        );
+    }
+    ngAfterViewInit() {
+        this.store
+            .select('editProfile')
+            .pipe(takeUntil(this.subscription$))
+            .subscribe(inf => {
+                this.profileForm.value.userName = inf.name;
+                this.profileForm.value.userSurname = inf.surname;
+                this.url = this.defaultImage;
+            });
+    }
+    ngAfterViewChecked() {
+        this.cdRef.detectChanges();
+    }
+    ngOnDestroy() {
+        this.subscription$.next();
+        this.subscription$.complete();
     }
 
     addAvatar(event) {
@@ -53,29 +74,21 @@ export class ProfileEditComponent implements OnInit {
             data: event,
         });
 
-        dialogRef.afterClosed().subscribe(result => {
-            this.url = result;
-            // this.profileForm.get('avatar').setValue(event.target.files[0]);
-        });
+        dialogRef
+            .afterClosed()
+            .pipe(takeUntil(this.subscription$))
+            .subscribe(result => {
+                this.url = result;
+            });
     }
 
-    getRawData(img): void {
-        // console.log(this.profileForm);
-        this.pic = 'imageNew'; // img.src;
-
-        /*this.data.avatar = this.pic;
-        this.data.name = this.profileForm.get('userName').value;
-        this.data.name = this.profileForm.get('userSurname').value;*/
-
+    getRawData(): void {
         this.store.dispatch(
             new ProfileEditSet({
                 name: this.profileForm.get('userName').value,
-                surName: this.profileForm.get('userSurname').value,
-                avatar: this.pic,
+                surname: this.profileForm.get('userSurname').value,
+                avatar: '', // will be new img url
             }),
         );
-
-        // console.log(this.pic);
-        // this.store
     }
 }
