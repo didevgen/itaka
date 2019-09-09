@@ -8,7 +8,6 @@
   text-align: center;
 }
 .mat-raised-button {
-  width: 180px;
   font-size: 18px;
 }
 .custom-file-input::before {
@@ -47,9 +46,16 @@
   width: 35%;
   margin-right: 25px;
 }
-.profile__user-name{
+.profile__user-name {
   color: #ff4081;
   font-size: 18px;
   font-weight: 600;
   margin: 15px;
 }
+.mat-dialog-button {
+  text-align: center;
+}
+image-cropper {
+  height: 400px;
+}
+
