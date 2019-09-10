@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Subject } from 'rxjs';
@@ -17,7 +17,7 @@ import { AppState } from '../../store/app.reducer';
     templateUrl: './profile-edit.component.html',
     styleUrls: ['./profile-edit.component.scss'],
 })
-export class ProfileEditComponent implements OnInit, AfterViewInit, OnDestroy {
+export class ProfileEditComponent implements OnInit, OnDestroy {
     public profileForm: FormGroup;
     url: string;
     defaultImage = '../../assets/avatarDefault.png';
@@ -47,7 +47,6 @@ export class ProfileEditComponent implements OnInit, AfterViewInit, OnDestroy {
             .select('editProfile')
             .pipe(takeUntil(this.destroy$))
             .subscribe(inf => {
-                console.log(inf);
                 if (inf) {
                     this.profileForm.get('userName').setValue(inf.name);
                     this.profileForm.get('userSurname').setValue(inf.surname);
@@ -55,9 +54,7 @@ export class ProfileEditComponent implements OnInit, AfterViewInit, OnDestroy {
                 }
             });
     }
-    ngAfterViewInit(): void {
-        // debugger;
-    }
+
     ngOnDestroy() {
         this.destroy$.next();
         this.destroy$.complete();
