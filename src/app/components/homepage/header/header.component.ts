@@ -1,9 +1,20 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-// add for auth
-import { Subscription } from 'rxjs';
-import { map } from 'rxjs/operators';
-import { Store } from '@ngrx/store';
 
+import { Subscription, Observable, Subject, of } from 'rxjs';
+import {
+    map,
+    filter,
+    debounceTime,
+    distinctUntilChanged,
+    mergeMap,
+    delay,
+} from 'rxjs/operators';
+import { Store } from '@ngrx/store';
+import {
+    AngularFireStorage,
+    AngularFireUploadTask,
+} from '@angular/fire/storage';
+import { AngularFirestore } from '@angular/fire/firestore';
 import * as fromApp from '../../../store/app.reducer';
 import * as AuthActions from '../../auth/store/auth.actions';
 
@@ -18,8 +29,23 @@ export class HeaderComponent implements OnInit, OnDestroy {
     avatar: string;
     isAuthenticated = false;
     private userSub: Subscription;
-
-    constructor(private store: Store<fromApp.AppState>) {}
+    private searchSubscription: Subscription;
+    public inputSearch = new Subject<KeyboardEvent>();
+    snapshot: Observable<any>;
+    inputData: string;
+    constructor(
+        private store: Store<fromApp.AppState>,
+        private db: AngularFirestore,
+    ) {
+        this.searchSubscription = this.inputSearch
+            .pipe(
+                map(event => event),
+                debounceTime(300),
+                distinctUntilChanged(),
+                mergeMap(search => of(search).pipe(delay(500))),
+            )
+            .subscribe(e => this.search(e));
+    }
     getUserAvatar(): string {
         if (!this.avatar) {
             return 'url(\'../../assets/avatarDefault.png\')';
@@ -38,12 +64,36 @@ export class HeaderComponent implements OnInit, OnDestroy {
                 console.log(!!user);
             });
     }
-
+    search(value) {
+        this.db
+            .collection('Posts')
+            .get()
+            .toPromise()
+            .then(post => {
+                post.docs.filter(
+                    i =>
+                        i
+                            .data()
+                            .title.toLowerCase()
+                            .indexOf(value.toLowerCase()) >= 0,
+                );
+                console.log(
+                    post.docs.filter(
+                        i =>
+                            i
+                                .data()
+                                .title.toLowerCase()
+                                .indexOf(value.toLowerCase()) >= 0,
+                    ),
+                );
+            });
+    }
     onLogout() {
         this.store.dispatch(new AuthActions.Logout());
     }
 
     ngOnDestroy() {
         this.userSub.unsubscribe();
+        this.searchSubscription.unsubscribe();
     }
 }
