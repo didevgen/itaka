@@ -1,5 +1,5 @@
 import { EditProfile } from '../../models/edit-profile/edit-profile.model';
-import {Observable, of, Subscription, throwError} from 'rxjs';
+import { Observable, of, Subscription, throwError } from 'rxjs';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { catchError, find, map } from 'rxjs/operators';
@@ -45,9 +45,7 @@ export class ProfileEditService implements OnDestroy {
             .pipe(
                 find(val => val === val[this.userID]),
                 map(d => (d as unknown) as EditProfile),
-                catchError(err =>
-                    of(err)
-                ),
+                catchError(err => of(err)),
             );
     }
 }
