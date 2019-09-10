@@ -5,6 +5,7 @@ import { ImageCropperComponent } from 'ngx-image-cropper/src/component/image-cro
 @Component({
     selector: 'ita-dialog-component',
     templateUrl: './modal-dialog.component.html',
+    styleUrls: ['../profile-edit.component.scss'],
 })
 export class ModalDialogComponent {
     croppedImage: any = '';
