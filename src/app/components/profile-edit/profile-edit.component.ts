@@ -7,9 +7,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ModalDialogComponent } from './modal-dialog/modal-dialog.component';
 import { SubmitDialogComponent } from './submit-dialog/submit-dialog.component';
 
-import {
-    ProfileEditSet
-} from './store/profile-edit.actions';
+import { ProfileEditSet } from './store/profile-edit.actions';
 import { AppState } from '../../store/app.reducer';
 
 @Component({
