@@ -40,6 +40,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { AuthEffects } from './components/auth/store/auth.effects';
 import { HttpClientModule } from '@angular/common/http';
 import { AlertModule } from './shared/alert/alert.module';
+import { SubmitDialogComponent } from './components/profile-edit/submit-dialog/submit-dialog.component';
 
 @NgModule({
     declarations: [
@@ -49,6 +50,7 @@ import { AlertModule } from './shared/alert/alert.module';
         ContentContainerComponent,
         ProfileEditComponent,
         ModalDialogComponent,
+        SubmitDialogComponent,
         RouterContainerComponent,
         CardsContainerComponent,
         UserPageComponent,
@@ -85,7 +87,7 @@ import { AlertModule } from './shared/alert/alert.module';
     ],
     providers: [AngularFirestore, AuthEffects, ProfileEditService],
     bootstrap: [AppComponent],
-    entryComponents: [ModalDialogComponent],
+    entryComponents: [ModalDialogComponent, SubmitDialogComponent],
     exports: [ContentContainerComponent],
 })
 export class AppModule {}

@@ -5,6 +5,7 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalDialogComponent } from './modal-dialog/modal-dialog.component';
+import { SubmitDialogComponent } from './submit-dialog/submit-dialog.component';
 
 import {
     ProfileEditSet,
@@ -20,6 +21,7 @@ import { AppState } from '../../store/app.reducer';
 export class ProfileEditComponent implements OnInit, OnDestroy {
     public profileForm: FormGroup;
     url: string;
+    isUpdate: boolean;
     defaultImage = '../../assets/avatarDefault.png';
     private destroy$ = new Subject<void>();
 
@@ -27,7 +29,9 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
         private formBuilder: FormBuilder,
         public dialog: MatDialog,
         private store: Store<AppState>,
-    ) {
+    ) {}
+
+    ngOnInit(): void {
         this.profileForm = this.formBuilder.group({
             userName: this.formBuilder.control(null, [
                 Validators.required,
@@ -40,17 +44,22 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
                 Validators.maxLength(15),
             ]),
         });
-    }
 
-    ngOnInit(): void {
         this.store
             .select('editProfile')
             .pipe(takeUntil(this.destroy$))
-            .subscribe(inf => {
-                if (inf) {
-                    this.profileForm.get('userName').setValue(inf.name);
-                    this.profileForm.get('userSurname').setValue(inf.surname);
+            .subscribe(info => {
+                if (info.name && !info.isError) {
+                    this.profileForm.get('userName').setValue(info.name);
+                    this.profileForm.get('userSurname').setValue(info.surname);
                     this.url = this.defaultImage;
+                    if (this.isUpdate) {
+                        this.dialogSubmit(`OK! ${info.name}\n${info.surname}`);
+                    }
+                } else if (info.isError) {
+                    this.dialogSubmit(
+                        `UNSUCCESSFUL!\ncheck your connection please`,
+                    );
                 }
             });
     }
@@ -59,7 +68,16 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
         this.destroy$.next();
         this.destroy$.complete();
     }
-
+    dialogSubmit(message) {
+        this.dialog.open(SubmitDialogComponent, {
+            height: '40vh',
+            width: '40vw',
+            data: { message: `${message}` },
+        });
+    }
+    forSubmitDialog() {
+        this.isUpdate = true;
+    }
     addAvatar(event) {
         const dialogRef = this.dialog.open(ModalDialogComponent, {
             height: '500px',

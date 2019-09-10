@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { catchError, map, switchMap } from 'rxjs/operators';
-import { of } from 'rxjs';
+import {of, throwError} from 'rxjs';
 import * as ProfileEditActions from './profile-edit.actions';
 import { ProfileEditService } from '../profile-edit.service';
 
@@ -25,14 +25,14 @@ export class ProfileEditEffect {
                                 avatar: data.avatar,
                             }),
                     ),
-                    catchError(err => {
-                        return of(
+                    catchError( () =>
+                        throwError(
                             new ProfileEditActions.ProfileEditError({
-                                ...act.payload,
-                                isError: true,
+                              ...act.payload,
+                              isError: true,
                             }),
-                        );
-                    }),
+                        )
+                    ),
                 ),
             ),
         ),

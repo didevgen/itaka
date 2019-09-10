@@ -20,6 +20,7 @@ export function profileEditReducer(
         case fromProfileEdit.ProfileEditTypes.ProfileEdit_Set:
         case fromProfileEdit.ProfileEditTypes.ProfileEdit_Success:
             return {
+                ...state,
                 name: action.payload.name,
                 surname: action.payload.surname,
                 avatar: action.payload.avatar,
@@ -28,6 +29,7 @@ export function profileEditReducer(
             return;
         case fromProfileEdit.ProfileEditTypes.ProfileEdit_Load:
             return {
+                ...state,
                 name: action.payload.name,
                 surname: action.payload.surname,
                 avatar: action.payload.avatar,

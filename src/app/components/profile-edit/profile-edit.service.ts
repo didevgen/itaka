@@ -1,8 +1,8 @@
 import { EditProfile } from '../../models/edit-profile/edit-profile.model';
-import { from, Observable, of, Subscription } from 'rxjs';
+import { from, Observable, of, Subscription, throwError } from 'rxjs';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { find, map, takeUntil } from 'rxjs/operators';
+import { catchError, find, map, takeUntil } from 'rxjs/operators';
 import { User } from '../../models/user/User.models';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../store/app.reducer';
@@ -36,7 +36,7 @@ export class ProfileEditService implements OnDestroy {
 
         const document = this.db.doc('Users/' + this.userID);
         document.set({ ...this.data }, { merge: true }).catch(err => {
-            console.log('error from promise in service to set fb data: ', err);
+            console.log('error from database while saving: ', err);
         });
 
         return this.db
@@ -45,6 +45,9 @@ export class ProfileEditService implements OnDestroy {
             .pipe(
                 find(val => val === val[this.userID]),
                 map(d => (d as unknown) as EditProfile),
+                catchError((err) =>
+                    throwError('error from database after saving: ', err),
+                ),
             );
     }
     loadData(): Observable<EditProfile> {
@@ -54,6 +57,9 @@ export class ProfileEditService implements OnDestroy {
             .pipe(
                 find(val => val === val[this.userID]),
                 map(d => (d as unknown) as EditProfile),
+                catchError(() =>
+                    throwError('error from database while loading'),
+                ),
             );
     }
 }
