@@ -34,12 +34,12 @@ import { CardsContentImageComponent } from './components/homepage/cards-containe
 import { CardsContentTextComponent } from './components/homepage/cards-container/cards-content-text/cards-content-text.component';
 import { CardContentDetailComponent } from './components/homepage/cards-container/card-content-detail/card-content-detail.component';
 import { UploadMediaModule } from './components/upload-media/upload-media.module';
-import { AuthModule } from '../app/components/auth/auth-form/auth-form.module';
-import { SharedModule } from '../app/shared/shared.module';
+import { AuthModule } from './components/auth/auth-form/auth-form.module';
+import { SharedModule } from './shared/shared.module';
 import { EffectsModule } from '@ngrx/effects';
-import { AuthEffects } from '../app/components/auth/store/auth.effects';
+import { AuthEffects } from './components/auth/store/auth.effects';
 import { HttpClientModule } from '@angular/common/http';
-import { AlertModule } from '../app/shared/alert/alert.module';
+import { AlertModule } from './shared/alert/alert.module';
 
 @NgModule({
     declarations: [

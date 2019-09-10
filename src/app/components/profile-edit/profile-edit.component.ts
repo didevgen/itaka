@@ -22,14 +22,12 @@ export class ProfileEditComponent implements OnInit, AfterViewInit, OnDestroy {
     url: string;
     defaultImage = '../../assets/avatarDefault.png';
     private destroy$ = new Subject<void>();
-    private isExisting: boolean;
 
     constructor(
         private formBuilder: FormBuilder,
         public dialog: MatDialog,
         private store: Store<AppState>,
     ) {
-        this.isExisting = false;
         this.profileForm = this.formBuilder.group({
             userName: this.formBuilder.control(null, [
                 Validators.required,
@@ -45,21 +43,15 @@ export class ProfileEditComponent implements OnInit, AfterViewInit, OnDestroy {
     }
 
     ngOnInit(): void {
-        debugger;
-        if (!this.isExisting) {
-            this.store.dispatch(new ProfileEditUpdate());
-            this.isExisting = true;
-        }
         this.store
             .select('editProfile')
             .pipe(takeUntil(this.destroy$))
             .subscribe(inf => {
                 console.log(inf);
                 if (inf) {
-                    this.profileForm.value.userName = inf.name;
-                    this.profileForm.value.userSurname = inf.surname;
+                    this.profileForm.get('userName').setValue(inf.name);
+                    this.profileForm.get('userSurname').setValue(inf.surname);
                     this.url = this.defaultImage;
-                    this.isExisting = true;
                 }
             });
     }
@@ -87,14 +79,12 @@ export class ProfileEditComponent implements OnInit, AfterViewInit, OnDestroy {
     }
 
     getRawData(): void {
-        debugger;
         this.store.dispatch(
             new ProfileEditSet({
-                name: this.profileForm.value.userName,
-                surname: this.profileForm.value.userSurname,
+                name: this.profileForm.get('userName').value,
+                surname: this.profileForm.get('userSurname').value,
                 avatar: '', // will be new img url
             }),
         );
-        this.isExisting = true;
     }
 }
