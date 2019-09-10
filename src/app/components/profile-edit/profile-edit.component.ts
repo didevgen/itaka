@@ -1,11 +1,4 @@
-import {
-    AfterViewChecked,
-    AfterViewInit,
-    ChangeDetectorRef,
-    Component,
-    OnDestroy,
-    OnInit,
-} from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Subject } from 'rxjs';
@@ -13,7 +6,10 @@ import { takeUntil } from 'rxjs/operators';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalDialogComponent } from './modal-dialog/modal-dialog.component';
 
-import { ProfileEditSet } from './store/profile-edit.actions';
+import {
+    ProfileEditSet,
+    ProfileEditUpdate,
+} from './store/profile-edit.actions';
 import { AppState } from '../../store/app.reducer';
 
 @Component({
@@ -21,21 +17,19 @@ import { AppState } from '../../store/app.reducer';
     templateUrl: './profile-edit.component.html',
     styleUrls: ['./profile-edit.component.scss'],
 })
-export class ProfileEditComponent
-    implements OnInit, AfterViewInit, AfterViewChecked, OnDestroy {
+export class ProfileEditComponent implements OnInit, AfterViewInit, OnDestroy {
     public profileForm: FormGroup;
     url: string;
     defaultImage = '../../assets/avatarDefault.png';
-    public subscription$ = new Subject();
+    private destroy$ = new Subject<void>();
+    private isExisting: boolean;
 
     constructor(
         private formBuilder: FormBuilder,
         public dialog: MatDialog,
-        private cdRef: ChangeDetectorRef,
         private store: Store<AppState>,
-    ) {}
-
-    ngOnInit(): void {
+    ) {
+        this.isExisting = false;
         this.profileForm = this.formBuilder.group({
             userName: this.formBuilder.control(null, [
                 Validators.required,
@@ -49,22 +43,32 @@ export class ProfileEditComponent
             ]),
         });
     }
-    ngAfterViewInit() {
+
+    ngOnInit(): void {
+        debugger;
+        if (!this.isExisting) {
+            this.store.dispatch(new ProfileEditUpdate());
+            this.isExisting = true;
+        }
         this.store
             .select('editProfile')
-            .pipe(takeUntil(this.subscription$))
+            .pipe(takeUntil(this.destroy$))
             .subscribe(inf => {
-                this.profileForm.value.userName = inf.name;
-                this.profileForm.value.userSurname = inf.surname;
-                this.url = this.defaultImage;
+                console.log(inf);
+                if (inf) {
+                    this.profileForm.value.userName = inf.name;
+                    this.profileForm.value.userSurname = inf.surname;
+                    this.url = this.defaultImage;
+                    this.isExisting = true;
+                }
             });
     }
-    ngAfterViewChecked() {
-        this.cdRef.detectChanges();
+    ngAfterViewInit(): void {
+        // debugger;
     }
     ngOnDestroy() {
-        this.subscription$.next();
-        this.subscription$.complete();
+        this.destroy$.next();
+        this.destroy$.complete();
     }
 
     addAvatar(event) {
@@ -76,19 +80,21 @@ export class ProfileEditComponent
 
         dialogRef
             .afterClosed()
-            .pipe(takeUntil(this.subscription$))
+            .pipe(takeUntil(this.destroy$))
             .subscribe(result => {
                 this.url = result;
             });
     }
 
     getRawData(): void {
+        debugger;
         this.store.dispatch(
             new ProfileEditSet({
-                name: this.profileForm.get('userName').value,
-                surname: this.profileForm.get('userSurname').value,
+                name: this.profileForm.value.userName,
+                surname: this.profileForm.value.userSurname,
                 avatar: '', // will be new img url
             }),
         );
+        this.isExisting = true;
     }
 }

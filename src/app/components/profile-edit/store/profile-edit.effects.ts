@@ -2,33 +2,57 @@ import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { catchError, map, switchMap } from 'rxjs/operators';
 import { of } from 'rxjs';
-import * as EdProfActions from './profile-edit.actions';
+import * as ProfileEditActions from './profile-edit.actions';
 import { ProfileEditService } from '../profile-edit.service';
 
 @Injectable()
 export class ProfileEditEffect {
-    loadEditProfile$ = createEffect(() =>
+    constructor(
+        private actions$: Actions,
+        private dataService: ProfileEditService,
+    ) {}
+
+    setEditProfile$ = createEffect(() =>
         this.actions$.pipe(
-            ofType(EdProfActions.ProfileEditTypes.ProfileEdit_Set),
-            switchMap((act: EdProfActions.ProfileEditSetSuccess) =>
+            ofType(ProfileEditActions.ProfileEditTypes.ProfileEdit_Set),
+            switchMap((act: ProfileEditActions.ProfileEditSet) =>
                 this.dataService.saveData(act.payload).pipe(
                     map(
-                        payload =>
-                            new EdProfActions.ProfileEditSetSuccess({
-                                name: payload.name,
-                                surname: payload.surname,
-                                avatar: payload.avatar,
+                        data =>
+                            new ProfileEditActions.ProfileEditSuccess({
+                                name: data.name,
+                                surname: data.surname,
+                                avatar: data.avatar,
                             }),
                     ),
                     catchError(err => {
-                        return of(new EdProfActions.ProfileEditSetError());
+                        return of(
+                            new ProfileEditActions.ProfileEditError({
+                                ...act.payload,
+                                isError: true,
+                            }),
+                        );
                     }),
                 ),
             ),
         ),
     );
-    constructor(
-        private actions$: Actions,
-        private dataService: ProfileEditService,
-    ) {}
+
+    /*loadEditProfile$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(ProfileEditActions.ProfileEditTypes.ProfileEdit_Update),
+            switchMap(() =>
+                this.dataService.loadData().pipe(
+                    map(
+                        data =>
+                            new ProfileEditActions.ProfileEditLoad({
+                                name: data.name,
+                                surname: data.surname,
+                                avatar: data.avatar,
+                            }),
+                    ), // return undefind into state
+                ),
+            ),
+        ),
+    );*/
 }

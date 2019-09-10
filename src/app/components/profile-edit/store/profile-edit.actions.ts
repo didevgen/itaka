@@ -1,10 +1,13 @@
 import { Action } from '@ngrx/store';
 import { EditProfile } from '../../../models/edit-profile/edit-profile.model';
+import { ProfileEditState } from './profile-edit.reducer';
 
 export const enum ProfileEditTypes {
     ProfileEdit_Set = '[ProfileEdit] Initial Set',
-    ProfileEdit_SetSuccess = '[ProfileEdit] Set Success',
-    ProfileEdit_SetError = '[ProfileEdit] Set Error',
+    ProfileEdit_Success = '[ProfileEdit] Success',
+    ProfileEdit_Update = '[ProfileEdit] Update',
+    ProfileEdit_Load = '[ProfileEdit] Load',
+    ProfileEdit_Error = '[ProfileEdit] Error',
 }
 
 export class ProfileEditSet implements Action {
@@ -12,16 +15,28 @@ export class ProfileEditSet implements Action {
 
     constructor(public payload: EditProfile) {}
 }
-export class ProfileEditSetSuccess implements Action {
-    readonly type = ProfileEditTypes.ProfileEdit_SetSuccess;
+export class ProfileEditSuccess implements Action {
+    readonly type = ProfileEditTypes.ProfileEdit_Success;
 
     constructor(public payload: EditProfile) {}
 }
-export class ProfileEditSetError implements Action {
-    readonly type = ProfileEditTypes.ProfileEdit_SetError;
+export class ProfileEditUpdate implements Action {
+    readonly type = ProfileEditTypes.ProfileEdit_Update;
+}
+export class ProfileEditLoad implements Action {
+    readonly type = ProfileEditTypes.ProfileEdit_Load;
+
+    constructor(public payload: EditProfile) {}
+}
+export class ProfileEditError implements Action {
+    readonly type = ProfileEditTypes.ProfileEdit_Error;
+
+    constructor(public payload: ProfileEditState) {}
 }
 
 export type ProfileEditActions =
     | ProfileEditSet
-    | ProfileEditSetSuccess
-    | ProfileEditSetError;
+    | ProfileEditSuccess
+    | ProfileEditUpdate
+    | ProfileEditLoad
+    | ProfileEditError;
