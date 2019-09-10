@@ -37,6 +37,7 @@ export function profileEditReducer(
         case fromProfileEdit.ProfileEditTypes.ProfileEdit_Error:
             return {
                 ...state,
+                isError: true,
             };
         default:
             return state;

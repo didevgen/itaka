@@ -1,8 +1,8 @@
 import { EditProfile } from '../../models/edit-profile/edit-profile.model';
-import { from, Observable, of, Subscription, throwError } from 'rxjs';
+import { Observable, Subscription, throwError } from 'rxjs';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { catchError, find, map, takeUntil } from 'rxjs/operators';
+import { catchError, find, map } from 'rxjs/operators';
 import { User } from '../../models/user/User.models';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../store/app.reducer';
@@ -45,20 +45,8 @@ export class ProfileEditService implements OnDestroy {
             .pipe(
                 find(val => val === val[this.userID]),
                 map(d => (d as unknown) as EditProfile),
-                catchError((err) =>
+                catchError(err =>
                     throwError('error from database after saving: ', err),
-                ),
-            );
-    }
-    loadData(): Observable<EditProfile> {
-        return this.db
-            .collection<User>('Users')
-            .valueChanges()
-            .pipe(
-                find(val => val === val[this.userID]),
-                map(d => (d as unknown) as EditProfile),
-                catchError(() =>
-                    throwError('error from database while loading'),
                 ),
             );
     }

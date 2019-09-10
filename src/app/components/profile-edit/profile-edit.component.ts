@@ -8,8 +8,7 @@ import { ModalDialogComponent } from './modal-dialog/modal-dialog.component';
 import { SubmitDialogComponent } from './submit-dialog/submit-dialog.component';
 
 import {
-    ProfileEditSet,
-    ProfileEditUpdate,
+    ProfileEditSet
 } from './store/profile-edit.actions';
 import { AppState } from '../../store/app.reducer';
 
