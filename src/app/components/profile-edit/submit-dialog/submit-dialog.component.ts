@@ -3,7 +3,9 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 
 @Component({
     selector: 'ita-submit-dialog',
-    templateUrl: './submit-dialog.component.html',
+    template: `
+        <div mat-dialog-content>{{ data.message | uppercase }}</div>
+    `,
     styleUrls: ['./submit-dialog.component.scss'],
 })
 export class SubmitDialogComponent implements OnInit {
