@@ -78,9 +78,12 @@ export class AuthEffects {
                         this.authService.setLogoutTimer(
                             +resData.expiresIn * 1000,
                         );
-                        this.db.collection('Users').doc(resData.localId).set({email: resData.email});
+                        this.db
+                            .collection('Users')
+                            .doc(resData.localId)
+                            .set({ email: resData.email });
                     }),
-                
+
                     map(resData => {
                         return handleAuthentication(
                             +resData.expiresIn,
@@ -185,7 +188,10 @@ export class AuthEffects {
                 ),
             ).pipe(
                 map(resData => {
-                    this.db.collection('Users').doc(resData.user.uid).set({email: resData.user.email});
+                    this.db
+                        .collection('Users')
+                        .doc(resData.user.uid)
+                        .set({ email: resData.user.email });
                     return handleAuthentication(
                         3600,
                         resData.user.email,
@@ -218,6 +224,6 @@ export class AuthEffects {
         private authService: AuthService,
         private firebaseAuth: AngularFireAuth,
         private zone: NgZone,
-        private db: AngularFirestore
+        private db: AngularFirestore,
     ) {}
 }
