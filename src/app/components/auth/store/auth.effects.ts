@@ -10,6 +10,7 @@ import { User } from '../user.model';
 import { AuthService } from '../auth-form/auth-form.service';
 import { AngularFireAuth } from '@angular/fire/auth';
 import * as firebase from 'firebase/app';
+import { AngularFirestore } from 'angularfire2/firestore';
 
 export interface AuthResponseData {
     kind: string;
@@ -77,6 +78,10 @@ export class AuthEffects {
                         this.authService.setLogoutTimer(
                             +resData.expiresIn * 1000,
                         );
+                        this.db
+                            .collection('Users')
+                            .doc(resData.localId)
+                            .set({ email: resData.email });
                     }),
                     map(resData => {
                         return handleAuthentication(
@@ -182,6 +187,10 @@ export class AuthEffects {
                 ),
             ).pipe(
                 map(resData => {
+                    this.db
+                        .collection('Users')
+                        .doc(resData.user.uid)
+                        .set({ email: resData.user.email });
                     return handleAuthentication(
                         3600,
                         resData.user.email,
@@ -214,5 +223,6 @@ export class AuthEffects {
         private authService: AuthService,
         private firebaseAuth: AngularFireAuth,
         private zone: NgZone,
+        private db: AngularFirestore,
     ) {}
 }
