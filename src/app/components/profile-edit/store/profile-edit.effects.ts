@@ -38,31 +38,31 @@ export class ProfileEditEffect {
         ),
     );
 
-  updateEditProfile$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(ProfileEditActions.ProfileEditTypes.ProfileEdit_Update),
-      switchMap(() =>
-        this.dataService.loadData().pipe(
-          map(
-            data =>
-              new ProfileEditActions.ProfileEditSuccess({
-                name: data.name,
-                surname: data.surname,
-                avatar: data.avatar,
-              }),
-          ),
-          catchError(() =>
-            of(
-              new ProfileEditActions.ProfileEditError({
-                name: null,
-                surname: null,
-                avatar: null,
-                isError: true,
-              }),
+    updateEditProfile$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(ProfileEditActions.ProfileEditTypes.ProfileEdit_Update),
+            switchMap(() =>
+                this.dataService.loadData().pipe(
+                    map(
+                        data =>
+                            new ProfileEditActions.ProfileEditSuccess({
+                                name: data.name,
+                                surname: data.surname,
+                                avatar: data.avatar,
+                            }),
+                    ),
+                    catchError(() =>
+                        of(
+                            new ProfileEditActions.ProfileEditError({
+                                name: null,
+                                surname: null,
+                                avatar: null,
+                                isError: true,
+                            }),
+                        ),
+                    ),
+                ),
             ),
-          ),
         ),
-      ),
-    ),
-  );
+    );
 }
