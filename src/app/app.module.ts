@@ -21,7 +21,6 @@ import { ImageCropperModule } from 'ngx-image-cropper';
 import { ModalDialogComponent } from './components/profile-edit/modal-dialog/modal-dialog.component';
 import { ProfileEditComponent } from './components/profile-edit/profile-edit.component';
 import { RouterContainerComponent } from './components/router-container/router-container.component';
-import { UserPageComponent } from './components/user-page/user-page.component';
 import { UserPageModule } from './components/user-page/user.module';
 import { TextEditorModule } from './components/editors/text-editor/text-editor.module';
 import { CardsContentVideoComponent } from './components/homepage/cards-container/cards-content-video/cards-content-video.component';
@@ -47,7 +46,6 @@ import { AlertModule } from '../app/shared/alert/alert.module';
         ModalDialogComponent,
         RouterContainerComponent,
         CardsContainerComponent,
-        UserPageComponent,
         CardsContentVideoComponent,
         CardsContentAudioComponent,
         CardsContentImageComponent,

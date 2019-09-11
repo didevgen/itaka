@@ -14,14 +14,9 @@ export class CardsContainerComponent implements OnInit {
 
     ngOnInit() {
         this.render();
-        this.renderUserContet();
     }
 
     render(): void {
         this.getDataService.render(this.media);
-    }
-
-    renderUserContet(): void {
-        this.getDataService.renderUserContent();
     }
 }
