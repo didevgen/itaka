@@ -55,7 +55,7 @@ export class ProgressBarComponent implements OnInit {
                     contentType: this.contentType,
                     likes: 0,
                     dislikes: 0,
-                    userId: userId,
+                    userId,
                 });
             }),
         );

@@ -27,7 +27,7 @@ export class TextEditorComponent implements OnInit {
             title,
             description,
             contentType: 'text',
-            userId: userId,
+            userId,
         });
     }
 }
