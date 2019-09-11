@@ -40,7 +40,6 @@ const handleAuthentication = (
     });
 };
 const handleError = (errorRes: any) => {
-    console.log('hello from effect');
     let errorMessage = 'An unknown error occurred!';
     if (!errorRes.error || !errorRes.error.error) {
         return of(new AuthActions.AuthenticateFail(errorMessage));

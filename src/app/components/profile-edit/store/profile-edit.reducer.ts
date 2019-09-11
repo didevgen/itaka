@@ -25,15 +25,6 @@ export function profileEditReducer(
                 surname: action.payload.surname,
                 avatar: action.payload.avatar,
             };
-        case fromProfileEdit.ProfileEditTypes.ProfileEdit_Update:
-            return;
-        case fromProfileEdit.ProfileEditTypes.ProfileEdit_Load:
-            return {
-                ...state,
-                name: action.payload.name,
-                surname: action.payload.surname,
-                avatar: action.payload.avatar,
-            };
         case fromProfileEdit.ProfileEditTypes.ProfileEdit_Clear:
             return {
                 name: null,

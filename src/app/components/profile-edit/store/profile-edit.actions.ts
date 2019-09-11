@@ -6,7 +6,6 @@ export const enum ProfileEditTypes {
     ProfileEdit_Set = '[ProfileEdit] Initial Set',
     ProfileEdit_Success = '[ProfileEdit] Success',
     ProfileEdit_Update = '[ProfileEdit] Update',
-    ProfileEdit_Load = '[ProfileEdit] Load',
     ProfileEdit_Error = '[ProfileEdit] Error',
     ProfileEdit_Clear = '[ProfileEdit] Clear Store',
 }
@@ -24,11 +23,6 @@ export class ProfileEditSuccess implements Action {
 export class ProfileEditUpdate implements Action {
     readonly type = ProfileEditTypes.ProfileEdit_Update;
 }
-export class ProfileEditLoad implements Action {
-    readonly type = ProfileEditTypes.ProfileEdit_Load;
-
-    constructor(public payload: EditProfile) {}
-}
 export class ProfileEditClear implements Action {
     readonly type = ProfileEditTypes.ProfileEdit_Clear;
 }
@@ -42,6 +36,5 @@ export type ProfileEditActions =
     | ProfileEditSet
     | ProfileEditSuccess
     | ProfileEditUpdate
-    | ProfileEditLoad
     | ProfileEditError
     | ProfileEditClear;
