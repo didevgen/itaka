@@ -7,8 +7,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { ModalDialogComponent } from './modal-dialog/modal-dialog.component';
 import { SubmitDialogComponent } from './submit-dialog/submit-dialog.component';
 
-import { ProfileEditSet } from './store/profile-edit.actions';
 import { AppState } from '../../store/app.reducer';
+import * as EditProfileActions from './store/profile-edit.actions';
 
 @Component({
     selector: 'ita-profile-edit',
@@ -66,6 +66,10 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
         this.destroy$.next();
         this.destroy$.complete();
     }
+
+    forSubmitDialog() {
+        this.isUpdate = true;
+    }
     dialogSubmit(message) {
         this.dialog.open(SubmitDialogComponent, {
             height: '20vh',
@@ -73,9 +77,7 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
             data: { message: `${message}` },
         });
     }
-    forSubmitDialog() {
-        this.isUpdate = true;
-    }
+
     addAvatar(event) {
         const dialogRef = this.dialog.open(ModalDialogComponent, {
             height: '500px',
@@ -93,7 +95,7 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
 
     getRawData(): void {
         this.store.dispatch(
-            new ProfileEditSet({
+            new EditProfileActions.ProfileEditSet({
                 name: this.profileForm.get('userName').value,
                 surname: this.profileForm.get('userSurname').value,
                 avatar: '', // will be new img url
