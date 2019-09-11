@@ -45,8 +45,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
         private store: Store<fromApp.AppState>,
         private db: AngularFirestore,
     ) {
-        let sub = this.inputSearch;
-        let searchInput = sub.pipe(
+        const sub = this.inputSearch;
+        const searchInput = sub.pipe(
             map(event => event),
             debounceTime(300),
             distinctUntilChanged(),
