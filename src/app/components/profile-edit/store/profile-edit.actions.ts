@@ -30,7 +30,7 @@ export class ProfileEditLoad implements Action {
     constructor(public payload: EditProfile) {}
 }
 export class ProfileEditClear implements Action {
-  readonly type = ProfileEditTypes.ProfileEdit_Clear;
+    readonly type = ProfileEditTypes.ProfileEdit_Clear;
 }
 export class ProfileEditError implements Action {
     readonly type = ProfileEditTypes.ProfileEdit_Error;

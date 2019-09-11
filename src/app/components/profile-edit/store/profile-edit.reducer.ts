@@ -34,13 +34,13 @@ export function profileEditReducer(
                 surname: action.payload.surname,
                 avatar: action.payload.avatar,
             };
-      case fromProfileEdit.ProfileEditTypes.ProfileEdit_Clear:
-        return {
-          name: null,
-          surname: null,
-          avatar: null,
-          isError: false,
-        };
+        case fromProfileEdit.ProfileEditTypes.ProfileEdit_Clear:
+            return {
+                name: null,
+                surname: null,
+                avatar: null,
+                isError: false,
+            };
         case fromProfileEdit.ProfileEditTypes.ProfileEdit_Error:
             return {
                 ...state,
