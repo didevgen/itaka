@@ -17,8 +17,6 @@ export class ModalDialogComponent {
 
     imageCropped(image: any) {
         this.croppedImage = image.base64;
-        // create canvas image instead base64????
-        // this.ICC.getCanvasBlob(cropCanvas);
     }
     imageLoaded() {
         // show cropper
