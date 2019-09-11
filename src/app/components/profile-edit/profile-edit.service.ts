@@ -30,7 +30,7 @@ export class ProfileEditService implements OnDestroy {
                 .select('auth')
                 .subscribe(
                     ({ user: { id: userID = 'NOT SUCH USER' } }) =>
-                        (this.userID = `TEST->${userID}`),
+                        (this.userID = `${userID}`),
                 );
         }
 

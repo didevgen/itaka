@@ -51,7 +51,8 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
                     this.profileForm.get('userSurname').setValue(info.surname);
                     this.url = this.defaultImage;
                     if (this.isUpdate) {
-                        this.dialogSubmit(`OK! ${info.name}\n${info.surname}`);
+                        this.dialogSubmit(`Updated!
+                         ${info.name}`);
                     }
                 } else if (info.isError) {
                     this.dialogSubmit(
@@ -67,8 +68,8 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
     }
     dialogSubmit(message) {
         this.dialog.open(SubmitDialogComponent, {
-            height: '40vh',
-            width: '40vw',
+            height: '20vh',
+            width: '30vw',
             data: { message: `${message}` },
         });
     }
