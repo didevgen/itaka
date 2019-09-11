@@ -1,6 +1,13 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 
-import { Subscription, Observable, Subject, of } from 'rxjs';
+import {
+    Subscription,
+    Observable,
+    Subject,
+    of,
+    BehaviorSubject,
+    from,
+} from 'rxjs';
 import {
     map,
     filter,
@@ -8,6 +15,7 @@ import {
     distinctUntilChanged,
     mergeMap,
     delay,
+    multicast,
 } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
 import {
@@ -24,27 +32,30 @@ import * as AuthActions from '../../auth/store/auth.actions';
     styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit, OnDestroy {
-    value = 'Clear me';
     userName: string;
     avatar: string;
     isAuthenticated = false;
     private userSub: Subscription;
     private searchSubscription: Subscription;
     public inputSearch = new Subject<KeyboardEvent>();
+
     snapshot: Observable<any>;
-    inputData: string;
+
     constructor(
         private store: Store<fromApp.AppState>,
         private db: AngularFirestore,
     ) {
-        this.searchSubscription = this.inputSearch
-            .pipe(
-                map(event => event),
-                debounceTime(300),
-                distinctUntilChanged(),
-                mergeMap(search => of(search).pipe(delay(500))),
-            )
-            .subscribe(e => this.search(e));
+        let sub = this.inputSearch;
+        let searchInput = sub.pipe(
+            map(event => event),
+            debounceTime(300),
+            distinctUntilChanged(),
+            mergeMap(search => of(search).pipe(delay(500))),
+        );
+
+        searchInput.subscribe(t => console.log('input ==>', t));
+        searchInput.subscribe(e => this.searchByTitle(e));
+        searchInput.subscribe(e => this.searchByAuthorName(e));
     }
     getUserAvatar(): string {
         if (!this.avatar) {
@@ -64,7 +75,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
                 console.log(!!user);
             });
     }
-    search(value) {
+    searchByTitle(value) {
         this.db
             .collection('Posts')
             .get()
@@ -88,6 +99,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
                 );
             });
     }
+    searchByAuthorName(value) {}
     onLogout() {
         this.store.dispatch(new AuthActions.Logout());
     }
