@@ -28,7 +28,6 @@
                             <input
                                 matInput
                                 type="text"
-                                value="{{ profileForm.value.userName }}"
                                 formControlName="userName"
                             />
                         </mat-form-field>
@@ -37,7 +36,6 @@
                             <input
                                 matInput
                                 type="text"
-                                value="{{ profileForm.value.userSurname }}"
                                 formControlName="userSurname"
                             />
                         </mat-form-field>
@@ -45,7 +43,13 @@
                 </div>
             </mat-card-content>
             <mat-card-actions>
-                <button [disabled]="profileForm.invalid" type="submit" mat-raised-button color="accent">
+                <button
+                    [disabled]="profileForm.invalid"
+                    type="submit"
+                    mat-raised-button
+                    (click)="forSubmitDialog()"
+                    color="accent"
+                >
                     Update profile
                 </button>
             </mat-card-actions>

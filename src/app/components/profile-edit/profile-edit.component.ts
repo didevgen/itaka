@@ -1,17 +1,11 @@
-import {
-    AfterViewChecked,
-    AfterViewInit,
-    ChangeDetectorRef,
-    Component,
-    OnDestroy,
-    OnInit,
-} from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalDialogComponent } from './modal-dialog/modal-dialog.component';
+import { SubmitDialogComponent } from './submit-dialog/submit-dialog.component';
 
 import { ProfileEditSet } from './store/profile-edit.actions';
 import { AppState } from '../../store/app.reducer';
@@ -21,17 +15,16 @@ import { AppState } from '../../store/app.reducer';
     templateUrl: './profile-edit.component.html',
     styleUrls: ['./profile-edit.component.scss'],
 })
-export class ProfileEditComponent
-    implements OnInit, AfterViewInit, AfterViewChecked, OnDestroy {
+export class ProfileEditComponent implements OnInit, OnDestroy {
     public profileForm: FormGroup;
     url: string;
+    isUpdate: boolean;
     defaultImage = '../../assets/avatarDefault.png';
-    public subscription$ = new Subject();
+    private destroy$ = new Subject<void>();
 
     constructor(
         private formBuilder: FormBuilder,
         public dialog: MatDialog,
-        private cdRef: ChangeDetectorRef,
         private store: Store<AppState>,
     ) {}
 
@@ -48,25 +41,40 @@ export class ProfileEditComponent
                 Validators.maxLength(15),
             ]),
         });
-    }
-    ngAfterViewInit() {
+
         this.store
             .select('editProfile')
-            .pipe(takeUntil(this.subscription$))
-            .subscribe(inf => {
-                this.profileForm.value.userName = inf.name;
-                this.profileForm.value.userSurname = inf.surname;
-                this.url = this.defaultImage;
+            .pipe(takeUntil(this.destroy$))
+            .subscribe(info => {
+                if (info.name && !info.isError) {
+                    this.profileForm.get('userName').setValue(info.name);
+                    this.profileForm.get('userSurname').setValue(info.surname);
+                    this.url = this.defaultImage;
+                    if (this.isUpdate) {
+                        this.dialogSubmit(`OK! ${info.name}\n${info.surname}`);
+                    }
+                } else if (info.isError) {
+                    this.dialogSubmit(
+                        `UNSUCCESSFUL!\ncheck your connection please`,
+                    );
+                }
             });
     }
-    ngAfterViewChecked() {
-        this.cdRef.detectChanges();
-    }
-    ngOnDestroy() {
-        this.subscription$.next();
-        this.subscription$.complete();
-    }
 
+    ngOnDestroy() {
+        this.destroy$.next();
+        this.destroy$.complete();
+    }
+    dialogSubmit(message) {
+        this.dialog.open(SubmitDialogComponent, {
+            height: '40vh',
+            width: '40vw',
+            data: { message: `${message}` },
+        });
+    }
+    forSubmitDialog() {
+        this.isUpdate = true;
+    }
     addAvatar(event) {
         const dialogRef = this.dialog.open(ModalDialogComponent, {
             height: '500px',
@@ -76,7 +84,7 @@ export class ProfileEditComponent
 
         dialogRef
             .afterClosed()
-            .pipe(takeUntil(this.subscription$))
+            .pipe(takeUntil(this.destroy$))
             .subscribe(result => {
                 this.url = result;
             });
