@@ -1,4 +1,4 @@
-.card__photo {
+.card__image {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -9,4 +9,8 @@
 .mat-card-title {
     font-size: 18px;
     text-transform: uppercase;
+}
+.mat-card-image {
+    width: 305px;
+    height: 255px;
 }

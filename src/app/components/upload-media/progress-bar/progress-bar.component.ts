@@ -46,11 +46,12 @@ export class ProgressBarComponent implements OnInit {
                 this.urlOfUploadedFile = await ref.getDownloadURL().toPromise();
                 this.db.collection('Posts').add({
                     url: this.urlOfUploadedFile,
-                    path,
                     date: new Date(),
                     title: this.title,
                     description: this.description,
                     contentType: this.contentType,
+                    likes: 0,
+                    dislikes: 0,
                 });
             }),
         );

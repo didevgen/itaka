@@ -1,55 +1,36 @@
 <div class="cards-container__grid">
-    <div class="video">
-        <ita-cards-content-video></ita-cards-content-video>
-    </div>
-    <div class="photo">
-        <ita-cards-content-image></ita-cards-content-image>
-    </div>
-    <div class="video">
-        <ita-cards-content-video></ita-cards-content-video>
-    </div>
-    <div class="music">
-        <ita-cards-content-audio></ita-cards-content-audio>
-    </div>
-
-    <div class="video">
-        <ita-cards-content-video></ita-cards-content-video>
-    </div>
-    <div class="music">
-        <ita-cards-content-audio></ita-cards-content-audio>
-    </div>
-    <div class="blog">
-        <ita-cards-content-text></ita-cards-content-text>
-    </div>
-    <div class="photo">
-        <ita-cards-content-image></ita-cards-content-image>
-    </div>
-    <div class="blog">
-        <ita-cards-content-text></ita-cards-content-text>
-    </div>
-    <div class="music">
-        <ita-cards-content-audio></ita-cards-content-audio>
-    </div>
-    <div class="photo">
-        <ita-cards-content-image></ita-cards-content-image>
-    </div>
-
-    <div class="blog">
-        <ita-cards-content-text></ita-cards-content-text>
-    </div>
-    <div class="photo">
-        <ita-cards-content-image></ita-cards-content-image>
-    </div>
-
-    <div class="blog">
-        <ita-cards-content-text></ita-cards-content-text>
-    </div>
-
-    <div class="video">
-        <ita-cards-content-video></ita-cards-content-video>
-    </div>
-    <div class="music">
-        <ita-cards-content-audio></ita-cards-content-audio>
-    </div>
-    <div class="blog"><ita-cards-content-text></ita-cards-content-text></div>
+    <ng-container *ngFor="let content of media">
+        <ng-container *ngIf="content.contentType === 'image'" #image>
+            <div class="image">
+                <ita-cards-content-image
+                    [title]="content.title"
+                    [url]="content.url"
+                ></ita-cards-content-image>
+            </div>
+        </ng-container>
+        <ng-container #audio *ngIf="content.contentType === 'audio'">
+            <div class="audio">
+                <ita-cards-content-audio
+                    [title]="content.title"
+                    [url]="content.url"
+                ></ita-cards-content-audio>
+            </div>
+        </ng-container>
+        <ng-container #video *ngIf="content.contentType === 'video'">
+            <div class="video">
+                <ita-cards-content-video
+                    [title]="content.title"
+                    [url]="content.url"
+                ></ita-cards-content-video>
+            </div>
+        </ng-container>
+        <ng-container #text *ngIf="content.contentType === 'text'">
+            <div class="text">
+                <ita-cards-content-text
+                    [title]="content.title"
+                    [description]="content.description"
+                ></ita-cards-content-text>
+            </div>
+        </ng-container>
+    </ng-container>
 </div>
