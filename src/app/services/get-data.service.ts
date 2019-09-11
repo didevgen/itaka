@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from 'angularfire2/firestore';
-import { Media } from '../models/content/Media/media.models';
 
 @Injectable({
     providedIn: 'root',
@@ -13,7 +12,7 @@ export class GetDataService {
             .get()
             .subscribe(snapshot => {
                 snapshot.docs.forEach(doc => {
-                    let items = doc.data();
+                    const items = doc.data();
                     media.push(items);
                 });
             });
