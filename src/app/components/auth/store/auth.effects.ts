@@ -40,7 +40,6 @@ const handleAuthentication = (
     });
 };
 const handleError = (errorRes: any) => {
-    console.log('hello from effect');
     let errorMessage = 'An unknown error occurred!';
     if (!errorRes.error || !errorRes.error.error) {
         return of(new AuthActions.AuthenticateFail(errorMessage));
@@ -83,6 +82,7 @@ export class AuthEffects {
                             .doc(resData.localId)
                             .set({ email: resData.email });
                     }),
+
                     map(resData => {
                         return handleAuthentication(
                             +resData.expiresIn,
