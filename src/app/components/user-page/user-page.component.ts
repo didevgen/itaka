@@ -17,16 +17,13 @@ export class UserPageComponent implements OnInit, OnDestroy {
     constructor(private store: Store<fromApp.AppState>) {}
 
     ngOnInit() {
-        this.userSub = this.store
-            .select('editProfile')
-            .subscribe(user => {
-                this.name = user.name
-                // this.url= user.avatar
-            });
+        this.userSub = this.store.select('editProfile').subscribe(user => {
+            this.name = user.name;
+            // this.url= user.avatar
+        });
     }
-   
+
     ngOnDestroy() {
         this.userSub.unsubscribe();
     }
-   
 }
