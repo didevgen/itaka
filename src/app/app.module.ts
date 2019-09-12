@@ -25,8 +25,6 @@ import { ProfileEditEffect } from './components/profile-edit/store/profile-edit.
 import { ProfileEditService } from './components/profile-edit/profile-edit.service';
 import { ProfileEditComponent } from './components/profile-edit/profile-edit.component';
 import { RouterContainerComponent } from './components/router-container/router-container.component';
-import { UserPageComponent } from './components/user-page/user-page.component';
-import { UserPageModule } from './components/user-page/user.module';
 import { TextEditorModule } from './components/editors/text-editor/text-editor.module';
 import { CardsContentVideoComponent } from './components/homepage/cards-container/cards-content-video/cards-content-video.component';
 import { CardsContentAudioComponent } from './components/homepage/cards-container/cards-content-audio/cards-content-audio.component';
@@ -41,6 +39,8 @@ import { AuthEffects } from './components/auth/store/auth.effects';
 import { HttpClientModule } from '@angular/common/http';
 import { AlertModule } from './shared/alert/alert.module';
 import { SubmitDialogComponent } from './components/profile-edit/submit-dialog/submit-dialog.component';
+import { UserPageComponent } from './components/user-page/user-page.component';
+import { UserCardsContainerComponent } from './components/user-page/user-cards-container/user-cards-container.component';
 
 @NgModule({
     declarations: [
@@ -53,12 +53,13 @@ import { SubmitDialogComponent } from './components/profile-edit/submit-dialog/s
         SubmitDialogComponent,
         RouterContainerComponent,
         CardsContainerComponent,
-        UserPageComponent,
         CardsContentVideoComponent,
         CardsContentAudioComponent,
         CardsContentImageComponent,
         CardsContentTextComponent,
         CardContentDetailComponent,
+        UserPageComponent,
+        UserCardsContainerComponent,
     ],
     imports: [
         BrowserModule,
@@ -77,7 +78,6 @@ import { SubmitDialogComponent } from './components/profile-edit/submit-dialog/s
         AngularFireStorageModule,
         NotFoundModule,
         ImageCropperModule,
-        UserPageModule,
         TextEditorModule,
         UploadMediaModule,
         AuthModule,
@@ -88,6 +88,12 @@ import { SubmitDialogComponent } from './components/profile-edit/submit-dialog/s
     providers: [AngularFirestore, AuthEffects, ProfileEditService],
     bootstrap: [AppComponent],
     entryComponents: [ModalDialogComponent, SubmitDialogComponent],
-    exports: [ContentContainerComponent],
+    exports: [
+        ContentContainerComponent,
+        CardsContentVideoComponent,
+        CardsContentAudioComponent,
+        CardsContentImageComponent,
+        CardsContentTextComponent,
+    ],
 })
 export class AppModule {}
