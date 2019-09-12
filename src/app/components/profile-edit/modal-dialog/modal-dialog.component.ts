@@ -1,5 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
+import { ImageCropperComponent } from 'ngx-image-cropper/src/component/image-cropper.component';
 
 @Component({
     selector: 'ita-dialog-component',

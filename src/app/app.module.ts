@@ -3,6 +3,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { StoreModule } from '@ngrx/store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+
 import * as fromApp from './store/app.reducer';
 import { MaterialModule } from './material.module';
 import { HeaderComponent } from './components/homepage/header/header.component';
@@ -19,6 +21,8 @@ import { AppComponent } from './app.component';
 import { NotFoundModule } from './components/not-found/not-found.module';
 import { ImageCropperModule } from 'ngx-image-cropper';
 import { ModalDialogComponent } from './components/profile-edit/modal-dialog/modal-dialog.component';
+import { ProfileEditEffect } from './components/profile-edit/store/profile-edit.effects';
+import { ProfileEditService } from './components/profile-edit/profile-edit.service';
 import { ProfileEditComponent } from './components/profile-edit/profile-edit.component';
 import { RouterContainerComponent } from './components/router-container/router-container.component';
 import { UserPageComponent } from './components/user-page/user-page.component';
@@ -30,12 +34,13 @@ import { CardsContentImageComponent } from './components/homepage/cards-containe
 import { CardsContentTextComponent } from './components/homepage/cards-container/cards-content-text/cards-content-text.component';
 import { CardContentDetailComponent } from './components/homepage/cards-container/card-content-detail/card-content-detail.component';
 import { UploadMediaModule } from './components/upload-media/upload-media.module';
-import { AuthModule } from '../app/components/auth/auth-form/auth-form.module';
-import { SharedModule } from '../app/shared/shared.module';
+import { AuthModule } from './components/auth/auth-form/auth-form.module';
+import { SharedModule } from './shared/shared.module';
 import { EffectsModule } from '@ngrx/effects';
-import { AuthEffects } from '../app/components/auth/store/auth.effects';
+import { AuthEffects } from './components/auth/store/auth.effects';
 import { HttpClientModule } from '@angular/common/http';
-import { AlertModule } from '../app/shared/alert/alert.module';
+import { AlertModule } from './shared/alert/alert.module';
+import { SubmitDialogComponent } from './components/profile-edit/submit-dialog/submit-dialog.component';
 
 @NgModule({
     declarations: [
@@ -45,6 +50,7 @@ import { AlertModule } from '../app/shared/alert/alert.module';
         ContentContainerComponent,
         ProfileEditComponent,
         ModalDialogComponent,
+        SubmitDialogComponent,
         RouterContainerComponent,
         CardsContainerComponent,
         UserPageComponent,
@@ -57,8 +63,12 @@ import { AlertModule } from '../app/shared/alert/alert.module';
     imports: [
         BrowserModule,
         AppRoutingModule,
-        EffectsModule.forRoot([AuthEffects]),
+        EffectsModule.forRoot([AuthEffects, ProfileEditEffect]),
         StoreModule.forRoot(fromApp.appReducer),
+        StoreDevtoolsModule.instrument({
+            maxAge: 25,
+            logOnly: environment.production,
+        }),
         ReactiveFormsModule,
         BrowserAnimationsModule,
         MaterialModule,
@@ -75,9 +85,9 @@ import { AlertModule } from '../app/shared/alert/alert.module';
         HttpClientModule,
         AlertModule,
     ],
-    providers: [AngularFirestore, AuthEffects],
+    providers: [AngularFirestore, AuthEffects, ProfileEditService],
     bootstrap: [AppComponent],
-    entryComponents: [ModalDialogComponent],
+    entryComponents: [ModalDialogComponent, SubmitDialogComponent],
     exports: [ContentContainerComponent],
 })
 export class AppModule {}
