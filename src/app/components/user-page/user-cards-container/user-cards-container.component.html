@@ -1,1 +1,37 @@
-<p>user-cards-container works!</p>
+<div class="cards-container__grid">
+    <ng-container *ngFor="let content of media">
+        <ng-container *ngIf="content.contentType === 'image'" #image>
+            <div class="image">
+                <ita-cards-content-image
+                    [title]="content.title"
+                    [url]="content.url"
+                ></ita-cards-content-image>
+            </div>
+        </ng-container>
+        <ng-container #audio *ngIf="content.contentType === 'audio'">
+            <div class="audio">
+                <ita-cards-content-audio
+                    [title]="content.title"
+                    [url]="content.url"
+                ></ita-cards-content-audio>
+            </div>
+        </ng-container>
+        <ng-container #video *ngIf="content.contentType === 'video'">
+            <div class="video">
+                <ita-cards-content-video
+                    [title]="content.title"
+                    [url]="content.url"
+                ></ita-cards-content-video>
+            </div>
+        </ng-container>
+        <ng-container #text *ngIf="content.contentType === 'text'">
+            <div class="text">
+                <ita-cards-content-text
+                    [title]="content.title"
+                    [description]="content.description"
+                >
+                </ita-cards-content-text>
+            </div>
+        </ng-container>
+    </ng-container>
+</div>

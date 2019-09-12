@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Media } from 'src/app/models/content/Media/media.models';
+import { GetDataService } from 'src/app/services/get-data.service';
 
 @Component({
     selector: 'ita-user-cards-container',
@@ -7,7 +8,15 @@ import { Media } from 'src/app/models/content/Media/media.models';
     styleUrls: ['./user-cards-container.component.scss'],
 })
 export class UserCardsContainerComponent implements OnInit {
-    constructor() {}
+    media: Media[] = [];
 
-    ngOnInit() {}
+    constructor(private getDataService: GetDataService) {}
+
+    ngOnInit() {
+        this.renderUserContent();
+    }
+
+    renderUserContent(): void {
+        this.getDataService.renderUserContent(this.media);
+    }
 }
