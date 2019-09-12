@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
     selector: 'ita-cards-content-video',
@@ -9,6 +9,10 @@ import { Component, OnInit } from '@angular/core';
     ],
 })
 export class CardsContentVideoComponent implements OnInit {
+    @Input()
+    title: string;
+    @Input()
+    url: string;
     constructor() {}
 
     ngOnInit() {}

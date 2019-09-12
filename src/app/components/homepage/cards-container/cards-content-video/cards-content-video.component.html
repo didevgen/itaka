@@ -1,21 +1,16 @@
 <mat-card class="card__video">
     <mat-video
+        class="card__video--videoplayer"
         [autoplay]="false"
-        [overlay]="true"
         [preload]="false"
         [fullscreen]="true"
-        [download]="false"
+        [download]="true"
         color="accent"
-        style="text-align: center"
     >
-        <source
-            matVideoSource
-            src="http://techslides.com/demos/sample-videos/small.mp4"
-            type="video/mp4"
-        />
+        <source matVideoSource [src]="url" type="video/mp4" />
     </mat-video>
     <mat-card-title>
-        The title of the video
+        {{ title }}
     </mat-card-title>
     <button mat-icon-button class="more__icon">
         <mat-icon>more_horiz</mat-icon>
