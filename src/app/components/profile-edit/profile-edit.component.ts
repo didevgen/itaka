@@ -55,9 +55,7 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
                          ${info.name}`);
                     }
                 } else if (!info || info.isError) {
-                    this.dialogSubmit(
-                        `UNSUCCESSFUL!`,
-                    );
+                    this.dialogSubmit(`UNSUCCESSFUL!`);
                 }
             });
     }
