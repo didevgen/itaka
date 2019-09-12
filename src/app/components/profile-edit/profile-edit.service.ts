@@ -24,7 +24,6 @@ export class ProfileEditService implements OnInit, OnDestroy {
         private userIdService: GetUserService,
     ) {}
 
-    ngOnInit(): void {}
     ngOnDestroy() {
         this.subscription.unsubscribe();
     }

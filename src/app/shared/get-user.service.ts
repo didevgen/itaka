@@ -3,16 +3,16 @@ import * as fromApp from '../store/app.reducer';
 import { Subscription } from 'rxjs';
 import { Store } from '@ngrx/store';
 
-@Injectable({
+/*@Injectable({
     providedIn: 'root',
-})
+})*/
 export class GetUserService implements OnDestroy {
     private userID: string;
     private subscription: Subscription;
     private isExisting: boolean;
 
     constructor(private store: Store<fromApp.AppState>) {
-      this.isExisting = false;
+        this.isExisting = false;
     }
 
     getUserId(): string {

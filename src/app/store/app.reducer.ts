@@ -1,4 +1,8 @@
-import {ActionReducerMap, createFeatureSelector, createSelector} from '@ngrx/store';
+import {
+    ActionReducerMap,
+    createFeatureSelector,
+    createSelector,
+} from '@ngrx/store';
 
 import * as fromAuth from '../components/auth/store/auth.reducer';
 import * as profEdit from '../components/profile-edit/store/profile-edit.reducer';
@@ -14,4 +18,7 @@ export const appReducer: ActionReducerMap<AppState> = {
 };
 
 export const getAuth = createFeatureSelector<fromAuth.State>('auth');
-export const getUser = createSelector(getAuth, fromAuth.getUser);
+export const getUser = createSelector(
+    getAuth,
+    fromAuth.getUser,
+);

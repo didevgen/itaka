@@ -41,7 +41,7 @@ import { AuthEffects } from './components/auth/store/auth.effects';
 import { HttpClientModule } from '@angular/common/http';
 import { AlertModule } from './shared/alert/alert.module';
 import { SubmitDialogComponent } from './components/profile-edit/submit-dialog/submit-dialog.component';
-import {GetUserService} from './shared/get-user.service';
+import { GetUserService } from './shared/get-user.service';
 
 @NgModule({
     declarations: [
@@ -86,7 +86,7 @@ import {GetUserService} from './shared/get-user.service';
         HttpClientModule,
         AlertModule,
     ],
-    providers: [AngularFirestore, AuthEffects, ProfileEditService],
+    providers: [AngularFirestore, AuthEffects, GetUserService],
     bootstrap: [AppComponent],
     entryComponents: [ModalDialogComponent, SubmitDialogComponent],
     exports: [ContentContainerComponent],

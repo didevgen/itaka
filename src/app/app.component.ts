@@ -14,9 +14,7 @@ import * as EditProfileActions from './components/profile-edit/store/profile-edi
 export class AppComponent implements OnInit, OnDestroy {
     private subscription: Subscription;
 
-    constructor(
-        private store: Store<fromApp.AppState>,
-    ) {}
+    constructor(private store: Store<fromApp.AppState>) {}
 
     ngOnInit(): void {
         this.store.dispatch(new AuthActions.AutoLogin());
@@ -28,9 +26,9 @@ export class AppComponent implements OnInit, OnDestroy {
                 }
                 this.store.dispatch(new EditProfileActions.ProfileEditUpdate());
             });
-        }
+    }
 
-  ngOnDestroy(): void {
-    this.subscription.unsubscribe();
-  }
+    ngOnDestroy(): void {
+        this.subscription.unsubscribe();
+    }
 }
