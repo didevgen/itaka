@@ -190,7 +190,7 @@ export class AuthEffects {
                     this.db
                         .collection('Users')
                         .doc(resData.user.uid)
-                        .set({ email: resData.user.email });
+                        .set({ email: resData.user.email }, {merge: true});
                     return handleAuthentication(
                         3600,
                         resData.user.email,
