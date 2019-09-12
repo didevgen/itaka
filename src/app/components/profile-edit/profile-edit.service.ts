@@ -4,7 +4,7 @@ import { AngularFireStorage } from '@angular/fire/storage';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../store/app.reducer';
-import { Injectable, OnDestroy, OnInit } from '@angular/core';
+import { Injectable, OnDestroy} from '@angular/core';
 import { User } from '../../models/user/User.models';
 import { catchError, map } from 'rxjs/operators';
 import { GetUserService } from '../../shared/get-user.service';
@@ -12,7 +12,7 @@ import { GetUserService } from '../../shared/get-user.service';
 @Injectable({
     providedIn: 'root',
 })
-export class ProfileEditService implements OnInit, OnDestroy {
+export class ProfileEditService implements OnDestroy {
     private subscription: Subscription;
     private data: EditProfile;
     private userID: string;

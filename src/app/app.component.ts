@@ -21,7 +21,7 @@ export class AppComponent implements OnInit, OnDestroy {
         this.subscription = this.store
             .select(fromApp.getUser)
             .subscribe(user => {
-                if (!user && !user.id) {
+                if (!user) {
                     return;
                 }
                 this.store.dispatch(new EditProfileActions.ProfileEditUpdate());
