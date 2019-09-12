@@ -1,3 +1,5 @@
+import { EditProfile } from '../../models/edit-profile/edit-profile.model';
+
 export class User {
     constructor(
         public email: string,
