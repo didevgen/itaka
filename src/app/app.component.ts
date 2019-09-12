@@ -19,13 +19,12 @@ export class AppComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
         this.store.dispatch(new AuthActions.AutoLogin());
-        this.store.select('auth').subscribe(res => {
+        this.subscription = this.store.select('auth').subscribe(res => {
             if (!res.user) {
                 return;
             }
             this.userID = res.user.id;
             if (this.userID) {
-                console.log(this.userID);
                 this.store.dispatch(new EditProfileActions.ProfileEditUpdate());
             }
         });

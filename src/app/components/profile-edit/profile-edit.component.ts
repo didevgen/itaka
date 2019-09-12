@@ -46,7 +46,7 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
             .select('editProfile')
             .pipe(takeUntil(this.destroy$))
             .subscribe(info => {
-                if (info && !info.isError) {
+                if (info && info.name && !info.isError) {
                     this.profileForm.get('userName').setValue(info.name);
                     this.profileForm.get('userSurname').setValue(info.surname);
                     this.url = this.defaultImage;
@@ -56,7 +56,7 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
                     }
                 } else if (!info || info.isError) {
                     this.dialogSubmit(
-                        `UNSUCCESSFUL!\ncheck your connection please`,
+                        `UNSUCCESSFUL!`,
                     );
                 }
             });

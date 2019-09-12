@@ -10,8 +10,8 @@ import { catchError, find, map } from 'rxjs/operators';
 
 export class ProfileEditService implements OnInit, OnDestroy {
     private subscription: Subscription;
-    data: EditProfile;
-    userID: string;
+    private data: EditProfile;
+    private userID: string;
 
     constructor(
         private storage: AngularFireStorage,
