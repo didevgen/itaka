@@ -4,7 +4,7 @@ import { AngularFireStorage } from '@angular/fire/storage';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../store/app.reducer';
-import { Injectable, OnDestroy} from '@angular/core';
+import { Injectable, OnDestroy } from '@angular/core';
 import { User } from '../../models/user/User.models';
 import { catchError, map } from 'rxjs/operators';
 import { GetUserService } from '../../shared/get-user.service';
