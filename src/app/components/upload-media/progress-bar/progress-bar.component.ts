@@ -6,6 +6,7 @@ import {
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { finalize, tap } from 'rxjs/operators';
+import { GetUserIdService } from 'src/app/services/get-user-id.service';
 @Component({
     selector: 'ita-progress-bar',
     templateUrl: './progress-bar.component.html',
@@ -29,6 +30,7 @@ export class ProgressBarComponent implements OnInit {
     constructor(
         private storage: AngularFireStorage,
         private db: AngularFirestore,
+        private getUserIdService: GetUserIdService,
     ) {}
 
     ngOnInit() {
@@ -36,6 +38,7 @@ export class ProgressBarComponent implements OnInit {
     }
 
     startUpload() {
+        const userId = this.getUserIdService.getUserId();
         const path = `media/${Date.now()}_${this.file.name}`;
         const ref = this.storage.ref(path);
         this.task = this.storage.upload(path, this.file);
@@ -46,11 +49,13 @@ export class ProgressBarComponent implements OnInit {
                 this.urlOfUploadedFile = await ref.getDownloadURL().toPromise();
                 this.db.collection('Posts').add({
                     url: this.urlOfUploadedFile,
-                    path,
                     date: new Date(),
                     title: this.title,
                     description: this.description,
                     contentType: this.contentType,
+                    likes: 0,
+                    dislikes: 0,
+                    userId,
                 });
             }),
         );

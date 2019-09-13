@@ -12,13 +12,12 @@
         <mat-card-title *ngIf="!isLoginMode">Registration</mat-card-title>
         <mat-card-title *ngIf="isLoginMode">Login</mat-card-title>
       </mat-card-header>
-      <form #authForm="ngForm" (ngSubmit)="onSubmit(authForm)">
+      <form #authForm="ngForm" autocomplete="false" (ngSubmit)="onSubmit(authForm)">
         <mat-card-content>
           <mat-form-field class="form-group" appearance="outline">
             <mat-label>Email</mat-label>
             <input matInput type="email"
             id="email"
-            class="form-control"
             ngModel
             name="email"
             required
@@ -28,7 +27,6 @@
             <mat-label>Password</mat-label>
             <input matInput type="password"
             id="password"
-            class="form-control"
             ngModel
             name="password"
             required
