@@ -1,11 +1,8 @@
-import { Injectable, OnDestroy } from '@angular/core';
-import * as fromApp from '../store/app.reducer';
-import { Subscription } from 'rxjs';
+import { OnDestroy } from '@angular/core';
 import { Store } from '@ngrx/store';
+import { Subscription, throwError } from 'rxjs';
+import * as fromApp from '../store/app.reducer';
 
-/*@Injectable({
-    providedIn: 'root',
-})*/
 export class GetUserService implements OnDestroy {
     private userID: string;
     private subscription: Subscription;
@@ -20,6 +17,7 @@ export class GetUserService implements OnDestroy {
             .select(fromApp.getUser)
             .subscribe(user => {
                 if (!user) {
+                    console.log(`the user doesn't exist yet`);
                     return;
                 }
                 this.userID = user.id;
@@ -28,7 +26,7 @@ export class GetUserService implements OnDestroy {
         if (this.isExisting) {
             return this.userID;
         } else {
-            return `user doesn't exist!`;
+            throwError(`user doesn't exist!`);
         }
     }
     ngOnDestroy() {
