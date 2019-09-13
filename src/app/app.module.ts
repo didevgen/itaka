@@ -41,6 +41,7 @@ import { AlertModule } from './shared/alert/alert.module';
 import { SubmitDialogComponent } from './components/profile-edit/submit-dialog/submit-dialog.component';
 import { UserPageComponent } from './components/user-page/user-page.component';
 import { UserCardsContainerComponent } from './components/user-page/user-cards-container/user-cards-container.component';
+import { GetUserService } from './shared/get-user.service';
 
 @NgModule({
     declarations: [
@@ -85,7 +86,7 @@ import { UserCardsContainerComponent } from './components/user-page/user-cards-c
         HttpClientModule,
         AlertModule,
     ],
-    providers: [AngularFirestore, AuthEffects, ProfileEditService],
+    providers: [AngularFirestore, AuthEffects, GetUserService],
     bootstrap: [AppComponent],
     entryComponents: [ModalDialogComponent, SubmitDialogComponent],
     exports: [

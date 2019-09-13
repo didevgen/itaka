@@ -56,3 +56,5 @@ export function authReducer(state = initialState, action: AuthActions) {
             return state;
     }
 }
+
+export const getUser = (state: State) => state.user;

@@ -4,11 +4,15 @@ import { AngularFireStorage } from '@angular/fire/storage';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../store/app.reducer';
-import { OnDestroy, OnInit } from '@angular/core';
+import { Injectable, OnDestroy } from '@angular/core';
 import { User } from '../../models/user/User.models';
-import { catchError, find, map } from 'rxjs/operators';
+import { catchError, map } from 'rxjs/operators';
+import { GetUserService } from '../../shared/get-user.service';
 
-export class ProfileEditService implements OnInit, OnDestroy {
+@Injectable({
+    providedIn: 'root',
+})
+export class ProfileEditService implements OnDestroy {
     private subscription: Subscription;
     private data: EditProfile;
     private userID: string;
@@ -17,55 +21,45 @@ export class ProfileEditService implements OnInit, OnDestroy {
         private storage: AngularFireStorage,
         private db: AngularFirestore,
         private store: Store<AppState>,
+        private userIdService: GetUserService,
     ) {}
 
-    ngOnInit(): void {}
     ngOnDestroy() {
         this.subscription.unsubscribe();
     }
 
     saveData(payload: EditProfile): Observable<EditProfile> {
-        if (!this.userID) {
-            this.subscription = this.store.select('auth').subscribe(res => {
-                if (!res.user) {
-                    return;
-                }
-                this.userID = res.user.id;
+        if (this.userIdService.getUserId()) {
+            this.userID = this.userIdService.getUserId();
+            this.data = payload;
+            const document = this.db.doc('Users/' + this.userID);
+            document.set({ ...this.data }, { merge: true }).catch(err => {
+                console.log('error from database while saving: ', err);
             });
-        }
-        this.data = payload;
-        const document = this.db.doc('Users/' + this.userID);
-        document.set({ ...this.data }, { merge: true }).catch(err => {
-            console.log('error from database while saving: ', err);
-        });
 
-        return this.db
-            .collection<User>('Users')
-            .valueChanges()
-            .pipe(
-                find(val => val === val[this.userID]),
-                map(d => (d as unknown) as EditProfile),
-                catchError(err => of(err)),
-            );
+            return this.db
+                .collection<User>('Users')
+                .doc(this.userID)
+                .valueChanges()
+                .pipe(
+                    map(val => val as EditProfile),
+                    catchError(err => of(err)),
+                );
+        }
     }
 
     loadData(): Observable<EditProfile> {
-        if (!this.userID) {
-            this.subscription = this.store.select('auth').subscribe(res => {
-                if (!res.user) {
-                    return;
-                }
-                this.userID = res.user.id;
-            });
-        }
+        if (this.userIdService.getUserId()) {
+            this.userID = this.userIdService.getUserId();
 
-        return this.db
-            .collection<User>('Users')
-            .doc(this.userID)
-            .valueChanges()
-            .pipe(
-                map(val => val as EditProfile),
-                catchError(err => of(err)),
-            );
+            return this.db
+                .collection<User>('Users')
+                .doc(this.userID)
+                .valueChanges()
+                .pipe(
+                    map(val => val as EditProfile),
+                    catchError(err => of(err)),
+                );
+        }
     }
 }

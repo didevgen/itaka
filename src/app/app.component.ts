@@ -1,10 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
+import { Subscription } from 'rxjs';
 
 import * as fromApp from './store/app.reducer';
 import * as AuthActions from '../app/components/auth/store/auth.actions';
 import * as EditProfileActions from './components/profile-edit/store/profile-edit.actions';
-import { Subscription } from 'rxjs';
 
 @Component({
     selector: 'ita-root',
@@ -12,24 +12,23 @@ import { Subscription } from 'rxjs';
     styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit, OnDestroy {
-    private userID: string;
     private subscription: Subscription;
 
     constructor(private store: Store<fromApp.AppState>) {}
 
-    ngOnInit() {
+    ngOnInit(): void {
         this.store.dispatch(new AuthActions.AutoLogin());
-        this.subscription = this.store.select('auth').subscribe(res => {
-            if (!res.user) {
-                return;
-            }
-            this.userID = res.user.id;
-            if (this.userID) {
+        this.subscription = this.store
+            .select(fromApp.getUser)
+            .subscribe(user => {
+                if (!user) {
+                    return;
+                }
                 this.store.dispatch(new EditProfileActions.ProfileEditUpdate());
-            }
-        });
+            });
     }
-    ngOnDestroy() {
+
+    ngOnDestroy(): void {
         this.subscription.unsubscribe();
     }
 }
