@@ -17,7 +17,7 @@ export class CardContentDetailComponent implements OnInit, OnDestroy {
     constructor() {}
 
     ngOnInit(): void {
-      this.myForm = new FormData();
+        this.myForm = new FormData();
     }
     ngOnDestroy() {}
 
@@ -25,7 +25,7 @@ export class CardContentDetailComponent implements OnInit, OnDestroy {
         this.isOpenComment = !this.isOpenComment;
     }
     addDate() {
-      this.date = new Date().toLocaleString('ru', {
+        this.date = new Date().toLocaleString('ru', {
             year: 'numeric',
             month: 'short',
             day: 'numeric',
