@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { GetDataService } from '../../../services/get-data.service';
 import { Media } from '../../../models/content/Media/media.models';
 
@@ -8,15 +8,7 @@ import { Media } from '../../../models/content/Media/media.models';
     styleUrls: ['./cards-container.component.scss'],
 })
 export class CardsContainerComponent implements OnInit {
-    media: Media[] = [];
-
-    constructor(private getDataService: GetDataService) {}
-
-    ngOnInit() {
-        this.render();
-    }
-
-    render(): void {
-        this.getDataService.render(this.media);
-    }
+    @Input() media: Media[];
+    constructor() {}
+    ngOnInit() {}
 }

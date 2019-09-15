@@ -22,7 +22,7 @@
         matTooltipPosition="right"
         class="add_circle_outline"
     >
-        <mat-icon class="sidebar__button sidebar__button--base"
+        <mat-icon class="sidebar__button sidebar__button--base" (click)="filterByContent('audio')"
             >library_music</mat-icon
         >
     </button>
@@ -35,7 +35,7 @@
         matTooltipPosition="right"
         class="add_circle_outline"
     >
-        <mat-icon class="sidebar__button sidebar__button--base"
+        <mat-icon class="sidebar__button sidebar__button--base" (click)="filterByContent('video')"
             >video_library</mat-icon
         >
     </button>
@@ -48,7 +48,7 @@
         matTooltipPosition="right"
         class="add_circle_outline"
     >
-        <mat-icon class="sidebar__button sidebar__button--base"
+        <mat-icon class="sidebar__button sidebar__button--base" (click)="filterByContent('image')"
             >collections</mat-icon
         >
     </button>
@@ -61,7 +61,7 @@
         matTooltipPosition="right"
         class="add_circle_outline"
     >
-        <mat-icon class="sidebar__button sidebar__button--base"
+        <mat-icon class="sidebar__button sidebar__button--base" (click)="filterByContent('text')"
             >text_fields</mat-icon
         >
     </button>
@@ -96,3 +96,4 @@
         </button>
     </mat-menu>
 </aside>
+<ita-cards-container [media]="filteredMedia"></ita-cards-container>
