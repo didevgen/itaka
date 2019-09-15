@@ -12,16 +12,27 @@ export class CardContentDetailComponent implements OnInit, OnDestroy {
     type: string;
     isOpenComment = false;
     date: string;
+    myForm: FormData;
 
     constructor() {}
 
-    ngOnInit(): void {}
+    ngOnInit(): void {
+      this.myForm = new FormData();
+    }
     ngOnDestroy() {}
 
     toggleComment() {
         this.isOpenComment = !this.isOpenComment;
     }
-    addDate(timeElem) {
-        timeElem.dateTime = new Date().toString();
+    addDate() {
+      this.date = new Date().toLocaleString('ru', {
+            year: 'numeric',
+            month: 'short',
+            day: 'numeric',
+            weekday: 'short',
+            hour: 'numeric',
+            minute: 'numeric',
+            second: 'numeric',
+        });
     }
 }
