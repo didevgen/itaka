@@ -9,7 +9,7 @@ import { UserPageComponent } from './components/user-page/user-page.component';
 import { TextEditorComponent } from './components/editors/text-editor/text-editor.component';
 import { DragAndDropComponent } from './components/upload-media/drag-and-drop/drag-and-drop.component';
 import { AuthFormComponent } from './components/auth/auth-form/auth-form.component';
-import {CardContentDetailComponent} from './components/homepage/cards-container/card-content-detail/card-content-detail.component';
+import { CardContentDetailComponent } from './components/homepage/cards-container/card-content-detail/card-content-detail.component';
 
 const routes: Routes = [
     { path: '', component: ContentContainerComponent },
