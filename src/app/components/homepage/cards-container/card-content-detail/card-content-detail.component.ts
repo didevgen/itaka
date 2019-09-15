@@ -10,9 +10,18 @@ export class CardContentDetailComponent implements OnInit, OnDestroy {
     description: string;
     url: string;
     type: string;
+    isOpenComment = false;
+    date: string;
 
     constructor() {}
 
     ngOnInit(): void {}
     ngOnDestroy() {}
+
+    toggleComment() {
+        this.isOpenComment = !this.isOpenComment;
+    }
+    addDate(timeElem) {
+        timeElem.dateTime = new Date().toString();
+    }
 }

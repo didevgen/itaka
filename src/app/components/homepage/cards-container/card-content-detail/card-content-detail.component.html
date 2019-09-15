@@ -66,6 +66,17 @@
                 <mat-icon>thumb_down_alt</mat-icon>
             </button>
             <button
+                (click)="toggleComment()"
+                mat-icon-button
+                color="base"
+                matTooltip="Comments"
+                matTooltipPosition="above"
+            >
+                <mat-icon [color]="isOpenComment ? 'accent' : 'base'"
+                    >comment</mat-icon
+                >
+            </button>
+            <button
                 mat-icon-button
                 color="base"
                 matTooltip="Share"
@@ -73,6 +84,32 @@
             >
                 <mat-icon>send</mat-icon>
             </button>
+        </mat-card-actions>
+    </mat-card>
+
+    <mat-card  *ngIf="isOpenComment">
+        <mat-card-header>
+            <img
+                mat-card-avatar
+                src="https://material.angular.io/assets/img/examples/shiba2.jpg"
+                alt="Photo of a Shiba Inu"
+            />
+            <mat-card-title>Shiba Inu</mat-card-title
+            ><mat-card-subtitle>Author</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content class="comment-card">
+            <p>
+                The Shiba Inu is the smallest of the six original and distinct
+                spitz breeds of dog from Japan. A small, agile dog that copes
+                very well with mountainous terrain, the Shiba Inu was originally
+                bred for hunting.
+            </p>
+          <hr>
+          <p>Was added: <time #time >{{ time.dateTime }}</time></p>
+        </mat-card-content>
+        <mat-card-actions class="comment-card">
+            <button mat-button (click)="addDate(time)">Send</button>
+            <button mat-button>Cancel</button>
         </mat-card-actions>
     </mat-card>
 </div>

@@ -1,9 +1,9 @@
 <mat-card class="card__image">
-    <img mat-card-image [src]="url" alt="Photo of a Shiba Inu" />
-    <mat-card-title>
-        {{ title }}
-    </mat-card-title>
-    <button mat-icon-button class="more__icon">
-        <mat-icon>more_horiz</mat-icon>
-    </button>
+  <img mat-card-image [src]="url" alt="Photo of a Shiba Inu" />
+  <mat-card-title>
+    {{ title }}
+  </mat-card-title>
+  <button mat-icon-button class="more__icon" [routerLink]="['/cardDetail']">
+    <mat-icon>more_horiz</mat-icon>
+  </button>
 </mat-card>
