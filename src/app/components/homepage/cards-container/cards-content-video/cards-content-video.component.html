@@ -12,7 +12,21 @@
     <mat-card-title>
         {{ title }}
     </mat-card-title>
-    <button mat-icon-button class="more__icon">
-        <mat-icon>more_horiz</mat-icon>
-    </button>
+    <div class="card__video--icons">
+        <div>
+            <button mat-icon-button>
+                <mat-icon>thumb_up_alt</mat-icon>
+            </button>
+            <span>0</span>
+            <button mat-icon-button>
+                <mat-icon>thumb_down_alt</mat-icon>
+            </button>
+            <span>0</span>
+        </div>
+        <div>
+            <button mat-icon-button>
+                <mat-icon>send</mat-icon>
+            </button>
+        </div>
+    </div>
 </mat-card>

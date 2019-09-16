@@ -12,9 +12,14 @@
     transform: scale(2);
     margin-bottom: 1vh;
 }
-.more__icon {
-    align-self: flex-end;
-}
 .card__audio--palyer {
     outline: none;
+}
+.card__audio--icons {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+.mat-icon-button:hover {
+    color: #ff4081;
 }
