@@ -13,7 +13,7 @@ export class CardsContainerComponent implements OnInit {
 
     ngOnInit() {
         this.getDataService.currentMedia.subscribe(
-            message => (this.media = message),
+            content => (this.media = content),
         );
     }
 }
