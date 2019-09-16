@@ -25,12 +25,12 @@ export class TextEditorComponent implements OnInit, OnDestroy {
             description: new FormControl(),
         });
     }
-    private checkTitle(data): void {
+    public checkTitle(data): void {
         const { value } = data.target;
         !value ? (this.disableTitle = true) : (this.disableTitle = false);
         this.disableSendButton();
     }
-    private checkDescription({ editor }): void {
+    public checkDescription({ editor }): void {
         const data = editor.getData();
         data.length <= 400 || data.length >= 700
             ? (this.disableDescription = true)
