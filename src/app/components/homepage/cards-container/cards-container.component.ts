@@ -8,7 +8,12 @@ import { Media } from '../../../models/content/Media/media.models';
     styleUrls: ['./cards-container.component.scss'],
 })
 export class CardsContainerComponent implements OnInit {
-    @Input() media: Media[];
-    constructor() {}
-    ngOnInit() {}
+    media: Media[];
+    constructor(private getDataService: GetDataService) {}
+
+    ngOnInit() {
+        this.getDataService.currentMedia.subscribe(
+            message => (this.media = message),
+        );
+    }
 }

@@ -36,5 +36,6 @@ export class SidebarComponent implements OnInit {
                 this.filteredMedia.push(this.media[index]);
             }
         });
+        this.getDataService.filterMedia(this.filteredMedia);
     }
 }
