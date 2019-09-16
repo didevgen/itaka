@@ -8,20 +8,22 @@
                     type="text"
                     [(ngModel)]="title"
                     required
+                    (change)="write($event)"
                 />
             </mat-form-field>
+
             <ckeditor
                 [editor]="Editor"
                 [config]="config"
-                description=""
                 [(ngModel)]="description"
+                (change)="onChange($event)"
             ></ckeditor>
             <button
                 class="text-editor__button"
                 mat-raised-button
                 color="accent"
                 type="submit"
-                disabled="disabled"
+                [disabled]="disabled"
                 (click)="
                     startUpload({
                         title: title,
