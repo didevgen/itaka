@@ -75,18 +75,16 @@ export class ModalDialogComponent {
         console.log(ref);
         this.task = this.storage.upload(path, this.file);
         // console.log(this.task.snapshotChanges().subscribe());
-        this.snapshot = this.task
-            .snapshotChanges()
-            .subscribe( async () => {
-                console.log(typeof this.croppedImage);
-                this.croppedImage = await ref.getDownloadURL().toPromise();
-                this.deletePreviousPath = path;
-                console.log(this.croppedImage);
-                this.isDisabled = false;
-                return this.profileEditService.setUrl(
-                    this.croppedImage,
-                    this.deletePreviousPath,
-                );
-            });
+        this.snapshot = this.task.snapshotChanges().subscribe(async () => {
+            console.log(typeof this.croppedImage);
+            this.croppedImage = await ref.getDownloadURL().toPromise();
+            this.deletePreviousPath = path;
+            console.log(this.croppedImage);
+            this.isDisabled = false;
+            return this.profileEditService.setUrl(
+                this.croppedImage,
+                this.deletePreviousPath,
+            );
+        });
     }
 }

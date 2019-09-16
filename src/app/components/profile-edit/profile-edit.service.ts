@@ -101,7 +101,7 @@ export class ProfileEditService implements OnDestroy {
                     // File deleted successfully
                     console.log('del OK');
                 })
-                .catch((error) => {
+                .catch(error => {
                     // Uh-oh, an error occurred!
                 });
             this.deletePath = this.deletePreviousPath;
