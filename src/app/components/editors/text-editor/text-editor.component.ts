@@ -16,8 +16,8 @@ export class TextEditorComponent implements OnInit, OnDestroy {
     public config = Config;
     public uploadTextContentForm: FormGroup;
     public disabled: boolean;
-    private disableTitle: boolean = true;
-    private disableDescription: boolean = true;
+    private disableTitle = true;
+    private disableDescription = true;
     constructor(
         private db: AngularFirestore,
         private getUserIdService: GetUserIdService,
