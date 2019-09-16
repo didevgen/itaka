@@ -3,10 +3,9 @@ import {
     AngularFireStorage,
     AngularFireUploadTask,
 } from '@angular/fire/storage';
-import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
-import { finalize, tap } from 'rxjs/operators';
-import { GetUserService } from 'src/app/services/get-user.service';
+import { finalize } from 'rxjs/operators';
+import { UploadDataService } from 'src/app/services/upload-data.service';
 @Component({
     selector: 'ita-progress-bar',
     templateUrl: './progress-bar.component.html',
@@ -14,13 +13,13 @@ import { GetUserService } from 'src/app/services/get-user.service';
 })
 export class ProgressBarComponent implements OnInit {
     @Input()
-    file: File;
+    private file: File;
     @Input()
-    title: string;
+    private title: string;
     @Input()
-    description: string;
+    private description: string;
     @Input()
-    contentType: string;
+    private contentType: string;
 
     task: AngularFireUploadTask;
     percentage: Observable<number>;
@@ -29,8 +28,7 @@ export class ProgressBarComponent implements OnInit {
 
     constructor(
         private storage: AngularFireStorage,
-        private db: AngularFirestore,
-        private getUserService: GetUserService,
+        private uploadDataService: UploadDataService,
     ) {}
 
     ngOnInit() {
@@ -38,25 +36,19 @@ export class ProgressBarComponent implements OnInit {
     }
 
     startUpload() {
-        const userId = this.getUserService.getUserId();
         const path = `media/${Date.now()}_${this.file.name}`;
         const ref = this.storage.ref(path);
         this.task = this.storage.upload(path, this.file);
         this.percentage = this.task.percentageChanges();
         this.snapshot = this.task.snapshotChanges().pipe(
-            tap(console.log),
             finalize(async () => {
                 this.urlOfUploadedFile = await ref.getDownloadURL().toPromise();
-                this.db.collection('Posts').add({
-                    url: this.urlOfUploadedFile,
-                    date: new Date(),
-                    title: this.title,
-                    description: this.description,
-                    contentType: this.contentType,
-                    likes: 0,
-                    dislikes: 0,
-                    userId,
-                });
+                this.uploadDataService.uploadMediaData(
+                    this.title,
+                    this.description,
+                    this.contentType,
+                    this.urlOfUploadedFile,
+                );
             }),
         );
     }
