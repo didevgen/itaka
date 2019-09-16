@@ -66,15 +66,12 @@
                 <mat-icon>thumb_down_alt</mat-icon>
             </button>
             <button
-                (click)="toggleComment()"
                 mat-icon-button
                 color="base"
                 matTooltip="Comments"
                 matTooltipPosition="above"
             >
-                <mat-icon [color]="isOpenComment ? 'accent' : 'base'"
-                    >comment</mat-icon
-                >
+                <mat-icon>comment</mat-icon>
             </button>
             <button
                 mat-icon-button
@@ -87,45 +84,58 @@
         </mat-card-actions>
     </mat-card>
 
-    <mat-card *ngIf="isOpenComment">
-        <mat-card-header>
-            <img
-                mat-card-avatar
-                src="https://material.angular.io/assets/img/examples/shiba2.jpg"
-                alt="Photo of a Shiba Inu"
-            />
-            <mat-card-title>Shiba Inu</mat-card-title
-            ><mat-card-subtitle>Author</mat-card-subtitle>
-        </mat-card-header>
-        <mat-card-content class="comment-card">
-
-                <mat-form-field class="example-full-width">
-                    <input
-                        matInput
-                        #message
-                        maxlength="256"
-                        placeholder="Message"
+    <section class="comment-container">
+        <div id="idFromDB" #singleComment>
+            <mat-card >
+                <mat-card-header>
+                    <img
+                        mat-card-avatar
+                        src="https://material.angular.io/assets/img/examples/shiba2.jpg"
+                        alt="Photo of a Shiba Inu"
                     />
-                    <mat-hint align="start"
-                        ><strong>everybody can see this text</strong>
-                    </mat-hint>
-                    <mat-hint align="end"
-                        >{{ message.value.length }} / 256</mat-hint
+                    <mat-card-title>Shiba Inu</mat-card-title
+                    ><mat-card-subtitle>Author</mat-card-subtitle>
+                </mat-card-header>
+                <mat-card-content class="comment-container_content-card">
+                    <ng-container *ngIf="!isComment; else p">
+                        <mat-form-field
+                            class="comment-container_content-card__size"
+                            color="accent"
+                        >
+                            <textarea
+                                matInput
+                                #message
+                                maxlength="400"
+                                placeholder="Your message"
+                                [formControl]="commentFC"
+                            ></textarea>
+                            <mat-hint align="start"
+                                ><strong>everybody can see this text</strong>
+                            </mat-hint>
+                            <mat-hint align="end"
+                                >{{ message.value.length }} / 400</mat-hint
+                            >
+                        </mat-form-field>
+                    </ng-container>
+                    <ng-template #p>
+                        <p>{{ comment }}</p>
+                        <hr />
+                    </ng-template>
+                    <time datetime="date">{{ date }}</time>
+                </mat-card-content>
+                <mat-card-actions class="comment-card">
+                    <button
+                        mat-button
+                        (click)="onSend()"
+                        [disabled]="isComment || !commentFC.valid"
                     >
-                </mat-form-field>
-
-            <p>
-                The Shiba Inu is the smallest of the six original and distinct
-                spitz breeds of dog from Japan. A small, agile dog that copes
-                very well with mountainous terrain, the Shiba Inu was originally
-                bred for hunting.
-            </p>
-            <hr />
-            <time datetime="date">{{ date }}</time>
-        </mat-card-content>
-        <mat-card-actions class="comment-card">
-            <button mat-button (click)="addDate()">Send</button>
-            <button mat-button>Cancel</button>
-        </mat-card-actions>
-    </mat-card>
+                        Send
+                    </button>
+                    <button mat-button (click)="onCancel(singleComment)">
+                        Cancel
+                    </button>
+                </mat-card-actions>
+            </mat-card>
+        </div>
+    </section>
 </div>

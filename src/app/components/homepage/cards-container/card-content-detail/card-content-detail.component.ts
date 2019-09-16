@@ -1,4 +1,5 @@
-import { Component, OnInit, OnDestroy, Output } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { FormControl, Validators } from '@angular/forms';
 
 @Component({
     selector: 'ita-card-content-detail',
@@ -10,21 +11,24 @@ export class CardContentDetailComponent implements OnInit, OnDestroy {
     description: string;
     url: string;
     type: string;
-    isOpenComment = false;
+
+    isComment = false;
+    commentFC: FormControl;
+    comment: string;
     date: string;
-    myForm: FormData;
 
     constructor() {}
 
     ngOnInit(): void {
-        this.myForm = new FormData();
+        this.commentFC = new FormControl('', [
+            Validators.required,
+            Validators.minLength(1),
+            Validators.maxLength(400),
+        ]);
     }
     ngOnDestroy() {}
 
-    toggleComment() {
-        this.isOpenComment = !this.isOpenComment;
-    }
-    addDate() {
+    onSend() {
         this.date = new Date().toLocaleString('ru', {
             year: 'numeric',
             month: 'short',
@@ -34,5 +38,10 @@ export class CardContentDetailComponent implements OnInit, OnDestroy {
             minute: 'numeric',
             second: 'numeric',
         });
+        this.isComment = true;
+        this.comment = this.commentFC.value;
+    }
+    onCancel(singleComment) {
+        singleComment.innerHTML = '';
     }
 }

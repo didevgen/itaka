@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewEncapsulation} from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
 
@@ -10,6 +10,7 @@ import * as EditProfileActions from './components/profile-edit/store/profile-edi
     selector: 'ita-root',
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.scss'],
+    // encapsulation: ViewEncapsulation.ShadowDom,
 })
 export class AppComponent implements OnInit, OnDestroy {
     private subscription: Subscription;
