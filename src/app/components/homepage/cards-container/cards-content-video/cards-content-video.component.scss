@@ -3,9 +3,6 @@
     flex-direction: column;
     align-items: center;
 }
-.more__icon {
-    align-self: flex-end;
-}
 .mat-card-title {
     font-size: 18px;
     text-transform: uppercase;
@@ -14,4 +11,12 @@
 .card__video--videoplayer {
     width: auto;
     height: 160px;
+}
+.card__video--icons {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+.mat-icon-button:hover {
+    color: #ff4081;
 }
