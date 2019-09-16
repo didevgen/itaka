@@ -1,7 +1,7 @@
-<mat-card class="card__photo">
-    <img mat-card-image src="https://is.gd/pcNA7b" alt="Photo of a Shiba Inu" />
+<mat-card class="card__image">
+    <img mat-card-image [src]="url" alt="Photo of {{ title }}" />
     <mat-card-title>
-        The title of the photo
+        {{ title }}
     </mat-card-title>
     <button mat-icon-button class="more__icon">
         <mat-icon>more_horiz</mat-icon>

@@ -3,9 +3,9 @@ import {
     AngularFireStorage,
     AngularFireUploadTask,
 } from '@angular/fire/storage';
-import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
-import { finalize, tap } from 'rxjs/operators';
+import { finalize } from 'rxjs/operators';
+import { UploadDataService } from 'src/app/services/upload-data.service';
 @Component({
     selector: 'ita-progress-bar',
     templateUrl: './progress-bar.component.html',
@@ -13,13 +13,13 @@ import { finalize, tap } from 'rxjs/operators';
 })
 export class ProgressBarComponent implements OnInit {
     @Input()
-    file: File;
+    private file: File;
     @Input()
-    title: string;
+    private title: string;
     @Input()
-    description: string;
+    private description: string;
     @Input()
-    contentType: string;
+    private contentType: string;
 
     task: AngularFireUploadTask;
     percentage: Observable<number>;
@@ -28,7 +28,7 @@ export class ProgressBarComponent implements OnInit {
 
     constructor(
         private storage: AngularFireStorage,
-        private db: AngularFirestore,
+        private uploadDataService: UploadDataService,
     ) {}
 
     ngOnInit() {
@@ -41,17 +41,14 @@ export class ProgressBarComponent implements OnInit {
         this.task = this.storage.upload(path, this.file);
         this.percentage = this.task.percentageChanges();
         this.snapshot = this.task.snapshotChanges().pipe(
-            tap(console.log),
             finalize(async () => {
                 this.urlOfUploadedFile = await ref.getDownloadURL().toPromise();
-                this.db.collection('Posts').add({
-                    url: this.urlOfUploadedFile,
-                    path,
-                    date: new Date(),
-                    title: this.title,
-                    description: this.description,
-                    contentType: this.contentType,
-                });
+                this.uploadDataService.uploadMediaData(
+                    this.title,
+                    this.description,
+                    this.contentType,
+                    this.urlOfUploadedFile,
+                );
             }),
         );
     }
