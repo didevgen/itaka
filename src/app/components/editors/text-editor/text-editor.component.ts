@@ -28,6 +28,8 @@ export class TextEditorComponent implements OnInit {
             description,
             contentType: 'text',
             userId,
+            likes: 0,
+            dislikes: 0,
         });
     }
 }
