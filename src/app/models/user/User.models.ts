@@ -1,6 +1,5 @@
-import { EditProfile } from '../edit-profile/edit-profile.model';
-
-export interface User extends EditProfile {
+// it isn't used anywhere
+export interface User {
     email: string;
     postID: string[];
 }

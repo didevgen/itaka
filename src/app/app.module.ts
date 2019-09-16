@@ -22,7 +22,6 @@ import { NotFoundModule } from './components/not-found/not-found.module';
 import { ImageCropperModule } from 'ngx-image-cropper';
 import { ModalDialogComponent } from './components/profile-edit/modal-dialog/modal-dialog.component';
 import { ProfileEditEffect } from './components/profile-edit/store/profile-edit.effects';
-import { ProfileEditService } from './components/profile-edit/profile-edit.service';
 import { ProfileEditComponent } from './components/profile-edit/profile-edit.component';
 import { RouterContainerComponent } from './components/router-container/router-container.component';
 import { TextEditorModule } from './components/editors/text-editor/text-editor.module';
@@ -41,6 +40,7 @@ import { AlertModule } from './shared/alert/alert.module';
 import { SubmitDialogComponent } from './components/profile-edit/submit-dialog/submit-dialog.component';
 import { UserPageComponent } from './components/user-page/user-page.component';
 import { UserCardsContainerComponent } from './components/user-page/user-cards-container/user-cards-container.component';
+import { GetUserService } from './services/get-user.service';
 
 @NgModule({
     declarations: [
@@ -85,7 +85,7 @@ import { UserCardsContainerComponent } from './components/user-page/user-cards-c
         HttpClientModule,
         AlertModule,
     ],
-    providers: [AngularFirestore, AuthEffects, ProfileEditService],
+    providers: [AngularFirestore, AuthEffects, GetUserService],
     bootstrap: [AppComponent],
     entryComponents: [ModalDialogComponent, SubmitDialogComponent],
     exports: [
