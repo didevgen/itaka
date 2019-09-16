@@ -2,7 +2,8 @@ import { Component, OnInit, Input } from '@angular/core';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { Config } from './texteditor.config';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { GetUserIdService } from 'src/app/services/get-user-id.service';
+import { GetUserService } from 'src/app/services/get-user.service';
+import { UploadDataService } from 'src/app/services/upload-data.service';
 @Component({
     selector: 'ita-text-editor',
     templateUrl: './text-editor.component.html',
@@ -13,21 +14,12 @@ export class TextEditorComponent implements OnInit {
     public config = Config;
     public title: string;
     public description: string;
-    constructor(
-        private db: AngularFirestore,
-        private getUserIdService: GetUserIdService,
-    ) {}
+
+    constructor(private uploadDataService: UploadDataService) {}
     ngOnInit(): void {}
 
     public startUpload(textContent) {
         const { title, description } = textContent;
-        const userId = this.getUserIdService.getUserId();
-        this.db.collection('Posts').add({
-            date: new Date(),
-            title,
-            description,
-            contentType: 'text',
-            userId,
-        });
+        this.uploadDataService.uploadTextData(title, description);
     }
 }

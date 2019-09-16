@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from 'angularfire2/firestore';
-import { GetUserIdService } from './get-user-id.service';
+import { GetUserService } from './get-user.service';
 import { BehaviorSubject } from 'rxjs';
 import { Media } from '../models/content/Media/media.models';
 
@@ -13,7 +13,7 @@ export class GetDataService {
 
     constructor(
         private db: AngularFirestore,
-        private getUserIdService: GetUserIdService,
+        private getUserService: GetUserService,
     ) {}
     render(media): void {
         this.db
@@ -29,7 +29,7 @@ export class GetDataService {
     }
 
     renderUserContent(userMedia): void {
-        const userId = this.getUserIdService.getUserId();
+        const userId = this.getUserService.getUserId();
         this.db
             .collection('Posts')
             .get()
