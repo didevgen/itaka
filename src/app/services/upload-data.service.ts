@@ -4,11 +4,10 @@ import {
     AngularFireUploadTask,
 } from '@angular/fire/storage';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { Observable } from 'rxjs';
+import { Observable, from } from 'rxjs';
 import { finalize, tap } from 'rxjs/operators';
 import { GetUserService } from './get-user.service';
-import { Router } from '@angular/router';
-import { MatSnackBar } from '@angular/material/snack-bar';
+
 @Injectable({
     providedIn: 'root',
 })
@@ -16,8 +15,6 @@ export class UploadDataService {
     constructor(
         private db: AngularFirestore,
         private getUserService: GetUserService,
-        private router: Router,
-        private snackBar: MatSnackBar,
     ) {}
 
     uploadMediaData(
@@ -41,31 +38,17 @@ export class UploadDataService {
 
     uploadTextData(title: string, description: string) {
         const userId = this.getUserService.getUserId();
-        this.db
-            .collection('Posts')
-            .add({
-                date: new Date(),
-                title,
-                description,
-                contentType: 'text',
-                likes: 0,
-                dislikes: 0,
-                userId,
-            })
-            .then(() => {
-                this.openSnackBar('Text added');
-                setTimeout(() => {
-                    this.redirect();
-                }, 2000);
-            })
-            .catch(err => this.openSnackBar(err));
-    }
-    private redirect(): Promise<boolean> {
-        return this.router.navigate(['userPage']);
-    }
-    private openSnackBar(message: string): void {
-        this.snackBar.open(message, 'Close', {
-            duration: 1500,
+        const sendTextPromise = this.db.collection('Posts').add({
+            date: new Date(),
+            title,
+            description,
+            contentType: 'text',
+            likes: 0,
+            dislikes: 0,
+            userId,
         });
+        let addText = from(sendTextPromise);
+
+        return addText;
     }
 }

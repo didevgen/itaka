@@ -1,10 +1,12 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-
+import { catchError } from 'rxjs/operators';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { Config } from './texteditor.config';
 import { FormGroup, FormControl } from '@angular/forms';
-
+import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { UploadDataService } from 'src/app/services/upload-data.service';
+
 @Component({
     selector: 'ita-text-editor',
     templateUrl: './text-editor.component.html',
@@ -12,12 +14,16 @@ import { UploadDataService } from 'src/app/services/upload-data.service';
 })
 export class TextEditorComponent implements OnInit, OnDestroy {
     public Editor = ClassicEditor;
-    public config = Config;
+    public config: object = Config;
     public uploadTextContentForm: FormGroup;
     public disabled: boolean;
-    private disableTitle = true;
-    private disableDescription = true;
-    constructor(private uploadDataService: UploadDataService) {}
+    private disableTitle: boolean = true;
+    private disableDescription: boolean = true;
+    constructor(
+        private uploadDataService: UploadDataService,
+        private router: Router,
+        private snackBar: MatSnackBar,
+    ) {}
     ngOnInit(): void {
         this.disabled = true;
         this.uploadTextContentForm = new FormGroup({
@@ -42,10 +48,29 @@ export class TextEditorComponent implements OnInit, OnDestroy {
             ? (this.disabled = true)
             : (this.disabled = false);
     }
-
+    private redirect(): Promise<boolean> {
+        return this.router.navigate(['userPage']);
+    }
+    private openSnackBar(message: string): void {
+        this.snackBar.open(message, 'Close', {
+            duration: 1500,
+        });
+    }
     public startUpload(data): void {
-        this.uploadDataService.uploadTextData(data.title, data.description);
         this.disabled = true;
+        this.uploadDataService
+            .uploadTextData(data.title, data.description)
+            .subscribe(
+                response => {},
+                error => this.openSnackBar(error),
+                () => {
+                    this.openSnackBar('Text added');
+                    setTimeout(() => {
+                        this.redirect();
+                    }, 1500);
+                },
+            )
+            .unsubscribe();
     }
 
     ngOnDestroy(): void {
