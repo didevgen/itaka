@@ -11,6 +11,7 @@ import { Media } from '../../../models/content/Media/media.models';
 export class SidebarComponent implements OnInit {
     media: Media[] = [];
     filteredMedia = this.media;
+    activeType: string;
 
     constructor(
         public router: Router,
@@ -30,12 +31,14 @@ export class SidebarComponent implements OnInit {
     }
 
     filterByContent(type) {
+        this.activeType = type;
         this.filteredMedia = [];
-        this.media.map((content, index) => {
-            if (content.contentType === type) {
-                this.filteredMedia.push(this.media[index]);
-            }
-        });
+        this.media
+            .filter(content => content.contentType === type)
+            .map(result => this.filteredMedia.push(result));
         this.getDataService.filterMedia(this.filteredMedia);
+    }
+    isActive(type) {
+        return this.activeType === type;
     }
 }

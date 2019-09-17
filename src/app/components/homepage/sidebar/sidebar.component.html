@@ -21,8 +21,9 @@
         matTooltip="Music"
         matTooltipPosition="right"
         class="add_circle_outline"
+        [routerLink]="['']"
     >
-        <mat-icon class="sidebar__button sidebar__button--base" (click)="filterByContent('audio')"
+        <mat-icon [ngClass]="{'sidebar__button--selected': isActive('audio')}" class="sidebar__button sidebar__button--base" (click)="filterByContent('audio')"
             >library_music</mat-icon
         >
     </button>
@@ -34,8 +35,9 @@
         matTooltip="Video"
         matTooltipPosition="right"
         class="add_circle_outline"
+        [routerLink]="['']"
     >
-        <mat-icon class="sidebar__button sidebar__button--base" (click)="filterByContent('video')"
+        <mat-icon [ngClass]="{'sidebar__button--selected': isActive('video')}" class="sidebar__button sidebar__button--base" (click)="filterByContent('video')"
             >video_library</mat-icon
         >
     </button>
@@ -47,8 +49,9 @@
         matTooltip="Pictures"
         matTooltipPosition="right"
         class="add_circle_outline"
+        [routerLink]="['']"
     >
-        <mat-icon class="sidebar__button sidebar__button--base" (click)="filterByContent('image')"
+        <mat-icon [ngClass]="{'sidebar__button--selected': isActive('image')}" class="sidebar__button sidebar__button--base" (click)="filterByContent('image')"
             >collections</mat-icon
         >
     </button>
@@ -60,8 +63,9 @@
         matTooltip="Poetry"
         matTooltipPosition="right"
         class="add_circle_outline"
+        [routerLink]="['']"
     >
-        <mat-icon class="sidebar__button sidebar__button--base" (click)="filterByContent('text')"
+        <mat-icon [ngClass]="{'sidebar__button--selected': isActive('text')}" class="sidebar__button sidebar__button--base" (click)="filterByContent('text')"
             >text_fields</mat-icon
         >
     </button>
@@ -73,6 +77,7 @@
         matTooltip="Add content"
         matTooltipPosition="left"
         class="add_circle_outline"
+        [routerLink]="['']"
     >
         <mat-icon color="accent">add</mat-icon>
     </button>
