@@ -1,12 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
     selector: 'ita-card-buttons',
     templateUrl: './card-buttons.component.html',
     styleUrls: ['./card-buttons.component.scss'],
 })
-export class CardButtonsComponent implements OnInit {
-    constructor() {}
-
-    ngOnInit() {}
-}
+export class CardButtonsComponent {}
