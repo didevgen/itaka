@@ -18,7 +18,7 @@ export class ProfileEditService implements OnDestroy {
     private userID: string;
     public newUrl: string;
     public deletePreviousPath: string;
-    public deletePath = ' ';
+    public deletePath: any = ' ';
 
     constructor(
         private storage: AngularFireStorage,
@@ -80,10 +80,8 @@ export class ProfileEditService implements OnDestroy {
             delRef
                 .delete()
                 .toPromise()
-                .then(() => {
-                })
-                .catch(error => {
-                });
+                .then(() => {})
+                .catch(error => {});
             this.deletePath = this.deletePreviousPath;
         } else {
             return;
