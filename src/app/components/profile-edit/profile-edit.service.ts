@@ -81,7 +81,7 @@ export class ProfileEditService implements OnDestroy {
                 .then(() => {})
                 .catch(error => {});
             this.deletePath = this.deletePreviousPath;
-            } else {
+        } else {
             return;
         }
     }
