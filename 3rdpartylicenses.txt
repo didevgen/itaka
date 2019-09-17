@@ -122,6 +122,8 @@ THE SOFTWARE.
 
 @angular/material/slider
 
+@angular/material/snack-bar
+
 @angular/material/tabs
 
 @angular/material/toolbar
