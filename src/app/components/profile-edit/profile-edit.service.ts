@@ -16,6 +16,9 @@ export class ProfileEditService implements OnDestroy {
     private subscription: Subscription;
     private data: EditProfile;
     private userID: string;
+    public newUrl: string;
+    public deletePreviousPath: string;
+    public deletePath: any = ' ';
 
     constructor(
         private storage: AngularFireStorage,
@@ -23,7 +26,6 @@ export class ProfileEditService implements OnDestroy {
         private store: Store<AppState>,
         private userIdService: GetUserService,
     ) {}
-
     ngOnDestroy() {
         this.subscription.unsubscribe();
     }
@@ -60,6 +62,27 @@ export class ProfileEditService implements OnDestroy {
                     map(val => val as EditProfile),
                     catchError(err => of(err)),
                 );
+        }
+    }
+    setUrl(url: string, deletePreviousPath: string): void {
+        this.deletePreviousPath = deletePreviousPath;
+        this.newUrl = url;
+    }
+    getUrl() {
+        return this.newUrl;
+    }
+    delPreviousUrl(): void {
+        if (this.deletePath !== this.deletePreviousPath) {
+            const path = `${this.deletePath}`;
+            const delRef = this.storage.ref(path);
+            delRef
+                .delete()
+                .toPromise()
+                .then(() => {})
+                .catch(error => {});
+            this.deletePath = this.deletePreviousPath;
+        } else {
+            return;
         }
     }
 }

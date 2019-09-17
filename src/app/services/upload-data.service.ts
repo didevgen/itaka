@@ -4,7 +4,7 @@ import {
     AngularFireUploadTask,
 } from '@angular/fire/storage';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { Observable } from 'rxjs';
+import { Observable, from } from 'rxjs';
 import { finalize, tap } from 'rxjs/operators';
 import { GetUserService } from './get-user.service';
 
@@ -38,7 +38,7 @@ export class UploadDataService {
 
     uploadTextData(title: string, description: string) {
         const userId = this.getUserService.getUserId();
-        this.db.collection('Posts').add({
+        const sendTextPromise = this.db.collection('Posts').add({
             date: new Date(),
             title,
             description,
@@ -47,5 +47,8 @@ export class UploadDataService {
             dislikes: 0,
             userId,
         });
+        const addText = from(sendTextPromise);
+
+        return addText;
     }
 }
