@@ -9,7 +9,7 @@ import * as fromApp from '../../store/app.reducer';
     styleUrls: ['./user-page.component.scss'],
 })
 export class UserPageComponent implements OnInit, OnDestroy {
-    url: string;
+    url: string | Blob;
     name: string;
     defaultImage = '../../assets/avatarDefault.png';
     private userSub: Subscription;
@@ -19,7 +19,7 @@ export class UserPageComponent implements OnInit, OnDestroy {
     ngOnInit() {
         this.userSub = this.store.select('editProfile').subscribe(user => {
             this.name = user.name;
-            // this.url= user.avatar
+            this.url = user.avatar;
         });
     }
 

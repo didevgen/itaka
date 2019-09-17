@@ -18,7 +18,7 @@ import { ProfileEditService } from './profile-edit.service';
 })
 export class ProfileEditComponent implements OnInit, OnDestroy {
     public profileForm: FormGroup;
-    url: any;
+    url: string | Blob;
     isUpdate: boolean;
     defaultImage = '../../assets/avatarDefault.png';
     private destroy$ = new Subject<void>();
@@ -90,7 +90,6 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
             .afterClosed()
             .pipe(takeUntil(this.destroy$))
             .subscribe(result => {
-                console.log(result);
                 this.url = result;
             });
     }

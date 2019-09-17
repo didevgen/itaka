@@ -17,7 +17,7 @@ export class ProfileEditService implements OnDestroy {
     private data: EditProfile;
     private userID: string;
     public newUrl: string;
-    public deletePreviousPath: any;
+    public deletePreviousPath: string;
     public deletePath = ' ';
 
     constructor(
@@ -65,59 +65,28 @@ export class ProfileEditService implements OnDestroy {
         }
     }
     setUrl(url: string, deletePreviousPath: string): any {
-        console.log(url);
-        console.log(deletePreviousPath);
         this.deletePreviousPath = deletePreviousPath;
         return (this.newUrl = url);
     }
     getUrl() {
-        console.log(this.newUrl);
         return this.newUrl;
     }
     delPreviousUrl() {
         if (this.deletePath === ' ') {
             this.deletePath = this.deletePreviousPath;
-            console.log('first if');
-            console.log(this.deletePath);
-            console.log(this.deletePreviousPath);
         } else if (this.deletePath !== this.deletePreviousPath) {
             const path = `${this.deletePath}`;
-            // if (path === '') {return};
-            console.log(path);
             const delRef = this.storage.ref(path);
-            console.log(delRef);
-            // Delete the file
             delRef
                 .delete()
                 .toPromise()
                 .then(() => {
-                    // File deleted successfully
-                    console.log('del OK');
                 })
                 .catch(error => {
-                    // Uh-oh, an error occurred!
                 });
             this.deletePath = this.deletePreviousPath;
         } else {
             return;
         }
-        // if ( this.deletePreviousUrl !== this.newUrl ) {
-        //     console.log(this.deletePreviousUrl, "previous");
-        //     console.log(this.newUrl, "new url")
-        //     const path = `${this.deletePreviousUrl}`;
-        //     //if (path === '') {return};
-        //     console.log(path);
-        //     let delRef = this.storage.ref(path);
-        //     console.log(delRef);
-        //     // Delete the file
-        //     delRef.delete().toPromise().then(function() {
-        //     // File deleted successfully
-        //     console.log("del OK");
-        //     }).catch(function(error) {
-        //     // Uh-oh, an error occurred!
-        //     });
-        // } else {
-        //     return console.log("Del not");
-        // };
     }
 }
