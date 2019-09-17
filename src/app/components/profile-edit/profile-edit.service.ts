@@ -64,17 +64,15 @@ export class ProfileEditService implements OnDestroy {
                 );
         }
     }
-    setUrl(url: string, deletePreviousPath: string): any {
+    setUrl(url: string, deletePreviousPath: string): void {
         this.deletePreviousPath = deletePreviousPath;
-        return (this.newUrl = url);
+        this.newUrl = url;
     }
     getUrl() {
         return this.newUrl;
     }
-    delPreviousUrl() {
-        if (this.deletePath === ' ') {
-            this.deletePath = this.deletePreviousPath;
-        } else if (this.deletePath !== this.deletePreviousPath) {
+    delPreviousUrl(): void {
+        if (this.deletePath !== this.deletePreviousPath) {
             const path = `${this.deletePath}`;
             const delRef = this.storage.ref(path);
             delRef
@@ -83,7 +81,7 @@ export class ProfileEditService implements OnDestroy {
                 .then(() => {})
                 .catch(error => {});
             this.deletePath = this.deletePreviousPath;
-        } else {
+            } else {
             return;
         }
     }

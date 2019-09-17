@@ -22,7 +22,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     constructor(private store: Store<fromApp.AppState>) {}
     getUserAvatar(): string {
         this.userSub = this.store.select('editProfile').subscribe(user => {
-            return (this.url = user.avatar);
+            this.url = user.avatar;
         });
         if (!this.url) {
             return 'url(\'../../assets/avatarDefault.png\')';
