@@ -47,7 +47,7 @@ export class UploadDataService {
             dislikes: 0,
             userId,
         });
-        let addText = from(sendTextPromise);
+        const addText = from(sendTextPromise);
 
         return addText;
     }

@@ -17,8 +17,8 @@ export class TextEditorComponent implements OnInit, OnDestroy {
     public config: object = Config;
     public uploadTextContentForm: FormGroup;
     public disabled: boolean;
-    private disableTitle: boolean = true;
-    private disableDescription: boolean = true;
+    private disableTitle = true;
+    private disableDescription = true;
     constructor(
         private uploadDataService: UploadDataService,
         private router: Router,
