@@ -41,6 +41,7 @@ import { SubmitDialogComponent } from './components/profile-edit/submit-dialog/s
 import { UserPageComponent } from './components/user-page/user-page.component';
 import { UserCardsContainerComponent } from './components/user-page/user-cards-container/user-cards-container.component';
 import { GetUserService } from './services/get-user.service';
+import { CardButtonsComponent } from './components/homepage/cards-container/card-buttons/card-buttons.component';
 
 @NgModule({
     declarations: [
@@ -60,6 +61,7 @@ import { GetUserService } from './services/get-user.service';
         CardContentDetailComponent,
         UserPageComponent,
         UserCardsContainerComponent,
+        CardButtonsComponent,
     ],
     imports: [
         BrowserModule,
