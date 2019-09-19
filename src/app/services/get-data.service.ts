@@ -1,11 +1,16 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from 'angularfire2/firestore';
 import { GetUserService } from './get-user.service';
+import { BehaviorSubject } from 'rxjs';
+import { Media } from '../models/content/Media/media.models';
 
 @Injectable({
     providedIn: 'root',
 })
 export class GetDataService {
+    private mediaSource = new BehaviorSubject<Media[]>([]);
+    currentMedia = this.mediaSource.asObservable();
+
     constructor(
         private db: AngularFirestore,
         private getUserService: GetUserService,
@@ -19,6 +24,7 @@ export class GetDataService {
                     const posts = doc.data();
                     media.push(posts);
                 });
+                this.mediaSource.next(media);
             });
     }
 
@@ -35,5 +41,8 @@ export class GetDataService {
                     }
                 });
             });
+    }
+    filterMedia(media) {
+        this.mediaSource.next(media);
     }
 }
