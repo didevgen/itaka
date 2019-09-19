@@ -2,11 +2,14 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: 90%;
+    height: 95%;
 }
 .mat-card-title {
+    width: 100%;
     font-size: 18px;
     text-transform: uppercase;
+    word-wrap: break-word;
+    text-align: center;
 }
 .mat-card-content {
     width: 100%;
