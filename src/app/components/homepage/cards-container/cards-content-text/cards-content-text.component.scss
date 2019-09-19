@@ -2,10 +2,16 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    height: 90%;
 }
 .mat-card-title {
     font-size: 18px;
     text-transform: uppercase;
+}
+.mat-card-content {
+    width: 100%;
+    word-wrap: break-word;
+    overflow: hidden;
 }
 .card__text--icons {
     width: 100%;

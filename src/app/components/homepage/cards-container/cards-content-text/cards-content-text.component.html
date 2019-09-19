@@ -2,9 +2,7 @@
     <mat-card-title>
         {{ title }}
     </mat-card-title>
-    <mat-card-content>
-        {{ description }}
-    </mat-card-content>
+    <mat-card-content [innerHtml]="description"></mat-card-content>
     <div class="card__text--icons">
         <ita-card-buttons></ita-card-buttons>
     </div>
