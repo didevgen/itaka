@@ -53,24 +53,29 @@ export class TextEditorComponent implements OnInit, OnDestroy {
     }
     private openSnackBar(message: string): void {
         this.snackBar.open(message, 'Close', {
-            duration: 1500,
+            duration: 1000,
         });
     }
     public startUpload(data): void {
         this.disabled = true;
-        this.uploadDataService
-            .uploadTextData(data.title, data.description)
-            .subscribe(
-                response => {},
-                error => this.openSnackBar(error),
-                () => {
-                    this.openSnackBar('Text added');
-                    setTimeout(() => {
-                        this.redirect();
-                    }, 1500);
-                },
-            )
-            .unsubscribe();
+        const downloadTextMethod = this.uploadDataService.uploadTextData(
+            data.title,
+            data.description,
+        );
+
+        const downloadTextSubscription = downloadTextMethod.subscribe(
+            response => {
+                console.log(response);
+            },
+            error => this.openSnackBar(error),
+            () => {
+                this.openSnackBar('Text added');
+                setTimeout(() => {
+                    this.redirect();
+                    downloadTextSubscription.unsubscribe();
+                }, 1000);
+            },
+        );
     }
 
     ngOnDestroy(): void {
