@@ -48,7 +48,6 @@ export class UploadDataService {
             userId,
         });
         const addText = from(sendTextPromise);
-
         return addText;
     }
 }
