@@ -9,9 +9,19 @@
     </audio>
 
     <mat-card-title>
-        {{ title }}
+        {{  userId }}
+        {{ userId}}
     </mat-card-title>
-    <button mat-icon-button class="more__icon">
-        <mat-icon>more_horiz</mat-icon>
-    </button>
+    <div class="container-icon">
+        <div class="container-icon-likes">
+            <mat-icon class="more__icon--like">thumb_up_alt</mat-icon>
+            <span>{{count}}</span>
+        </div>
+        <button mat-icon-button class="more__icon" 
+        [routerLink]="['/cardDetail', postId]"
+        (click) = "getPostId (this.postId)"
+        >
+            <mat-icon>more_horiz</mat-icon>
+        </button>
+    </div>
 </mat-card>

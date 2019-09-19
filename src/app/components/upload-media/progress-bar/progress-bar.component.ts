@@ -41,13 +41,17 @@ export class ProgressBarComponent implements OnInit {
         const userId = this.getUserIdService.getUserId();
         const path = `media/${Date.now()}_${this.file.name}`;
         const ref = this.storage.ref(path);
+        //
+        const newId = this.db.createId();
+        //
         this.task = this.storage.upload(path, this.file);
         this.percentage = this.task.percentageChanges();
         this.snapshot = this.task.snapshotChanges().pipe(
             tap(console.log),
             finalize(async () => {
                 this.urlOfUploadedFile = await ref.getDownloadURL().toPromise();
-                this.db.collection('Posts').add({
+                this.db.collection('Posts').doc(newId)
+                .set({
                     url: this.urlOfUploadedFile,
                     date: new Date(),
                     title: this.title,
@@ -56,6 +60,7 @@ export class ProgressBarComponent implements OnInit {
                     likes: 0,
                     dislikes: 0,
                     userId,
+                    postId : newId
                 });
             }),
         );

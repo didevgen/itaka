@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { GetDataService } from '../../../services/get-data.service';
 import { Media } from '../../../models/content/Media/media.models';
 
@@ -9,7 +9,6 @@ import { Media } from '../../../models/content/Media/media.models';
 })
 export class CardsContainerComponent implements OnInit {
     media: Media[] = [];
-
     constructor(private getDataService: GetDataService) {}
 
     ngOnInit() {

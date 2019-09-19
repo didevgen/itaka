@@ -1,10 +1,13 @@
 <div class="cards-container__grid">
-    <ng-container *ngFor="let content of media">
-        <ng-container *ngIf="content.contentType === 'image'" #image>
-            <div class="image">
+    <ng-container *ngFor="let content of media"
+    >
+        <ng-container *ngIf="content.contentType === 'image'" #image
+        >
+            <div class="image" >
                 <ita-cards-content-image
-                    [title]="content.title"
+                    [title]="content.title "
                     [url]="content.url"
+                    [postId]="content.postId"
                 ></ita-cards-content-image>
             </div>
         </ng-container>
@@ -13,6 +16,7 @@
                 <ita-cards-content-audio
                     [title]="content.title"
                     [url]="content.url"
+                    [postId]="content.postId"
                 ></ita-cards-content-audio>
             </div>
         </ng-container>

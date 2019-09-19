@@ -1,14 +1,19 @@
 <div class="container">
     <mat-card class="card card-content-detail ">
         <mat-card-header>
-            <mat-card-title
-                ><h1 class="content-page__title">
-                    {{ title }}
-                </h1></mat-card-title
+            <img
+                mat-card-avatar
+                src="https://material.angular.io/assets/img/examples/shiba2.jpg"
+                alt="Photo of a Shiba Inu"
+            />
+            <mat-card-subtitle>Author</mat-card-subtitle>
+            <mat-card-title>      
+                {{ media.title }}
+            </mat-card-title
             >
         </mat-card-header>
         <div class="content-page__content">
-            <div *ngIf="type == 'image'">
+            <div *ngIf="media.contentType == 'image'">
                 <img
                     mat-card-image
                     [src]="url"
@@ -16,11 +21,10 @@
                     class="content-page__picture"
                 />
                 <p class="content-page__content-description">
-                    {{ description }}
+                  {{media.description}}
                 </p>
             </div>
-
-            <div *ngIf="type == 'audio'">
+            <div *ngIf="media.contentType == 'audio'">
                 <audio controls>
                     <source [src]="url" type="audio/mp3" />
                 </audio>
@@ -29,7 +33,7 @@
                 </p>
             </div>
 
-            <div *ngIf="type == 'video'">
+            <div *ngIf="media.contentType == 'video'">
                 <div>
                     <iframe
                         class="responsive-video1"
@@ -43,7 +47,7 @@
             </div>
 
             <div
-                *ngIf="type == 'text'"
+                *ngIf="media.contentType == 'text'"
                 [innerHTML]="description"
                 class="content-page__text-content"
             ></div>
@@ -54,17 +58,21 @@
                 color="accent"
                 matTooltip="Like"
                 matTooltipPosition="above"
+                (click) = "onLike()"
             >
                 <mat-icon>thumb_up_alt</mat-icon>
             </button>
+            <span>{{counterLike}}</span>
             <button
                 mat-icon-button
                 color="base"
                 matTooltip="Dislike"
                 matTooltipPosition="above"
+                (click) = "onDisLike()"
             >
                 <mat-icon>thumb_down_alt</mat-icon>
             </button>
+            <span>{{counterDisl}}</span>
             <button
                 mat-icon-button
                 color="base"

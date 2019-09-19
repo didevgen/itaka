@@ -5,7 +5,9 @@
     <mat-card-content>
         {{ description }}
     </mat-card-content>
-    <button mat-icon-button class="more__icon">
+    <button mat-icon-button class="more__icon" [routerLink]="['/cardDetail']"
+    (click) = "getPostId (this.description)">
         <mat-icon>more_horiz</mat-icon>
+     
     </button>
 </mat-card>
