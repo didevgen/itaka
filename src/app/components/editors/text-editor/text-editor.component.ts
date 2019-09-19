@@ -38,7 +38,7 @@ export class TextEditorComponent implements OnInit, OnDestroy {
     }
     public checkDescription({ editor }): void {
         const data = editor.getData();
-        data.length <= 400 || data.length >= 700
+        data.length <= 330 || data.length >= 340
             ? (this.disableDescription = true)
             : (this.disableDescription = false);
         this.disableSendButton();
