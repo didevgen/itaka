@@ -31,11 +31,11 @@ export class ProgressBarComponent implements OnInit {
         private uploadDataService: UploadDataService,
     ) {}
 
-    ngOnInit() {
+    ngOnInit(): void {
         this.startUpload();
     }
 
-    startUpload() {
+    startUpload(): void {
         const path = `media/${Date.now()}_${this.file.name}`;
         const ref = this.storage.ref(path);
         this.task = this.storage.upload(path, this.file);
