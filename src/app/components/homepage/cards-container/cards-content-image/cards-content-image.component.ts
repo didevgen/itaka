@@ -1,4 +1,4 @@
-import { Component, OnInit, Input,Output} from '@angular/core';
+import { Component, OnInit, Input, Output } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
 import * as fromApp from '../../../../store/app.reducer';
@@ -15,15 +15,13 @@ export class CardsContentImageComponent implements OnInit {
     @Input()
     url: string;
     @Input()
-    postId : string
- 
-    constructor(private store: Store<fromApp.AppState>){}
+    postId: string;
+
+    constructor(private store: Store<fromApp.AppState>) {}
 
     ngOnInit() {}
 
-    getPostId (elem) {
-      this.store.dispatch(new LikesActions.GetPostId({postId:elem}))
+    getPostId(elem) {
+        this.store.dispatch(new LikesActions.GetPostId({ postId: elem }));
     }
-
-  
 }

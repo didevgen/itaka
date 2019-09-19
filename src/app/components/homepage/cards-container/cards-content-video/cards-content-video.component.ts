@@ -17,14 +17,13 @@ export class CardsContentVideoComponent implements OnInit {
     @Input()
     url: string;
     @Input()
-    postId : string
+    postId: string;
 
-    constructor(private store: Store<fromApp.AppState>){}
+    constructor(private store: Store<fromApp.AppState>) {}
 
     ngOnInit() {}
 
-    getPostId (elem) {
-        this.store.dispatch(new LikesActions.GetPostId({postId:elem}))
-      }
-    
+    getPostId(elem) {
+        this.store.dispatch(new LikesActions.GetPostId({ postId: elem }));
+    }
 }

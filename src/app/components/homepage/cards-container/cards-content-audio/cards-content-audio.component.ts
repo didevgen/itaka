@@ -14,27 +14,27 @@ export class CardsContentAudioComponent implements OnInit, OnDestroy {
     title: string;
     @Input()
     url: string;
-    count :number;
+    count: number;
     @Input()
-    postId : string;
-    private userSub: Subscription; 
-    constructor(private store: Store<fromApp.AppState>,private db: AngularFirestore) {}
+    postId: string;
+    private userSub: Subscription;
+    constructor(
+        private store: Store<fromApp.AppState>,
+        private db: AngularFirestore,
+    ) {}
 
     ngOnInit() {
-        this.userSub = this.store
-        .select('likesCount')
-        .subscribe(like => {
-            console.log(like)
-            this.count = +like.likes
+        this.userSub = this.store.select('likesCount').subscribe(like => {
+            console.log(like);
+            this.count = +like.likes;
         });
     }
-    
-    getPostId (elem) {
-        this.store.dispatch(new LikesActions.GetPostId({postId:elem}))
+
+    getPostId(elem) {
+        this.store.dispatch(new LikesActions.GetPostId({ postId: elem }));
     }
 
     ngOnDestroy() {
         this.userSub.unsubscribe();
     }
-
 }

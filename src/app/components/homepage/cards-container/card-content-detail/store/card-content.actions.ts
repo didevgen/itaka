@@ -5,7 +5,7 @@ export const enum LikesCounterTypes {
     DISLIKE = '[LikesCounter] Likes Dislike',
     // CLEARLIKE = '[LikesCounter] Like Clear',
     // CLEARDISLIKE = '[LikesCounter] Dislike Clear',
-    GETPOSTID = '[LikesCounter] Get Post Id'
+    GETPOSTID = '[LikesCounter] Get Post Id',
 }
 
 export class LikesLike implements Action {
@@ -19,7 +19,7 @@ export class LikeDislike implements Action {
 export class GetPostId implements Action {
     readonly type = LikesCounterTypes.GETPOSTID;
 
-    constructor(public payload: { postId: string}) {}
+    constructor(public payload: { postId: string }) {}
 }
 
 // export class LikeClearLike implements Action {
@@ -34,10 +34,6 @@ export class GetPostId implements Action {
 //     // constructor(public payload: EditProfile) {}
 // }
 
-export type LikesounterActions =
-    | LikesLike
-    | LikeDislike
-    | GetPostId
-    // | LikeClearLike
-    // | LikeClearDislike
-   
+export type LikesounterActions = LikesLike | LikeDislike | GetPostId;
+// | LikeClearLike
+// | LikeClearDislike

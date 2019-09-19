@@ -50,18 +50,20 @@ export class ProgressBarComponent implements OnInit {
             tap(console.log),
             finalize(async () => {
                 this.urlOfUploadedFile = await ref.getDownloadURL().toPromise();
-                this.db.collection('Posts').doc(newId)
-                .set({
-                    url: this.urlOfUploadedFile,
-                    date: new Date(),
-                    title: this.title,
-                    description: this.description,
-                    contentType: this.contentType,
-                    likes: 0,
-                    dislikes: 0,
-                    userId,
-                    postId : newId
-                });
+                this.db
+                    .collection('Posts')
+                    .doc(newId)
+                    .set({
+                        url: this.urlOfUploadedFile,
+                        date: new Date(),
+                        title: this.title,
+                        description: this.description,
+                        contentType: this.contentType,
+                        likes: 0,
+                        dislikes: 0,
+                        userId,
+                        postId: newId,
+                    });
             }),
         );
     }

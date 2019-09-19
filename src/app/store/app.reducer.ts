@@ -11,13 +11,13 @@ import * as fromLikes from '../components/homepage/cards-container/card-content-
 export interface AppState {
     auth: fromAuth.State;
     editProfile: profEdit.ProfileEditState;
-    likesCount : fromLikes.State
+    likesCount: fromLikes.State;
 }
 
 export const appReducer: ActionReducerMap<AppState> = {
     auth: fromAuth.authReducer,
     editProfile: profEdit.profileEditReducer,
-    likesCount : fromLikes.LikesCountReducer
+    likesCount: fromLikes.LikesCountReducer,
 };
 
 export const getAuth = createFeatureSelector<fromAuth.State>('auth');
