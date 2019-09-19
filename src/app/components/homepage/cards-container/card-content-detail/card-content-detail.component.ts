@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 
 @Component({
@@ -6,16 +6,18 @@ import { FormControl, Validators } from '@angular/forms';
     templateUrl: './card-content-detail.component.html',
     styleUrls: ['./card-content-detail.component.scss'],
 })
-export class CardContentDetailComponent implements OnInit, OnDestroy {
+export class CardContentDetailComponent implements OnInit {
     title: string;
     description: string;
     url: string;
     type: string;
 
-    isComment = false;
+    isComment: boolean;
     commentFC: FormControl;
-    comment: string;
     date: string;
+
+    @ViewChild('comment', { static: false })
+    comment: ElementRef;
 
     constructor() {}
 
@@ -26,7 +28,6 @@ export class CardContentDetailComponent implements OnInit, OnDestroy {
             Validators.maxLength(400),
         ]);
     }
-    ngOnDestroy() {}
 
     onSend() {
         this.date = new Date().toLocaleString('ru', {
@@ -39,9 +40,15 @@ export class CardContentDetailComponent implements OnInit, OnDestroy {
             second: 'numeric',
         });
         this.isComment = true;
-        this.comment = this.commentFC.value;
+        setTimeout(
+            () => (this.comment.nativeElement.innerText = this.commentFC.value),
+            0,
+        );
     }
-    onCancel(singleComment) {
+    onCancel() {
+        this.isComment = false;
+    }
+    onDelete(singleComment) {
         singleComment.innerHTML = '';
     }
 }

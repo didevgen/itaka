@@ -40,18 +40,14 @@
     color: #ff4081;
 }
 .comment-container{
-  width: 95%;
-
-  .mat-card{
+    width: 95%;
     font-family: "Montserrat", sans-serif;
-    //margin-right: 16px;
-  }
 
   .comment-container_content-card {
     margin: 0;
     padding: 0;
 
-    time {
+    .right {
       float: right;
     }
   }

@@ -84,9 +84,9 @@
         </mat-card-actions>
     </mat-card>
 
-    <section class="comment-container">
-        <div id="idFromDB" #singleComment>
-            <mat-card >
+    <section >
+        <div id="idFromDB" #singleComment >
+            <mat-card class="comment-container">
                 <mat-card-header>
                     <img
                         mat-card-avatar
@@ -97,14 +97,16 @@
                     ><mat-card-subtitle>Author</mat-card-subtitle>
                 </mat-card-header>
                 <mat-card-content class="comment-container_content-card">
-                    <ng-container *ngIf="!isComment; else p">
+                    <ng-container *ngIf="!isComment; else showCommentParagraph">
                         <mat-form-field
                             class="comment-container_content-card__size"
                             color="accent"
                         >
                             <textarea
-                                matInput
                                 #message
+                                matInput
+                                cdkTextareaAutosize
+                                cdkAutosizeMaxRows="5"
                                 maxlength="400"
                                 placeholder="Your message"
                                 [formControl]="commentFC"
@@ -117,11 +119,11 @@
                             >
                         </mat-form-field>
                     </ng-container>
-                    <ng-template #p>
-                        <p>{{ comment }}</p>
+                    <ng-template #showCommentParagraph>
+                        <p #comment></p>
                         <hr />
                     </ng-template>
-                    <time datetime="date">{{ date }}</time>
+                    <time class="right" datetime="date">{{ date }}</time>
                 </mat-card-content>
                 <mat-card-actions class="comment-card">
                     <button
@@ -131,8 +133,24 @@
                     >
                         Send
                     </button>
-                    <button mat-button (click)="onCancel(singleComment)">
+                    <button
+                        mat-button
+                        matTooltip="Edit again..."
+                        matTooltipPosition="above"
+                        [disabled]="!isComment"
+                        (click)="onCancel()"
+                    >
                         Cancel
+                    </button>
+                    <button
+                        *ngIf="isComment"
+                        mat-icon-button
+                        color="base"
+                        matTooltip="Delete"
+                        matTooltipPosition="above"
+                        (click)="onDelete(singleComment)"
+                    >
+                        <mat-icon>delete</mat-icon>
                     </button>
                 </mat-card-actions>
             </mat-card>
