@@ -4,6 +4,8 @@ import { Subscription } from 'rxjs';
 import * as fromApp from '../../../../store/app.reducer';
 import * as LikesActions from '../../cards-container/card-content-detail/store/card-content.actions';
 import { AngularFirestore } from 'angularfire2/firestore';
+import { Router } from '@angular/router';
+
 @Component({
     selector: 'ita-cards-content-audio',
     templateUrl: './cards-content-audio.component.html',
@@ -18,23 +20,28 @@ export class CardsContentAudioComponent implements OnInit, OnDestroy {
     @Input()
     postId: string;
     private userSub: Subscription;
+
     constructor(
         private store: Store<fromApp.AppState>,
         private db: AngularFirestore,
+        private router: Router
     ) {}
 
-    ngOnInit() {
-        this.userSub = this.store.select('likesCount').subscribe(like => {
-            console.log(like);
-            this.count = +like.likes;
-        });
+    ngOnInit() {}
+
+    goCardDetail (elem) {
+        console.log (elem)
+        this.router.navigate (['/cardDetail', this.postId])
+        this.setPostId(elem)
     }
 
-    getPostId(elem) {
+    setPostId(elem) {
         this.store.dispatch(new LikesActions.GetPostId({ postId: elem }));
     }
 
-    ngOnDestroy() {
-        this.userSub.unsubscribe();
+    stopEvent (event) {
+        event.stopPropagation();
     }
+
+    ngOnDestroy() {}
 }

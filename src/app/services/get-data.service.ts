@@ -45,16 +45,15 @@ export class GetDataService {
             });
     }
 
-    // метод для выгрузки контента на карточку
-    renderCardContent(postId, obj): any {
+    renderCardContent(postId, curPost): any {
         this.db
             .collection('Posts')
             .get()
             .subscribe(snapshot => {
                 snapshot.docs.forEach(doc => {
                     if (postId === doc.data().postId) {
-                        const posts = doc.data();
-                        Object.assign(obj, posts);
+                        const post = doc.data();
+                        Object.assign(curPost, post);
                     }
                 });
             });

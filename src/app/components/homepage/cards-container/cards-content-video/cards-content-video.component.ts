@@ -3,6 +3,8 @@ import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
 import * as fromApp from '../../../../store/app.reducer';
 import * as LikesActions from '../../cards-container/card-content-detail/store/card-content.actions';
+import { Router } from '@angular/router';
+
 @Component({
     selector: 'ita-cards-content-video',
     templateUrl: './cards-content-video.component.html',
@@ -19,11 +21,26 @@ export class CardsContentVideoComponent implements OnInit {
     @Input()
     postId: string;
 
-    constructor(private store: Store<fromApp.AppState>) {}
+    constructor(
+        private store: Store<fromApp.AppState>,
+        private router: Router
+    ) {}
 
     ngOnInit() {}
 
-    getPostId(elem) {
+    goCardDetail (elem) {
+        console.log (elem)
+        this.router.navigate (['/cardDetail', this.postId])
+        this.setPostId(elem)
+    }
+
+    setPostId(elem) {
         this.store.dispatch(new LikesActions.GetPostId({ postId: elem }));
     }
+
+    stopEvent (event) {
+        event.stopPropagation();
+    }
+
+    ngOnDestroy() {}
 }

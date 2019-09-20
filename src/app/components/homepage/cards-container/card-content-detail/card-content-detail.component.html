@@ -16,7 +16,7 @@
             <div *ngIf="media.contentType == 'image'">
                 <img
                     mat-card-image
-                    [src]="url"
+                    [src]="media.url"
                     alt="picture"
                     class="content-page__picture"
                 />
@@ -26,7 +26,7 @@
             </div>
             <div *ngIf="media.contentType == 'audio'">
                 <audio controls>
-                    <source [src]="url" type="audio/mp3" />
+                    <source [src]="media.url" type="audio/mp3" />
                 </audio>
                 <p class="content-page__content-description">
                     {{ description }}
@@ -37,7 +37,7 @@
                 <div>
                     <iframe
                         class="responsive-video1"
-                        [src]="url"
+                        [src]="media.url"
                         allowfullscreen
                     ></iframe>
                 </div>
@@ -45,10 +45,9 @@
                     {{ description }}
                 </p>
             </div>
-
             <div
                 *ngIf="media.contentType == 'text'"
-                [innerHTML]="description"
+                [innerHTML]="media.description"
                 class="content-page__text-content"
             ></div>
         </div>

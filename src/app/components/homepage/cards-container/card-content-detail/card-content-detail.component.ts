@@ -7,14 +7,6 @@ import * as LikesounterActions from '../../cards-container/card-content-detail/s
 import { GetDataService } from '../../../../services/get-data.service';
 import { AngularFirestore } from 'angularfire2/firestore';
 import { ActivatedRoute } from '@angular/router';
-import {
-    takeUntil,
-    mapTo,
-    finalize,
-    switchAll,
-    exhaust,
-    filter,
-} from 'rxjs/operators';
 import { Subject, of } from 'rxjs';
 import { getMatIconFailedToSanitizeUrlError } from '@angular/material';
 import { Media } from '../../../../models/content/Media/media.models';
@@ -34,9 +26,9 @@ export class CardContentDetailComponent implements OnInit, OnDestroy {
     counterDisl: number;
     private userSub: Subscription;
     private routeSubscription: Subscription;
-    private destroy$ = new Subject();
+    private destroy$ = new Subject<void>();
     media: Media = {};
-    postIdr: string;
+    postIdroute: string;
 
     constructor(
         private store: Store<fromApp.AppState>,
@@ -45,7 +37,7 @@ export class CardContentDetailComponent implements OnInit, OnDestroy {
         private db: AngularFirestore,
     ) {
         this.routeSubscription = this.route.params.subscribe(
-            params => (this.postIdr = params.postId),
+            params => (this.postIdroute = params.postId),
         );
     }
 
@@ -55,12 +47,12 @@ export class CardContentDetailComponent implements OnInit, OnDestroy {
             this.counterLike = +like.likes;
             this.counterDisl = +like.dislikes;
         });
-        this.render(this.postIdr);
+        this.render(this.postIdroute);
     }
 
     onLike() {
         this.store.dispatch(new LikesounterActions.LikesLike());
-        console.log('Get post id', this.postIdr);
+        console.log('Get post id', this.postIdroute);
     }
 
     onDisLike() {
@@ -71,12 +63,11 @@ export class CardContentDetailComponent implements OnInit, OnDestroy {
         this.getDataService.renderCardContent(postId, this.media);
         console.log(this.media);
     }
-
+    
     ngOnDestroy() {
         this.userSub.unsubscribe();
         this.routeSubscription.unsubscribe();
-        // this.destroy$.next(true);  // trigger the unsubscribe
+        // this.destroy$.next();
         // this.destroy$.complete();
-        // this.db1.unsubscribe()
     }
 }
