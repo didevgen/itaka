@@ -63,7 +63,7 @@ export class CardContentDetailComponent implements OnInit, OnDestroy {
         this.getDataService.renderCardContent(postId, this.media);
         console.log(this.media);
     }
-    
+
     ngOnDestroy() {
         this.userSub.unsubscribe();
         this.routeSubscription.unsubscribe();

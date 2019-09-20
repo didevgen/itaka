@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
     templateUrl: './cards-content-image.component.html',
     styleUrls: ['./cards-content-image.component.scss'],
 })
-export class CardsContentImageComponent implements OnInit {
+export class CardsContentImageComponent implements OnInit, OnDestroy {
     contentType: string;
     @Input()
     title: string;
@@ -21,25 +21,24 @@ export class CardsContentImageComponent implements OnInit {
 
     constructor(
         private store: Store<fromApp.AppState>,
-        private router: Router
-        ) {}
+        private router: Router,
+    ) {}
 
     ngOnInit() {}
 
-    goCardDetail (elem) {
-        console.log (elem)
-        this.router.navigate (['/cardDetail', this.postId])
-        this.setPostId(elem)
+    goCardDetail(elem) {
+        console.log(elem);
+        this.router.navigate(['/cardDetail', this.postId]);
+        this.setPostId(elem);
     }
 
     setPostId(elem) {
         this.store.dispatch(new LikesActions.GetPostId({ postId: elem }));
     }
 
-    stopEvent (event) {
+    stopEvent(event) {
         event.stopPropagation();
     }
 
     ngOnDestroy() {}
 }
-

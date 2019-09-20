@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
 import * as fromApp from '../../../../store/app.reducer';
@@ -13,7 +13,7 @@ import { Router } from '@angular/router';
         '../cards-container.component.scss',
     ],
 })
-export class CardsContentVideoComponent implements OnInit {
+export class CardsContentVideoComponent implements OnInit, OnDestroy {
     @Input()
     title: string;
     @Input()
@@ -23,22 +23,22 @@ export class CardsContentVideoComponent implements OnInit {
 
     constructor(
         private store: Store<fromApp.AppState>,
-        private router: Router
+        private router: Router,
     ) {}
 
     ngOnInit() {}
 
-    goCardDetail (elem) {
-        console.log (elem)
-        this.router.navigate (['/cardDetail', this.postId])
-        this.setPostId(elem)
+    goCardDetail(elem) {
+        console.log(elem);
+        this.router.navigate(['/cardDetail', this.postId]);
+        this.setPostId(elem);
     }
 
     setPostId(elem) {
         this.store.dispatch(new LikesActions.GetPostId({ postId: elem }));
     }
 
-    stopEvent (event) {
+    stopEvent(event) {
         event.stopPropagation();
     }
 
