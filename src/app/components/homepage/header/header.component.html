@@ -4,7 +4,11 @@
     </div>
     <div class="header__search">
         <mat-icon>search</mat-icon>
-        <input placeholder="Search" (input)="inputSearch.next($event.target.value)" />
+        <input
+            placeholder="Search"
+            (input)="inputSearch.next($event.target.value)"
+            (input)="onSearch($event)"
+        />
     </div>
     <div class="header__user-tools">
         <div class="header__user-buttons">
