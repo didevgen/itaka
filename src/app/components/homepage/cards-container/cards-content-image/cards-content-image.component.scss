@@ -2,14 +2,23 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    height: 95%;
 }
 .mat-card-title {
+    width: 100%;
     font-size: 18px;
     text-transform: uppercase;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    text-align: center;
 }
 .mat-card-image {
     width: 305px;
     height: 255px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 .card__image--icons {
     width: 100%;

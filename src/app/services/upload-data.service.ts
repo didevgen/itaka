@@ -1,52 +1,55 @@
 import { Injectable } from '@angular/core';
-import {
-    AngularFireStorage,
-    AngularFireUploadTask,
-} from '@angular/fire/storage';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable, from } from 'rxjs';
-import { finalize, tap } from 'rxjs/operators';
 import { GetUserService } from './get-user.service';
 
 @Injectable({
     providedIn: 'root',
 })
 export class UploadDataService {
+    private postId = this.db.createId();
+    private userId = this.getUserService.getUserId();
     constructor(
         private db: AngularFirestore,
         private getUserService: GetUserService,
     ) {}
 
-    uploadMediaData(
+    public uploadMediaData(
         title: string,
         description: string,
         contentType: string,
         url: string,
-    ) {
-        const userId = this.getUserService.getUserId();
-        this.db.collection('Posts').add({
-            url,
-            date: new Date(),
-            title,
-            description,
-            contentType,
-            likes: 0,
-            dislikes: 0,
-            userId,
-        });
+    ): void {
+        this.db
+            .collection('Posts')
+            .doc(this.postId)
+            .set({
+                url,
+                date: new Date(),
+                title,
+                description,
+                contentType,
+                likes: 0,
+                dislikes: 0,
+                userId: this.userId,
+                postId: this.postId,
+            });
     }
 
-    uploadTextData(title: string, description: string) {
-        const userId = this.getUserService.getUserId();
-        const sendTextPromise = this.db.collection('Posts').add({
-            date: new Date(),
-            title,
-            description,
-            contentType: 'text',
-            likes: 0,
-            dislikes: 0,
-            userId,
-        });
+    public uploadTextData(title: string, description: string): Observable<any> {
+        const sendTextPromise = this.db
+            .collection('Posts')
+            .doc(this.postId)
+            .set({
+                date: new Date(),
+                title,
+                description,
+                contentType: 'text',
+                likes: 0,
+                dislikes: 0,
+                userId: this.userId,
+                postId: this.postId,
+            });
         const addText = from(sendTextPromise);
         return addText;
     }
