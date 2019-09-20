@@ -8,7 +8,6 @@ import { Media } from '../models/content/Media/media.models';
     providedIn: 'root',
 })
 export class GetDataService {
-
     private posiId: string;
     private mediaSource = new BehaviorSubject<Media[]>([]);
     currentMedia = this.mediaSource.asObservable();
