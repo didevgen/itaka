@@ -8,6 +8,7 @@ import {
     MatProgressSpinnerModule,
     MatDialogModule,
 } from '@angular/material';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -50,6 +51,7 @@ import { MatRadioModule } from '@angular/material/radio';
         MatVideoModule,
         MaterialFileInputModule,
         MatRadioModule,
+        MatSnackBarModule,
     ],
     exports: [
         MatInputModule,
@@ -76,6 +78,7 @@ import { MatRadioModule } from '@angular/material/radio';
         MatVideoModule,
         MaterialFileInputModule,
         MatRadioModule,
+        MatSnackBarModule,
     ],
 })
 export class MaterialModule {}

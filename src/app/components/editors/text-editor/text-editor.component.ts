@@ -1,48 +1,84 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { catchError } from 'rxjs/operators';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { Config } from './texteditor.config';
-import { AngularFirestore } from '@angular/fire/firestore';
-import {
-    Subscription,
-    Observable,
-    Subject,
-    of,
-    BehaviorSubject,
-    from,
-} from 'rxjs';
-import {
-    map,
-    filter,
-    debounceTime,
-    distinctUntilChanged,
-    mergeMap,
-    delay,
-    multicast,
-} from 'rxjs/operators';
-import { Store } from '@ngrx/store';
+import { FormGroup, FormControl } from '@angular/forms';
+import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { UploadDataService } from 'src/app/services/upload-data.service';
+
 @Component({
     selector: 'ita-text-editor',
     templateUrl: './text-editor.component.html',
     styleUrls: ['./text-editor.component.scss'],
 })
-export class TextEditorComponent implements OnInit {
+export class TextEditorComponent implements OnInit, OnDestroy {
     public Editor = ClassicEditor;
-    public config = Config;
-    public title: string;
-    public description: string;
-    private disabled = false;
-
-    constructor(private db: AngularFirestore) {}
-    ngOnInit(): void {}
-
-    public startUpload(textContent) {
-        const { title, description } = textContent;
+    public config: object = Config;
+    public uploadTextContentForm: FormGroup;
+    public disabled: boolean;
+    private disableTitle = true;
+    private disableDescription = true;
+    constructor(
+        private uploadDataService: UploadDataService,
+        private router: Router,
+        private snackBar: MatSnackBar,
+    ) {}
+    ngOnInit(): void {
         this.disabled = true;
-        this.db.collection('Posts').add({
-            date: new Date(),
-            title,
-            description,
-            contentType: 'text',
+        this.uploadTextContentForm = new FormGroup({
+            title: new FormControl(),
+            description: new FormControl(),
         });
+    }
+    public checkTitle(data): void {
+        const { value } = data.target;
+        !value ? (this.disableTitle = true) : (this.disableTitle = false);
+        this.disableSendButton();
+    }
+    public checkDescription({ editor }): void {
+        const data = editor.getData();
+        data.length <= 550 || data.length >= 1000
+            ? (this.disableDescription = true)
+            : (this.disableDescription = false);
+        this.disableSendButton();
+    }
+    private disableSendButton(): void {
+        this.disableTitle || this.disableDescription
+            ? (this.disabled = true)
+            : (this.disabled = false);
+    }
+    private redirect(): Promise<boolean> {
+        return this.router.navigate(['userPage']);
+    }
+    private openSnackBar(message: string): void {
+        this.snackBar.open(message, 'Close', {
+            duration: 1000,
+        });
+    }
+    public startUpload(data): void {
+        this.disabled = true;
+        const downloadTextMethod = this.uploadDataService.uploadTextData(
+            data.title,
+            data.description,
+        );
+
+        const downloadTextSubscription = downloadTextMethod.subscribe(
+            response => {
+                console.log(response);
+            },
+            error => this.openSnackBar(error),
+            () => {
+                this.openSnackBar('Text added');
+                setTimeout(() => {
+                    this.redirect();
+                    downloadTextSubscription.unsubscribe();
+                }, 1000);
+            },
+        );
+    }
+
+    ngOnDestroy(): void {
+        this.disabled = true;
     }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
     selector: 'ita-cards-content-image',
@@ -6,6 +6,11 @@ import { Component, OnInit } from '@angular/core';
     styleUrls: ['./cards-content-image.component.scss'],
 })
 export class CardsContentImageComponent implements OnInit {
+    contentType: string;
+    @Input()
+    title: string;
+    @Input()
+    url: string;
     constructor() {}
 
     ngOnInit() {}

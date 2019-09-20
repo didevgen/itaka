@@ -1,27 +1,81 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Store } from '@ngrx/store';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalDialogComponent } from './modal-dialog/modal-dialog.component';
+import { SubmitDialogComponent } from './submit-dialog/submit-dialog.component';
+
+import { AppState } from '../../store/app.reducer';
+import * as EditProfileActions from './store/profile-edit.actions';
+import { ProfileEditService } from './profile-edit.service';
 
 @Component({
     selector: 'ita-profile-edit',
     templateUrl: './profile-edit.component.html',
     styleUrls: ['./profile-edit.component.scss'],
 })
-export class ProfileEditComponent implements OnInit {
+export class ProfileEditComponent implements OnInit, OnDestroy {
     public profileForm: FormGroup;
-    url: string;
+    url: string | Blob;
+    isUpdate: boolean;
     defaultImage = '../../assets/avatarDefault.png';
+    private destroy$ = new Subject<void>();
 
-    constructor(private formBuilder: FormBuilder, public dialog: MatDialog) {}
+    constructor(
+        private formBuilder: FormBuilder,
+        public dialog: MatDialog,
+        private store: Store<AppState>,
+        private profileEditService: ProfileEditService,
+    ) {}
 
     ngOnInit(): void {
         this.profileForm = this.formBuilder.group({
-            email: ['', Validators.required],
-            password: ['', Validators.required],
-            bio: ['', Validators.required],
-            skills: [''],
-            avatar: [''],
+            userName: this.formBuilder.control(null, [
+                Validators.required,
+                Validators.minLength(2),
+                Validators.maxLength(15),
+            ]),
+            userSurname: this.formBuilder.control(null, [
+                Validators.required,
+                Validators.minLength(2),
+                Validators.maxLength(15),
+            ]),
+        });
+
+        this.store
+            .select('editProfile')
+            .pipe(takeUntil(this.destroy$))
+            .subscribe(info => {
+                if (info && info.name && !info.isError) {
+                    this.profileForm.get('userName').setValue(info.name);
+                    this.profileForm.get('userSurname').setValue(info.surname);
+                    this.url = info.avatar;
+                    if (this.isUpdate) {
+                        this.dialogSubmit(`Updated!
+                         ${info.name}`);
+                    }
+                } else if (!info || info.isError) {
+                    this.dialogSubmit(`UNSUCCESSFUL!`);
+                }
+            });
+    }
+
+    ngOnDestroy() {
+        this.destroy$.next();
+        this.destroy$.complete();
+    }
+
+    forSubmitDialog() {
+        this.profileEditService.delPreviousUrl();
+        this.isUpdate = true;
+    }
+    dialogSubmit(message) {
+        this.dialog.open(SubmitDialogComponent, {
+            height: '20vh',
+            width: '30vw',
+            data: { message: `${message}` },
         });
     }
 
@@ -32,13 +86,21 @@ export class ProfileEditComponent implements OnInit {
             data: event,
         });
 
-        dialogRef.afterClosed().subscribe(result => {
-            this.url = result;
-            this.profileForm.get('avatar').setValue(event.target.files[0]);
-        });
+        dialogRef
+            .afterClosed()
+            .pipe(takeUntil(this.destroy$))
+            .subscribe(result => {
+                this.url = result;
+            });
     }
 
     getRawData(): void {
-        console.log(this.profileForm);
+        this.store.dispatch(
+            new EditProfileActions.ProfileEditSet({
+                name: this.profileForm.get('userName').value,
+                surname: this.profileForm.get('userSurname').value,
+                avatar: this.profileEditService.getUrl(),
+            }),
+        );
     }
 }
