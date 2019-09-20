@@ -1,12 +1,9 @@
 <mat-card class="card__image">
-    <img mat-card-image [src]="url" alt="Photo of a Shiba Inu" />
+    <img mat-card-image [src]="url" alt="Photo of {{ title }}" />
     <mat-card-title>
         {{ title }}
     </mat-card-title>
-    <button mat-icon-button class="more__icon" 
-        [routerLink]="['/cardDetail', postId]"
-        (click) = "getPostId (this.postId)"
-    >
-        <mat-icon>more_horiz</mat-icon>
-    </button>
+    <div class="card__image--icons">
+        <ita-card-buttons></ita-card-buttons>
+    </div>
 </mat-card>

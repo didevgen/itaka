@@ -1,16 +1,21 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from 'angularfire2/firestore';
-import { GetUserIdService } from './get-user-id.service';
-import { map } from 'rxjs/operators';
-import { post } from 'selenium-webdriver/http';
+import { GetUserService } from './get-user.service';
+import { BehaviorSubject } from 'rxjs';
+import { Media } from '../models/content/Media/media.models';
+
 @Injectable({
     providedIn: 'root',
 })
 export class GetDataService {
-    posiId: string;
+
+    private posiId: string;
+    private mediaSource = new BehaviorSubject<Media[]>([]);
+    currentMedia = this.mediaSource.asObservable();
+
     constructor(
         private db: AngularFirestore,
-        private getUserIdService: GetUserIdService,
+        private getUserService: GetUserService,
     ) {}
     render(media): void {
         this.db
@@ -21,11 +26,12 @@ export class GetDataService {
                     const posts = doc.data();
                     media.push(posts);
                 });
+                this.mediaSource.next(media);
             });
     }
 
     renderUserContent(userMedia): void {
-        const userId = this.getUserIdService.getUserId();
+        const userId = this.getUserService.getUserId();
         this.db
             .collection('Posts')
             .get()
@@ -53,5 +59,9 @@ export class GetDataService {
                     }
                 });
             });
+    }
+
+    filterMedia(media) {
+        this.mediaSource.next(media);
     }
 }

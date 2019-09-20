@@ -12,17 +12,9 @@
     transform: scale(2);
     margin-bottom: 1vh;
 }
-.more__icon {
-    align-self: flex-end;
-}
 .card__audio--palyer {
     outline: none;
 }
-
-.container-icon {
-    display: flex;
-}
-
-.container-icon-likes {
-    align-self: flex-start;
+.card__audio--icons {
+    width: 100%;
 }
