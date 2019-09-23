@@ -15,15 +15,9 @@
     text-align: center;
 }
 .card__video--videoplayer {
-    width: 285px;
+    width: 110%;
     height: 185px;
 }
 .card__video--icons {
     width: 100%;
-}
-
-@media screen and (max-width: 1024px) {
-    .card__video--videoplayer {
-        width: 80vw;
-    }
 }
