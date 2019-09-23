@@ -15,11 +15,16 @@
 }
 .mat-card-image {
     width: 305px;
-    height: 255px;
+    height: 305px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
 }
 .card__image--icons {
     width: 100%;
+}
+@media screen and (max-width: 1024px) {
+    .mat-card-image {
+        width: 110%;
+    }
 }
