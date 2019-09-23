@@ -23,3 +23,8 @@
 .card__image--icons {
     width: 100%;
 }
+@media screen and (max-width: 1024px) {
+    .mat-card-image {
+        width: 80vw;
+    }
+}

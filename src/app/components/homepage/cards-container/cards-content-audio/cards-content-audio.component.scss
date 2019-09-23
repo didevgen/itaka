@@ -24,3 +24,9 @@
 .card__audio--icons {
     width: 100%;
 }
+
+@media screen and (max-width: 1024px) {
+    .card__audio--palyer {
+        width: 75vw;
+    }
+}
