@@ -4,12 +4,13 @@ import { GetUserService } from './get-user.service';
 import { BehaviorSubject } from 'rxjs';
 import { Media } from '../models/content/Media/media.models';
 import { Subject } from 'rxjs';
+import { OnDestroy } from '@angular/core';
 import { takeUntil } from 'rxjs/operators';
 
 @Injectable({
     providedIn: 'root',
 })
-export class GetDataService {
+export class GetDataService implements OnDestroy {
     private mediaSource = new BehaviorSubject<Media[]>([]);
     currentMedia = this.mediaSource.asObservable();
     private destroy$ = new Subject();
@@ -64,9 +65,9 @@ export class GetDataService {
     filterMedia(media) {
         this.mediaSource.next(media);
     }
-   
+
     ngOnDestroy(): void {
-        this.destroy$.next(true);  
+        this.destroy$.next(true);
         this.destroy$.complete();
-      }
- }
+    }
+}

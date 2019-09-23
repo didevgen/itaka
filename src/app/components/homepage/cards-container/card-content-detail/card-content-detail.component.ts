@@ -23,15 +23,14 @@ export class CardContentDetailComponent implements OnInit, OnDestroy {
     counterDisl: number;
     private userSub: Subscription;
     private routeSubscription: Subscription;
-    media: Media = new Object()
+    media: Media = new Object();
     postIdroute: string;
 
     constructor(
         private store: Store<fromApp.AppState>,
         private getDataService: GetDataService,
         private route: ActivatedRoute,
-        )
-    {
+    ) {
         this.routeSubscription = this.route.params.subscribe(
             params => (this.postIdroute = params.postId),
         );
@@ -43,9 +42,8 @@ export class CardContentDetailComponent implements OnInit, OnDestroy {
             this.counterLike = +like.likes;
             this.counterDisl = +like.dislikes;
         });
-    this.render (this.postIdroute)
-      
-}
+        this.render(this.postIdroute);
+    }
     onLike() {
         this.store.dispatch(new LikesounterActions.LikesLike());
         console.log('Get post id', this.postIdroute);
