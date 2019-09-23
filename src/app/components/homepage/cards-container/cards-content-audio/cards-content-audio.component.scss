@@ -20,13 +20,8 @@
 }
 .card__audio--palyer {
     outline: none;
+    width: 100%;
 }
 .card__audio--icons {
     width: 100%;
-}
-
-@media screen and (max-width: 1024px) {
-    .card__audio--palyer {
-        width: 75vw;
-    }
 }
