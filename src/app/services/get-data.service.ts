@@ -3,14 +3,16 @@ import { AngularFirestore } from 'angularfire2/firestore';
 import { GetUserService } from './get-user.service';
 import { BehaviorSubject } from 'rxjs';
 import { Media } from '../models/content/Media/media.models';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Injectable({
     providedIn: 'root',
 })
 export class GetDataService {
-    private posiId: string;
     private mediaSource = new BehaviorSubject<Media[]>([]);
     currentMedia = this.mediaSource.asObservable();
+    private destroy$ = new Subject();
 
     constructor(
         private db: AngularFirestore,
@@ -38,17 +40,17 @@ export class GetDataService {
                 snapshot.docs.forEach(doc => {
                     if (userId === doc.data().userId) {
                         const posts = doc.data();
-                        this.posiId = doc.data().postId;
                         userMedia.push(posts);
                     }
                 });
             });
     }
 
-    renderCardContent(postId, curPost): any {
+    renderCardContent(postId, curPost): void {
         this.db
             .collection('Posts')
             .get()
+            .pipe(takeUntil(this.destroy$))
             .subscribe(snapshot => {
                 snapshot.docs.forEach(doc => {
                     if (postId === doc.data().postId) {
@@ -62,4 +64,9 @@ export class GetDataService {
     filterMedia(media) {
         this.mediaSource.next(media);
     }
-}
+   
+    ngOnDestroy(): void {
+        this.destroy$.next(true);  
+        this.destroy$.complete();
+      }
+ }

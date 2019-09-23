@@ -18,8 +18,7 @@
                     mat-card-image
                     [src]="media.url"
                     alt="picture"
-                    class="content-page__picture"
-                />
+                    class="content-page__picture"/>
                 <p class="content-page__content-description">
                   {{media.description}}
                 </p>
@@ -34,12 +33,15 @@
             </div>
 
             <div *ngIf="media.contentType == 'video'">
-                <div>
-                    <iframe
-                        class="responsive-video1"
-                        [src]="media.url"
-                        allowfullscreen
-                    ></iframe>
+                <div class="responsive-video">
+                    <mat-video
+                            class="responsive-video1"
+                            [download] = "true"
+                            allowfullscreen
+                            color = "accent"
+                    >
+                            <source matVideoSource [src]="media.url" type="video/mp4"> 
+                    </mat-video>
                 </div>
                 <p class="content-page__content-description">
                     {{ description }}
@@ -47,9 +49,9 @@
             </div>
             <div
                 *ngIf="media.contentType == 'text'"
-                [innerHTML]="media.description"
-                class="content-page__text-content"
-            ></div>
+                class="content-page__text-content">
+                <mat-card-content [innerHtml]="media.description"></mat-card-content>
+            </div>
         </div>
         <mat-card-actions class="card__buttons">
             <button
@@ -82,4 +84,5 @@
             </button>
         </mat-card-actions>
     </mat-card>
-</div>
+ </div>
+<!--[src]='sanitizer.bypassSecurityTrustResourceUrl(media.url)' -->

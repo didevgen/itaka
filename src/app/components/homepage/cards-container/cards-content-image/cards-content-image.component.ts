@@ -28,7 +28,7 @@ export class CardsContentImageComponent implements OnInit, OnDestroy {
 
     goCardDetail(elem) {
         console.log(elem);
-        this.router.navigate(['/cardDetail', this.postId]);
+        this.router.navigate(['cardDetail', this.postId]);
         this.setPostId(elem);
     }
 

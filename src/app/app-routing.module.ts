@@ -36,10 +36,10 @@ const routes: Routes = [
     {
         path: 'userPage',
         component: UserPageComponent,
-        canActivate: [AuthGuard],
+        canActivate: [AuthGuard]
     },
     { path: 'auth', component: AuthFormComponent },
-    { path: 'cardDetail/:postId', component: CardContentDetailComponent },
+    { path: 'cardDetail/:postId', component: CardContentDetailComponent},
     { path: '**', component: NotFoundComponent },
 ];
 

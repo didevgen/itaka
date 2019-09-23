@@ -34,16 +34,6 @@ export function LikesCountReducer(
                 ...state,
                 postId: action.payload.postId,
             };
-        // case LikesCounterTypes.CLEARLIKE:
-        //         return {
-        //             ...state,
-        //             likes : false,
-        //         };
-        // case LikesCounterTypes.CLEARLIKE:
-        //         return {
-        //             ...state,
-        //             dislikes : false,
-        //             };
         default:
             return state;
     }

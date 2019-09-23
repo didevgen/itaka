@@ -1,14 +1,11 @@
-import { Component, OnInit, OnDestroy, Output, Input } from '@angular/core';
-import { map, switchMap } from 'rxjs/operators';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
 import * as fromApp from '../../../../store/app.reducer';
 import * as LikesounterActions from '../../cards-container/card-content-detail/store/card-content.actions';
 import { GetDataService } from '../../../../services/get-data.service';
-import { AngularFirestore } from 'angularfire2/firestore';
 import { ActivatedRoute } from '@angular/router';
 import { Subject, of } from 'rxjs';
-import { getMatIconFailedToSanitizeUrlError } from '@angular/material';
 import { Media } from '../../../../models/content/Media/media.models';
 
 @Component({
@@ -26,16 +23,15 @@ export class CardContentDetailComponent implements OnInit, OnDestroy {
     counterDisl: number;
     private userSub: Subscription;
     private routeSubscription: Subscription;
-    private destroy$ = new Subject<void>();
-    media: Media = {};
+    media: Media = new Object()
     postIdroute: string;
 
     constructor(
         private store: Store<fromApp.AppState>,
         private getDataService: GetDataService,
         private route: ActivatedRoute,
-        private db: AngularFirestore,
-    ) {
+        )
+    {
         this.routeSubscription = this.route.params.subscribe(
             params => (this.postIdroute = params.postId),
         );
@@ -47,9 +43,9 @@ export class CardContentDetailComponent implements OnInit, OnDestroy {
             this.counterLike = +like.likes;
             this.counterDisl = +like.dislikes;
         });
-        this.render(this.postIdroute);
-    }
-
+    this.render (this.postIdroute)
+      
+}
     onLike() {
         this.store.dispatch(new LikesounterActions.LikesLike());
         console.log('Get post id', this.postIdroute);
@@ -61,13 +57,10 @@ export class CardContentDetailComponent implements OnInit, OnDestroy {
 
     render(postId) {
         this.getDataService.renderCardContent(postId, this.media);
-        console.log(this.media);
     }
 
     ngOnDestroy() {
         this.userSub.unsubscribe();
         this.routeSubscription.unsubscribe();
-        // this.destroy$.next();
-        // this.destroy$.complete();
     }
 }
