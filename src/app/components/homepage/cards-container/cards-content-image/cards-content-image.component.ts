@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, OnDestroy } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
 import * as fromApp from '../../../../store/app.reducer';
@@ -27,7 +27,6 @@ export class CardsContentImageComponent implements OnInit, OnDestroy {
     ngOnInit() {}
 
     goCardDetail(elem) {
-        console.log(elem);
         this.router.navigate(['cardDetail', this.postId]);
         this.setPostId(elem);
     }
