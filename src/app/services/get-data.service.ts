@@ -40,6 +40,7 @@ export class GetDataService {
                         userMedia.push(posts);
                     }
                 });
+                this.mediaSource.next(userMedia);
             });
     }
     filterMedia(media) {
