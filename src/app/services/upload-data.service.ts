@@ -7,7 +7,6 @@ import { GetUserService } from './get-user.service';
     providedIn: 'root',
 })
 export class UploadDataService {
-    private postId = this.db.createId();
     private userId = this.getUserService.getUserId();
     constructor(
         private db: AngularFirestore,
@@ -20,9 +19,10 @@ export class UploadDataService {
         contentType: string,
         url: string,
     ): void {
+        const postId = this.db.createId();
         this.db
             .collection('Posts')
-            .doc(this.postId)
+            .doc(postId)
             .set({
                 url,
                 date: new Date(),
@@ -32,14 +32,15 @@ export class UploadDataService {
                 likes: 0,
                 dislikes: 0,
                 userId: this.userId,
-                postId: this.postId,
+                postId,
             });
     }
 
     public uploadTextData(title: string, description: string): Observable<any> {
+        const postId = this.db.createId();
         const sendTextPromise = this.db
             .collection('Posts')
-            .doc(this.postId)
+            .doc(postId)
             .set({
                 date: new Date(),
                 title,
@@ -48,7 +49,7 @@ export class UploadDataService {
                 likes: 0,
                 dislikes: 0,
                 userId: this.userId,
-                postId: this.postId,
+                postId,
             });
         const addText = from(sendTextPromise);
         return addText;
