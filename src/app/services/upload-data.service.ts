@@ -7,7 +7,6 @@ import { GetUserService } from './get-user.service';
     providedIn: 'root',
 })
 export class UploadDataService {
-    // private postId = this.db.createId();
     private userId = this.getUserService.getUserId();
     constructor(
         private db: AngularFirestore,
