@@ -1,6 +1,6 @@
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
-import {UserComment} from '../../../../models/content/comment.model';
+import { UserComment } from '../../../../models/content/comment.model';
 
 @Component({
     selector: 'ita-card-content-detail',
@@ -13,7 +13,7 @@ export class CardContentDetailComponent implements OnInit {
     url: string;
     type: string;
 
-   /* type SingleComment<UserComment> = {
+    /* type SingleComment<UserComment> = {
       id: string | undefined,
       info: UserComment
     };
