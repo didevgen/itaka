@@ -12,7 +12,6 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import * as firebase from 'firebase/app';
 import { AngularFirestore } from 'angularfire2/firestore';
 import * as ProfileEditActions from '../../profile-edit/store/profile-edit.actions';
-import { ProfileEditClear } from '../../profile-edit/store/profile-edit.actions';
 
 export interface AuthResponseData {
     kind: string;
