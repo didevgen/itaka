@@ -4,5 +4,5 @@
 export interface EditProfile {
     name: string | null;
     surname: string | null;
-    avatar: string | Blob | null;
+    avatar: string | null;
 }
