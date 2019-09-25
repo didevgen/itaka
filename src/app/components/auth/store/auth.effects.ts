@@ -216,7 +216,6 @@ export class AuthEffects {
             this.authService.clearLogoutTimer();
             localStorage.removeItem('userData');
             this.router.navigate(['/auth']);
-            // this.store.dispatch(new EditProfileActions.ProfileEditClear());
         }),
         map(() => new ProfileEditActions.ProfileEditClear()),
     );

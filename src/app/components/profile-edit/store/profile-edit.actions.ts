@@ -29,7 +29,7 @@ export class ProfileEditClear implements Action {
 export class ProfileEditError implements Action {
     readonly type = ProfileEditTypes.ProfileEdit_Error;
 
-    constructor(public payload: ProfileEditState) {}
+    constructor(public payload: Partial<ProfileEditState>) {}
 }
 
 export type ProfileEditActions =
