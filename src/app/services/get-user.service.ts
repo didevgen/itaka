@@ -17,7 +17,7 @@ export class GetUserService implements OnDestroy {
             .select(fromApp.getUser)
             .subscribe(user => {
                 if (!user) {
-                    console.log(`the user doesn't exist yet`);
+                    console.log(`the user doesn't exist yet (userID service)`);
                     return;
                 }
                 this.userID = user.id;
@@ -25,8 +25,6 @@ export class GetUserService implements OnDestroy {
             });
         if (this.isExisting) {
             return this.userID;
-        } else {
-            throwError(`user doesn't exist!`);
         }
     }
     ngOnDestroy() {
