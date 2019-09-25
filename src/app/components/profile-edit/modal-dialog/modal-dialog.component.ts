@@ -14,7 +14,7 @@ import { ProfileEditService } from '../profile-edit.service';
     styleUrls: ['../profile-edit.component.scss'],
 })
 export class ModalDialogComponent {
-    croppedImageQ: string;
+    imageURL: string;
     image: string;
 
     croppedImage: string;
@@ -60,10 +60,10 @@ export class ModalDialogComponent {
         const ref = this.storage.ref(path);
         this.task = this.storage.upload(path, this.file);
         this.snapshot = this.task.snapshotChanges().subscribe(async () => {
-            this.croppedImageQ = await ref.getDownloadURL().toPromise();
+            this.imageURL = await ref.getDownloadURL().toPromise();
             this.deletePreviousPath = path;
             return this.profileEditService.setUrl(
-                this.croppedImageQ,
+                this.imageURL,
                 this.deletePreviousPath,
             );
         });
