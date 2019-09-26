@@ -8,6 +8,7 @@
         [fullscreen]="true"
         [download]="true"
         color="accent"
+        (click) = "stopEvent($event)"
     >
         <source matVideoSource [src]="url" type="video/mp4" />
     </mat-video>
