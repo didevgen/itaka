@@ -90,7 +90,9 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
             .afterClosed()
             .pipe(takeUntil(this.destroy$))
             .subscribe(result => {
-                this.url = result;
+                if (result) {
+                    this.url = result.base64 || this.url || this.defaultImage;
+                }
             });
     }
 
@@ -99,7 +101,10 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
             new EditProfileActions.ProfileEditSet({
                 name: this.profileForm.get('userName').value,
                 surname: this.profileForm.get('userSurname').value,
-                avatar: this.profileEditService.getUrl(),
+                avatar:
+                    this.profileEditService.getUrl() ||
+                    this.url ||
+                    this.defaultImage,
             }),
         );
     }

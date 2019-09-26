@@ -42,6 +42,7 @@ export class GetDataService implements OnDestroy {
                         userMedia.push(posts);
                     }
                 });
+                this.mediaSource.next(userMedia);
             });
     }
 

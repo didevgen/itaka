@@ -35,7 +35,7 @@ export class ProfileEditService implements OnDestroy {
             this.userID = this.userIdService.getUserId();
             this.data = payload;
             const document = this.db.doc('Users/' + this.userID);
-            document.set({ ...this.data }, { merge: true }).catch(err => {
+            document.update({ ...this.data }).catch(err => {
                 console.log('error from database while saving: ', err);
             });
 
