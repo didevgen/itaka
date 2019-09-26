@@ -25,8 +25,9 @@
             </div>
         </ng-container>
         <ng-container #text *ngIf="content.contentType === 'text'">
-            <div class="text">
+            <div class="text" (click) = "getConsole($event)" >
                 <ita-cards-content-text
+                    
                     [title]="content.title"
                     [description]="content.description"
                 >
