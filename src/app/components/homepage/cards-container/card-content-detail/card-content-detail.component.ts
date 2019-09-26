@@ -16,7 +16,6 @@ import { takeUntil } from 'rxjs/operators';
 })
 export class CardContentDetailComponent implements OnInit, OnDestroy {
     title: string;
-    postId: string;
     description: string;
     url: string;
     type: string;
