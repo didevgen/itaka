@@ -17,6 +17,7 @@ import { SearchService } from '../../../services/search.service';
     selector: 'ita-header',
     templateUrl: './header.component.html',
     styleUrls: ['./header.component.scss'],
+    providers: [SearchService],
 })
 export class HeaderComponent implements OnInit, OnDestroy {
     userName: string;
@@ -25,7 +26,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     private userSub: Subscription;
     private searchSubscription: Subscription;
     public inputSearch = new Subject<KeyboardEvent>();
-    public searchInput = new Observable();
+    public searchInput;
     snapshot: Observable<any>;
 
     constructor(
@@ -49,33 +50,30 @@ export class HeaderComponent implements OnInit, OnDestroy {
                 this.isAuthenticated = !!user;
             });
         const sub = this.inputSearch;
+        this.onSearch(sub, search);
+    }
+
+    private onSearch(sub: Subject<KeyboardEvent>, search: SearchService) {
         this.searchInput = sub.pipe(
-            debounceTime(300),
+            debounceTime(400),
             distinctUntilChanged(),
             mergeMap(e => of(e).pipe(delay(500))),
         );
-        const a = this.searchInput.subscribe(t => console.log('input ==>', t));
-        this.searchInput.subscribe((e: string) => search.searchByTitle(e));
-        this.searchInput.subscribe((e: string) => search.searchByAuthorName(e));
-        // a.unsubscribe();
+        this.searchInput.subscribe((element: string) =>
+            search
+                .searchByTitle(element)
+                .subscribe(posts =>
+                    console.log(posts.map(post => post.data().title)),
+                ),
+        );
     }
-    onSearch(event) {
-        // console.log(event.target.value);
-        // fromEvent(event.target.value, 'input')
-        //     .pipe(
-        //         map(event => event),
-        //         debounceTime(500),
-        //         distinctUntilChanged(),
-        //         mergeMap(e => of(e).pipe(delay(500))),
-        //     )
-        //     .subscribe(e => console.log('ads', e));
-    }
+
     onLogout() {
         this.store.dispatch(new AuthActions.Logout());
     }
 
     ngOnDestroy() {
         this.userSub.unsubscribe();
-        // this.searchInput.unsubscribe();
+        this.inputSearch.unsubscribe();
     }
 }
