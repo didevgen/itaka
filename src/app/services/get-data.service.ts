@@ -46,16 +46,12 @@ export class GetDataService implements OnDestroy {
     }
 
     renderCardContent(): Observable<any> {
-        return this.db
-            .collection('Posts')
-            .get();
+        return this.db.collection('Posts').get();
     }
 
     filterMedia(media) {
         this.mediaSource.next(media);
     }
 
-    ngOnDestroy(): void {
-       
-    }
+    ngOnDestroy(): void {}
 }

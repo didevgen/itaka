@@ -53,17 +53,17 @@ export class CardContentDetailComponent implements OnInit, OnDestroy {
     }
 
     render(postId) {
-        this.getDataService.renderCardContent()
-        .pipe(takeUntil(this.destroy$))
+        this.getDataService
+            .renderCardContent()
+            .pipe(takeUntil(this.destroy$))
             .subscribe(snapshot => {
                 snapshot.docs.forEach(doc => {
                     if (postId === doc.data().postId) {
-                         const post = doc.data()
-                         this.media = post
+                        const post = doc.data();
+                        this.media = post;
                     }
                 });
             });
-           
     }
 
     ngOnDestroy() {
