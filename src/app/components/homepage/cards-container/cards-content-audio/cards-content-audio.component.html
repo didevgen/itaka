@@ -1,4 +1,6 @@
-<mat-card class="card__audio">
+<mat-card class="card__audio"
+   (click) = "goCardDetail (this.postId)"
+>
     <div class="music__icon">
         <mat-icon>music_video</mat-icon>
     </div>
@@ -11,7 +13,9 @@
     <mat-card-title>
         {{ title }}
     </mat-card-title>
-    <div class="card__audio--icons">
+    <div class="card__audio--icons"
+      (click) = "stopEvent($event)"
+    >
         <ita-card-buttons></ita-card-buttons>
     </div>
 </mat-card>

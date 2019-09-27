@@ -90,7 +90,9 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
             .afterClosed()
             .pipe(takeUntil(this.destroy$))
             .subscribe(result => {
-                this.url = result.base64;
+                if (result) {
+                    this.url = result.base64 || this.url || this.defaultImage;
+                }
             });
     }
 
