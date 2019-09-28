@@ -3,8 +3,9 @@ import { AngularFirestore } from 'angularfire2/firestore';
 import { GetUserService } from './get-user.service';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Media } from '../models/content/Media/media.models';
-import { Subject } from 'rxjs';
+import { Subject, of } from 'rxjs';
 import { OnDestroy } from '@angular/core';
+import { forkJoin } from 'rxjs';
 
 @Injectable({
     providedIn: 'root',
@@ -46,8 +47,12 @@ export class GetDataService implements OnDestroy {
             });
     }
 
-    renderCardContent(): Observable<any> {
-        return this.db.collection('Posts').get();
+    renderData () : Observable<Array<any>> {
+
+        const posts =  this.db.collection('Posts').get()
+        const users =  this.db.collection('Users').get()
+        const joinObservable = forkJoin (posts, users);
+        return joinObservable
     }
 
     filterMedia(media) {

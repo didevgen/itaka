@@ -1,12 +1,11 @@
 <div class="container">
     <mat-card class="card card-content-detail ">
         <mat-card-header>
-            <img
+            <img *ngIf="!!ava"
                 mat-card-avatar
-                src="https://material.angular.io/assets/img/examples/shiba2.jpg"
-                alt="Photo of a Shiba Inu"
+                [src] = "ava"
             />
-            <mat-card-subtitle>Author</mat-card-subtitle>
+            <mat-card-subtitle>{{name}}</mat-card-subtitle>
             <mat-card-title>      
                 {{ media.title }}
             </mat-card-title
