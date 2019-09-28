@@ -33,8 +33,7 @@ export class CardContentDetailComponent implements OnInit, OnDestroy {
     constructor(
         private store: Store<fromApp.AppState>,
         private getDataService: GetDataService,
-        private route: ActivatedRoute
-
+        private route: ActivatedRoute,
     ) {}
 
     ngOnInit(): void {
@@ -55,26 +54,25 @@ export class CardContentDetailComponent implements OnInit, OnDestroy {
         this.store.dispatch(new LikesСounterActions.LikeDislike());
     }
 
-
     renderData(postId) {
-        this.getDataService.renderData()
-        .pipe(takeUntil(this.destroy$))
-        .subscribe(snapshot => {
-            snapshot[0].docs.forEach(doc => {
-                if (postId === doc.data().postId) {
-                    const post = doc.data();
-                    this.userId = doc.data().userId;
-                    this.media = post;
-                }
+        this.getDataService
+            .renderData()
+            .pipe(takeUntil(this.destroy$))
+            .subscribe(snapshot => {
+                snapshot[0].docs.forEach(doc => {
+                    if (postId === doc.data().postId) {
+                        const post = doc.data();
+                        this.userId = doc.data().userId;
+                        this.media = post;
+                    }
+                });
+                snapshot[1].docs.forEach(doc => {
+                    if (this.userId === doc.id) {
+                        this.name = doc.data().name;
+                        this.ava = doc.data().avatar;
+                    }
+                });
             });
-            snapshot[1].docs.forEach(doc => {
-                if (this.userId === doc.id) {
-                    this.name = doc.data().name;
-                    this.ava = doc.data().avatar
-                }
-             });
-        });
-
     }
 
     ngOnDestroy() {

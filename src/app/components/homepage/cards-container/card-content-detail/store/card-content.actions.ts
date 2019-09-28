@@ -1,11 +1,10 @@
 import { Action } from '@ngrx/store';
 
-
 export const enum LikesCounterTypes {
     LIKE = '[LikesCounter] Likes Like ',
     DISLIKE = '[LikesCounter] Likes Dislike',
     SETPOSTID = '[LikesCounter] Set Post Id',
-    POSTSUCCES = '[LikesCounter] Succes Post Id'
+    POSTSUCCES = '[LikesCounter] Succes Post Id',
 }
 
 export class LikesLike implements Action {
@@ -24,9 +23,7 @@ export class SetPostId implements Action {
 export class SuccesPostId implements Action {
     readonly type = LikesCounterTypes.POSTSUCCES;
 
-    constructor(public payload: { postId: string, userId : string }) {}
+    constructor(public payload: { postId: string; userId: string }) {}
 }
-
-
 
 export type LikesounterActions = LikesLike | LikeDislike | SetPostId;

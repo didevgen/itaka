@@ -47,12 +47,11 @@ export class GetDataService implements OnDestroy {
             });
     }
 
-    renderData () : Observable<Array<any>> {
-
-        const posts =  this.db.collection('Posts').get()
-        const users =  this.db.collection('Users').get()
-        const joinObservable = forkJoin (posts, users);
-        return joinObservable
+    renderData(): Observable<Array<any>> {
+        const posts = this.db.collection('Posts').get();
+        const users = this.db.collection('Users').get();
+        const joinObservable = forkJoin(posts, users);
+        return joinObservable;
     }
 
     filterMedia(media) {
