@@ -14,7 +14,7 @@
     text-align: center;
 }
 .mat-card-image {
-    width: 305px;
+    width: 110%;
     height: 305px;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -22,9 +22,4 @@
 }
 .card__image--icons {
     width: 100%;
-}
-@media screen and (max-width: 1024px) {
-    .mat-card-image {
-        width: 110%;
-    }
 }

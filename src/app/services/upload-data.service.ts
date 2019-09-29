@@ -29,7 +29,7 @@ export class UploadDataService {
                 title,
                 description,
                 contentType,
-                likes: 0,
+                likes: [],
                 dislikes: 0,
                 userId: this.userId,
                 postId,
