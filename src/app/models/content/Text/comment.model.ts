@@ -1,4 +1,4 @@
 export interface Comment {
-  text: string;
-  date: string;
+    text: string;
+    date: string;
 }
