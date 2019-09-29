@@ -1,12 +1,8 @@
 <div class="container">
     <mat-card class="card card-content-detail ">
         <mat-card-header>
-            <img
-                mat-card-avatar
-                src="https://material.angular.io/assets/img/examples/shiba2.jpg"
-                alt="Photo of a Shiba Inu"
-            />
-            <mat-card-subtitle>Author</mat-card-subtitle>
+            <img *ngIf="!!ava" mat-card-avatar [src]="ava" />
+            <mat-card-subtitle>{{ name }}</mat-card-subtitle>
             <mat-card-title>
                 {{ media.title }}
             </mat-card-title>
@@ -65,7 +61,7 @@
         <mat-card-actions class="card__buttons">
             <button
                 mat-icon-button
-                color="accent"
+                color="base"
                 matTooltip="Like"
                 matTooltipPosition="above"
                 (click)="onLike()"
@@ -86,6 +82,15 @@
             <button
                 mat-icon-button
                 color="base"
+                [matTooltip]="!comment ? 'no comments yet' : isComment ? 'Hide' : 'Show'"
+                matTooltipPosition="above"
+                (click)="commentView()"
+            >
+                <mat-icon>comments</mat-icon>
+            </button>
+            <button
+                mat-icon-button
+                color="base"
                 matTooltip="Share"
                 matTooltipPosition="above"
             >
@@ -94,8 +99,9 @@
         </mat-card-actions>
     </mat-card>
 
-    <section>
-        <div id="idFromDB" #singleComment>
+  <ng-container *ngIf="isComment">
+    <ng-container *ngFor="let comment of comments; let ind = index">
+        <section #oneComment>
             <mat-card class="comment-container">
                 <mat-card-header>
                     <img
@@ -107,7 +113,40 @@
                     ><mat-card-subtitle>Author</mat-card-subtitle>
                 </mat-card-header>
                 <mat-card-content class="comment-container_content-card">
+                    <p [innerText]="comment.text"></p>
+                    <time class="right" datetime="date">{{
+                        comment.date
+                    }}</time>
+                </mat-card-content>
+                <mat-card-actions class="comment-card">
+                    <button
+                        mat-icon-button
+                        color="base"
+                        matTooltip="Delete"
+                        matTooltipPosition="above"
+                        (click)="onDelete(ind)"
+                    >
+                        <mat-icon>delete</mat-icon>
+                    </button>
+                </mat-card-actions>
+            </mat-card>
+        </section>
+    </ng-container>
+  </ng-container>
 
+    <section>
+        <div id="idFromDB" #singleComment>
+            <mat-card class="comment-container comment-container__margintop">
+                <mat-card-header>
+                    <img
+                        mat-card-avatar
+                        src="https://material.angular.io/assets/img/examples/shiba2.jpg"
+                        alt="User avatar"
+                    />
+                    <mat-card-title>userProfile.name</mat-card-title
+                    ><mat-card-subtitle>Author</mat-card-subtitle>
+                </mat-card-header>
+                <mat-card-content class="comment-container_content-card">
                     <mat-form-field
                         class="comment-container_content-card__size"
                         color="accent"
@@ -118,7 +157,7 @@
                             cdkTextareaAutosize
                             cdkAutosizeMaxRows="5"
                             maxlength="400"
-                            placeholder="Your message"
+                            placeholder="Send your message"
                             [formControl]="commentFC"
                         ></textarea>
                         <mat-hint align="start"
@@ -128,40 +167,23 @@
                             >{{ message.value.length }} / 400</mat-hint
                         >
                     </mat-form-field>
-                    <!--</ng-container>-->
-                    <!--<ng-template #showCommentParagraph *ngIf="!isComment">
-                        <p #comment></p>
-                        <hr />
-                    <time  class="right" datetime="date">{{ date }}</time>
-
-                    </ng-template>-->
                 </mat-card-content>
                 <mat-card-actions class="comment-card">
                     <button
                         mat-button
                         (click)="onSend()"
-                        [disabled]="isComment || !commentFC.valid"
+                        [disabled]="!commentFC.valid"
                     >
                         Send
                     </button>
                     <button
                         mat-button
-                        matTooltip="Edit again..."
+                        matTooltip="Clear text"
                         matTooltipPosition="above"
-                        [disabled]="!isComment"
+                        [disabled]="!commentFC.valid"
                         (click)="onCancel()"
                     >
                         Cancel
-                    </button>
-                    <button
-                        *ngIf="isComment"
-                        mat-icon-button
-                        color="base"
-                        matTooltip="Delete"
-                        matTooltipPosition="above"
-                        (click)="onDelete(singleComment)"
-                    >
-                        <mat-icon>delete</mat-icon>
                     </button>
                 </mat-card-actions>
             </mat-card>

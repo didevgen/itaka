@@ -8,7 +8,7 @@ import {
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
 import * as fromApp from '../../../../store/app.reducer';
-import * as LikesCounterActions from '../../cards-container/card-content-detail/store/card-content.actions';
+import * as LikesСounterActions from '../../cards-container/card-content-detail/store/card-content.actions';
 import { GetDataService } from '../../../../services/get-data.service';
 import { ActivatedRoute } from '@angular/router';
 import { Subject, of } from 'rxjs';
@@ -16,6 +16,7 @@ import { Media } from '../../../../models/content/Media/media.models';
 import { takeUntil } from 'rxjs/operators';
 import { FormControl, Validators } from '@angular/forms';
 import { EditProfile } from '../../../../models/edit-profile/edit-profile.model';
+import { Comment } from '../../../../models/content/Text/comment.model';
 
 @Component({
     selector: 'ita-card-content-detail',
@@ -29,6 +30,9 @@ export class CardContentDetailComponent implements OnInit, OnDestroy {
     type: string;
     counterLike: number;
     counterDisl: number;
+    private userId: string;
+    name: string;
+    ava: string;
     private userSub: Subscription;
     private routeSubscription: Subscription;
     media: Media = new Object();
@@ -39,15 +43,18 @@ export class CardContentDetailComponent implements OnInit, OnDestroy {
     isComment: boolean;
     commentFC: FormControl;
     date: string;
-    userId: string;
+    // userId: string;
     public userProfile: EditProfile;
     avatar: string;
     // private destroy$ = new Subject<void>();
     defaultImage = '../../assets/avatarDefault.png';
 
-    @ViewChild('comment', { static: false })
-    comment: ElementRef;
+    /*@ViewChild('comment', { static: false })
+    comment: ElementRef;*/
     leftText: string;
+    private comment: Comment;
+    // comments: Array<comment> = [];
+    public comments: Array<Comment> = [];
 
     constructor(
         private store: Store<fromApp.AppState>,
@@ -63,7 +70,7 @@ export class CardContentDetailComponent implements OnInit, OnDestroy {
         this.routeSubscription = this.route.params.subscribe(
             params => (this.postIdroute = params.postId),
         );
-        this.render(this.postIdroute);
+        this.renderData(this.postIdroute);
 
         this.commentFC = new FormControl('', [
             Validators.required,
@@ -72,22 +79,29 @@ export class CardContentDetailComponent implements OnInit, OnDestroy {
         ]);
     }
     onLike() {
-        this.store.dispatch(new LikesCounterActions.LikesLike());
+        this.store.dispatch(new LikesСounterActions.LikesLike());
     }
 
     onDisLike() {
-        this.store.dispatch(new LikesCounterActions.LikeDislike());
+        this.store.dispatch(new LikesСounterActions.LikeDislike());
     }
 
-    render(postId) {
+    renderData(postId) {
         this.getDataService
-            .renderCardContent()
+            .renderData()
             .pipe(takeUntil(this.destroy$))
             .subscribe(snapshot => {
-                snapshot.docs.forEach(doc => {
+                snapshot[0].docs.forEach(doc => {
                     if (postId === doc.data().postId) {
                         const post = doc.data();
+                        this.userId = doc.data().userId;
                         this.media = post;
+                    }
+                });
+                snapshot[1].docs.forEach(doc => {
+                    if (this.userId === doc.id) {
+                        this.name = doc.data().name;
+                        this.ava = doc.data().avatar;
                     }
                 });
             });
@@ -104,17 +118,22 @@ export class CardContentDetailComponent implements OnInit, OnDestroy {
             second: 'numeric',
         });
         this.isComment = true;
-        // this.leftText = this.commentFC.value;
-        /*setTimeout(
-            () => (this.comment.nativeElement.innerText = this.commentFC.value),
-            0,
-        );*/
+
+        this.comment = { text: this.commentFC.value, date: this.date };
+        this.comments.push(this.comment);
+        this.comments.reverse();
+        console.log(this.comment, 'comment onInit');
+        console.log(this.comments, 'commentSSS onInit');
+        this.commentFC.reset();
     }
     onCancel() {
-        this.isComment = false;
+        this.commentFC.reset();
     }
-    onDelete(singleComment) {
-        singleComment.innerHTML = '';
+    onDelete(deleteIndex) {
+        this.comments.splice(deleteIndex, 1);
+    }
+    commentView() {
+        this.isComment = !this.isComment;
     }
 
     ngOnDestroy() {

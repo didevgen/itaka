@@ -29,7 +29,7 @@ export function LikesCountReducer(
                 dislikes: !state.dislikes,
                 likes: false,
             };
-        case LikesCounterTypes.GETPOSTID:
+        case LikesCounterTypes.SETPOSTID:
             return {
                 ...state,
                 postId: action.payload.postId,

@@ -27,12 +27,12 @@ export class CardsContentTextComponent implements OnInit, OnDestroy {
 
     goCardDetail(elem) {
         this.router.navigate(['/cardDetail', this.postId]);
-        this.setPostId(elem);
+        // this.setPostId(elem);
     }
 
-    setPostId(elem) {
-        this.store.dispatch(new LikesActions.GetPostId({ postId: elem }));
-    }
+    // setPostId(elem) {
+    //     this.store.dispatch(new LikesActions.SetPostId({ postId: elem }));
+    // }
 
     stopEvent(event) {
         event.stopPropagation();
