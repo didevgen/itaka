@@ -32,7 +32,7 @@ export class CardContentDetailComponent implements OnInit, OnDestroy {
     commentFC: FormControl;
     date: string;
     userId: string;
-    userProfile: EditProfile;
+    public userProfile: EditProfile;
     avatar: string;
     private destroy$ = new Subject<void>();
     defaultImage = '../../assets/avatarDefault.png';
