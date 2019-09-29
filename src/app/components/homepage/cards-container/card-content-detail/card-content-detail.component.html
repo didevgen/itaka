@@ -7,23 +7,27 @@
                 alt="Photo of a Shiba Inu"
             />
             <mat-card-subtitle>Author</mat-card-subtitle>
-            <mat-card-title>      
+            <mat-card-title>
                 {{ media.title }}
-            </mat-card-title
-            >
+            </mat-card-title>
         </mat-card-header>
-        <div class="content-page__content" *ngIf="!!media.contentType" [ngSwitch] = "media.contentType" >
-            <div *ngSwitchCase ="'image'">
+        <div
+            class="content-page__content"
+            *ngIf="!!media.contentType"
+            [ngSwitch]="media.contentType"
+        >
+            <div *ngSwitchCase="'image'">
                 <img
                     mat-card-image
                     [src]="media.url"
                     alt="picture"
-                    class="content-page__picture"/>
+                    class="content-page__picture"
+                />
                 <p class="content-page__content-description">
-                  {{media.description}}
+                    {{ media.description }}
                 </p>
             </div>
-            <div *ngSwitchCase ="'audio'">
+            <div *ngSwitchCase="'audio'">
                 <audio controls>
                     <source [src]="media.url" type="audio/mp3" />
                 </audio>
@@ -32,27 +36,31 @@
                 </p>
             </div>
 
-            <div *ngSwitchCase ="'video'">
+            <div *ngSwitchCase="'video'">
                 <div class="responsive-video">
                     <mat-video
-                            class="responsive-video1"
-                            [download] = "true"
-                            allowfullscreen
-                            color = "accent"
+                        class="responsive-video1"
+                        [download]="true"
+                        allowfullscreen
+                        color="accent"
                     >
-                            <source matVideoSource [src]="media.url" type="video/mp4"> 
+                        <source
+                            matVideoSource
+                            [src]="media.url"
+                            type="video/mp4"
+                        />
                     </mat-video>
                 </div>
                 <p class="content-page__content-description">
                     {{ description }}
                 </p>
             </div>
-            <div
-                *ngSwitchCase ="'text'"
-                class="content-page__text-content">
-                <mat-card-content [innerHtml]="media.description"></mat-card-content>
+            <div *ngSwitchCase="'text'" class="content-page__text-content">
+                <mat-card-content
+                    [innerHtml]="media.description"
+                ></mat-card-content>
             </div>
-        <div *ngSwitchDefault><mat-spinner></mat-spinner></div>
+            <div *ngSwitchDefault><mat-spinner></mat-spinner></div>
         </div>
         <mat-card-actions class="card__buttons">
             <button
@@ -60,21 +68,21 @@
                 color="accent"
                 matTooltip="Like"
                 matTooltipPosition="above"
-                (click) = "onLike()"
+                (click)="onLike()"
             >
                 <mat-icon>thumb_up_alt</mat-icon>
             </button>
-            <span>{{counterLike}}</span>
+            <span>{{ counterLike }}</span>
             <button
                 mat-icon-button
                 color="base"
                 matTooltip="Dislike"
                 matTooltipPosition="above"
-                (click) = "onDisLike()"
+                (click)="onDisLike()"
             >
                 <mat-icon>thumb_down_alt</mat-icon>
             </button>
-            <span>{{counterDisl}}</span>
+            <span>{{ counterDisl }}</span>
             <button
                 mat-icon-button
                 color="base"
@@ -85,4 +93,78 @@
             </button>
         </mat-card-actions>
     </mat-card>
- </div>
+
+    <section>
+        <div id="idFromDB" #singleComment>
+            <mat-card class="comment-container">
+                <mat-card-header>
+                    <img
+                        mat-card-avatar
+                        src="https://material.angular.io/assets/img/examples/shiba2.jpg"
+                        alt="User avatar"
+                    />
+                    <mat-card-title>userProfile.name</mat-card-title
+                    ><mat-card-subtitle>Author</mat-card-subtitle>
+                </mat-card-header>
+                <mat-card-content class="comment-container_content-card">
+
+                    <mat-form-field
+                        class="comment-container_content-card__size"
+                        color="accent"
+                    >
+                        <textarea
+                            #message
+                            matInput
+                            cdkTextareaAutosize
+                            cdkAutosizeMaxRows="5"
+                            maxlength="400"
+                            placeholder="Your message"
+                            [formControl]="commentFC"
+                        ></textarea>
+                        <mat-hint align="start"
+                            ><strong>everybody can see this text</strong>
+                        </mat-hint>
+                        <mat-hint align="end"
+                            >{{ message.value.length }} / 400</mat-hint
+                        >
+                    </mat-form-field>
+                    <!--</ng-container>-->
+                    <!--<ng-template #showCommentParagraph *ngIf="!isComment">
+                        <p #comment></p>
+                        <hr />
+                    <time  class="right" datetime="date">{{ date }}</time>
+
+                    </ng-template>-->
+                </mat-card-content>
+                <mat-card-actions class="comment-card">
+                    <button
+                        mat-button
+                        (click)="onSend()"
+                        [disabled]="isComment || !commentFC.valid"
+                    >
+                        Send
+                    </button>
+                    <button
+                        mat-button
+                        matTooltip="Edit again..."
+                        matTooltipPosition="above"
+                        [disabled]="!isComment"
+                        (click)="onCancel()"
+                    >
+                        Cancel
+                    </button>
+                    <button
+                        *ngIf="isComment"
+                        mat-icon-button
+                        color="base"
+                        matTooltip="Delete"
+                        matTooltipPosition="above"
+                        (click)="onDelete(singleComment)"
+                    >
+                        <mat-icon>delete</mat-icon>
+                    </button>
+                </mat-card-actions>
+            </mat-card>
+        </div>
+    </section>
+</div>

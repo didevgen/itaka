@@ -1,13 +1,21 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import {
+    Component,
+    OnInit,
+    OnDestroy,
+    ViewChild,
+    ElementRef,
+} from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
 import * as fromApp from '../../../../store/app.reducer';
-import * as LikesСounterActions from '../../cards-container/card-content-detail/store/card-content.actions';
+import * as LikesCounterActions from '../../cards-container/card-content-detail/store/card-content.actions';
 import { GetDataService } from '../../../../services/get-data.service';
 import { ActivatedRoute } from '@angular/router';
 import { Subject, of } from 'rxjs';
 import { Media } from '../../../../models/content/Media/media.models';
 import { takeUntil } from 'rxjs/operators';
+import { FormControl, Validators } from '@angular/forms';
+import { EditProfile } from '../../../../models/edit-profile/edit-profile.model';
 
 @Component({
     selector: 'ita-card-content-detail',
@@ -27,6 +35,20 @@ export class CardContentDetailComponent implements OnInit, OnDestroy {
     postIdroute: string;
     private destroy$ = new Subject<void>();
 
+    // forMyComment
+    isComment: boolean;
+    commentFC: FormControl;
+    date: string;
+    userId: string;
+    public userProfile: EditProfile;
+    avatar: string;
+    // private destroy$ = new Subject<void>();
+    defaultImage = '../../assets/avatarDefault.png';
+
+    @ViewChild('comment', { static: false })
+    comment: ElementRef;
+    leftText: string;
+
     constructor(
         private store: Store<fromApp.AppState>,
         private getDataService: GetDataService,
@@ -42,13 +64,19 @@ export class CardContentDetailComponent implements OnInit, OnDestroy {
             params => (this.postIdroute = params.postId),
         );
         this.render(this.postIdroute);
+
+        this.commentFC = new FormControl('', [
+            Validators.required,
+            Validators.minLength(1),
+            Validators.maxLength(400),
+        ]);
     }
     onLike() {
-        this.store.dispatch(new LikesСounterActions.LikesLike());
+        this.store.dispatch(new LikesCounterActions.LikesLike());
     }
 
     onDisLike() {
-        this.store.dispatch(new LikesСounterActions.LikeDislike());
+        this.store.dispatch(new LikesCounterActions.LikeDislike());
     }
 
     render(postId) {
@@ -63,6 +91,30 @@ export class CardContentDetailComponent implements OnInit, OnDestroy {
                     }
                 });
             });
+    }
+    // forMyComment
+    onSend() {
+        this.date = new Date().toLocaleString('ru', {
+            year: 'numeric',
+            month: 'short',
+            day: 'numeric',
+            weekday: 'short',
+            hour: 'numeric',
+            minute: 'numeric',
+            second: 'numeric',
+        });
+        this.isComment = true;
+        // this.leftText = this.commentFC.value;
+        /*setTimeout(
+            () => (this.comment.nativeElement.innerText = this.commentFC.value),
+            0,
+        );*/
+    }
+    onCancel() {
+        this.isComment = false;
+    }
+    onDelete(singleComment) {
+        singleComment.innerHTML = '';
     }
 
     ngOnDestroy() {

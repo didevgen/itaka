@@ -33,3 +33,21 @@
     text-align: unset;
     display: block;
 }
+
+.comment-container{
+  width: 95%;
+  font-family: "Montserrat", sans-serif;
+
+  .comment-container_content-card {
+    margin: 0;
+    padding: 0;
+
+    .right {
+      float: right;
+    }
+  }
+
+  .comment-container_content-card__size {
+    width: 100%;
+  }
+}
