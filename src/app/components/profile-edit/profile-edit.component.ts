@@ -101,9 +101,7 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
             new EditProfileActions.ProfileEditSet({
                 name: this.profileForm.get('userName').value,
                 surname: this.profileForm.get('userSurname').value,
-                avatar:
-                    this.profileEditService.getUrl() ||
-                    this.defaultImage,
+                avatar: this.profileEditService.getUrl() || this.defaultImage,
             }),
         );
     }
