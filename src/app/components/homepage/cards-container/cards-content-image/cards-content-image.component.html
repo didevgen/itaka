@@ -1,9 +1,11 @@
-<mat-card class="card__image">
+<mat-card class="card__image"
+(click) = "goCardDetail (this.postId)">
     <img mat-card-image [src]="url" alt="Photo of {{ title }}" />
     <mat-card-title>
         {{ title }}
     </mat-card-title>
-    <div class="card__image--icons">
+    <div class="card__image--icons"
+    (click) = "stopEvent($event)">
         <ita-card-buttons></ita-card-buttons>
     </div>
 </mat-card>

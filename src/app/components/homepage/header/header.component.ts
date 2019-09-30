@@ -31,6 +31,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
     searchService = new SearchService(this.db);
     searchInput;
     avatar: string;
+    url: string | Blob;
+    userName: string;
     isAuthenticated = false;
     private userSub: Subscription;
 
@@ -41,7 +43,11 @@ export class HeaderComponent implements OnInit, OnDestroy {
         private db: AngularFirestore,
     ) {}
     getUserAvatar(): string {
-        if (!this.avatar) {
+        this.userSub = this.store.select('editProfile').subscribe(user => {
+            this.url = user.avatar;
+            this.userName = user.name;
+        });
+        if (!this.url) {
             return 'url(\'../../assets/avatarDefault.png\')';
         } else {
             return `url(\'${this.avatar}\')`;

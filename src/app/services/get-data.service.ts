@@ -1,13 +1,16 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from 'angularfire2/firestore';
 import { GetUserService } from './get-user.service';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { Media } from '../models/content/Media/media.models';
+import { Subject, of } from 'rxjs';
+import { OnDestroy } from '@angular/core';
+import { forkJoin } from 'rxjs';
 
 @Injectable({
     providedIn: 'root',
 })
-export class GetDataService {
+export class GetDataService implements OnDestroy {
     private mediaSource = new BehaviorSubject<Media[]>([]);
     currentMedia = this.mediaSource.asObservable();
 
@@ -43,7 +46,17 @@ export class GetDataService {
                 this.mediaSource.next(userMedia);
             });
     }
-    filterMedia(media: Media[]) {
+
+    renderData(): Observable<Array<any>> {
+        const posts = this.db.collection('Posts').get();
+        const users = this.db.collection('Users').get();
+        const joinObservable = forkJoin(posts, users);
+        return joinObservable;
+    }
+
+    filterMedia(media) {
         this.mediaSource.next(media);
     }
+
+    ngOnDestroy(): void {}
 }

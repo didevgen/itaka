@@ -14,6 +14,9 @@ import { ProfileEditService } from '../profile-edit.service';
     styleUrls: ['../profile-edit.component.scss'],
 })
 export class ModalDialogComponent {
+    imageURL: string;
+    image: string;
+
     croppedImage: string;
     file: File;
     task: AngularFireUploadTask;
@@ -35,6 +38,7 @@ export class ModalDialogComponent {
             uploadFileName.length,
         );
         this.croppedImage = image.file;
+        this.image = image;
         this.file = new File([this.croppedImage], uploadFileName, {
             type: 'image/png',
         });
@@ -56,10 +60,10 @@ export class ModalDialogComponent {
         const ref = this.storage.ref(path);
         this.task = this.storage.upload(path, this.file);
         this.snapshot = this.task.snapshotChanges().subscribe(async () => {
-            this.croppedImage = await ref.getDownloadURL().toPromise();
+            this.imageURL = await ref.getDownloadURL().toPromise();
             this.deletePreviousPath = path;
             return this.profileEditService.setUrl(
-                this.croppedImage,
+                this.imageURL,
                 this.deletePreviousPath,
             );
         });
