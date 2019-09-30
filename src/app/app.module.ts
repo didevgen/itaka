@@ -42,6 +42,8 @@ import { UserPageComponent } from './components/user-page/user-page.component';
 import { UserCardsContainerComponent } from './components/user-page/user-cards-container/user-cards-container.component';
 import { GetUserService } from './services/get-user.service';
 import { CardButtonsComponent } from './components/homepage/cards-container/card-buttons/card-buttons.component';
+import { GetDataService } from './services/get-data.service';
+import { UploadDataService } from './services/upload-data.service';
 
 @NgModule({
     declarations: [
@@ -87,7 +89,13 @@ import { CardButtonsComponent } from './components/homepage/cards-container/card
         HttpClientModule,
         AlertModule,
     ],
-    providers: [AngularFirestore, AuthEffects, GetUserService],
+    providers: [
+        AngularFirestore,
+        AuthEffects,
+        GetUserService,
+        GetDataService,
+        UploadDataService,
+    ],
     bootstrap: [AppComponent],
     entryComponents: [ModalDialogComponent, SubmitDialogComponent],
     exports: [
