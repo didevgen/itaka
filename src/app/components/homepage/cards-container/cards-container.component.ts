@@ -12,6 +12,7 @@ import { Subscription, Subject } from 'rxjs';
 })
 export class CardsContainerComponent implements OnInit, OnDestroy {
     public media: Media[] = [];
+    private mediaContent: Media[] = [];
     private destroy$ = new Subject<void>();
     subscription: Subscription;
     constructor(
@@ -24,13 +25,18 @@ export class CardsContainerComponent implements OnInit, OnDestroy {
             .pipe(takeUntil(this.destroy$))
             .subscribe(content => {
                 this.media = content;
+                this.mediaContent = content;
             });
 
-        this.searchService.currentSearchResponse.subscribe((e: []) => {
-            e === undefined || e === []
-                ? (this.media = this.media)
-                : (this.media = e);
-        });
+        this.searchService.currentSearchResponse.subscribe(
+            (foundData: Media[]) => {
+                foundData === undefined ||
+                foundData === [] ||
+                foundData.length === this.mediaContent.length
+                    ? (this.media = this.mediaContent)
+                    : (this.media = foundData);
+            },
+        );
     }
 
     ngOnDestroy() {

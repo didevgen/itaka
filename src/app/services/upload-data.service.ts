@@ -3,9 +3,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable, from } from 'rxjs';
 import { GetUserService } from './get-user.service';
 
-@Injectable({
-    providedIn: 'root',
-})
+@Injectable()
 export class UploadDataService {
     private userId = this.getUserService.getUserId();
     constructor(
