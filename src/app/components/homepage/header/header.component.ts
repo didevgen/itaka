@@ -20,14 +20,12 @@ import { SearchService } from '../../../services/search.service';
 })
 export class HeaderComponent implements OnInit, OnDestroy {
     inputSearch = new Subject<KeyboardEvent>();
-
     searchInput;
     avatar: string;
     url: string | Blob;
     userName: string;
     isAuthenticated = false;
     private userSub: Subscription;
-
     snapshot: Observable<any>;
 
     constructor(
@@ -56,7 +54,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
         this.onSearch();
     }
-
+    private setDesiredValue(value) {
+        this.inputSearch.next(value);
+    }
     private onSearch() {
         this.searchInput = this.inputSearch.pipe(
             debounceTime(400),
