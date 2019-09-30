@@ -28,11 +28,15 @@ export class CardsContainerComponent implements OnInit, OnDestroy {
                 this.mediaContent = content;
             });
 
-        this.searchService.currentSearchResponse.subscribe((e: []) => {
-            e === undefined || e === [] || e.length === this.mediaContent.length
-                ? (this.media = this.mediaContent)
-                : (this.media = e);
-        });
+        this.searchService.currentSearchResponse.subscribe(
+            (foundData: Media[]) => {
+                foundData === undefined ||
+                foundData === [] ||
+                foundData.length === this.mediaContent.length
+                    ? (this.media = this.mediaContent)
+                    : (this.media = foundData);
+            },
+        );
     }
 
     ngOnDestroy() {
