@@ -65,7 +65,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
             mergeMap((e: KeyboardEvent) => of(e).pipe(delay(500))),
         );
 
-        this.searchInput = this.searchInput
+        this.searchInput
             .pipe(
                 switchMap((query: string) =>
                     this.searchService.searchByTitle(query),
