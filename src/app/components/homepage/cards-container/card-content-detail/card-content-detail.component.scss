@@ -34,26 +34,30 @@
     display: block;
 }
 
-.comment-container{
-  width: 95%;
-  font-family: "Montserrat", sans-serif;
+.comment-container {
+    width: 95%;
+    font-family: 'Montserrat', sans-serif;
 
-  .comment-container_content-card {
-    margin: 0;
-    padding: 0;
+    .comment-container_content-card {
+        margin: 0;
+        padding: 0;
 
-    .right {
-      float: right;
+        .right {
+            float: right;
+        }
+
+        p {
+            word-break: break-all;
+        }
     }
-  }
 
-  .comment-container_content-card__size {
-    width: 100%;
-  }
+    .comment-container_content-card__size {
+        width: 100%;
+    }
 }
-.comment-container__margintop{
-  margin-top: 0.5em;
+.comment-container__margintop {
+    margin-top: 0.5em;
 }
-.mat-icon-button:hover{
-  color: #ff4081;
+.mat-icon-button:hover {
+    color: #ff4081;
 }

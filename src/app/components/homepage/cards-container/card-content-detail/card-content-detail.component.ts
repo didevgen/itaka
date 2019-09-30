@@ -6,17 +6,19 @@ import {
     ElementRef,
 } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Subscription } from 'rxjs';
+import { Subscription, throwError } from 'rxjs';
 import * as fromApp from '../../../../store/app.reducer';
 import * as LikesСounterActions from '../../cards-container/card-content-detail/store/card-content.actions';
 import { GetDataService } from '../../../../services/get-data.service';
 import { ActivatedRoute } from '@angular/router';
 import { Subject, of } from 'rxjs';
 import { Media } from '../../../../models/content/Media/media.models';
-import { takeUntil } from 'rxjs/operators';
+import { map, takeUntil } from 'rxjs/operators';
 import { FormControl, Validators } from '@angular/forms';
 import { EditProfile } from '../../../../models/edit-profile/edit-profile.model';
 import { Comment } from '../../../../models/content/Text/comment.model';
+import { GetUserService } from '../../../../services/get-user.service';
+import { CommentService } from './comment.service';
 
 @Component({
     selector: 'ita-card-content-detail',
@@ -43,26 +45,24 @@ export class CardContentDetailComponent implements OnInit, OnDestroy {
     isComment: boolean;
     commentFC: FormControl;
     date: string;
-    // userId: string;
-    public userProfile: EditProfile;
-    avatar: string;
-    // private destroy$ = new Subject<void>();
-    defaultImage = '../../assets/avatarDefault.png';
+    userProfile: { name: string; avatar: string };
+    currentUserId: string;
 
     /*@ViewChild('comment', { static: false })
     comment: ElementRef;*/
-    leftText: string;
     private comment: Comment;
-    // comments: Array<comment> = [];
     public comments: Array<Comment> = [];
 
     constructor(
         private store: Store<fromApp.AppState>,
         private getDataService: GetDataService,
         private route: ActivatedRoute,
+        private currentUserIdService: GetUserService,
+        private commentService: CommentService,
     ) {}
 
     ngOnInit(): void {
+        this.currentUserId = this.currentUserIdService.getUserId();
         this.userSub = this.store.select('likesCount').subscribe(like => {
             this.counterLike = Number(like.likes);
             this.counterDisl = Number(like.dislikes);
@@ -103,6 +103,12 @@ export class CardContentDetailComponent implements OnInit, OnDestroy {
                         this.name = doc.data().name;
                         this.ava = doc.data().avatar;
                     }
+                    if (this.currentUserId === doc.id) {
+                        this.userProfile = {
+                            name: doc.data().name,
+                            avatar: doc.data().avatar,
+                        };
+                    }
                 });
             });
     }
@@ -119,7 +125,14 @@ export class CardContentDetailComponent implements OnInit, OnDestroy {
         });
         this.isComment = true;
 
-        this.comment = { text: this.commentFC.value, date: this.date };
+        this.comment = {
+            text: this.commentFC.value,
+            date: this.date,
+            userId: this.currentUserId,
+            postId: this.postIdroute,
+        };
+        this.commentService.addComment(this.comment);
+
         this.comments.push(this.comment);
         this.comments.reverse();
         // console.log(this.comment, 'comment onInit');
