@@ -12,6 +12,7 @@ import {
 import { Store } from '@ngrx/store';
 import * as fromApp from '../../../store/app.reducer';
 import * as AuthActions from '../../auth/store/auth.actions';
+import * as EditProfileActions from '../../profile-edit/store/profile-edit.actions';
 import { SearchService } from '../../../services/search.service';
 @Component({
     selector: 'ita-header',
@@ -76,6 +77,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
     onLogout() {
         this.store.dispatch(new AuthActions.Logout());
+        this.store.dispatch(new EditProfileActions.ProfileEditClear());
     }
 
     ngOnDestroy() {
