@@ -1,35 +1,17 @@
-import { Component, Input, OnDestroy, OnInit, DoCheck } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { GetDataService } from '../../../services/get-data.service';
 import { Media } from '../../../models/content/Media/media.models';
-
 import { takeUntil } from 'rxjs/operators';
 import { SearchService } from 'src/app/services/search.service';
-import { AngularFirestore } from '@angular/fire/firestore';
-import {
-    Subscription,
-    Observable,
-    Subject,
-    of,
-    fromEvent,
-    interval,
-    timer,
-} from 'rxjs';
-import {
-    map,
-    debounceTime,
-    distinctUntilChanged,
-    mergeMap,
-    delay,
-} from 'rxjs/operators';
+import { Subscription, Subject } from 'rxjs';
+
 @Component({
     selector: 'ita-cards-container',
     templateUrl: './cards-container.component.html',
     styleUrls: ['./cards-container.component.scss'],
-    providers: [SearchService],
 })
-export class CardsContainerComponent implements OnInit, OnDestroy, DoCheck {
-    media: Media[] = [];
-
+export class CardsContainerComponent implements OnInit, OnDestroy {
+    private media: Media[] = [];
     private destroy$ = new Subject<void>();
     subscription: Subscription;
     constructor(
@@ -42,19 +24,16 @@ export class CardsContainerComponent implements OnInit, OnDestroy, DoCheck {
             .pipe(takeUntil(this.destroy$))
             .subscribe(content => {
                 this.media = content;
-                console.log(content);
             });
 
-        console.log(
-            this.searchService
-                .getFoundData()
-                .subscribe(e => console.log('cont', e)),
-        );
+        this.searchService.currentSearchResponse.subscribe((e: []) => {
+            e == undefined || e == [] ? this.media : (this.media = e);
+        });
     }
-    ngDoCheck(): void {}
 
     ngOnDestroy() {
         this.destroy$.next();
         this.destroy$.complete();
+        this.searchService.currentSearchResponse.unsubscribe();
     }
 }

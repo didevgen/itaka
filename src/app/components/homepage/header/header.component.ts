@@ -1,22 +1,15 @@
-import {
-    Component,
-    OnInit,
-    OnDestroy,
-    Output,
-    DoCheck,
-    Input,
-} from '@angular/core';
-import { appReducer } from '../../../store/app.reducer';
-import { Subscription, Observable, Subject, of, fromEvent } from 'rxjs';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+
+import { Subscription, Observable, Subject, of } from 'rxjs';
 import {
     map,
     debounceTime,
     distinctUntilChanged,
     mergeMap,
     delay,
+    switchMap,
 } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
-import { AngularFirestore } from '@angular/fire/firestore';
 import * as fromApp from '../../../store/app.reducer';
 import * as AuthActions from '../../auth/store/auth.actions';
 import { SearchService } from '../../../services/search.service';
@@ -24,11 +17,10 @@ import { SearchService } from '../../../services/search.service';
     selector: 'ita-header',
     templateUrl: './header.component.html',
     styleUrls: ['./header.component.scss'],
-    providers: [SearchService],
 })
 export class HeaderComponent implements OnInit, OnDestroy {
     inputSearch = new Subject<KeyboardEvent>();
-    searchService = new SearchService(this.db);
+
     searchInput;
     avatar: string;
     url: string | Blob;
@@ -40,7 +32,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
     constructor(
         private store: Store<fromApp.AppState>,
-        private db: AngularFirestore,
+        private searchService: SearchService,
     ) {}
     getUserAvatar(): string {
         this.userSub = this.store.select('editProfile').subscribe(user => {
@@ -66,17 +58,19 @@ export class HeaderComponent implements OnInit, OnDestroy {
     }
 
     private onSearch() {
-        const inputSearch = this.inputSearch;
-        this.searchInput = inputSearch.pipe(
+        this.searchInput = this.inputSearch.pipe(
             debounceTime(400),
             distinctUntilChanged(),
-            mergeMap(e => of(e).pipe(delay(500))),
+            mergeMap((e: KeyboardEvent) => of(e).pipe(delay(500))),
         );
-        this.searchInput.subscribe((query: string) =>
-            this.searchService.searchByTitle(query).subscribe(queryResult => {
-                console.log(queryResult);
-                this.searchService.shareFoundData(queryResult);
-            }),
+
+        this.searchInput = this.searchInput.pipe(
+            switchMap((query: string) =>
+                this.searchService.searchByTitle(query),
+            ),
+        );
+        this.searchInput.subscribe((queryResult: []) =>
+            this.searchService.shareFoundData(queryResult),
         );
     }
 
