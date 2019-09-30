@@ -43,7 +43,7 @@ export class GetDataService {
                 this.mediaSource.next(userMedia);
             });
     }
-    filterMedia(media) {
+    filterMedia(media: Media[]) {
         this.mediaSource.next(media);
     }
 }

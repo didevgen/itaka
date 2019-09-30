@@ -1,4 +1,11 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import {
+    Component,
+    OnInit,
+    OnDestroy,
+    Output,
+    DoCheck,
+    Input,
+} from '@angular/core';
 import { appReducer } from '../../../store/app.reducer';
 import { Subscription, Observable, Subject, of, fromEvent } from 'rxjs';
 import {
@@ -20,13 +27,13 @@ import { SearchService } from '../../../services/search.service';
     providers: [SearchService],
 })
 export class HeaderComponent implements OnInit, OnDestroy {
-    userName: string;
+    inputSearch = new Subject<KeyboardEvent>();
+    searchService = new SearchService(this.db);
+    searchInput;
     avatar: string;
     isAuthenticated = false;
     private userSub: Subscription;
-    private searchSubscription: Subscription;
-    public inputSearch = new Subject<KeyboardEvent>();
-    public searchInput;
+
     snapshot: Observable<any>;
 
     constructor(
@@ -42,29 +49,28 @@ export class HeaderComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
-        const search = new SearchService(this.db);
         this.userSub = this.store
             .select('auth')
             .pipe(map(authState => authState.user))
             .subscribe(user => {
                 this.isAuthenticated = !!user;
             });
-        const sub = this.inputSearch;
-        this.onSearch(sub, search);
+
+        this.onSearch();
     }
 
-    private onSearch(sub: Subject<KeyboardEvent>, search: SearchService) {
-        this.searchInput = sub.pipe(
+    private onSearch() {
+        const inputSearch = this.inputSearch;
+        this.searchInput = inputSearch.pipe(
             debounceTime(400),
             distinctUntilChanged(),
             mergeMap(e => of(e).pipe(delay(500))),
         );
-        this.searchInput.subscribe((element: string) =>
-            search
-                .searchByTitle(element)
-                .subscribe(posts =>
-                    console.log(posts.map(post => post.data().title)),
-                ),
+        this.searchInput.subscribe((query: string) =>
+            this.searchService.searchByTitle(query).subscribe(queryResult => {
+                console.log(queryResult);
+                this.searchService.shareFoundData(queryResult);
+            }),
         );
     }
 
@@ -75,5 +81,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
     ngOnDestroy() {
         this.userSub.unsubscribe();
         this.inputSearch.unsubscribe();
+        this.searchInput.unsubscribe();
     }
 }
