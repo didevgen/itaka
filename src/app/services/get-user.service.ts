@@ -11,9 +11,7 @@ export class GetUserService implements OnDestroy {
     private subscription: Subscription;
     private isExisting: boolean;
 
-    constructor(
-        private store: Store<fromApp.AppState>,
-    ) {
+    constructor(private store: Store<fromApp.AppState>) {
         this.isExisting = false;
     }
 
