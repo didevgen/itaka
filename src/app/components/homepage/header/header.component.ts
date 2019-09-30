@@ -23,7 +23,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     inputSearch = new Subject<KeyboardEvent>();
     searchInput;
     avatar: string;
-    url: string | Blob;
+    private url: string | Blob;
     userName: string;
     isAuthenticated = false;
     private userSub: Subscription;
@@ -55,7 +55,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
         this.onSearch();
     }
-    public setDesiredValue(value) {
+    public setDesiredValue(value: KeyboardEvent) {
         this.inputSearch.next(value);
     }
     private onSearch() {
