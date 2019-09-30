@@ -1,5 +1,4 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-// add for auth
 import { Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
@@ -19,13 +18,17 @@ export class HeaderComponent implements OnInit, OnDestroy {
     avatar: string;
     isAuthenticated = false;
     private userSub: Subscription;
-
+    private url: any;
     constructor(private store: Store<fromApp.AppState>) {}
     getUserAvatar(): string {
-        if (!this.avatar) {
+        this.userSub = this.store.select('editProfile').subscribe(user => {
+            this.url = user.avatar;
+            this.userName = user.name;
+        });
+        if (!this.url) {
             return 'url(\'../../assets/avatarDefault.png\')';
         } else {
-            return `url(\'${this.avatar}\')`;
+            return `url(\'${this.url}\')`;
         }
     }
 

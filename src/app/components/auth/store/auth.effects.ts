@@ -11,6 +11,7 @@ import { AuthService } from '../auth-form/auth-form.service';
 import { AngularFireAuth } from '@angular/fire/auth';
 import * as firebase from 'firebase/app';
 import { AngularFirestore } from 'angularfire2/firestore';
+import * as ProfileEditActions from '../../profile-edit/store/profile-edit.actions';
 
 export interface AuthResponseData {
     kind: string;
@@ -215,7 +216,9 @@ export class AuthEffects {
             localStorage.removeItem('userData');
             this.router.navigate(['/auth']);
         }),
+        map(() => new ProfileEditActions.ProfileEditClear()),
     );
+
     constructor(
         private actions$: Actions,
         private http: HttpClient,

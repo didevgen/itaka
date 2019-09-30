@@ -2,11 +2,20 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-}
-.more__icon {
-    align-self: flex-end;
+    height: 95%;
 }
 .mat-card-title {
+    width: 100%;
     font-size: 18px;
     text-transform: uppercase;
+    word-wrap: break-word;
+    text-align: center;
+}
+.mat-card-content {
+    width: 100%;
+    word-wrap: break-word;
+    overflow: hidden;
+}
+.card__text--icons {
+    width: 100%;
 }

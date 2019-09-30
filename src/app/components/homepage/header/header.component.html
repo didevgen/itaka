@@ -1,6 +1,6 @@
 <mat-toolbar color="white" class="header">
     <div class="header__heading">
-        <h1 class="header__logo"><a [routerLink]="['/']">ITaka</a></h1>
+        <h1 class="header__logo"><a [routerLink]="['']">ITaka</a></h1>
     </div>
     <div class="header__search">
         <mat-icon>search</mat-icon>
@@ -24,16 +24,8 @@
                 </button>
 
                 <button mat-menu-item [routerLink]="['/uploadMedia']">
-                    <mat-icon>volume_up</mat-icon>
-                    <span>Audio</span>
-                </button>
-                <button mat-menu-item [routerLink]="['/uploadMedia']">
-                    <mat-icon>videocam</mat-icon>
-                    <span>Video</span>
-                </button>
-                <button mat-menu-item [routerLink]="['/uploadMedia']">
-                    <mat-icon>crop_original</mat-icon>
-                    <span>Photo</span>
+                    <mat-icon>color_lens</mat-icon>
+                    <span>Media</span>
                 </button>
             </mat-menu>
         </div>

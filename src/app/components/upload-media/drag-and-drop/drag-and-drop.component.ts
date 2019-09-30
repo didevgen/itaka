@@ -7,12 +7,12 @@ import { FormGroup, FormControl } from '@angular/forms';
     styleUrls: ['./drag-and-drop.component.scss'],
 })
 export class DragAndDropComponent implements OnInit {
-    isHovering: boolean;
-    files: File[] = [];
+    public isHovering: boolean;
+    public files: File[] = [];
     public uploadMediaForm: FormGroup;
 
-    selectedContent = '';
-    contentType: string[] = ['image', 'audio', 'video'];
+    public selectedContent = 'image';
+    public contentType: string[] = ['image', 'audio', 'video'];
 
     ngOnInit() {
         this.uploadMediaForm = new FormGroup({
@@ -22,15 +22,15 @@ export class DragAndDropComponent implements OnInit {
         });
     }
 
-    toggleHover(event: boolean) {
+    public toggleHover(event: boolean): void {
         this.isHovering = event;
     }
-    onDrop(files: FileList) {
+    public onDrop(files: FileList): void {
         for (let i = 0; i < files.length; i++) {
             this.files.push(files.item(i));
         }
     }
-    selectedContentType(event) {
+    public selectedContentType(event): void {
         this.selectedContent = event.value;
     }
 }

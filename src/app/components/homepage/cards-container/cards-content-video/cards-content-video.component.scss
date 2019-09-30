@@ -2,16 +2,22 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-}
-.more__icon {
-    align-self: flex-end;
+    height: 90%;
 }
 .mat-card-title {
+    width: 100%;
     font-size: 18px;
     text-transform: uppercase;
     padding-top: 1vh;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    text-align: center;
 }
 .card__video--videoplayer {
-    width: auto;
-    height: 160px;
+    width: 110%;
+    height: 215px;
+}
+.card__video--icons {
+    width: 100%;
 }

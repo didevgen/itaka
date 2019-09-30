@@ -6,6 +6,7 @@
         >
             <mat-radio-button
                 *ngFor="let content of contentType"
+                [checked]="content === 'image'"
                 [value]="content"
                 (change)="selectedContentType($event)"
                 >{{ content }}</mat-radio-button

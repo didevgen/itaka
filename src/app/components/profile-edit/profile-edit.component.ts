@@ -9,6 +9,7 @@ import { SubmitDialogComponent } from './submit-dialog/submit-dialog.component';
 
 import { AppState } from '../../store/app.reducer';
 import * as EditProfileActions from './store/profile-edit.actions';
+import { ProfileEditService } from './profile-edit.service';
 
 @Component({
     selector: 'ita-profile-edit',
@@ -17,7 +18,7 @@ import * as EditProfileActions from './store/profile-edit.actions';
 })
 export class ProfileEditComponent implements OnInit, OnDestroy {
     public profileForm: FormGroup;
-    url: string;
+    url: string | Blob;
     isUpdate: boolean;
     defaultImage = '../../assets/avatarDefault.png';
     private destroy$ = new Subject<void>();
@@ -26,6 +27,7 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
         private formBuilder: FormBuilder,
         public dialog: MatDialog,
         private store: Store<AppState>,
+        private profileEditService: ProfileEditService,
     ) {}
 
     ngOnInit(): void {
@@ -49,7 +51,7 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
                 if (info && info.name && !info.isError) {
                     this.profileForm.get('userName').setValue(info.name);
                     this.profileForm.get('userSurname').setValue(info.surname);
-                    this.url = this.defaultImage;
+                    this.url = info.avatar;
                     if (this.isUpdate) {
                         this.dialogSubmit(`Updated!
                          ${info.name}`);
@@ -66,6 +68,7 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
     }
 
     forSubmitDialog() {
+        this.profileEditService.delPreviousUrl();
         this.isUpdate = true;
     }
     dialogSubmit(message) {
@@ -87,7 +90,9 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
             .afterClosed()
             .pipe(takeUntil(this.destroy$))
             .subscribe(result => {
-                this.url = result;
+                if (result) {
+                    this.url = result.base64 || this.url || this.defaultImage;
+                }
             });
     }
 
@@ -96,7 +101,9 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
             new EditProfileActions.ProfileEditSet({
                 name: this.profileForm.get('userName').value,
                 surname: this.profileForm.get('userSurname').value,
-                avatar: '', // will be new img url
+                avatar:
+                    this.profileEditService.getUrl() ||
+                    this.defaultImage,
             }),
         );
     }

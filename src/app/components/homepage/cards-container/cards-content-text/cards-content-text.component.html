@@ -1,11 +1,12 @@
-<mat-card class="card__text">
+<mat-card class="card__text"
+ (click) = "goCardDetail (this)">
     <mat-card-title>
         {{ title }}
     </mat-card-title>
-    <mat-card-content>
-        {{ description }}
-    </mat-card-content>
-    <button mat-icon-button class="more__icon" [routerLink]="['/cardDetail']">
-        <mat-icon>more_horiz</mat-icon>
-    </button>
+    <mat-card-content [innerHtml]="description"></mat-card-content>
+    <div class="card__text--icons"
+      (click) = "stopEvent($event)"
+    >
+        <ita-card-buttons></ita-card-buttons>
+    </div>
 </mat-card>

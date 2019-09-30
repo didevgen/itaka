@@ -2,19 +2,26 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    height: 90%;
 }
 .mat-card-title {
+    width: 100%;
     padding-top: 3vh;
     font-size: 18px;
     text-transform: uppercase;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    text-align: center;
 }
 .music__icon {
     transform: scale(2);
     margin-bottom: 1vh;
 }
-.more__icon {
-    align-self: flex-end;
-}
 .card__audio--palyer {
     outline: none;
+    width: 100%;
+}
+.card__audio--icons {
+    width: 100%;
 }

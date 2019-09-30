@@ -22,7 +22,7 @@
         matTooltipPosition="right"
         class="add_circle_outline"
     >
-        <mat-icon class="sidebar__button sidebar__button--base"
+        <mat-icon [ngClass]="{'sidebar__button--selected': isActive('audio')}" class="sidebar__button sidebar__button--base" (click)="filterByContent('audio')"
             >library_music</mat-icon
         >
     </button>
@@ -35,7 +35,7 @@
         matTooltipPosition="right"
         class="add_circle_outline"
     >
-        <mat-icon class="sidebar__button sidebar__button--base"
+        <mat-icon [ngClass]="{'sidebar__button--selected': isActive('video')}" class="sidebar__button sidebar__button--base" (click)="filterByContent('video')"
             >video_library</mat-icon
         >
     </button>
@@ -48,7 +48,7 @@
         matTooltipPosition="right"
         class="add_circle_outline"
     >
-        <mat-icon class="sidebar__button sidebar__button--base"
+        <mat-icon [ngClass]="{'sidebar__button--selected': isActive('image')}" class="sidebar__button sidebar__button--base" (click)="filterByContent('image')"
             >collections</mat-icon
         >
     </button>
@@ -61,7 +61,7 @@
         matTooltipPosition="right"
         class="add_circle_outline"
     >
-        <mat-icon class="sidebar__button sidebar__button--base"
+        <mat-icon [ngClass]="{'sidebar__button--selected': isActive('text')}" class="sidebar__button sidebar__button--base" (click)="filterByContent('text')"
             >text_fields</mat-icon
         >
     </button>
@@ -73,6 +73,7 @@
         matTooltip="Add content"
         matTooltipPosition="left"
         class="add_circle_outline"
+        [routerLink]="['']"
     >
         <mat-icon color="accent">add</mat-icon>
     </button>
@@ -81,18 +82,9 @@
             <mat-icon>receipt</mat-icon>
             <span>Text</span>
         </button>
-
         <button mat-menu-item [routerLink]="['/uploadMedia']">
-            <mat-icon>volume_up</mat-icon>
-            <span>Audio</span>
-        </button>
-        <button mat-menu-item [routerLink]="['/uploadMedia']">
-            <mat-icon>videocam</mat-icon>
-            <span>Video</span>
-        </button>
-        <button mat-menu-item [routerLink]="['/uploadMedia']">
-            <mat-icon>crop_original</mat-icon>
-            <span>Photo</span>
+            <mat-icon>color_lens</mat-icon>
+            <span>Media</span>
         </button>
     </mat-menu>
 </aside>

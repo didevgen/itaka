@@ -1,4 +1,6 @@
-<mat-card class="card__video">
+<mat-card class="card__video"
+    (click) = "goCardDetail (this.postId)"
+>
     <mat-video
         class="card__video--videoplayer"
         [autoplay]="false"
@@ -6,13 +8,17 @@
         [fullscreen]="true"
         [download]="true"
         color="accent"
+        (click) = "stopEvent($event)"
     >
         <source matVideoSource [src]="url" type="video/mp4" />
     </mat-video>
     <mat-card-title>
         {{ title }}
     </mat-card-title>
-    <button mat-icon-button class="more__icon" [routerLink]="['/cardDetail']">
-        <mat-icon>more_horiz</mat-icon>
-    </button>
+    <div class="card__video--icons"
+    (click) = "stopEvent($event)"
+    >
+        <ita-card-buttons></ita-card-buttons>
+    </div>
 </mat-card>
+ <!-- (click) = "goCardDetail (this.postId)" -->

@@ -1,16 +1,22 @@
 import {
     Component,
     OnInit,
-    ElementRef,
-    ViewChild,
     OnDestroy,
+    ViewChild,
+    ElementRef,
 } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
-import { UserComment } from '../../../../models/content/comment.model';
-import { GetUserService } from '../../../../shared/get-user.service';
-import { EditProfile } from '../../../../models/edit-profile/edit-profile.model';
+import { Store } from '@ngrx/store';
+import { Subscription } from 'rxjs';
+import * as fromApp from '../../../../store/app.reducer';
+import * as LikesСounterActions from '../../cards-container/card-content-detail/store/card-content.actions';
+import { GetDataService } from '../../../../services/get-data.service';
+import { ActivatedRoute } from '@angular/router';
+import { Subject, of } from 'rxjs';
+import { Media } from '../../../../models/content/Media/media.models';
 import { takeUntil } from 'rxjs/operators';
-import { Subject } from 'rxjs';
+import { FormControl, Validators } from '@angular/forms';
+import { EditProfile } from '../../../../models/edit-profile/edit-profile.model';
+import { Comment } from '../../../../models/content/Text/comment.model';
 
 @Component({
     selector: 'ita-card-content-detail',
@@ -22,42 +28,49 @@ export class CardContentDetailComponent implements OnInit, OnDestroy {
     description: string;
     url: string;
     type: string;
+    counterLike: number;
+    counterDisl: number;
+    private userId: string;
+    name: string;
+    ava: string;
+    private userSub: Subscription;
+    private routeSubscription: Subscription;
+    media: Media = new Object();
+    postIdroute: string;
+    private destroy$ = new Subject<void>();
 
-    /* type SingleComment<UserComment> = {
-      id: string | undefined,
-      info: UserComment
-    };
-    comments: SingleComment[];*/
+    // forMyComment
     isComment: boolean;
     commentFC: FormControl;
     date: string;
-    userId: string;
+    // userId: string;
     public userProfile: EditProfile;
     avatar: string;
-    private destroy$ = new Subject<void>();
+    // private destroy$ = new Subject<void>();
     defaultImage = '../../assets/avatarDefault.png';
 
-    @ViewChild('comment', { static: false })
-    comment: ElementRef;
+    /*@ViewChild('comment', { static: false })
+    comment: ElementRef;*/
+    leftText: string;
+    private comment: Comment;
+    // comments: Array<comment> = [];
+    public comments: Array<Comment> = [];
 
-    constructor(private userService: GetUserService) {}
+    constructor(
+        private store: Store<fromApp.AppState>,
+        private getDataService: GetDataService,
+        private route: ActivatedRoute,
+    ) {}
 
     ngOnInit(): void {
-        this.userId = this.userService.getUserId();
-        this.userService
-            .gerUserProfile(this.userId)
-            .pipe(takeUntil(this.destroy$))
-            .subscribe(
-                profile => {
-                    this.userProfile = profile;
-                    console.log(this.userProfile, 'userProfile onInit');
-                },
-                err => console.error('error onInit subscribe ', err),
-            );
-        if (this.userProfile) {
-            this.avatar = this.userProfile.avatar;
-            console.log(this.avatar, 'avatar');
-        }
+        this.userSub = this.store.select('likesCount').subscribe(like => {
+            this.counterLike = Number(like.likes);
+            this.counterDisl = Number(like.dislikes);
+        });
+        this.routeSubscription = this.route.params.subscribe(
+            params => (this.postIdroute = params.postId),
+        );
+        this.renderData(this.postIdroute);
 
         this.commentFC = new FormControl('', [
             Validators.required,
@@ -65,11 +78,35 @@ export class CardContentDetailComponent implements OnInit, OnDestroy {
             Validators.maxLength(400),
         ]);
     }
-    ngOnDestroy(): void {
-        this.destroy$.next();
-        this.destroy$.complete();
+    onLike() {
+        this.store.dispatch(new LikesСounterActions.LikesLike());
     }
 
+    onDisLike() {
+        this.store.dispatch(new LikesСounterActions.LikeDislike());
+    }
+
+    renderData(postId) {
+        this.getDataService
+            .renderData()
+            .pipe(takeUntil(this.destroy$))
+            .subscribe(snapshot => {
+                snapshot[0].docs.forEach(doc => {
+                    if (postId === doc.data().postId) {
+                        const post = doc.data();
+                        this.userId = doc.data().userId;
+                        this.media = post;
+                    }
+                });
+                snapshot[1].docs.forEach(doc => {
+                    if (this.userId === doc.id) {
+                        this.name = doc.data().name;
+                        this.ava = doc.data().avatar;
+                    }
+                });
+            });
+    }
+    // forMyComment
     onSend() {
         this.date = new Date().toLocaleString('ru', {
             year: 'numeric',
@@ -81,15 +118,28 @@ export class CardContentDetailComponent implements OnInit, OnDestroy {
             second: 'numeric',
         });
         this.isComment = true;
-        setTimeout(
-            () => (this.comment.nativeElement.innerText = this.commentFC.value),
-            0,
-        );
+
+        this.comment = { text: this.commentFC.value, date: this.date };
+        this.comments.push(this.comment);
+        this.comments.reverse();
+        // console.log(this.comment, 'comment onInit');
+        // console.log(this.comments, 'commentSSS onInit');
+        this.commentFC.reset();
     }
     onCancel() {
-        this.isComment = false;
+        this.commentFC.reset();
     }
-    onDelete(singleComment) {
-        singleComment.innerHTML = '';
+    onDelete(deleteIndex) {
+        this.comments.splice(deleteIndex, 1);
+    }
+    commentView() {
+        this.isComment = !this.isComment;
+    }
+
+    ngOnDestroy() {
+        this.userSub.unsubscribe();
+        this.routeSubscription.unsubscribe();
+        this.destroy$.next();
+        this.destroy$.complete();
     }
 }
