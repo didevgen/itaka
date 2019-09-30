@@ -44,6 +44,7 @@ import { GetUserService } from './services/get-user.service';
 import { CardButtonsComponent } from './components/homepage/cards-container/card-buttons/card-buttons.component';
 import { GetDataService } from './services/get-data.service';
 import { UploadDataService } from './services/upload-data.service';
+import { SearchService } from './services/search.service';
 
 @NgModule({
     declarations: [
@@ -95,6 +96,7 @@ import { UploadDataService } from './services/upload-data.service';
         GetUserService,
         GetDataService,
         UploadDataService,
+        SearchService,
     ],
     bootstrap: [AppComponent],
     entryComponents: [ModalDialogComponent, SubmitDialogComponent],

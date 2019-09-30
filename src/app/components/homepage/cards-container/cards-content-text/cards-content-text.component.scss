@@ -5,6 +5,7 @@
     height: 95%;
 }
 .mat-card-title {
+    cursor: pointer;
     width: 100%;
     font-size: 18px;
     text-transform: uppercase;
@@ -15,6 +16,7 @@
     width: 100%;
     word-wrap: break-word;
     overflow: hidden;
+    cursor: pointer;
 }
 .card__text--icons {
     width: 100%;
