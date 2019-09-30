@@ -11,7 +11,7 @@ import { Subscription, Subject } from 'rxjs';
     styleUrls: ['./cards-container.component.scss'],
 })
 export class CardsContainerComponent implements OnInit, OnDestroy {
-    private media: Media[] = [];
+    public media: Media[] = [];
     private destroy$ = new Subject<void>();
     subscription: Subscription;
     constructor(

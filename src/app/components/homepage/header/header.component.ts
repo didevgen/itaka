@@ -54,7 +54,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
         this.onSearch();
     }
-    private setDesiredValue(value) {
+    public setDesiredValue(value) {
         this.inputSearch.next(value);
     }
     private onSearch() {
