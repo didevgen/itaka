@@ -40,7 +40,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
         if (!this.url) {
             return 'url(\'../../assets/avatarDefault.png\')';
         } else {
-            return `url(\'${this.avatar}\')`;
+            return `url(\'${this.url}\')`;
         }
     }
 
