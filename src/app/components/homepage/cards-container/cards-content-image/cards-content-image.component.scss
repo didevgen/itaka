@@ -12,6 +12,7 @@
     text-overflow: ellipsis;
     white-space: nowrap;
     text-align: center;
+    cursor: pointer;
 }
 .mat-card-image {
     width: 110%;
@@ -19,7 +20,13 @@
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+    cursor: pointer;
 }
 .card__image--icons {
     width: 100%;
+}
+@media screen and (max-width: 1024px) {
+    .mat-card-image {
+        width: 110%;
+    }
 }
