@@ -27,7 +27,9 @@ export class CardsContainerComponent implements OnInit, OnDestroy {
             });
 
         this.searchService.currentSearchResponse.subscribe((e: []) => {
-            e == undefined || e == [] ? this.media : (this.media = e);
+            e === undefined || e === []
+                ? (this.media = this.media)
+                : (this.media = e);
         });
     }
 
