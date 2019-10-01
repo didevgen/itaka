@@ -31,12 +31,7 @@ export class CardsContentAudioComponent implements OnInit, OnDestroy {
 
     goCardDetail(elem) {
         this.router.navigate(['/cardDetail', this.postId]);
-        // this.setPostId(elem);
     }
-
-    // setPostId(elem) {
-    //     this.store.dispatch(new LikesActions.SetPostId({ postId: elem }));
-    // }
 
     stopEvent(event) {
         event.stopPropagation();
