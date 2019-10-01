@@ -33,6 +33,7 @@
                 formControlName="file"
                 placeholder="Сlick to select file"
                 (change)="onDrop($event.target.files)"
+                accept="{{ selectedContent }}/*"
             ></ngx-mat-file-input>
         </mat-form-field>
     </form>
