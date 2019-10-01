@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
@@ -42,6 +42,7 @@ import { UserPageComponent } from './components/user-page/user-page.component';
 import { UserCardsContainerComponent } from './components/user-page/user-cards-container/user-cards-container.component';
 import { GetUserService } from './services/get-user.service';
 import { CardButtonsComponent } from './components/homepage/cards-container/card-buttons/card-buttons.component';
+import { ConfirmationDialogComponent } from './components/profile-edit/confirmation-dialog/confirmation-dialog.component';
 
 @NgModule({
     declarations: [
@@ -62,10 +63,12 @@ import { CardButtonsComponent } from './components/homepage/cards-container/card
         UserPageComponent,
         UserCardsContainerComponent,
         CardButtonsComponent,
+        ConfirmationDialogComponent,
     ],
     imports: [
         BrowserModule,
         AppRoutingModule,
+        FormsModule,
         EffectsModule.forRoot([AuthEffects, ProfileEditEffect]),
         StoreModule.forRoot(fromApp.appReducer),
         StoreDevtoolsModule.instrument({
@@ -89,7 +92,11 @@ import { CardButtonsComponent } from './components/homepage/cards-container/card
     ],
     providers: [AngularFirestore, AuthEffects, GetUserService],
     bootstrap: [AppComponent],
-    entryComponents: [ModalDialogComponent, SubmitDialogComponent],
+    entryComponents: [
+        ModalDialogComponent,
+        SubmitDialogComponent,
+        ConfirmationDialogComponent,
+    ],
     exports: [
         ContentContainerComponent,
         CardsContentVideoComponent,

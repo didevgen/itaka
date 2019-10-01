@@ -10,6 +10,8 @@ import { SubmitDialogComponent } from './submit-dialog/submit-dialog.component';
 import { AppState } from '../../store/app.reducer';
 import * as EditProfileActions from './store/profile-edit.actions';
 import { ProfileEditService } from './profile-edit.service';
+import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog.component';
+import * as AuthActions from '../auth/store/auth.actions';
 
 @Component({
     selector: 'ita-profile-edit',
@@ -71,6 +73,7 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
         this.profileEditService.delPreviousUrl();
         this.isUpdate = true;
     }
+
     dialogSubmit(message) {
         this.dialog.open(SubmitDialogComponent, {
             height: '20vh',
@@ -107,5 +110,32 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
                     this.defaultImage,
             }),
         );
+    }
+
+    confirmDialog(): void {
+        const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+            width: '350px',
+            data: { email: '', password: '' },
+        });
+        dialogRef
+            .afterClosed()
+            .pipe(takeUntil(this.destroy$))
+            .subscribe(value => {
+                this.profileEditService
+                    .updateUser(value.email, value.password)
+                    .subscribe(
+                        user =>
+                            this.profileEditService
+                                .deleteUser((user as any).idToken)
+                                .subscribe(() => {
+                                    this.store.dispatch(
+                                        new AuthActions.Logout(),
+                                    );
+                                }),
+                        //   () => {
+                        //   const test = this.dialog.open(AlertComponent);
+                        // }
+                    );
+            });
     }
 }

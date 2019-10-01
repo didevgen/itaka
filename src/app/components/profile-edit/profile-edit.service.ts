@@ -8,6 +8,8 @@ import { Injectable, OnDestroy } from '@angular/core';
 import { User } from '../../models/user/User.models';
 import { catchError, map } from 'rxjs/operators';
 import { GetUserService } from '../../services/get-user.service';
+import { HttpClient } from '@angular/common/http';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
     providedIn: 'root',
@@ -25,6 +27,7 @@ export class ProfileEditService implements OnDestroy {
         private db: AngularFirestore,
         private store: Store<AppState>,
         private userIdService: GetUserService,
+        private http: HttpClient,
     ) {}
     ngOnDestroy() {
         this.subscription.unsubscribe();
@@ -84,5 +87,23 @@ export class ProfileEditService implements OnDestroy {
         } else {
             return;
         }
+    }
+    updateUser(email, password) {
+        return this.http.post(
+            `${environment.urlAuthConfig.signIn}${environment.firebaseConfig.apiKey}`,
+            {
+                email,
+                password,
+                returnSecureToken: true,
+            },
+        );
+    }
+    deleteUser(idToken) {
+        return this.http.post(
+            `${environment.urlAuthConfig.deleteUser}${environment.firebaseConfig.apiKey}`,
+            {
+                idToken,
+            },
+        );
     }
 }
