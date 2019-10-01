@@ -19,6 +19,10 @@ export class TextEditorComponent implements OnInit, OnDestroy {
     public disabled: boolean;
     private disableTitle = true;
     private disableDescription = true;
+    private titleHeader: string;
+    private contentForEditting: string;
+    private postIdroute: string;
+    private button = 'Send';
     constructor(
         private uploadDataService: UploadDataService,
         private router: Router,
@@ -30,7 +34,14 @@ export class TextEditorComponent implements OnInit, OnDestroy {
             title: new FormControl(),
             description: new FormControl(),
         });
-    }
+        this.titleHeader = this.uploadDataService.getTitleHeader() || '';
+        this.contentForEditting = this.uploadDataService.getContentForEditting() || '';
+        this.config.initialData = this.contentForEditting || '';
+        this.postIdroute = this.uploadDataService.getPostIdroute();
+        if (this.titleHeader || this.contentForEditting) {
+            this.button = 'Update';
+        }
+     }
     public checkTitle(data): void {
         const { value } = data.target;
         !value ? (this.disableTitle = true) : (this.disableTitle = false);
@@ -42,6 +53,7 @@ export class TextEditorComponent implements OnInit, OnDestroy {
             ? (this.disableDescription = true)
             : (this.disableDescription = false);
         this.disableSendButton();
+        console.log(this.postIdroute);
     }
     private disableSendButton(): void {
         this.disableTitle || this.disableDescription
@@ -57,26 +69,52 @@ export class TextEditorComponent implements OnInit, OnDestroy {
         });
     }
     public startUpload(data): void {
-        this.disabled = true;
-        const downloadTextMethod = this.uploadDataService.uploadTextData(
-            data.title,
-            data.description,
-        );
+        if (this.titleHeader || this.contentForEditting) {
+            console.log(data, '111111');
+            this.disabled = true;
+            const downloadTextMethod = this.uploadDataService.updateTextData(
+                data.title,
+                data.description,
+            );
 
-        const downloadTextSubscription = downloadTextMethod.subscribe(
-            response => {
-                console.log(response);
-            },
-            error => this.openSnackBar(error),
-            () => {
-                this.openSnackBar('Text added');
-                setTimeout(() => {
-                    this.redirect();
-                    downloadTextSubscription.unsubscribe();
-                }, 1000);
-            },
-        );
+            const downloadTextSubscription = downloadTextMethod.subscribe(
+                response => {
+                    console.log(response);
+                },
+                error => this.openSnackBar(error),
+                () => {
+                    this.openSnackBar('Text updated');
+                    setTimeout(() => {
+                        this.redirect();
+                        downloadTextSubscription.unsubscribe();
+                    }, 1000);
+                },
+            );
+        } else {
+            console.log(data, '222222');
+            this.disabled = true;
+            const downloadTextMethod = this.uploadDataService.uploadTextData(
+                data.title,
+                data.description,
+            );
+
+            const downloadTextSubscription = downloadTextMethod.subscribe(
+                response => {
+                    console.log(response);
+                },
+                error => this.openSnackBar(error),
+                () => {
+                    this.openSnackBar('Text added');
+                    setTimeout(() => {
+                        this.redirect();
+                        downloadTextSubscription.unsubscribe();
+                    }, 1000);
+                },
+            );
+        }
+
     }
+
 
     ngOnDestroy(): void {
         this.disabled = true;

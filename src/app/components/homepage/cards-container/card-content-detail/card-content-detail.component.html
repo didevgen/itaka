@@ -12,7 +12,7 @@
             </mat-card-title
             >
         </mat-card-header>
-        <div class="content-page__content" *ngIf="!!media.contentType" [ngSwitch] = "media.contentType" >
+        <div class="content-page__content" *ngIf="!!media.contentType" [ngSwitch] = "media.contentType">
             <div *ngSwitchCase ="'image'">
                 <img
                     mat-card-image
@@ -49,8 +49,24 @@
             </div>
             <div
                 *ngSwitchCase ="'text'"
-                class="content-page__text-content">
+                class="content-page__text-content"
+                >
                 <mat-card-content [innerHtml]="media.description"></mat-card-content>
+                <button 
+                mat-icon-button
+                color="accent"
+                matTooltipPosition="above"
+                (click) = 'getEditor($event)'>
+                <mat-icon>build</mat-icon>
+                        Edit
+                </button>
+                <div *ngIf="condition" >
+                    <ita-text-editor>
+                       
+                    </ita-text-editor>
+                </div>
+                
+
             </div>
         <div *ngSwitchDefault><mat-spinner></mat-spinner></div>
         </div>

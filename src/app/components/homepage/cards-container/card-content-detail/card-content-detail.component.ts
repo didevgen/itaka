@@ -8,6 +8,9 @@ import { ActivatedRoute } from '@angular/router';
 import { Subject, of } from 'rxjs';
 import { Media } from '../../../../models/content/Media/media.models';
 import { takeUntil } from 'rxjs/operators';
+// import { NavigationEnd, Router } from '@angular/router';
+import { TextEditorComponent } from 'src/app/components/editors/text-editor/text-editor.component';
+import { UploadDataService } from 'src/app/services/upload-data.service';
 
 @Component({
     selector: 'ita-card-content-detail',
@@ -26,11 +29,17 @@ export class CardContentDetailComponent implements OnInit, OnDestroy {
     media: Media = new Object();
     postIdroute: string;
     private destroy$ = new Subject<void>();
+    condition = false;
+    titleCard: string;
+    contentForEditting: string;
+    public textEditorComponent: TextEditorComponent;
 
     constructor(
         private store: Store<fromApp.AppState>,
         private getDataService: GetDataService,
         private route: ActivatedRoute,
+        // public router: Router,
+        public uploadDataService: UploadDataService,
     ) {}
 
     ngOnInit(): void {
@@ -42,6 +51,8 @@ export class CardContentDetailComponent implements OnInit, OnDestroy {
             params => (this.postIdroute = params.postId),
         );
         this.render(this.postIdroute);
+        console.log(this.uploadDataService);
+
     }
     onLike() {
         this.store.dispatch(new LikesСounterActions.LikesLike());
@@ -70,5 +81,16 @@ export class CardContentDetailComponent implements OnInit, OnDestroy {
         this.routeSubscription.unsubscribe();
         this.destroy$.next();
         this.destroy$.complete();
+    }
+    getEditor($event) {
+        this.condition = true;
+        this.titleCard = this.media.title;
+        this.contentForEditting = this.media.description;
+        this.uploadDataService.setTitleHeader(this.titleCard);
+        this.uploadDataService.setContentForEditting(this.contentForEditting);
+        this.uploadDataService.setPostIdroute(this.postIdroute);
+        console.log(this.postIdroute);
+        console.log(this.media.title);
+        console.log(this.media.description);
     }
 }
