@@ -9,7 +9,11 @@
         </button>
         <span>0</span>
     </div>
-    <div class="card__buttons--delete" *ngIf="isUserPage()">
+    <div
+        class="card__buttons--delete"
+        *ngIf="isUserPage()"
+        (click)="deleteContent(postId)"
+    >
         <button mat-icon-button>
             <mat-icon>delete</mat-icon>
         </button>

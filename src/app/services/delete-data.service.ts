@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { from } from 'rxjs';
+import { from, Observable } from 'rxjs';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Injectable({
     providedIn: 'root',
@@ -8,15 +9,15 @@ import { from } from 'rxjs';
 export class DeleteDataService {
     constructor(private db: AngularFirestore) {}
 
-    private deleteDatafromDb(postId: string): Promise<any> {
+    private deleteDataFromDb(postId: string): Promise<any> {
         return this.db
             .collection('Posts')
             .doc(postId)
             .delete();
     }
 
-    public deleteData(postId: string) {
-        const deleteContent = from(this.deleteDatafromDb(postId));
-        deleteContent.subscribe(snapshot => {});
+    public deleteData(postId: string): Observable<any> {
+        const deleteFromDb = this.deleteDataFromDb(postId);
+        return from(deleteFromDb);
     }
 }
