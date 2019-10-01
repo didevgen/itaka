@@ -20,14 +20,13 @@ export class CardsContentImageComponent implements OnInit, OnDestroy {
 
     constructor(
         private store: Store<fromApp.AppState>,
-        private router: Router
+        private router: Router,
     ) {}
 
     ngOnInit() {}
 
     goCardDetail(elem) {
         this.router.navigate(['cardDetail', this.postId]);
-       
     }
 
     stopEvent(event) {
