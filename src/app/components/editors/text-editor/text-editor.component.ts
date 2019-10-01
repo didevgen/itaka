@@ -35,13 +35,14 @@ export class TextEditorComponent implements OnInit, OnDestroy {
             description: new FormControl(),
         });
         this.titleHeader = this.uploadDataService.getTitleHeader() || '';
-        this.contentForEditting = this.uploadDataService.getContentForEditting() || '';
+        this.contentForEditting =
+            this.uploadDataService.getContentForEditting() || '';
         this.config.initialData = this.contentForEditting || '';
         this.postIdroute = this.uploadDataService.getPostIdroute();
         if (this.titleHeader || this.contentForEditting) {
             this.button = 'Update';
         }
-     }
+    }
     public checkTitle(data): void {
         const { value } = data.target;
         !value ? (this.disableTitle = true) : (this.disableTitle = false);
@@ -112,9 +113,7 @@ export class TextEditorComponent implements OnInit, OnDestroy {
                 },
             );
         }
-
     }
-
 
     ngOnDestroy(): void {
         this.disabled = true;

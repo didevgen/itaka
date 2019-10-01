@@ -13,9 +13,7 @@ export class UserCardsContainerComponent implements OnInit, OnDestroy {
     media: Media[] = [];
     private destroy$ = new Subject<void>();
 
-    constructor(
-        private getDataService: GetDataService,
-    ) {}
+    constructor(private getDataService: GetDataService) {}
 
     ngOnInit() {
         this.getDataService.currentMedia

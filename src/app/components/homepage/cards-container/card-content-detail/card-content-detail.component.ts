@@ -52,7 +52,6 @@ export class CardContentDetailComponent implements OnInit, OnDestroy {
         );
         this.render(this.postIdroute);
         console.log(this.uploadDataService);
-
     }
     onLike() {
         this.store.dispatch(new LikesСounterActions.LikesLike());
