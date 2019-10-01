@@ -4,7 +4,10 @@
     </div>
     <div class="header__search">
         <mat-icon>search</mat-icon>
-        <input placeholder="Search" />
+        <input
+            placeholder="Search"
+            (input)="setDesiredValue($event.target.value)"
+        />
     </div>
     <div class="header__user-tools">
         <div class="header__user-buttons">
