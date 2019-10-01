@@ -10,7 +10,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class CardButtonsComponent {
     // @Input()
-    public postId: string = 'sWALA5TVz0S73lICvowi';
+    public postId: string;
 
     constructor(
         private router: Router,
