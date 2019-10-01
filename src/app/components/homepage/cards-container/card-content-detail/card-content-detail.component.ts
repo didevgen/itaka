@@ -24,6 +24,9 @@ export class CardContentDetailComponent implements OnInit, OnDestroy {
     type: string;
     counterLike: number;
     counterDisl: number;
+    private userId: string;
+    name: string;
+    ava: string;
     private userSub: Subscription;
     private routeSubscription: Subscription;
     media: Media = new Object();
@@ -50,8 +53,7 @@ export class CardContentDetailComponent implements OnInit, OnDestroy {
         this.routeSubscription = this.route.params.subscribe(
             params => (this.postIdroute = params.postId),
         );
-        this.render(this.postIdroute);
-        console.log(this.uploadDataService);
+        this.renderData(this.postIdroute);
     }
     onLike() {
         this.store.dispatch(new LikesСounterActions.LikesLike());
@@ -61,15 +63,22 @@ export class CardContentDetailComponent implements OnInit, OnDestroy {
         this.store.dispatch(new LikesСounterActions.LikeDislike());
     }
 
-    render(postId) {
+    renderData(postId) {
         this.getDataService
-            .renderCardContent()
+            .renderData()
             .pipe(takeUntil(this.destroy$))
             .subscribe(snapshot => {
-                snapshot.docs.forEach(doc => {
+                snapshot[0].docs.forEach(doc => {
                     if (postId === doc.data().postId) {
                         const post = doc.data();
+                        this.userId = doc.data().userId;
                         this.media = post;
+                    }
+                });
+                snapshot[1].docs.forEach(doc => {
+                    if (this.userId === doc.id) {
+                        this.name = doc.data().name;
+                        this.ava = doc.data().avatar;
                     }
                 });
             });
