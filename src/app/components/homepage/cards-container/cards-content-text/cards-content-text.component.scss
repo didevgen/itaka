@@ -17,6 +17,11 @@
     word-wrap: break-word;
     overflow: hidden;
     cursor: pointer;
+    -moz-user-select: none; 
+    -ms-user-select: none; 
+    -khtml-user-select: none; 
+    -webkit-user-select: none;
+    -webkit-touch-callout: none; 
 }
 .card__text--icons {
     width: 100%;

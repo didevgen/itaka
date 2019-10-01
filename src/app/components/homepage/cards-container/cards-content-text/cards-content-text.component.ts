@@ -17,6 +17,8 @@ export class CardsContentTextComponent implements OnInit, OnDestroy {
     description: string;
     @Input()
     postId: string;
+    @Output() @Input() likes: number;
+    @Output() @Input() dislikes: number;
 
     constructor(
         private store: Store<fromApp.AppState>,
@@ -27,13 +29,15 @@ export class CardsContentTextComponent implements OnInit, OnDestroy {
 
     goCardDetail(elem) {
         this.router.navigate(['/cardDetail', this.postId]);
+        console.log('dis', this.dislikes);
+        console.log('likes', this.likes);
         // this.setPostId(elem);
     }
 
     // setPostId(elem) {
     //     this.store.dispatch(new LikesActions.SetPostId({ postId: elem }));
     // }
-
+    getMarks() {}
     stopEvent(event) {
         event.stopPropagation();
     }

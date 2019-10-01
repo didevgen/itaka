@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnDestroy } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy, Output } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
 import * as fromApp from '../../../../store/app.reducer';
@@ -18,7 +18,8 @@ export class CardsContentImageComponent implements OnInit, OnDestroy {
     url: string;
     @Input()
     postId: string;
-
+    @Output() @Input() likes: number;
+    @Output() @Input() dislikes: number;
     constructor(
         private store: Store<fromApp.AppState>,
         private router: Router,
@@ -28,6 +29,8 @@ export class CardsContentImageComponent implements OnInit, OnDestroy {
 
     goCardDetail(elem) {
         this.router.navigate(['cardDetail', this.postId]);
+        console.log('dis', this.dislikes);
+        console.log('likes', this.likes);
         // this.setPostId(elem);
     }
 
