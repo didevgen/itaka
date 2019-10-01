@@ -9,9 +9,9 @@
         </button>
         <span>0</span>
     </div>
-    <div class="card__buttons--send">
+    <div class="card__buttons--delete" *ngIf="isUserPage()">
         <button mat-icon-button>
-            <mat-icon>send</mat-icon>
+            <mat-icon>delete</mat-icon>
         </button>
     </div>
 </div>
