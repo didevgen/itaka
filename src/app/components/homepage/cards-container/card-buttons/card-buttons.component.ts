@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { DeleteDataService } from 'src/app/services/delete-data.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -8,7 +8,9 @@ import { MatSnackBar } from '@angular/material/snack-bar';
     templateUrl: './card-buttons.component.html',
     styleUrls: ['./card-buttons.component.scss'],
 })
-export class CardButtonsComponent {
+export class CardButtonsComponent implements OnInit {
+    @Input() likes: number;
+    @Input() dislikes: number;
     // @Input()
     public postId: string;
 
@@ -18,8 +20,11 @@ export class CardButtonsComponent {
         private snackBar: MatSnackBar,
     ) {}
 
-    public isUserPage(): boolean {
-        return this.router.url === '/userPage';
+    ngOnInit(): void {
+        this.likes === undefined ? (this.likes = 0) : (this.likes = this.likes);
+        this.dislikes === undefined
+            ? (this.dislikes = 0)
+            : (this.dislikes = this.dislikes);
     }
 
     public deleteContent(postId: string): void {
@@ -36,5 +41,9 @@ export class CardButtonsComponent {
         this.snackBar.open(message, 'Close', {
             duration: 1000,
         });
+    }
+
+    public isUserPage(): boolean {
+        return this.router.url === '/userPage';
     }
 }

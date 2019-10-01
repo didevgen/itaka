@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnDestroy } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy, Output } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
 import * as fromApp from '../../../../store/app.reducer';
@@ -19,6 +19,8 @@ export class CardsContentAudioComponent implements OnInit, OnDestroy {
     count: number;
     @Input()
     postId: string;
+    @Output() @Input() likes: number;
+    @Output() @Input() dislikes: number;
     private userSub: Subscription;
 
     constructor(
