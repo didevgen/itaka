@@ -132,9 +132,12 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
                                         new AuthActions.Logout(),
                                     );
                                 }),
-                        //   () => {
-                        //   const test = this.dialog.open(AlertComponent);
-                        // }
+                        () => {
+                            this.dialog.open(SubmitDialogComponent, {
+                                width: '350px',
+                                data: { message: 'Wrong password or email' },
+                            });
+                        },
                     );
             });
     }
