@@ -42,6 +42,5 @@ export class CardsContainerComponent implements OnInit, OnDestroy {
     ngOnDestroy() {
         this.destroy$.next();
         this.destroy$.complete();
-        this.searchService.currentSearchResponse.unsubscribe();
     }
 }
