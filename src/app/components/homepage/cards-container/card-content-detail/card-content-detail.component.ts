@@ -12,7 +12,6 @@ import { TextEditorComponent } from 'src/app/components/editors/text-editor/text
 import { UploadDataService } from 'src/app/services/upload-data.service';
 import { GetUserService } from 'src/app/services/get-user.service';
 
-
 @Component({
     selector: 'ita-card-content-detail',
     templateUrl: './card-content-detail.component.html',
@@ -102,7 +101,7 @@ export class CardContentDetailComponent implements OnInit, OnDestroy {
             );
             this.uploadDataService.setPostIdroute(this.postIdroute);
         } else {
-            alert('OOOPS, it\'s not your card');
+            alert("OOOPS, it's not your card");
         }
     }
 }

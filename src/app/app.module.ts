@@ -103,9 +103,9 @@ import { ConfirmationDialogComponent } from './components/profile-edit/confirmat
     ],
     bootstrap: [AppComponent],
     entryComponents: [
-      ModalDialogComponent,
-      SubmitDialogComponent,
-      ConfirmationDialogComponent,
+        ModalDialogComponent,
+        SubmitDialogComponent,
+        ConfirmationDialogComponent,
     ],
     exports: [
         ContentContainerComponent,
