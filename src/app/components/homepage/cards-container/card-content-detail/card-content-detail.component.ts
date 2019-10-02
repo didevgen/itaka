@@ -2,7 +2,6 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
 import * as fromApp from '../../../../store/app.reducer';
-import * as LikesСounterActions from '../../cards-container/card-content-detail/store/card-content.actions';
 import { GetDataService } from '../../../../services/get-data.service';
 import { ActivatedRoute } from '@angular/router';
 import { Subject, of } from 'rxjs';
@@ -11,7 +10,6 @@ import { takeUntil } from 'rxjs/operators';
 import { TextEditorComponent } from 'src/app/components/editors/text-editor/text-editor.component';
 import { UploadDataService } from 'src/app/services/upload-data.service';
 import { GetUserService } from 'src/app/services/get-user.service';
-
 
 @Component({
     selector: 'ita-card-content-detail',
@@ -55,13 +53,6 @@ export class CardContentDetailComponent implements OnInit, OnDestroy {
             params => (this.postIdroute = params.postId),
         );
         this.renderData(this.postIdroute);
-    }
-    onLike() {
-        this.store.dispatch(new LikesСounterActions.LikesLike());
-    }
-
-    onDisLike() {
-        this.store.dispatch(new LikesСounterActions.LikeDislike());
     }
 
     renderData(postId) {
