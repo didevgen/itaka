@@ -35,14 +35,15 @@ export class TextEditorComponent implements OnInit, OnDestroy {
         });
         this.config.initialData = '';
         if (this.router.routerState.snapshot.url.includes('cardDetail')) {
-                this.titleHeader = this.uploadDataService.getTitleHeader();
-                this.contentForEditting =
-                this.uploadDataService.getContentForEditting();
-                this.config.initialData = this.contentForEditting;
-                this.postIdroute = this.uploadDataService.getPostIdroute();
-                if (this.titleHeader || this.contentForEditting) {
+            this.titleHeader = this.uploadDataService.getTitleHeader();
+            this.contentForEditting = this.uploadDataService.getContentForEditting();
+            this.config.initialData = this.contentForEditting;
+            this.postIdroute = this.uploadDataService.getPostIdroute();
+            if (this.titleHeader || this.contentForEditting) {
                 this.button = 'Update';
-        } else {return; }
+            } else {
+                return;
+            }
         }
     }
     public checkTitle(data): void {
