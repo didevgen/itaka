@@ -262,7 +262,7 @@ export class CardContentDetailComponent implements OnInit, OnDestroy {
             );
             this.uploadDataService.setPostIdroute(this.postIdroute);
         } else {
-            alert("OOOPS, it's not your card");
+            alert('OOOPS, it\'s not your card');
         }
     }
 
