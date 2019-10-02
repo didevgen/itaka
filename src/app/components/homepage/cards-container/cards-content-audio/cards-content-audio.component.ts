@@ -1,8 +1,6 @@
 import { Component, OnInit, Input, OnDestroy, Output } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
-import * as fromApp from '../../../../store/app.reducer';
-import * as LikesActions from '../../cards-container/card-content-detail/store/card-content.actions';
 import { AngularFirestore } from 'angularfire2/firestore';
 import { Router } from '@angular/router';
 
@@ -24,7 +22,6 @@ export class CardsContentAudioComponent implements OnInit, OnDestroy {
     private userSub: Subscription;
 
     constructor(
-        private store: Store<fromApp.AppState>,
         private db: AngularFirestore,
         private router: Router,
     ) {}

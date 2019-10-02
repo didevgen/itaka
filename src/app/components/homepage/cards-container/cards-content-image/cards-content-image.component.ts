@@ -1,8 +1,4 @@
 import { Component, OnInit, Input, OnDestroy, Output } from '@angular/core';
-import { Store } from '@ngrx/store';
-import { Subscription } from 'rxjs';
-import * as fromApp from '../../../../store/app.reducer';
-import * as LikesActions from '../../cards-container/card-content-detail/store/card-content.actions';
 import { Router } from '@angular/router';
 @Component({
     selector: 'ita-cards-content-image',
@@ -20,8 +16,7 @@ export class CardsContentImageComponent implements OnInit, OnDestroy {
     @Output() @Input() likes: number;
     @Output() @Input() dislikes: number;
     constructor(
-        private store: Store<fromApp.AppState>,
-        private router: Router,
+        private router: Router
     ) {}
 
     ngOnInit() {}

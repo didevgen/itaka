@@ -1,8 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
-import * as fromApp from '../../../../store/app.reducer';
-import * as LikesСounterActions from '../../cards-container/card-content-detail/store/card-content.actions';
 import { GetDataService } from '../../../../services/get-data.service';
 import { ActivatedRoute } from '@angular/router';
 import { Subject, of } from 'rxjs';
@@ -10,6 +7,8 @@ import { Media } from '../../../../models/content/Media/media.models';
 import { takeUntil } from 'rxjs/operators';
 import { GetUserService } from '../../../../services/get-user.service';
 import { LikesService } from '../../../../services/likes.service';
+import { TextEditorComponent } from 'src/app/components/editors/text-editor/text-editor.component';
+import { UploadDataService } from 'src/app/services/upload-data.service';
 
 @Component({
     selector: 'ita-card-content-detail',
@@ -35,18 +34,21 @@ export class CardContentDetailComponent implements OnInit, OnDestroy {
     userColorD: string;
     userColorL: string;
 
-    private userSub: Subscription;
     private routeSubscription: Subscription;
     media: Media = new Object();
     postIdroute: string;
     private destroy$ = new Subject<void>();
+    condition = false;
+    titleCard: string;
+    contentForEditting: string;
+    public textEditorComponent: TextEditorComponent;
 
     constructor(
-        private store: Store<fromApp.AppState>,
         private getDataService: GetDataService,
         private route: ActivatedRoute,
         private getUserService: GetUserService,
         private likesService: LikesService,
+        public uploadDataService: UploadDataService,
     ) {}
 
     ngOnInit(): void {
@@ -73,6 +75,7 @@ export class CardContentDetailComponent implements OnInit, OnDestroy {
     }
 
     setLike() {
+
         if (this.checkDataDislike) {
             this.userColorD = 'base';
             this.likesService.deleteDataDislike(
@@ -86,9 +89,7 @@ export class CardContentDetailComponent implements OnInit, OnDestroy {
         }
 
         if (!this.curStatusLike) {
-            console.log(this.curStatusLike);
             this.curStatusLike = !this.curStatusLike;
-            console.log(this.curStatusLike);
             this.likesService.saveDataLike(
                 {
                     userId: this.getUserService.getUserId(),
@@ -97,8 +98,8 @@ export class CardContentDetailComponent implements OnInit, OnDestroy {
                 this.postIdroute,
             );
             this.userColorL = 'accent';
+
         } else {
-            console.log('deleteDataLike', this.curStatusLike);
             this.likesService.deleteDataLike(
                 {
                     userId: this.getUserService.getUserId(),
@@ -125,9 +126,7 @@ export class CardContentDetailComponent implements OnInit, OnDestroy {
         }
 
         if (!this.curStatusDisl) {
-            console.log(this.curStatusDisl);
             this.curStatusDisl = !this.curStatusDisl;
-            console.log(this.curStatusDisl);
             this.likesService.saveDataDislike(
                 {
                     userId: this.getUserService.getUserId(),
@@ -137,7 +136,7 @@ export class CardContentDetailComponent implements OnInit, OnDestroy {
             );
             this.userColorD = 'accent';
         } else {
-            console.log('deleteDataDislike', this.curStatusDisl);
+            
             this.likesService.deleteDataDislike(
                 {
                     userId: this.getUserService.getUserId(),
@@ -170,7 +169,6 @@ export class CardContentDetailComponent implements OnInit, OnDestroy {
 
     renderDataLikes(postId: string) {
         this.likesService.getDataLikes(postId).subscribe(snapshot => {
-            // console.log("snapshot.data likes",snapshot.data() )
             if (snapshot.data()) {
                 !snapshot.data().likes.length
                     ? (this.counterLike = 0)
@@ -181,7 +179,6 @@ export class CardContentDetailComponent implements OnInit, OnDestroy {
 
     renderDataDislikes(postId: string) {
         this.likesService.getDataDislikes(postId).subscribe(snapshot => {
-            // console.log("snapshot.data dislikes",snapshot.data() )
             if (snapshot.data()) {
                 !snapshot.data().dislikes.length
                     ? (this.counterDisl = 0)
@@ -220,9 +217,16 @@ export class CardContentDetailComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy() {
-        // this.userSub.unsubscribe();
         this.routeSubscription.unsubscribe();
         this.destroy$.next();
         this.destroy$.complete();
+    }
+    getEditor($event) {
+        this.condition = true;
+        this.titleCard = this.media.title;
+        this.contentForEditting = this.media.description;
+        this.uploadDataService.setTitleHeader(this.titleCard);
+        this.uploadDataService.setContentForEditting(this.contentForEditting);
+        this.uploadDataService.setPostIdroute(this.postIdroute);
     }
 }
