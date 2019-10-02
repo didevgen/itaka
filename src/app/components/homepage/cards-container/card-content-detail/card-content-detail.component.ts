@@ -31,7 +31,7 @@ export class CardContentDetailComponent implements OnInit, OnDestroy {
     private curFlag: boolean;
     counterLike: number;
     counterDisl: number;
-    private userId: string;
+    public userId: string;
     name: string;
     ava: string;
     userColorD: string;
