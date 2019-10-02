@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from 'angularfire2/firestore';
 import { GetUserService } from './get-user.service';
-import { Like } from '../models/content/Likes/likes.models';
+import { Like } from '../models/content/Likes/Likes.models';
 import { OnDestroy } from '@angular/core';
 import * as firebase from 'firebase/app';
 import { Observable, from } from 'rxjs';
