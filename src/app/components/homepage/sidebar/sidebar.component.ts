@@ -48,7 +48,9 @@ export class SidebarComponent implements OnInit, OnDestroy {
         this.media
             .filter(content => content.contentType === type)
             .map(result => this.filteredMedia.push(result));
-        this.getDataService.filterMedia(this.filteredMedia);
+        !type
+            ? this.getDataService.filterMedia(this.media)
+            : this.getDataService.filterMedia(this.filteredMedia);
         if (this.router.url !== this.userPageUrl) {
             this.router.navigate(['/']);
         }
