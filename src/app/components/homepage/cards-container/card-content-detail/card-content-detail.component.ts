@@ -214,18 +214,16 @@ export class CardContentDetailComponent implements OnInit, OnDestroy {
         this.destroy$.next();
         this.destroy$.complete();
     }
-    getEditor($event) {
-        if (this.getUserService.getUserId() === this.media.userId) {
-            this.condition = true;
-            this.titleCard = this.media.title;
-            this.contentForEditting = this.media.description;
-            this.uploadDataService.setTitleHeader(this.titleCard);
-            this.uploadDataService.setContentForEditting(
-                this.contentForEditting,
-            );
-            this.uploadDataService.setPostIdroute(this.postIdroute);
-        } else {
-            alert('OOOPS, it\'s not your card');
-        }
+    getEditor() {
+        this.condition = true;
+        this.titleCard = this.media.title;
+        this.contentForEditting = this.media.description;
+        this.uploadDataService.setTitleHeader(this.titleCard);
+        this.uploadDataService.setContentForEditting(this.contentForEditting);
+        this.uploadDataService.setPostIdroute(this.postIdroute);
+    }
+
+    isUserContent(): boolean {
+        return this.getUserService.getUserId() === this.media.userId;
     }
 }
