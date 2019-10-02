@@ -29,7 +29,6 @@ export class CardsContentTextComponent implements OnInit, OnDestroy {
 
     goCardDetail(elem) {
         this.router.navigate(['/cardDetail', this.postId]);
-
         // this.setPostId(elem);
     }
 
