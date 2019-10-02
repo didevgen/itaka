@@ -5,6 +5,7 @@
     </mat-card-title>
     <div class="card__image--icons" (click)="stopEvent($event)">
         <ita-card-buttons
+            [postId]="postId"
             [likes]="likes"
             [dislikes]="dislikes"
         ></ita-card-buttons>

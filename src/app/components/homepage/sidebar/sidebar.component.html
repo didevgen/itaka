@@ -7,9 +7,8 @@
         matTooltip="Hot content"
         matTooltipPosition="right"
         class="add_circle_outline"
-        [routerLink]="['']"
     >
-        <mat-icon class="sidebar__button sidebar__button--base"
+        <mat-icon [ngClass]="{'sidebar__button--selected': isActive('')}" class="sidebar__button sidebar__button--base" (click)="filterByContent('')"
             >whatshot</mat-icon
         >
     </button>
@@ -73,7 +72,6 @@
         matTooltip="Add content"
         matTooltipPosition="left"
         class="add_circle_outline"
-        [routerLink]="['']"
     >
         <mat-icon color="accent">add</mat-icon>
     </button>

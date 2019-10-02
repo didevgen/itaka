@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
@@ -45,6 +45,7 @@ import { CardButtonsComponent } from './components/homepage/cards-container/card
 import { GetDataService } from './services/get-data.service';
 import { UploadDataService } from './services/upload-data.service';
 import { SearchService } from './services/search.service';
+import { ConfirmationDialogComponent } from './components/profile-edit/confirmation-dialog/confirmation-dialog.component';
 
 @NgModule({
     declarations: [
@@ -65,10 +66,12 @@ import { SearchService } from './services/search.service';
         UserPageComponent,
         UserCardsContainerComponent,
         CardButtonsComponent,
+        ConfirmationDialogComponent,
     ],
     imports: [
         BrowserModule,
         AppRoutingModule,
+        FormsModule,
         EffectsModule.forRoot([AuthEffects, ProfileEditEffect]),
         StoreModule.forRoot(fromApp.appReducer),
         StoreDevtoolsModule.instrument({
@@ -99,7 +102,11 @@ import { SearchService } from './services/search.service';
         SearchService,
     ],
     bootstrap: [AppComponent],
-    entryComponents: [ModalDialogComponent, SubmitDialogComponent],
+    entryComponents: [
+        ModalDialogComponent,
+        SubmitDialogComponent,
+        ConfirmationDialogComponent,
+    ],
     exports: [
         ContentContainerComponent,
         CardsContentVideoComponent,
