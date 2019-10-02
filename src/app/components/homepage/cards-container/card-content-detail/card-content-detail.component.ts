@@ -1,10 +1,4 @@
-import {
-    Component,
-    OnInit,
-    OnDestroy,
-    ViewChild,
-    ElementRef,
-} from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Subscription, throwError } from 'rxjs';
 import * as fromApp from '../../../../store/app.reducer';
@@ -15,7 +9,6 @@ import { Subject, of } from 'rxjs';
 import { Media } from '../../../../models/content/Media/media.models';
 import { map, takeUntil } from 'rxjs/operators';
 import { FormControl, Validators } from '@angular/forms';
-import { EditProfile } from '../../../../models/edit-profile/edit-profile.model';
 import { Comment } from '../../../../models/content/Text/comment.model';
 import { GetUserService } from '../../../../services/get-user.service';
 import { CommentService } from './comment.service';
@@ -45,8 +38,9 @@ export class CardContentDetailComponent implements OnInit, OnDestroy {
     isComment: boolean;
     commentFC: FormControl;
     date: string;
-    userProfile: { name: string; avatar: string };
+    currentUserProfile: { name: string; avatar: string };
     currentUserId: string;
+    defaultImage = '../../../../assets/avatarDefault.png';
 
     /*@ViewChild('comment', { static: false })
     comment: ElementRef;*/
@@ -71,6 +65,8 @@ export class CardContentDetailComponent implements OnInit, OnDestroy {
             params => (this.postIdroute = params.postId),
         );
         this.renderData(this.postIdroute);
+        this.comments = this.commentService.getComments(this.postIdroute);
+        console.log(this.comments, 'commentSSS onInit component');
 
         this.commentFC = new FormControl('', [
             Validators.required,
@@ -104,7 +100,7 @@ export class CardContentDetailComponent implements OnInit, OnDestroy {
                         this.ava = doc.data().avatar;
                     }
                     if (this.currentUserId === doc.id) {
-                        this.userProfile = {
+                        this.currentUserProfile = {
                             name: doc.data().name,
                             avatar: doc.data().avatar,
                         };
@@ -132,11 +128,8 @@ export class CardContentDetailComponent implements OnInit, OnDestroy {
             postId: this.postIdroute,
         };
         this.commentService.addComment(this.comment);
-
-        this.comments.push(this.comment);
-        this.comments.reverse();
-        // console.log(this.comment, 'comment onInit');
-        // console.log(this.comments, 'commentSSS onInit');
+        // this.comments.push(this.comment);
+        // this.comments.reverse();
         this.commentFC.reset();
     }
     onCancel() {

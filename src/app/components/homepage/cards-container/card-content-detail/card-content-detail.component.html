@@ -101,18 +101,18 @@
         </mat-card-actions>
     </mat-card>
 
-    <ng-container *ngIf="isComment && comment">
-        <ng-container *ngFor="let comment of comments; let ind = index">
+    <ng-container *ngIf="comments">
+        <ng-container *ngFor="let comment of comments">
             <section #oneComment>
                 <mat-card class="comment-container">
                     <mat-card-header>
                         <img
                             mat-card-avatar
                             alt="User avatar"
-                            [src]="userProfile.avatar"
+                            [src]="comment.userProfile ? comment.userProfile.avatar : defaultImage"
                         />
-                        <mat-card-title>{{ userProfile.name }}</mat-card-title
-                        ><mat-card-subtitle *ngIf="comment.userId === userId"
+                        <!--<mat-card-title>{{ comment.userProfile.name }}</mat-card-title>-->
+                        <mat-card-subtitle *ngIf="comment.userId === userId"
                             >Author</mat-card-subtitle
                         >
                         <mat-card-subtitle
@@ -130,12 +130,12 @@
                         }}</time>
                     </mat-card-content>
                     <mat-card-actions class="comment-card">
-                        <button
+                        <button *ngIf="currentUserId === comment.userId"
                             mat-icon-button
                             color="base"
                             matTooltip="Delete"
                             matTooltipPosition="above"
-                            (click)="onDelete(ind)"
+                            (click)="onDelete(comment.commentId)"
                         >
                             <mat-icon>delete</mat-icon>
                         </button>
@@ -146,15 +146,15 @@
     </ng-container>
 
     <ng-container *ngIf="currentUserId">
-        <div *ngIf="userProfile">
+        <div *ngIf="currentUserProfile">
             <mat-card class="comment-container comment-container__margintop">
                 <mat-card-header>
                     <img
                         mat-card-avatar
                         alt="User avatar"
-                        [src]="userProfile.avatar"
+                        [src]="currentUserProfile ? currentUserProfile.avatar : defaultImage"
                     />
-                    <mat-card-title>{{ userProfile.name }}</mat-card-title
+                    <mat-card-title>{{ currentUserProfile.name }}</mat-card-title
                     ><mat-card-subtitle>You</mat-card-subtitle>
                 </mat-card-header>
                 <mat-card-content class="comment-container_content-card">
