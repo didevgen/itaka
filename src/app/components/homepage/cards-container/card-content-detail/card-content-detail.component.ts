@@ -65,8 +65,8 @@ export class CardContentDetailComponent implements OnInit, OnDestroy {
 
     onDisLike() {
         if (this.getUserService.getUserId()) {
-        this.renderDataDislikes(this.postIdroute);
-        this.setDislike();
+            this.renderDataDislikes(this.postIdroute);
+            this.setDislike();
         }
     }
 
