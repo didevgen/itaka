@@ -15,8 +15,7 @@ export class CardsContentTextComponent implements OnInit, OnDestroy {
     title: string;
     @Input()
     description: string;
-    @Input()
-    postId: string;
+    @Output() @Input() postId: string;
     @Output() @Input() likes: number;
     @Output() @Input() dislikes: number;
 

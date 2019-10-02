@@ -16,8 +16,7 @@ export class CardsContentImageComponent implements OnInit, OnDestroy {
     title: string;
     @Input()
     url: string;
-    @Input()
-    postId: string;
+    @Output() @Input() postId: string;
     @Output() @Input() likes: number;
     @Output() @Input() dislikes: number;
     constructor(

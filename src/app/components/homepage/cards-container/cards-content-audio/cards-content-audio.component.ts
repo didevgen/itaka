@@ -17,8 +17,7 @@ export class CardsContentAudioComponent implements OnInit, OnDestroy {
     @Input()
     url: string;
     count: number;
-    @Input()
-    postId: string;
+    @Output() @Input() postId: string;
     @Output() @Input() likes: number;
     @Output() @Input() dislikes: number;
     private userSub: Subscription;
