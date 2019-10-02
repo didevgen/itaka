@@ -5,10 +5,10 @@ import { ActivatedRoute } from '@angular/router';
 import { Subject, of } from 'rxjs';
 import { Media } from '../../../../models/content/Media/media.models';
 import { takeUntil } from 'rxjs/operators';
-import { GetUserService } from '../../../../services/get-user.service';
 import { LikesService } from '../../../../services/likes.service';
 import { TextEditorComponent } from 'src/app/components/editors/text-editor/text-editor.component';
 import { UploadDataService } from 'src/app/services/upload-data.service';
+import { GetUserService } from 'src/app/services/get-user.service';
 
 @Component({
     selector: 'ita-card-content-detail',
@@ -22,18 +22,14 @@ export class CardContentDetailComponent implements OnInit, OnDestroy {
     type: string;
     curStatusLike = false;
     curStatusDisl = false;
-
     private curFlag: boolean;
-    // for counts from db
     counterLike: number;
     counterDisl: number;
     private userId: string;
     name: string;
     ava: string;
-
     userColorD: string;
     userColorL: string;
-
     private routeSubscription: Subscription;
     media: Media = new Object();
     postIdroute: string;
@@ -46,9 +42,9 @@ export class CardContentDetailComponent implements OnInit, OnDestroy {
     constructor(
         private getDataService: GetDataService,
         private route: ActivatedRoute,
-        private getUserService: GetUserService,
         private likesService: LikesService,
         public uploadDataService: UploadDataService,
+        public getUserService: GetUserService,
     ) {}
 
     ngOnInit(): void {
@@ -68,10 +64,10 @@ export class CardContentDetailComponent implements OnInit, OnDestroy {
     }
 
     onDisLike() {
-        if (this.getUserService.getUserId()) {
+        // if (this.getUserService.getUserId()) {
             this.renderDataDislikes(this.postIdroute);
             this.setDislike();
-        }
+       // }
     }
 
     setLike() {
@@ -219,11 +215,17 @@ export class CardContentDetailComponent implements OnInit, OnDestroy {
         this.destroy$.complete();
     }
     getEditor($event) {
-        this.condition = true;
-        this.titleCard = this.media.title;
-        this.contentForEditting = this.media.description;
-        this.uploadDataService.setTitleHeader(this.titleCard);
-        this.uploadDataService.setContentForEditting(this.contentForEditting);
-        this.uploadDataService.setPostIdroute(this.postIdroute);
+        if (this.getUserService.getUserId() === this.media.userId) {
+            this.condition = true;
+            this.titleCard = this.media.title;
+            this.contentForEditting = this.media.description;
+            this.uploadDataService.setTitleHeader(this.titleCard);
+            this.uploadDataService.setContentForEditting(
+                this.contentForEditting,
+            );
+            this.uploadDataService.setPostIdroute(this.postIdroute);
+        } else {
+            alert('OOOPS, it\'s not your card');
+        }
     }
 }

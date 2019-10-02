@@ -22,8 +22,6 @@ export class CardsContentTextComponent implements OnInit, OnDestroy {
 
     goCardDetail(elem) {
         this.router.navigate(['/cardDetail', this.postId]);
-        console.log('dis', this.dislikes);
-        console.log('likes', this.likes);
     }
 
     getMarks() {}
