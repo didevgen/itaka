@@ -2,7 +2,6 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
 import * as fromApp from '../../../../store/app.reducer';
-import * as LikesСounterActions from '../../cards-container/card-content-detail/store/card-content.actions';
 import { GetDataService } from '../../../../services/get-data.service';
 import { ActivatedRoute } from '@angular/router';
 import { Subject, of } from 'rxjs';
@@ -55,13 +54,6 @@ export class CardContentDetailComponent implements OnInit, OnDestroy {
         );
         this.renderData(this.postIdroute);
     }
-    onLike() {
-        this.store.dispatch(new LikesСounterActions.LikesLike());
-    }
-
-    onDisLike() {
-        this.store.dispatch(new LikesСounterActions.LikeDislike());
-    }
 
     renderData(postId) {
         this.getDataService
@@ -101,7 +93,7 @@ export class CardContentDetailComponent implements OnInit, OnDestroy {
             );
             this.uploadDataService.setPostIdroute(this.postIdroute);
         } else {
-            alert("OOOPS, it's not your card");
+            alert('OOOPS, it\'s not your card');
         }
     }
 }
