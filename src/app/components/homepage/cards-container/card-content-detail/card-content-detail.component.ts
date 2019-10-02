@@ -10,6 +10,8 @@ import { Media } from '../../../../models/content/Media/media.models';
 import { takeUntil } from 'rxjs/operators';
 import { TextEditorComponent } from 'src/app/components/editors/text-editor/text-editor.component';
 import { UploadDataService } from 'src/app/services/upload-data.service';
+import { GetUserService } from 'src/app/services/get-user.service';
+
 
 @Component({
     selector: 'ita-card-content-detail',
@@ -41,6 +43,7 @@ export class CardContentDetailComponent implements OnInit, OnDestroy {
         private getDataService: GetDataService,
         private route: ActivatedRoute,
         public uploadDataService: UploadDataService,
+        public getUserService: GetUserService,
     ) {}
 
     ngOnInit(): void {
@@ -89,11 +92,15 @@ export class CardContentDetailComponent implements OnInit, OnDestroy {
         this.destroy$.complete();
     }
     getEditor($event) {
-        this.condition = true;
-        this.titleCard = this.media.title;
-        this.contentForEditting = this.media.description;
-        this.uploadDataService.setTitleHeader(this.titleCard);
-        this.uploadDataService.setContentForEditting(this.contentForEditting);
-        this.uploadDataService.setPostIdroute(this.postIdroute);
+        if (this.getUserService.getUserId() === this.media.userId) {
+            this.condition = true;
+            this.titleCard = this.media.title;
+            this.contentForEditting = this.media.description;
+            this.uploadDataService.setTitleHeader(this.titleCard);
+            this.uploadDataService.setContentForEditting(this.contentForEditting);
+            this.uploadDataService.setPostIdroute(this.postIdroute);
+         } else {
+             alert("OOOPS, it's not your card");
+        }
     }
 }
