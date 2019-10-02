@@ -11,7 +11,6 @@ import { takeUntil } from 'rxjs/operators';
 import { GetUserService } from '../../../../services/get-user.service';
 import { LikesService } from '../../../../services/likes.service';
 
-
 @Component({
     selector: 'ita-card-content-detail',
     templateUrl: './card-content-detail.component.html',
@@ -51,11 +50,10 @@ export class CardContentDetailComponent implements OnInit, OnDestroy {
     ) {}
 
     ngOnInit(): void {
-       
         this.routeSubscription = this.route.params.subscribe(
             params => (this.postIdroute = params.postId),
         );
-       
+
         this.renderData(this.postIdroute);
         this.renderDataLikes(this.postIdroute);
         this.renderDataDislikes(this.postIdroute);
@@ -71,7 +69,7 @@ export class CardContentDetailComponent implements OnInit, OnDestroy {
         if (this.getUserService.getUserId()) {
             this.renderDataDislikes(this.postIdroute);
             this.setDislike();
-      }
+        }
     }
 
     setLike() {
@@ -114,7 +112,6 @@ export class CardContentDetailComponent implements OnInit, OnDestroy {
     }
 
     setDislike() {
-
         if (this.checkDataLike) {
             this.userColorL = 'base';
             this.likesService.deleteDataLike(
@@ -174,30 +171,29 @@ export class CardContentDetailComponent implements OnInit, OnDestroy {
     renderDataLikes(postId: string) {
         this.likesService.getDataLikes(postId).subscribe(snapshot => {
             // console.log("snapshot.data likes",snapshot.data() )
-        if (snapshot.data()) {
-            !snapshot.data().likes.length
-                ? (this.counterLike = 0)
-                : (this.counterLike = snapshot.data().likes.length);
+            if (snapshot.data()) {
+                !snapshot.data().likes.length
+                    ? (this.counterLike = 0)
+                    : (this.counterLike = snapshot.data().likes.length);
             }
         });
-       
     }
 
     renderDataDislikes(postId: string) {
         this.likesService.getDataDislikes(postId).subscribe(snapshot => {
             // console.log("snapshot.data dislikes",snapshot.data() )
             if (snapshot.data()) {
-            !snapshot.data().dislikes.length
-                ? (this.counterDisl = 0)
-                : (this.counterDisl = snapshot.data().dislikes.length);
+                !snapshot.data().dislikes.length
+                    ? (this.counterDisl = 0)
+                    : (this.counterDisl = snapshot.data().dislikes.length);
             }
         });
     }
 
     checkDataLike(postId: string): boolean {
-        console.log("CheckDataLike",this.curFlag)
+        console.log('CheckDataLike', this.curFlag);
         this.likesService.getDataLikes(postId).subscribe(snapshot => {
-            if (!!snapshot.data().userId ) {
+            if (!!snapshot.data().userId) {
                 if (
                     snapshot.data().userId === this.getUserService.getUserId()
                 ) {
@@ -209,7 +205,7 @@ export class CardContentDetailComponent implements OnInit, OnDestroy {
     }
 
     checkDataDislike(postId: string): boolean {
-        console.log("CheckDataDislike",this.curFlag)
+        console.log('CheckDataDislike', this.curFlag);
         this.curFlag = !this.curFlag;
         this.likesService.getDataDislikes(postId).subscribe(snapshot => {
             if (!!snapshot.data().userId) {

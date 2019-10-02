@@ -154,7 +154,7 @@ export class AuthEffects {
                 tokenExpirationDate: string;
             } = JSON.parse(localStorage.getItem('userData'));
             if (!userData) {
-                return {type : "EMPTY"};
+                return { type: 'EMPTY' };
             }
             const loadedUser = new User(
                 userData.email,
@@ -175,7 +175,7 @@ export class AuthEffects {
                     redirect: false,
                 });
             }
-            return {type : "EMPTY"};
+            return { type: 'EMPTY' };
         }),
     );
 

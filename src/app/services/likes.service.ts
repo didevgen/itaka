@@ -10,9 +10,7 @@ import { Observable, from } from 'rxjs';
     providedIn: 'root',
 })
 export class LikesService implements OnDestroy {
-    constructor(
-        private db: AngularFirestore
-    ) {}
+    constructor(private db: AngularFirestore) {}
 
     saveDataLike(data: Like, postId: string): void {
         this.db
