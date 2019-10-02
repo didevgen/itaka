@@ -83,7 +83,7 @@
                 mat-icon-button
                 color="base"
                 [matTooltip]="
-                    !comment ? 'no comments yet' : isComment ? 'Hide' : 'Show'
+                    isComment ? 'Hide' : 'Show'
                 "
                 matTooltipPosition="above"
                 (click)="commentView()"
@@ -101,7 +101,7 @@
         </mat-card-actions>
     </mat-card>
 
-    <ng-container *ngIf="comments">
+    <ng-container *ngIf="comments && isComment">
         <ng-container *ngFor="let comment of comments">
                 <mat-card class="comment-container" *ngIf="comment.userProfile">
                     <mat-card-header>

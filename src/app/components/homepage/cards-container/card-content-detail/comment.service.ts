@@ -46,7 +46,6 @@ export class CommentService implements OnDestroy {
                 };
                 this.commentCollection.doc(commentId).set(fullComment);
                 this.commentIdToPostArray(postId, commentId);
-                console.log(fullComment, 'fullComment subscription');
             });
     }
     private getProfile(userID) {
@@ -69,9 +68,8 @@ export class CommentService implements OnDestroy {
                 ),
             });
     }
-    public getComments(postId: string): Array<Comment> | undefined {
+    public getComments(postId: string): Array<any> | undefined {
         let commentIds = [];
-        // let comments: Array<Comment> = [];
         this.db
             .collection('Posts')
             .doc(postId)
@@ -84,6 +82,7 @@ export class CommentService implements OnDestroy {
             .subscribe(
                 post => {
                     if (post && post.commentsId) {
+                        commentIds.length = 0;
                         commentIds.push(post.commentsId);
                     }
                 },
@@ -94,7 +93,7 @@ export class CommentService implements OnDestroy {
                     );
                 },
             );
-        return this.commentsFromCollection(commentIds);
+        return commentIds;
     }
     private commentIdToPostArray(postId: string, commId: string) {
         this.db
@@ -105,10 +104,10 @@ export class CommentService implements OnDestroy {
             });
     }
 
-    private commentsFromCollection(
-        neededIds: any[],
+    public commentsFromCollection(
+        postId,
     ): Array<Comment> | undefined {
-        const arrIds = neededIds;
+        const arrIds = this.getComments(postId);
         if (arrIds[0]) {
             return;
         }

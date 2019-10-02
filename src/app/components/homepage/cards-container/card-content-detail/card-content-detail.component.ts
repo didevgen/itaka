@@ -75,7 +75,6 @@ export class CardContentDetailComponent implements OnInit, OnDestroy {
         );
         this.renderData(this.postIdroute);
         this.getComments();
-
         this.commentFC = new FormControl('', [
             Validators.required,
             Validators.minLength(1),
@@ -138,7 +137,6 @@ export class CardContentDetailComponent implements OnInit, OnDestroy {
         this.commentService.addComment(this.comment);
         this.commentFC.reset();
         this.getComments();
-        console.log(this.comments, 'comments OnSend');
     }
     onCancel() {
         this.commentFC.reset();
@@ -151,10 +149,10 @@ export class CardContentDetailComponent implements OnInit, OnDestroy {
         this.isComment = !this.isComment;
     }
     private getComments() {
-        /*setTimeout(() => {
-            this.comments = this.commentService.getComments(this.postIdroute);
-        }, 0);*/
-        this.comments = this.commentService.getComments(this.postIdroute);
+        this.comments = this.commentService.commentsFromCollection(
+            this.postIdroute,
+        );
+        this.comments ? (this.isComment = true) : (this.isComment = false);
     }
     ngOnDestroy() {
         // this.currentUserId = null;
