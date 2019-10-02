@@ -1,8 +1,6 @@
 import { Component, OnInit, Input, OnDestroy, Output } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Subscription } from 'rxjs';
 import * as fromApp from '../../../../store/app.reducer';
-import * as LikesActions from '../../cards-container/card-content-detail/store/card-content.actions';
 import { Router } from '@angular/router';
 
 @Component({

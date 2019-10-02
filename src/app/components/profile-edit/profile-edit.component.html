@@ -6,6 +6,9 @@
         <hr />
         <form [formGroup]="profileForm" (ngSubmit)="getRawData()">
             <mat-card-content>
+              <div class="profile__delete">
+                <mat-icon matTooltip="Delete account" (click)="confirmDialog()">delete_forever</mat-icon>
+              </div>
                 <div class="profile__info">
                     <div class="profile__avatar">
                         <img
