@@ -1,8 +1,9 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { GetDataService } from '../../../services/get-data.service';
 import { Media } from '../../../models/content/Media/media.models';
-import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { SearchService } from 'src/app/services/search.service';
+import { Subscription, Subject } from 'rxjs';
 
 @Component({
     selector: 'ita-cards-container',
@@ -10,15 +11,34 @@ import { takeUntil } from 'rxjs/operators';
     styleUrls: ['./cards-container.component.scss'],
 })
 export class CardsContainerComponent implements OnInit, OnDestroy {
-    media: Media[] = [];
+    public media: Media[] = [];
+    private mediaContent: Media[] = [];
     private destroy$ = new Subject<void>();
-    constructor(private getDataService: GetDataService) {}
+    subscription: Subscription;
+    constructor(
+        private getDataService: GetDataService,
+        private searchService: SearchService,
+    ) {}
 
     ngOnInit() {
         this.getDataService.currentMedia
             .pipe(takeUntil(this.destroy$))
-            .subscribe(content => (this.media = content));
+            .subscribe(content => {
+                this.media = content;
+                this.mediaContent = content;
+            });
+
+        this.searchService.currentSearchResponse.subscribe(
+            (foundData: Media[]) => {
+                foundData === undefined ||
+                foundData === [] ||
+                foundData.length === this.mediaContent.length
+                    ? (this.media = this.mediaContent)
+                    : (this.media = foundData);
+            },
+        );
     }
+
     ngOnDestroy() {
         this.destroy$.next();
         this.destroy$.complete();

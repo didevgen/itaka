@@ -33,4 +33,19 @@
     text-align: unset;
     display: block;
 }
+mat-card-header {
+    align-self: flex-start;
+    display: flex;
+    flex-direction: row;
+    justify-items: center;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+}
 
+.card__user-name {
+    align-self: flex-end;
+    font-weight: 100;
+    font-size: 0.9rem;
+    color: lightgrey;
+}

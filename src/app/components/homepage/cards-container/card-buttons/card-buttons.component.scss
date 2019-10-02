@@ -2,9 +2,13 @@
     display: flex;
     justify-content: space-between;
 }
-.card__buttons--send {
+.card__buttons--delete {
     align-self: flex-end;
 }
+.mat-icon-button:hover {
+    color: lightgrey;
+}
+
 .mat-icon-button:hover {
     color: #ff4081;
 }

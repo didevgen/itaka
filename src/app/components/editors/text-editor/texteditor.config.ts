@@ -15,4 +15,5 @@ export const Config = {
         'blockQuote',
     ],
     placeholder: 'Type the content here!',
+    initialData: '',
 };

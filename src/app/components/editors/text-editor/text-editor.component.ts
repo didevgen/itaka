@@ -1,5 +1,4 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { catchError } from 'rxjs/operators';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { Config } from './texteditor.config';
 import { FormGroup, FormControl } from '@angular/forms';
@@ -14,11 +13,15 @@ import { UploadDataService } from 'src/app/services/upload-data.service';
 })
 export class TextEditorComponent implements OnInit, OnDestroy {
     public Editor = ClassicEditor;
-    public config: object = Config;
+    public config: any = Config;
     public uploadTextContentForm: FormGroup;
     public disabled: boolean;
     private disableTitle = true;
     private disableDescription = true;
+    public titleHeader: string;
+    public contentForEditting: string;
+    public postIdroute: string;
+    public button = 'Send';
     constructor(
         private uploadDataService: UploadDataService,
         private router: Router,
@@ -30,6 +33,14 @@ export class TextEditorComponent implements OnInit, OnDestroy {
             title: new FormControl(),
             description: new FormControl(),
         });
+        this.titleHeader = this.uploadDataService.getTitleHeader() || '';
+        this.contentForEditting =
+            this.uploadDataService.getContentForEditting() || '';
+        this.config.initialData = this.contentForEditting || '';
+        this.postIdroute = this.uploadDataService.getPostIdroute();
+        if (this.titleHeader || this.contentForEditting) {
+            this.button = 'Update';
+        }
     }
     public checkTitle(data): void {
         const { value } = data.target;
@@ -38,7 +49,7 @@ export class TextEditorComponent implements OnInit, OnDestroy {
     }
     public checkDescription({ editor }): void {
         const data = editor.getData();
-        data.length <= 550 || data.length >= 1000
+        data.length <= 550 || data.length >= 2000
             ? (this.disableDescription = true)
             : (this.disableDescription = false);
         this.disableSendButton();
@@ -57,25 +68,47 @@ export class TextEditorComponent implements OnInit, OnDestroy {
         });
     }
     public startUpload(data): void {
-        this.disabled = true;
-        const downloadTextMethod = this.uploadDataService.uploadTextData(
-            data.title,
-            data.description,
-        );
+        if (this.titleHeader || this.contentForEditting) {
+            this.disabled = true;
+            const downloadTextMethod = this.uploadDataService.updateTextData(
+                data.title,
+                data.description,
+            );
 
-        const downloadTextSubscription = downloadTextMethod.subscribe(
-            response => {
-                console.log(response);
-            },
-            error => this.openSnackBar(error),
-            () => {
-                this.openSnackBar('Text added');
-                setTimeout(() => {
-                    this.redirect();
-                    downloadTextSubscription.unsubscribe();
-                }, 1000);
-            },
-        );
+            const downloadTextSubscription = downloadTextMethod.subscribe(
+                response => {
+                    console.log(response);
+                },
+                error => this.openSnackBar(error),
+                () => {
+                    this.openSnackBar('Text updated');
+                    setTimeout(() => {
+                        this.redirect();
+                        downloadTextSubscription.unsubscribe();
+                    }, 1000);
+                },
+            );
+        } else {
+            this.disabled = true;
+            const downloadTextMethod = this.uploadDataService.uploadTextData(
+                data.title,
+                data.description,
+            );
+
+            const downloadTextSubscription = downloadTextMethod.subscribe(
+                response => {
+                    console.log(response);
+                },
+                error => this.openSnackBar(error),
+                () => {
+                    this.openSnackBar('Text added');
+                    setTimeout(() => {
+                        this.redirect();
+                        downloadTextSubscription.unsubscribe();
+                    }, 1000);
+                },
+            );
+        }
     }
 
     ngOnDestroy(): void {
