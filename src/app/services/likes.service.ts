@@ -1,20 +1,17 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from 'angularfire2/firestore';
 import { GetUserService } from './get-user.service';
-import { BehaviorSubject, Observable } from 'rxjs';
 import { Like } from '../models/content/Likes/likes.models';
-import { Subject, of, from } from 'rxjs';
 import { OnDestroy } from '@angular/core';
 import * as firebase from 'firebase/app';
-import { switchMap, catchError, map, tap } from 'rxjs/operators';
+import { Observable, from } from 'rxjs';
 
 @Injectable({
     providedIn: 'root',
 })
 export class LikesService implements OnDestroy {
     constructor(
-        private db: AngularFirestore,
-        private getUserService: GetUserService,
+        private db: AngularFirestore
     ) {}
 
     saveDataLike(data: Like, postId: string): void {

@@ -1,28 +1,29 @@
 <div class="container">
     <mat-card class="card card-content-detail ">
         <mat-card-header>
-            <img *ngIf="!!ava"
-                mat-card-avatar
-                [src] = "ava"
-            />
-            <mat-card-subtitle>{{name}}</mat-card-subtitle>
-            <mat-card-title>      
-                {{ media.title }}
-            </mat-card-title
-            >
+            <img *ngIf="!!ava" mat-card-avatar [src]="ava" />
+            <h3 class="card__user-name">{{ name }}</h3>
         </mat-card-header>
-        <div class="content-page__content" *ngIf="!!media.contentType" [ngSwitch] = "media.contentType" >
-            <div *ngSwitchCase ="'image'">
+        <mat-card-title>
+            {{ media.title }}
+        </mat-card-title>
+        <div
+            class="content-page__content"
+            *ngIf="!!media.contentType"
+            [ngSwitch]="media.contentType"
+        >
+            <div *ngSwitchCase="'image'">
                 <img
                     mat-card-image
                     [src]="media.url"
                     alt="picture"
-                    class="content-page__picture"/>
+                    class="content-page__picture"
+                />
                 <p class="content-page__content-description">
-                  {{media.description}}
+                    {{ media.description }}
                 </p>
             </div>
-            <div *ngSwitchCase ="'audio'">
+            <div *ngSwitchCase="'audio'">
                 <audio controls>
                     <source [src]="media.url" type="audio/mp3" />
                 </audio>
@@ -31,27 +32,31 @@
                 </p>
             </div>
 
-            <div *ngSwitchCase ="'video'">
+            <div *ngSwitchCase="'video'">
                 <div class="responsive-video">
                     <mat-video
-                            class="responsive-video1"
-                            [download] = "true"
-                            allowfullscreen
-                            color = "accent"
+                        class="responsive-video1"
+                        [download]="true"
+                        allowfullscreen
+                        color="accent"
                     >
-                            <source matVideoSource [src]="media.url" type="video/mp4"> 
+                        <source
+                            matVideoSource
+                            [src]="media.url"
+                            type="video/mp4"
+                        />
                     </mat-video>
                 </div>
                 <p class="content-page__content-description">
                     {{ description }}
                 </p>
             </div>
-            <div
-                *ngSwitchCase ="'text'"
-                class="content-page__text-content">
-                <mat-card-content [innerHtml]="media.description"></mat-card-content>
+            <div *ngSwitchCase="'text'" class="content-page__text-content">
+                <mat-card-content
+                    [innerHtml]="media.description"
+                ></mat-card-content>
             </div>
-        <div *ngSwitchDefault><mat-spinner></mat-spinner></div>
+            <div *ngSwitchDefault><mat-spinner></mat-spinner></div>
         </div>
         <mat-card-actions class="card__buttons">
             <button
@@ -59,21 +64,21 @@
                 [color]="userColorL"
                 matTooltip="Like"
                 matTooltipPosition="above"
-                (click) = "onLike()"
+                (click)="onLike()"
             >
                 <mat-icon>thumb_up_alt</mat-icon>
             </button>
-            <span>{{counterLike}}</span>
+            <span>{{ counterLike }}</span>
             <button
                 mat-icon-button
                 [color]="userColorD"
                 matTooltip="Dislike"
                 matTooltipPosition="above"
-                (click) = "onDisLike()"
+                (click)="onDisLike()"
             >
                 <mat-icon>thumb_down_alt</mat-icon>
             </button>
-            <span>{{counterDisl}}</span>
+            <span>{{ counterDisl }}</span>
             <button
                 mat-icon-button
                 color="base"
@@ -84,4 +89,4 @@
             </button>
         </mat-card-actions>
     </mat-card>
- </div>
+</div>

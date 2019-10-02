@@ -12,6 +12,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import * as firebase from 'firebase/app';
 import { AngularFirestore } from 'angularfire2/firestore';
 import * as ProfileEditActions from '../../profile-edit/store/profile-edit.actions';
+import { EMPTY } from 'rxjs';
 
 export interface AuthResponseData {
     kind: string;
@@ -153,7 +154,7 @@ export class AuthEffects {
                 tokenExpirationDate: string;
             } = JSON.parse(localStorage.getItem('userData'));
             if (!userData) {
-                return { type: 'DUMMY' };
+                return {type : "EMPTY"};
             }
             const loadedUser = new User(
                 userData.email,
@@ -174,7 +175,7 @@ export class AuthEffects {
                     redirect: false,
                 });
             }
-            return { type: 'DUMMY' };
+            return {type : "EMPTY"};
         }),
     );
 
