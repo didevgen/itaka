@@ -97,7 +97,7 @@ export class CommentService implements OnDestroy {
         }
         console.log(arrIds, 'neededIds arg');
 
-        let comments: Array<Comment> = [];
+        const comments: Array<Comment> = [];
 
         this.commentCollection
             .get()
