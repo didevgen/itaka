@@ -21,10 +21,7 @@ export class CardsContentAudioComponent implements OnInit, OnDestroy {
     @Output() @Input() dislikes: number;
     private userSub: Subscription;
 
-    constructor(
-        private db: AngularFirestore,
-        private router: Router,
-    ) {}
+    constructor(private db: AngularFirestore, private router: Router) {}
 
     ngOnInit() {}
 

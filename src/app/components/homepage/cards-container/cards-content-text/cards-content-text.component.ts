@@ -16,9 +16,7 @@ export class CardsContentTextComponent implements OnInit, OnDestroy {
     @Output() @Input() likes: number;
     @Output() @Input() dislikes: number;
 
-    constructor(
-        private router: Router
-    ) {}
+    constructor(private router: Router) {}
 
     ngOnInit() {}
 

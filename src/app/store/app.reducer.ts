@@ -7,7 +7,6 @@ import {
 import * as fromAuth from '../components/auth/store/auth.reducer';
 import * as profEdit from '../components/profile-edit/store/profile-edit.reducer';
 
-
 export interface AppState {
     auth: fromAuth.State;
     editProfile: profEdit.ProfileEditState;

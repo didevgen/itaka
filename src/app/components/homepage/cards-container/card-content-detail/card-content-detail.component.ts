@@ -75,7 +75,6 @@ export class CardContentDetailComponent implements OnInit, OnDestroy {
     }
 
     setLike() {
-
         if (this.checkDataDislike) {
             this.userColorD = 'base';
             this.likesService.deleteDataDislike(
@@ -98,7 +97,6 @@ export class CardContentDetailComponent implements OnInit, OnDestroy {
                 this.postIdroute,
             );
             this.userColorL = 'accent';
-
         } else {
             this.likesService.deleteDataLike(
                 {
@@ -136,7 +134,6 @@ export class CardContentDetailComponent implements OnInit, OnDestroy {
             );
             this.userColorD = 'accent';
         } else {
-            
             this.likesService.deleteDataDislike(
                 {
                     userId: this.getUserService.getUserId(),
