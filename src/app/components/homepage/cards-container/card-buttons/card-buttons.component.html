@@ -9,9 +9,13 @@
         </button>
         <span>{{ dislikes }}</span>
     </div>
-    <div class="card__buttons--send">
+    <div
+        class="card__buttons--delete"
+        *ngIf="isUserPage()"
+        (click)="deleteContent(postId)"
+    >
         <button mat-icon-button>
-            <mat-icon color="base">send</mat-icon>
+            <mat-icon>delete</mat-icon>
         </button>
     </div>
 </div>
