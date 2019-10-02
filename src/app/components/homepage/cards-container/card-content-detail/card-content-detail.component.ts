@@ -1,5 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
+import * as fromApp from '../../../../store/app.reducer';
+// import * as LikesСounterActions from '../../cards-container/card-content-detail/store/card-content.actions';
 import { GetDataService } from '../../../../services/get-data.service';
 import { ActivatedRoute } from '@angular/router';
 import { Subject, of } from 'rxjs';
@@ -9,6 +12,9 @@ import { LikesService } from '../../../../services/likes.service';
 import { TextEditorComponent } from 'src/app/components/editors/text-editor/text-editor.component';
 import { UploadDataService } from 'src/app/services/upload-data.service';
 import { GetUserService } from 'src/app/services/get-user.service';
+import { CommentService } from './comment.service';
+import { Comment } from '../../../../models/content/Text/comment.model';
+import { FormControl, Validators } from '@angular/forms';
 
 @Component({
     selector: 'ita-card-content-detail',
@@ -25,7 +31,7 @@ export class CardContentDetailComponent implements OnInit, OnDestroy {
     private curFlag: boolean;
     counterLike: number;
     counterDisl: number;
-    private userId: string;
+    public userId: string;
     name: string;
     ava: string;
     userColorD: string;
@@ -39,22 +45,49 @@ export class CardContentDetailComponent implements OnInit, OnDestroy {
     contentForEditting: string;
     public textEditorComponent: TextEditorComponent;
 
+    isComment: boolean;
+    commentFC: FormControl;
+    date: string;
+    currentUserProfile: { name: string; avatar: string };
+    currentUserId: string;
+    defaultImage = '../../../../assets/avatarDefault.png';
+
+    private comment: Comment;
+    public comments: Array<Comment> = [];
+
     constructor(
+        private store: Store<fromApp.AppState>,
         private getDataService: GetDataService,
         private route: ActivatedRoute,
         private likesService: LikesService,
         public uploadDataService: UploadDataService,
         public getUserService: GetUserService,
+        private currentUserIdService: GetUserService,
+        private commentService: CommentService,
     ) {}
 
     ngOnInit(): void {
+        this.store
+            .select('auth')
+            .pipe(takeUntil(this.destroy$))
+            .subscribe(state => {
+                if (!state.user) {
+                    return;
+                }
+                this.currentUserId = state.user.id;
+            });
         this.routeSubscription = this.route.params.subscribe(
             params => (this.postIdroute = params.postId),
         );
-
         this.renderData(this.postIdroute);
         this.renderDataLikes(this.postIdroute);
         this.renderDataDislikes(this.postIdroute);
+        this.getComments();
+        this.commentFC = new FormControl('', [
+            Validators.required,
+            Validators.minLength(1),
+            Validators.maxLength(400),
+        ]);
     }
     onLike() {
         if (this.getUserService.getUserId()) {
@@ -64,10 +97,10 @@ export class CardContentDetailComponent implements OnInit, OnDestroy {
     }
 
     onDisLike() {
-        // if (this.getUserService.getUserId()) {
-        this.renderDataDislikes(this.postIdroute);
-        this.setDislike();
-        // }
+        if (this.getUserService.getUserId()) {
+            this.renderDataDislikes(this.postIdroute);
+            this.setDislike();
+        }
     }
 
     setLike() {
@@ -143,21 +176,30 @@ export class CardContentDetailComponent implements OnInit, OnDestroy {
     }
 
     renderData(postId) {
-        this.getDataService.renderCardData().subscribe(snapshot => {
-            snapshot[0].docs.forEach(doc => {
-                if (postId === doc.data().postId) {
-                    const post = doc.data();
-                    this.userId = doc.data().userId;
-                    this.media = post;
-                }
+        this.getDataService
+            .renderCardData()
+            .pipe(takeUntil(this.destroy$))
+            .subscribe(snapshot => {
+                snapshot[0].docs.forEach(doc => {
+                    if (postId === doc.data().postId) {
+                        const post = doc.data();
+                        this.userId = doc.data().userId;
+                        this.media = post;
+                    }
+                });
+                snapshot[1].docs.forEach(doc => {
+                    if (this.userId === doc.id) {
+                        this.name = doc.data().name;
+                        this.ava = doc.data().avatar;
+                    }
+                    if (this.currentUserId === doc.id) {
+                        this.currentUserProfile = {
+                            name: doc.data().name,
+                            avatar: doc.data().avatar,
+                        };
+                    }
+                });
             });
-            snapshot[1].docs.forEach(doc => {
-                if (this.userId === doc.id) {
-                    this.name = doc.data().name;
-                    this.ava = doc.data().avatar;
-                }
-            });
-        });
     }
 
     renderDataLikes(postId: string) {
@@ -209,11 +251,6 @@ export class CardContentDetailComponent implements OnInit, OnDestroy {
         return this.curFlag;
     }
 
-    ngOnDestroy() {
-        this.routeSubscription.unsubscribe();
-        this.destroy$.next();
-        this.destroy$.complete();
-    }
     getEditor($event) {
         if (this.getUserService.getUserId() === this.media.userId) {
             this.condition = true;
@@ -227,5 +264,50 @@ export class CardContentDetailComponent implements OnInit, OnDestroy {
         } else {
             alert('OOOPS, it\'s not your card');
         }
+    }
+
+    // forComments
+    onSend() {
+        this.isComment = true;
+        this.date = new Date().toLocaleString('ru', {
+            year: 'numeric',
+            month: 'short',
+            day: 'numeric',
+            weekday: 'short',
+            hour: 'numeric',
+            minute: 'numeric',
+            second: 'numeric',
+        });
+        this.comment = {
+            text: this.commentFC.value,
+            date: this.date,
+            userId: this.currentUserId,
+            postId: this.postIdroute,
+        };
+        this.commentService.addComment(this.comment);
+        this.commentFC.reset();
+        this.getComments();
+    }
+    onCancel() {
+        this.commentFC.reset();
+    }
+    onDelete(commentForDelete) {
+        this.commentService.removeComment(commentForDelete);
+        this.getComments();
+    }
+    commentView() {
+        this.isComment = !this.isComment;
+    }
+    private getComments() {
+        this.comments = this.commentService.commentsFromCollection(
+            this.postIdroute,
+        );
+        this.comments ? (this.isComment = true) : (this.isComment = false);
+    }
+
+    ngOnDestroy() {
+        this.routeSubscription.unsubscribe();
+        this.destroy$.next();
+        this.destroy$.complete();
     }
 }

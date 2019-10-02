@@ -20,9 +20,7 @@ export class ModalDialogComponent {
     croppedImage: string;
     file: File;
     task: AngularFireUploadTask;
-    percentage: Observable<number>;
     snapshot: any;
-    downloadURL: string;
     deletePreviousPath: string;
     constructor(
         public dialogRef: MatDialogRef<ModalDialogComponent>,
