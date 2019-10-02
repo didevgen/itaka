@@ -1,16 +1,12 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from 'angularfire2/firestore';
 import { GetUserService } from './get-user.service';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, from } from 'rxjs';
 import { Media } from '../models/content/Media/media.models';
-import { Subject, of } from 'rxjs';
-import { OnDestroy } from '@angular/core';
 import { forkJoin } from 'rxjs';
 
-@Injectable({
-    providedIn: 'root',
-})
-export class GetDataService implements OnDestroy {
+@Injectable()
+export class GetDataService {
     private mediaSource = new BehaviorSubject<Media[]>([]);
     currentMedia = this.mediaSource.asObservable();
 
@@ -18,36 +14,42 @@ export class GetDataService implements OnDestroy {
         private db: AngularFirestore,
         private getUserService: GetUserService,
     ) {}
-    render(media): void {
-        this.db
+
+    private getDataByDate(): Promise<any> {
+        return this.db
             .collection('Posts')
-            .get()
-            .subscribe(snapshot => {
-                snapshot.docs.forEach(doc => {
-                    const posts = doc.data();
-                    media.push(posts);
-                });
-                this.mediaSource.next(media);
-            });
+            .ref.orderBy('date', 'desc')
+            .get();
     }
 
-    renderUserContent(userMedia): void {
+    public render(media: Media[]): void {
+        const getMedia = from(this.getDataByDate());
+        const renderedMedia = getMedia.subscribe(snapshot => {
+            snapshot.docs.forEach(doc => {
+                const posts = doc.data();
+                media.push(posts);
+            });
+            renderedMedia.unsubscribe();
+            this.mediaSource.next(media);
+        });
+    }
+
+    public renderUserContent(userMedia: Media[]): void {
         const userId = this.getUserService.getUserId();
-        this.db
-            .collection('Posts')
-            .get()
-            .subscribe(snapshot => {
-                snapshot.docs.forEach(doc => {
-                    if (userId === doc.data().userId) {
-                        const posts = doc.data();
-                        userMedia.push(posts);
-                    }
-                });
-                this.mediaSource.next(userMedia);
+        const getUserMedia = from(this.getDataByDate());
+        const renderedUserMedia = getUserMedia.subscribe(snapshot => {
+            snapshot.docs.forEach(doc => {
+                if (userId === doc.data().userId) {
+                    const posts = doc.data();
+                    userMedia.push(posts);
+                }
             });
+            renderedUserMedia.unsubscribe();
+            this.mediaSource.next(userMedia);
+        });
     }
 
-    renderData(): Observable<Array<any>> {
+    renderCardData(): Observable<Array<any>> {
         const posts = this.db.collection('Posts').get();
         const users = this.db.collection('Users').get();
         const joinObservable = forkJoin(posts, users);
@@ -57,6 +59,4 @@ export class GetDataService implements OnDestroy {
     filterMedia(media) {
         this.mediaSource.next(media);
     }
-
-    ngOnDestroy(): void {}
 }

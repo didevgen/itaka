@@ -1,17 +1,20 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Observable, Subscription, throwError } from 'rxjs';
+import { Subscription } from 'rxjs';
 import * as fromApp from '../../../../store/app.reducer';
-import * as LikesСounterActions from '../../cards-container/card-content-detail/store/card-content.actions';
+// import * as LikesСounterActions from '../../cards-container/card-content-detail/store/card-content.actions';
 import { GetDataService } from '../../../../services/get-data.service';
 import { ActivatedRoute } from '@angular/router';
 import { Subject, of } from 'rxjs';
 import { Media } from '../../../../models/content/Media/media.models';
-import { map, takeUntil } from 'rxjs/operators';
-import { FormControl, Validators } from '@angular/forms';
-import { Comment } from '../../../../models/content/Text/comment.model';
-import { GetUserService } from '../../../../services/get-user.service';
+import { takeUntil } from 'rxjs/operators';
+import { LikesService } from '../../../../services/likes.service';
+import { TextEditorComponent } from 'src/app/components/editors/text-editor/text-editor.component';
+import { UploadDataService } from 'src/app/services/upload-data.service';
+import { GetUserService } from 'src/app/services/get-user.service';
 import { CommentService } from './comment.service';
+import { Comment } from '../../../../models/content/Text/comment.model';
+import { FormControl, Validators } from '@angular/forms';
 
 @Component({
     selector: 'ita-card-content-detail',
@@ -23,18 +26,25 @@ export class CardContentDetailComponent implements OnInit, OnDestroy {
     description: string;
     url: string;
     type: string;
+    curStatusLike = false;
+    curStatusDisl = false;
+    private curFlag: boolean;
     counterLike: number;
     counterDisl: number;
     private userId: string;
     name: string;
     ava: string;
-    private userSub: Subscription;
+    userColorD: string;
+    userColorL: string;
     private routeSubscription: Subscription;
     media: Media = new Object();
     postIdroute: string;
     private destroy$ = new Subject<void>();
+    condition = false;
+    titleCard: string;
+    contentForEditting: string;
+    public textEditorComponent: TextEditorComponent;
 
-    // forMyComment
     isComment: boolean;
     commentFC: FormControl;
     date: string;
@@ -42,8 +52,6 @@ export class CardContentDetailComponent implements OnInit, OnDestroy {
     currentUserId: string;
     defaultImage = '../../../../assets/avatarDefault.png';
 
-    /*@ViewChild('comment', { static: false })
-    comment: ElementRef;*/
     private comment: Comment;
     public comments: Array<Comment> = [];
 
@@ -51,6 +59,9 @@ export class CardContentDetailComponent implements OnInit, OnDestroy {
         private store: Store<fromApp.AppState>,
         private getDataService: GetDataService,
         private route: ActivatedRoute,
+        private likesService: LikesService,
+        public uploadDataService: UploadDataService,
+        public getUserService: GetUserService,
         private currentUserIdService: GetUserService,
         private commentService: CommentService,
     ) {}
@@ -65,15 +76,12 @@ export class CardContentDetailComponent implements OnInit, OnDestroy {
                 }
                 this.currentUserId = state.user.id;
             });
-
-        this.userSub = this.store.select('likesCount').subscribe(like => {
-            this.counterLike = Number(like.likes);
-            this.counterDisl = Number(like.dislikes);
-        });
         this.routeSubscription = this.route.params.subscribe(
             params => (this.postIdroute = params.postId),
         );
         this.renderData(this.postIdroute);
+        this.renderDataLikes(this.postIdroute);
+        this.renderDataDislikes(this.postIdroute);
         this.getComments();
         this.commentFC = new FormControl('', [
             Validators.required,
@@ -82,16 +90,94 @@ export class CardContentDetailComponent implements OnInit, OnDestroy {
         ]);
     }
     onLike() {
-        this.store.dispatch(new LikesСounterActions.LikesLike());
+        if (this.getUserService.getUserId()) {
+            this.renderDataLikes(this.postIdroute);
+            this.setLike();
+        }
     }
 
     onDisLike() {
-        this.store.dispatch(new LikesСounterActions.LikeDislike());
+        if (this.getUserService.getUserId()) {
+            this.renderDataDislikes(this.postIdroute);
+            this.setDislike();
+        }
+    }
+
+    setLike() {
+        if (this.checkDataDislike) {
+            this.userColorD = 'base';
+            this.likesService.deleteDataDislike(
+                {
+                    userId: this.getUserService.getUserId(),
+                    choiceStatus: true,
+                },
+                this.postIdroute,
+            );
+            this.renderDataDislikes(this.postIdroute);
+        }
+
+        if (!this.curStatusLike) {
+            this.curStatusLike = !this.curStatusLike;
+            this.likesService.saveDataLike(
+                {
+                    userId: this.getUserService.getUserId(),
+                    choiceStatus: true,
+                },
+                this.postIdroute,
+            );
+            this.userColorL = 'accent';
+        } else {
+            this.likesService.deleteDataLike(
+                {
+                    userId: this.getUserService.getUserId(),
+                    choiceStatus: true,
+                },
+                this.postIdroute,
+            );
+            this.userColorL = 'base';
+            this.curStatusLike = false;
+        }
+    }
+
+    setDislike() {
+        if (this.checkDataLike) {
+            this.userColorL = 'base';
+            this.likesService.deleteDataLike(
+                {
+                    userId: this.getUserService.getUserId(),
+                    choiceStatus: true,
+                },
+                this.postIdroute,
+            );
+            this.renderDataLikes(this.postIdroute);
+        }
+
+        if (!this.curStatusDisl) {
+            this.curStatusDisl = !this.curStatusDisl;
+            this.likesService.saveDataDislike(
+                {
+                    userId: this.getUserService.getUserId(),
+                    choiceStatus: true,
+                },
+                this.postIdroute,
+            );
+            this.userColorD = 'accent';
+        } else {
+            this.likesService.deleteDataDislike(
+                {
+                    userId: this.getUserService.getUserId(),
+                    choiceStatus: true,
+                },
+                this.postIdroute,
+            );
+            this.userColorD = 'base';
+            this.curStatusDisl = false;
+        }
     }
 
     renderData(postId) {
         this.getDataService
-            .renderData()
+            .renderCardData()
             .pipe(takeUntil(this.destroy$))
             .subscribe(snapshot => {
                 snapshot[0].docs.forEach(doc => {
@@ -115,10 +201,74 @@ export class CardContentDetailComponent implements OnInit, OnDestroy {
                 });
             });
     }
-    // forMyComment
+
+    renderDataLikes(postId: string) {
+        this.likesService.getDataLikes(postId).subscribe(snapshot => {
+            if (snapshot.data()) {
+                !snapshot.data().likes.length
+                    ? (this.counterLike = 0)
+                    : (this.counterLike = snapshot.data().likes.length);
+            }
+        });
+    }
+
+    renderDataDislikes(postId: string) {
+        this.likesService.getDataDislikes(postId).subscribe(snapshot => {
+            if (snapshot.data()) {
+                !snapshot.data().dislikes.length
+                    ? (this.counterDisl = 0)
+                    : (this.counterDisl = snapshot.data().dislikes.length);
+            }
+        });
+    }
+
+    checkDataLike(postId: string): boolean {
+        console.log('CheckDataLike', this.curFlag);
+        this.likesService.getDataLikes(postId).subscribe(snapshot => {
+            if (!!snapshot.data().userId) {
+                if (
+                    snapshot.data().userId === this.getUserService.getUserId()
+                ) {
+                    this.curFlag = true;
+                }
+            }
+        });
+        return this.curFlag;
+    }
+
+    checkDataDislike(postId: string): boolean {
+        console.log('CheckDataDislike', this.curFlag);
+        this.curFlag = !this.curFlag;
+        this.likesService.getDataDislikes(postId).subscribe(snapshot => {
+            if (!!snapshot.data().userId) {
+                if (
+                    snapshot.data().userId === this.getUserService.getUserId()
+                ) {
+                    this.curFlag = true;
+                }
+            }
+        });
+        return this.curFlag;
+    }
+
+    getEditor($event) {
+        if (this.getUserService.getUserId() === this.media.userId) {
+            this.condition = true;
+            this.titleCard = this.media.title;
+            this.contentForEditting = this.media.description;
+            this.uploadDataService.setTitleHeader(this.titleCard);
+            this.uploadDataService.setContentForEditting(
+                this.contentForEditting,
+            );
+            this.uploadDataService.setPostIdroute(this.postIdroute);
+        } else {
+            alert("OOOPS, it's not your card");
+        }
+    }
+
+    // forComments
     onSend() {
         this.isComment = true;
-
         this.date = new Date().toLocaleString('ru', {
             year: 'numeric',
             month: 'short',
@@ -154,9 +304,8 @@ export class CardContentDetailComponent implements OnInit, OnDestroy {
         );
         this.comments ? (this.isComment = true) : (this.isComment = false);
     }
+
     ngOnDestroy() {
-        // this.currentUserId = null;
-        this.userSub.unsubscribe();
         this.routeSubscription.unsubscribe();
         this.destroy$.next();
         this.destroy$.complete();

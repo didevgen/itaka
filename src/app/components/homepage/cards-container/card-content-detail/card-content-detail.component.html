@@ -2,11 +2,11 @@
     <mat-card class="card card-content-detail ">
         <mat-card-header>
             <img *ngIf="!!ava" mat-card-avatar [src]="ava" />
-            <mat-card-subtitle>{{ name }}</mat-card-subtitle>
-            <mat-card-title>
-                {{ media.title }}
-            </mat-card-title>
-        </mat-card-header>
+            <h3 class="card__user-name">{{ name }}</h3>
+        </mat-card-header >
+        <mat-card-title class="padding_bottom">
+            {{ media.title }}
+        </mat-card-title>
         <div
             class="content-page__content"
             *ngIf="!!media.contentType"
@@ -51,53 +51,62 @@
                     {{ description }}
                 </p>
             </div>
-            <div *ngSwitchCase="'text'" class="content-page__text-content">
-                <mat-card-content
-                    [innerHtml]="media.description"
-                ></mat-card-content>
+            <div
+                *ngSwitchCase ="'text'"
+                class="content-page__text-content"
+                >
+                <mat-card-content [innerHtml]="media.description"></mat-card-content>
+                <button
+                mat-icon-button
+                color="accent"
+                matTooltipPosition="above"
+                (click) = 'getEditor($event)'>
+                <mat-icon>build</mat-icon>
+                        Edit
+                </button>
+                <div *ngIf="condition" >
+                    <ita-text-editor>
+
+                    </ita-text-editor>
+                </div>
+
+
             </div>
             <div *ngSwitchDefault><mat-spinner></mat-spinner></div>
         </div>
         <mat-card-actions class="card__buttons">
             <button
                 mat-icon-button
-                color="base"
+                [color]="userColorL"
                 matTooltip="Like"
                 matTooltipPosition="above"
-                (click)="onLike()"
+                (click) = "onLike()"
             >
                 <mat-icon>thumb_up_alt</mat-icon>
             </button>
             <span>{{ counterLike }}</span>
             <button
                 mat-icon-button
-                color="base"
+                [color]="userColorD"
                 matTooltip="Dislike"
                 matTooltipPosition="above"
-                (click)="onDisLike()"
+                (click) = "onDisLike()"
             >
                 <mat-icon>thumb_down_alt</mat-icon>
             </button>
             <span>{{ counterDisl }}</span>
-            <button
-                mat-icon-button
-                color="base"
-                [matTooltip]="
+          <button
+            mat-icon-button
+            color="base"
+            [matTooltip]="
                     isComment ? 'Hide' : 'Show'
                 "
-                matTooltipPosition="above"
-                (click)="commentView()"
-            >
-                <mat-icon>comments</mat-icon>
-            </button>
-            <button
-                mat-icon-button
-                color="base"
-                matTooltip="Share"
-                matTooltipPosition="above"
-            >
-                <mat-icon>send</mat-icon>
-            </button>
+            matTooltipPosition="above"
+            (click)="commentView()"
+          >
+            <mat-icon>comments</mat-icon>
+          </button>
+
         </mat-card-actions>
     </mat-card>
 

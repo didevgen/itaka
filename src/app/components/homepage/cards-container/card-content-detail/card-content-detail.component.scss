@@ -33,35 +33,54 @@
     text-align: unset;
     display: block;
 }
+mat-card-header {
+    align-self: flex-start;
+    display: flex;
+    flex-direction: row;
+    justify-items: center;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+}
+
+.card__user-name {
+    align-self: flex-end;
+    font-weight: 100;
+    font-size: 0.9rem;
+    color: lightgrey;
+}
 
 .comment-container {
-    width: 95%;
-    margin: 0.1em 0;
-    font-family: 'Montserrat', sans-serif;
+  width: 95%;
+  margin: 0.3em 0;
+  font-family: 'Montserrat', sans-serif;
 
-    .comment-container_content-card {
-        margin: 0;
-        padding: 0;
+  .comment-container_content-card {
+    margin: 0;
+    padding: 0;
 
-        .right {
-            float: right;
-        }
-
-        p {
-            word-break: break-all;
-            text-align: center;
-            padding: 0.2em;
-        }
+    .right {
+      float: right;
     }
 
-    .comment-container_content-card__size {
-        width: 100%;
+    p {
+      word-break: break-all;
+      text-align: center;
+      padding: 0.2em;
     }
+  }
+
+  .comment-container_content-card__size {
+    width: 100%;
+  }
 }
 .comment-container__margintop {
-    margin-top: 0.5em;
-    background-color: #eeeeee;
+  margin-top: 0.5em;
+  background-color: #eee6df;
 }
 .mat-icon-button:hover {
-    color: #ff4081;
+  color: #ff4081;
+}
+.padding_bottom{
+  padding-bottom: 8px;
 }

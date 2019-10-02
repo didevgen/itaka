@@ -1,25 +1,38 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Subscription } from 'rxjs';
-import { map } from 'rxjs/operators';
-import { Store } from '@ngrx/store';
 
+import { Subscription, Observable, Subject, of } from 'rxjs';
+import {
+    map,
+    debounceTime,
+    distinctUntilChanged,
+    mergeMap,
+    delay,
+    switchMap,
+} from 'rxjs/operators';
+import { Store } from '@ngrx/store';
 import * as fromApp from '../../../store/app.reducer';
 import * as AuthActions from '../../auth/store/auth.actions';
 import * as EditProfileActions from '../../profile-edit/store/profile-edit.actions';
-
+import { SearchService } from '../../../services/search.service';
 @Component({
     selector: 'ita-header',
     templateUrl: './header.component.html',
     styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit, OnDestroy {
-    value = 'Clear me';
-    userName: string;
+    inputSearch = new Subject<KeyboardEvent>();
+    searchInput;
     avatar: string;
+    private url: string | Blob;
+    userName: string;
     isAuthenticated = false;
     private userSub: Subscription;
-    private url: any;
-    constructor(private store: Store<fromApp.AppState>) {}
+    snapshot: Observable<any>;
+
+    constructor(
+        private store: Store<fromApp.AppState>,
+        private searchService: SearchService,
+    ) {}
     getUserAvatar(): string {
         this.userSub = this.store.select('editProfile').subscribe(user => {
             this.url = user.avatar;
@@ -39,6 +52,28 @@ export class HeaderComponent implements OnInit, OnDestroy {
             .subscribe(user => {
                 this.isAuthenticated = !!user;
             });
+
+        this.onSearch();
+    }
+    public setDesiredValue(value: KeyboardEvent) {
+        this.inputSearch.next(value);
+    }
+    private onSearch() {
+        this.searchInput = this.inputSearch.pipe(
+            debounceTime(400),
+            distinctUntilChanged(),
+            mergeMap((e: KeyboardEvent) => of(e).pipe(delay(500))),
+        );
+
+        this.searchInput
+            .pipe(
+                switchMap((query: string) =>
+                    this.searchService.searchByTitle(query),
+                ),
+            )
+            .subscribe((queryResult: []) =>
+                this.searchService.shareFoundData(queryResult),
+            );
     }
 
     onLogout() {
@@ -48,5 +83,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
     ngOnDestroy() {
         this.userSub.unsubscribe();
+        this.inputSearch.unsubscribe();
+        this.searchInput.unsubscribe();
     }
 }

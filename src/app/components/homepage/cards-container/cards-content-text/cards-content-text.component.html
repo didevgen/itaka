@@ -1,12 +1,13 @@
-<mat-card class="card__text"
- (click) = "goCardDetail (this)">
+<mat-card class="card__text" (click)="goCardDetail (this)">
     <mat-card-title>
         {{ title }}
     </mat-card-title>
     <mat-card-content [innerHtml]="description"></mat-card-content>
-    <div class="card__text--icons"
-      (click) = "stopEvent($event)"
-    >
-        <ita-card-buttons></ita-card-buttons>
+    <div class="card__text--icons" (click)="stopEvent($event)">
+        <ita-card-buttons
+            [postId]="postId"
+            [likes]="likes"
+            [dislikes]="dislikes"
+        ></ita-card-buttons>
     </div>
 </mat-card>

@@ -1,8 +1,4 @@
 import { Component, OnInit, Input, Output, OnDestroy } from '@angular/core';
-import { Store } from '@ngrx/store';
-import { Subscription } from 'rxjs';
-import * as fromApp from '../../../../store/app.reducer';
-import * as LikesActions from '../../cards-container/card-content-detail/store/card-content.actions';
 import { Router } from '@angular/router';
 
 @Component({
@@ -15,25 +11,19 @@ export class CardsContentTextComponent implements OnInit, OnDestroy {
     title: string;
     @Input()
     description: string;
-    @Input()
-    postId: string;
+    @Output() @Input() postId: string;
+    @Output() @Input() likes: number;
+    @Output() @Input() dislikes: number;
 
-    constructor(
-        private store: Store<fromApp.AppState>,
-        private router: Router,
-    ) {}
+    constructor(private router: Router) {}
 
     ngOnInit() {}
 
     goCardDetail(elem) {
         this.router.navigate(['/cardDetail', this.postId]);
-        // this.setPostId(elem);
     }
 
-    // setPostId(elem) {
-    //     this.store.dispatch(new LikesActions.SetPostId({ postId: elem }));
-    // }
-
+    getMarks() {}
     stopEvent(event) {
         event.stopPropagation();
     }

@@ -3,15 +3,35 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable, from } from 'rxjs';
 import { GetUserService } from './get-user.service';
 
-@Injectable({
-    providedIn: 'root',
-})
+@Injectable()
 export class UploadDataService {
     private userId = this.getUserService.getUserId();
     constructor(
         private db: AngularFirestore,
         private getUserService: GetUserService,
     ) {}
+    private titleHeader: string;
+    private contentForEditting: string;
+    private postIdroute: string;
+
+    public getTitleHeader() {
+        return this.titleHeader;
+    }
+    public setTitleHeader(titleHeader: string) {
+        this.titleHeader = titleHeader;
+    }
+    public getContentForEditting() {
+        return this.contentForEditting;
+    }
+    public setContentForEditting(contentForEditting: string) {
+        this.contentForEditting = contentForEditting;
+    }
+    public getPostIdroute() {
+        return this.postIdroute;
+    }
+    public setPostIdroute(postIdroute: string) {
+        this.postIdroute = postIdroute;
+    }
 
     public uploadMediaData(
         title: string,
@@ -30,7 +50,7 @@ export class UploadDataService {
                 description,
                 contentType,
                 likes: [],
-                dislikes: 0,
+                dislikes: [],
                 userId: this.userId,
                 postId,
             });
@@ -38,6 +58,26 @@ export class UploadDataService {
 
     public uploadTextData(title: string, description: string): Observable<any> {
         const postId = this.db.createId();
+        console.log(postId);
+        const sendTextPromise = this.db
+            .collection('Posts')
+            .doc(postId)
+            .set({
+                date: new Date(),
+                title,
+                description,
+                contentType: 'text',
+                likes: 0,
+                dislikes: 0,
+                userId: this.userId,
+                postId,
+            });
+        const addText = from(sendTextPromise);
+        return addText;
+    }
+    public updateTextData(title: string, description: string): Observable<any> {
+        const postId = this.postIdroute;
+        console.log(postId);
         const sendTextPromise = this.db
             .collection('Posts')
             .doc(postId)
