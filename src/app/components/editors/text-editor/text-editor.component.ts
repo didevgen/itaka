@@ -18,8 +18,8 @@ export class TextEditorComponent implements OnInit, OnDestroy {
     public disabled: boolean;
     private disableTitle = true;
     private disableDescription = true;
-    public titleHeader: string;
-    public contentForEditting: string;
+    public titleHeader = '';
+    public contentForEditting = '';
     public postIdroute: string;
     public button = 'Send';
     constructor(
@@ -33,13 +33,17 @@ export class TextEditorComponent implements OnInit, OnDestroy {
             title: new FormControl(),
             description: new FormControl(),
         });
-        this.titleHeader = this.uploadDataService.getTitleHeader() || '';
-        this.contentForEditting =
-            this.uploadDataService.getContentForEditting() || '';
-        this.config.initialData = this.contentForEditting || '';
-        this.postIdroute = this.uploadDataService.getPostIdroute();
-        if (this.titleHeader || this.contentForEditting) {
-            this.button = 'Update';
+        this.config.initialData = '';
+        if (this.router.routerState.snapshot.url.includes('cardDetail')) {
+            this.titleHeader = this.uploadDataService.getTitleHeader();
+            this.contentForEditting = this.uploadDataService.getContentForEditting();
+            this.config.initialData = this.contentForEditting;
+            this.postIdroute = this.uploadDataService.getPostIdroute();
+            if (this.titleHeader || this.contentForEditting) {
+                this.button = 'Update';
+            } else {
+                return;
+            }
         }
     }
     public checkTitle(data): void {
@@ -82,6 +86,7 @@ export class TextEditorComponent implements OnInit, OnDestroy {
                 error => this.openSnackBar(error),
                 () => {
                     this.openSnackBar('Text updated');
+                    this.config.initialData = '';
                     setTimeout(() => {
                         this.redirect();
                         downloadTextSubscription.unsubscribe();
