@@ -77,18 +77,20 @@
         <mat-card-actions class="card__buttons">
             <button
                 mat-icon-button
-                color="accent"
+                [color]="userColorL"
                 matTooltip="Like"
                 matTooltipPosition="above"
+                (click) = "onLike()"
             >
                 <mat-icon>thumb_up_alt</mat-icon>
             </button>
             <span>{{ counterLike }}</span>
             <button
                 mat-icon-button
-                color="base"
+                [color]="userColorD"
                 matTooltip="Dislike"
                 matTooltipPosition="above"
+                (click) = "onDisLike()"
             >
                 <mat-icon>thumb_down_alt</mat-icon>
             </button>
