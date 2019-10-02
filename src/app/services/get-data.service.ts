@@ -49,7 +49,7 @@ export class GetDataService {
         });
     }
 
-    renderData(): Observable<Array<any>> {
+    renderCardData(): Observable<Array<any>> {
         const posts = this.db.collection('Posts').get();
         const users = this.db.collection('Users').get();
         const joinObservable = forkJoin(posts, users);

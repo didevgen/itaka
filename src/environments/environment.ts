@@ -9,6 +9,8 @@ export const environment = {
             'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=',
         signIn:
             'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=',
+        deleteUser:
+            'https://identitytoolkit.googleapis.com/v1/accounts:delete?key=',
     },
     firebaseConfig: {
         apiKey: 'AIzaSyCPGOjrEl6_UhjQbKLYeb8vlOGOfjDSh8w',
