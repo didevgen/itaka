@@ -104,9 +104,7 @@ export class CommentService implements OnDestroy {
             });
     }
 
-    public commentsFromCollection(
-        postId,
-    ): Array<Comment> | undefined {
+    public commentsFromCollection(postId): Array<Comment> | undefined {
         const arrIds = this.getComments(postId);
         if (arrIds[0]) {
             return;
