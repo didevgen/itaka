@@ -7,7 +7,8 @@ import { Comment } from '../../../../models/content/Text/comment.model';
 import * as firebase from 'firebase/app';
 import 'firebase/database';
 import { catchError, map, takeUntil, tap } from 'rxjs/operators';
-import { of, Subject } from 'rxjs';
+import { BehaviorSubject, of, Subject } from 'rxjs';
+import { EditProfile } from '../../../../models/edit-profile/edit-profile.model';
 
 @Injectable({
     providedIn: 'root',
@@ -15,6 +16,7 @@ import { of, Subject } from 'rxjs';
 export class CommentService implements OnDestroy {
     private destroy$ = new Subject<void>();
     private commentCollection: AngularFirestoreCollection<Comment>;
+    defaultImage = '../../../../assets/avatarDefault.png';
 
     constructor(private db: AngularFirestore) {
         this.commentCollection = this.db.collection<Comment>('Comments');
@@ -22,15 +24,54 @@ export class CommentService implements OnDestroy {
 
     public addComment(comment: Comment) {
         const postId = comment.postId;
+        const userId = comment.userId;
         const commentId = this.db.createId();
-        const fullComment: Comment = { commentId, ...comment };
+        const userProfile: {
+            name: string;
+            avatar: string;
+        } = { name: 'Noname', avatar: `${this.defaultImage}` };
 
-        this.commentCollection.doc(commentId).set(fullComment);
-        this.commentIdToPostArray(postId, commentId);
+        this.getProfile(userId)
+            .pipe(
+                map(user => user as EditProfile),
+                takeUntil(this.destroy$),
+            )
+            .subscribe(user => {
+                userProfile.name = user.name;
+                userProfile.avatar = user.avatar;
+                const fullComment: Comment = {
+                    commentId,
+                    userProfile,
+                    ...comment,
+                };
+                this.commentCollection.doc(commentId).set(fullComment);
+                this.commentIdToPostArray(postId, commentId);
+                console.log(fullComment, 'fullComment subscription');
+            });
+    }
+    private getProfile(userID) {
+        return this.db
+            .collection('Users')
+            .doc(userID)
+            .valueChanges();
+    }
+    public removeComment(commentForDelete) {
+        const commentID = commentForDelete.commentId;
+        const postID = commentForDelete.postId;
+
+        this.commentCollection.doc(commentID).delete();
+        this.db
+            .collection('Posts')
+            .doc(postID)
+            .update({
+                commentsId: firebase.firestore.FieldValue.arrayRemove(
+                    commentID,
+                ),
+            });
     }
     public getComments(postId: string): Array<Comment> | undefined {
         let commentIds = [];
-
+        // let comments: Array<Comment> = [];
         this.db
             .collection('Posts')
             .doc(postId)
@@ -42,7 +83,7 @@ export class CommentService implements OnDestroy {
             )
             .subscribe(
                 post => {
-                    if (post.commentsId) {
+                    if (post && post.commentsId) {
                         commentIds.push(post.commentsId);
                     }
                 },
@@ -53,13 +94,8 @@ export class CommentService implements OnDestroy {
                     );
                 },
             );
-        console.log(commentIds, 'commentIds getComents service');
         return this.commentsFromCollection(commentIds);
-        /*return commentIds.length
-            ? this.commentsFromCollection(commentIds)
-            : undefined;*/
     }
-
     private commentIdToPostArray(postId: string, commId: string) {
         this.db
             .collection('Posts')
@@ -69,34 +105,13 @@ export class CommentService implements OnDestroy {
             });
     }
 
-    /*this.db
-          .doc(`Posts/${postId}`)
-          .snapshotChanges()
-          .pipe(takeUntil(this.destroy$))
-          .subscribe(post => {
-              commentIds = post.payload.doc.data().commentsId;
-              console.log(commentIds, 'commentIds from post');
-          });*/
-
-    /*tap(
-              allCommentsId => {
-                  comments = allCommentsId ;
-                  debugger;
-                  console.log(allCommentsId, 'allCommentsId');
-              },
-              (comments = allCommentsId.filter(
-                      (val, ind, id) => id === neededIds.find(needId => needId === id),
-                  )),
-          ),*/
     private commentsFromCollection(
         neededIds: any[],
     ): Array<Comment> | undefined {
         const arrIds = neededIds;
-        if (!arrIds) {
+        if (arrIds[0]) {
             return;
         }
-        console.log(arrIds, 'neededIds arg');
-
         const comments: Array<Comment> = [];
 
         this.commentCollection
@@ -104,25 +119,16 @@ export class CommentService implements OnDestroy {
             .pipe(takeUntil(this.destroy$))
             .subscribe(allCommentsId => {
                 allCommentsId.docs.forEach(comment => {
-                    if (
-                        comment.id ===
-                        arrIds[0].find(needId => needId === comment.id)
-                    ) {
-                        const oneComment = comment.data() as Comment;
-                        comments.push(oneComment);
+                    if (arrIds[0]) {
+                        if (
+                            comment.id ===
+                            arrIds[0].find(needId => needId === comment.id)
+                        ) {
+                            const oneComment = comment.data() as Comment;
+                            comments.push(oneComment);
+                        }
                     }
                 });
-                /*collection.docs.forEach(doc => {
-              if (postId === doc.data().postId) {
-                const post = doc.data();
-                this.userId = doc.data().userId;
-                this.media = post;
-              }
-            });*/
-                // debugger;
-                console.log(arrIds, 'neededIds subscribe');
-                console.log(comments, 'comments');
-                // return comments;
             });
         return comments;
     }

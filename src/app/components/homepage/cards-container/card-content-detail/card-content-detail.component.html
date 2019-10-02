@@ -103,15 +103,14 @@
 
     <ng-container *ngIf="comments">
         <ng-container *ngFor="let comment of comments">
-            <section #oneComment>
-                <mat-card class="comment-container">
+                <mat-card class="comment-container" *ngIf="comment.userProfile">
                     <mat-card-header>
                         <img
                             mat-card-avatar
                             alt="User avatar"
                             [src]="comment.userProfile ? comment.userProfile.avatar : defaultImage"
                         />
-                        <!--<mat-card-title>{{ comment.userProfile.name }}</mat-card-title>-->
+                        <mat-card-title>{{ comment.userProfile.name }}</mat-card-title>
                         <mat-card-subtitle *ngIf="comment.userId === userId"
                             >Author</mat-card-subtitle
                         >
@@ -135,13 +134,12 @@
                             color="base"
                             matTooltip="Delete"
                             matTooltipPosition="above"
-                            (click)="onDelete(comment.commentId)"
+                            (click)="onDelete(comment)"
                         >
                             <mat-icon>delete</mat-icon>
                         </button>
                     </mat-card-actions>
                 </mat-card>
-            </section>
         </ng-container>
     </ng-container>
 

@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Subscription, throwError } from 'rxjs';
+import { Observable, Subscription, throwError } from 'rxjs';
 import * as fromApp from '../../../../store/app.reducer';
 import * as LikesСounterActions from '../../cards-container/card-content-detail/store/card-content.actions';
 import { GetDataService } from '../../../../services/get-data.service';
@@ -56,7 +56,16 @@ export class CardContentDetailComponent implements OnInit, OnDestroy {
     ) {}
 
     ngOnInit(): void {
-        this.currentUserId = this.currentUserIdService.getUserId();
+        this.store
+            .select('auth')
+            .pipe(takeUntil(this.destroy$))
+            .subscribe(state => {
+                if (!state.user) {
+                    return;
+                }
+                this.currentUserId = state.user.id;
+            });
+
         this.userSub = this.store.select('likesCount').subscribe(like => {
             this.counterLike = Number(like.likes);
             this.counterDisl = Number(like.dislikes);
@@ -65,8 +74,7 @@ export class CardContentDetailComponent implements OnInit, OnDestroy {
             params => (this.postIdroute = params.postId),
         );
         this.renderData(this.postIdroute);
-        this.comments = this.commentService.getComments(this.postIdroute);
-        console.log(this.comments, 'commentSSS onInit component');
+        this.getComments();
 
         this.commentFC = new FormControl('', [
             Validators.required,
@@ -110,6 +118,8 @@ export class CardContentDetailComponent implements OnInit, OnDestroy {
     }
     // forMyComment
     onSend() {
+        this.isComment = true;
+
         this.date = new Date().toLocaleString('ru', {
             year: 'numeric',
             month: 'short',
@@ -119,8 +129,6 @@ export class CardContentDetailComponent implements OnInit, OnDestroy {
             minute: 'numeric',
             second: 'numeric',
         });
-        this.isComment = true;
-
         this.comment = {
             text: this.commentFC.value,
             date: this.date,
@@ -128,21 +136,28 @@ export class CardContentDetailComponent implements OnInit, OnDestroy {
             postId: this.postIdroute,
         };
         this.commentService.addComment(this.comment);
-        // this.comments.push(this.comment);
-        // this.comments.reverse();
         this.commentFC.reset();
+        this.getComments();
+        console.log(this.comments, 'comments OnSend');
     }
     onCancel() {
         this.commentFC.reset();
     }
-    onDelete(deleteIndex) {
-        this.comments.splice(deleteIndex, 1);
+    onDelete(commentForDelete) {
+        this.commentService.removeComment(commentForDelete);
+        this.getComments();
     }
     commentView() {
         this.isComment = !this.isComment;
     }
-
+    private getComments() {
+        /*setTimeout(() => {
+            this.comments = this.commentService.getComments(this.postIdroute);
+        }, 0);*/
+        this.comments = this.commentService.getComments(this.postIdroute);
+    }
     ngOnDestroy() {
+        // this.currentUserId = null;
         this.userSub.unsubscribe();
         this.routeSubscription.unsubscribe();
         this.destroy$.next();
