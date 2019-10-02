@@ -14,7 +14,7 @@ import { UploadDataService } from 'src/app/services/upload-data.service';
 })
 export class TextEditorComponent implements OnInit, OnDestroy {
     public Editor = ClassicEditor;
-    public config: object = Config;
+    public config: any = Config;
     public uploadTextContentForm: FormGroup;
     public disabled: boolean;
     private disableTitle = true;
