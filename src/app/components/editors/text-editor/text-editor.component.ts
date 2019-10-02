@@ -1,5 +1,4 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { catchError } from 'rxjs/operators';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { Config } from './texteditor.config';
 import { FormGroup, FormControl } from '@angular/forms';
@@ -54,7 +53,6 @@ export class TextEditorComponent implements OnInit, OnDestroy {
             ? (this.disableDescription = true)
             : (this.disableDescription = false);
         this.disableSendButton();
-        console.log(this.postIdroute);
     }
     private disableSendButton(): void {
         this.disableTitle || this.disableDescription
@@ -71,7 +69,6 @@ export class TextEditorComponent implements OnInit, OnDestroy {
     }
     public startUpload(data): void {
         if (this.titleHeader || this.contentForEditting) {
-            console.log(data, '111111');
             this.disabled = true;
             const downloadTextMethod = this.uploadDataService.updateTextData(
                 data.title,
@@ -92,7 +89,6 @@ export class TextEditorComponent implements OnInit, OnDestroy {
                 },
             );
         } else {
-            console.log(data, '222222');
             this.disabled = true;
             const downloadTextMethod = this.uploadDataService.uploadTextData(
                 data.title,

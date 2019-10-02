@@ -8,7 +8,6 @@ import { ActivatedRoute } from '@angular/router';
 import { Subject, of } from 'rxjs';
 import { Media } from '../../../../models/content/Media/media.models';
 import { takeUntil } from 'rxjs/operators';
-// import { NavigationEnd, Router } from '@angular/router';
 import { TextEditorComponent } from 'src/app/components/editors/text-editor/text-editor.component';
 import { UploadDataService } from 'src/app/services/upload-data.service';
 
@@ -41,7 +40,6 @@ export class CardContentDetailComponent implements OnInit, OnDestroy {
         private store: Store<fromApp.AppState>,
         private getDataService: GetDataService,
         private route: ActivatedRoute,
-        // public router: Router,
         public uploadDataService: UploadDataService,
     ) {}
 
@@ -97,8 +95,5 @@ export class CardContentDetailComponent implements OnInit, OnDestroy {
         this.uploadDataService.setTitleHeader(this.titleCard);
         this.uploadDataService.setContentForEditting(this.contentForEditting);
         this.uploadDataService.setPostIdroute(this.postIdroute);
-        console.log(this.postIdroute);
-        console.log(this.media.title);
-        console.log(this.media.description);
     }
 }
