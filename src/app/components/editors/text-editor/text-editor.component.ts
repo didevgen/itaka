@@ -18,10 +18,10 @@ export class TextEditorComponent implements OnInit, OnDestroy {
     public disabled: boolean;
     private disableTitle = true;
     private disableDescription = true;
-    private titleHeader: string;
-    private contentForEditting: string;
-    private postIdroute: string;
-    private button = 'Send';
+    public titleHeader: string;
+    public contentForEditting: string;
+    public postIdroute: string;
+    public button = 'Send';
     constructor(
         private uploadDataService: UploadDataService,
         private router: Router,
