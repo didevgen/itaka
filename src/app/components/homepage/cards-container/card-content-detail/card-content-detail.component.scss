@@ -1,9 +1,10 @@
 .card-content-detail {
-    width: 95vw;
+    width: 70vw;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
+    margin-left: 10vw;
 }
 .card__buttons {
     align-self: flex-end;
@@ -26,12 +27,19 @@
 }
 .mat-card-image {
     margin-top: 10px;
-    width: 100%;
+    width: 50vw;
+    height: 65vh;
+}
+
+.mat-card-title {
+    margin-bottom: 3vh;
 }
 
 .content-page__text-content > mat-card-content {
-    text-align: unset;
+    text-align: center;
     display: block;
+    width: 55vw;
+    word-wrap: break-word;
 }
 mat-card-header {
     align-self: flex-start;
