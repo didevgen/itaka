@@ -15,7 +15,7 @@
     text-transform: capitalize;
 }
 .content-page__content {
-    width: 900px;
+    width: 90%;
     display: flex;
     justify-content: center;
 }
@@ -56,4 +56,36 @@ mat-card-header {
     font-weight: 100;
     font-size: 0.9rem;
     color: lightgrey;
+}
+
+.comment-container {
+    width: 70vw;
+    margin-left: 10vw;
+    margin-bottom: 1vh;
+    font-family: 'Montserrat', sans-serif;
+
+    .comment-container_content-card {
+        margin: 0;
+        padding: 0;
+
+        .right {
+            float: right;
+        }
+
+        p {
+            word-break: break-all;
+            text-align: center;
+            padding: 0.2em;
+        }
+    }
+
+    .comment-container_content-card__size {
+        width: 100%;
+    }
+}
+.comment-container__margintop {
+    margin-top: 0.5em;
+}
+.mat-icon-button:hover {
+    color: #ff4081;
 }
