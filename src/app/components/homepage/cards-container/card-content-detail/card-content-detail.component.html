@@ -3,8 +3,8 @@
         <mat-card-header>
             <img *ngIf="!!ava" mat-card-avatar [src]="ava" />
             <h3 class="card__user-name">{{ name }}</h3>
-        </mat-card-header >
-        <mat-card-title class="padding_bottom">
+        </mat-card-header>
+        <mat-card-title>
             {{ media.title }}
         </mat-card-title>
         <div
@@ -51,26 +51,23 @@
                     {{ description }}
                 </p>
             </div>
-            <div
-                *ngSwitchCase ="'text'"
-                class="content-page__text-content"
-                >
-                <mat-card-content [innerHtml]="media.description"></mat-card-content>
+            <div *ngSwitchCase="'text'" class="content-page__text-content">
+                <mat-card-content
+                    [innerHtml]="media.description"
+                ></mat-card-content>
                 <button
-                mat-icon-button
-                color="accent"
-                matTooltipPosition="above"
-                (click) = 'getEditor($event)'>
-                <mat-icon>build</mat-icon>
-                        Edit
+                    mat-icon-button
+                    color="accent"
+                    matTooltipPosition="above"
+                    (click)="getEditor()"
+                    *ngIf="isUserContent()"
+                >
+                    <mat-icon>build</mat-icon>
+                    Edit
                 </button>
-                <div *ngIf="condition" >
-                    <ita-text-editor>
-
-                    </ita-text-editor>
+                <div *ngIf="condition">
+                    <ita-text-editor> </ita-text-editor>
                 </div>
-
-
             </div>
             <div *ngSwitchDefault><mat-spinner></mat-spinner></div>
         </div>
@@ -80,7 +77,7 @@
                 [color]="userColorL"
                 matTooltip="Like"
                 matTooltipPosition="above"
-                (click) = "onLike()"
+                (click)="onLike()"
             >
                 <mat-icon>thumb_up_alt</mat-icon>
             </button>
@@ -90,65 +87,69 @@
                 [color]="userColorD"
                 matTooltip="Dislike"
                 matTooltipPosition="above"
-                (click) = "onDisLike()"
+                (click)="onDisLike()"
             >
                 <mat-icon>thumb_down_alt</mat-icon>
             </button>
             <span>{{ counterDisl }}</span>
-          <button
-            mat-icon-button
-            color="base"
-            [matTooltip]="
-                    isComment ? 'Hide' : 'Show'
-                "
-            matTooltipPosition="above"
-            (click)="commentView()"
-          >
-            <mat-icon>comments</mat-icon>
-          </button>
-
+            <button
+                mat-icon-button
+                color="base"
+                [matTooltip]="isComment ? 'Hide' : 'Show'"
+                matTooltipPosition="above"
+                (click)="commentView()"
+            >
+                <mat-icon>comments</mat-icon>
+            </button>
         </mat-card-actions>
     </mat-card>
 
     <ng-container *ngIf="comments && isComment">
         <ng-container *ngFor="let comment of comments">
-                <mat-card class="comment-container" *ngIf="comment.userProfile">
-                    <mat-card-header>
-                        <img
-                            mat-card-avatar
-                            alt="User avatar"
-                            [src]="comment.userProfile ? comment.userProfile.avatar : defaultImage"
-                        />
-                        <mat-card-title>{{ comment.userProfile.name }}</mat-card-title>
-                        <mat-card-subtitle *ngIf="comment.userId === userId"
-                            >Author</mat-card-subtitle
-                        >
-                        <mat-card-subtitle
-                            *ngIf="
-                                comment.userId === currentUserId &&
-                                comment.userId !== userId
-                            "
-                            >You
-                        </mat-card-subtitle>
-                    </mat-card-header>
-                    <mat-card-content class="comment-container_content-card">
-                        <p [innerText]="comment.text"></p>
-                        <time class="right" datetime="date">{{
-                            comment.date
-                        }}</time>
-                    </mat-card-content>
-                    <mat-card-actions class="comment-card">
-                        <button *ngIf="currentUserId === comment.userId"
-                            mat-icon-button
-                            color="base"
-                            matTooltip="Delete"
-                            matTooltipPosition="above"
-                            (click)="onDelete(comment)"
-                        >
-                            <mat-icon>delete</mat-icon>
-                        </button>
-                    </mat-card-actions>
-                </mat-card>
+            <mat-card class="comment-container" *ngIf="comment.userProfile">
+                <mat-card-header>
+                    <img
+                        mat-card-avatar
+                        alt="User avatar"
+                        [src]="
+                            comment.userProfile
+                                ? comment.userProfile.avatar
+                                : defaultImage
+                        "
+                    />
+                    <mat-card-title>{{
+                        comment.userProfile.name
+                    }}</mat-card-title>
+                    <mat-card-subtitle *ngIf="comment.userId === userId"
+                        >Author</mat-card-subtitle
+                    >
+                    <mat-card-subtitle
+                        *ngIf="
+                            comment.userId === currentUserId &&
+                            comment.userId !== userId
+                        "
+                        >You
+                    </mat-card-subtitle>
+                </mat-card-header>
+                <mat-card-content class="comment-container_content-card">
+                    <p [innerText]="comment.text"></p>
+                    <time class="right" datetime="date">{{
+                        comment.date
+                    }}</time>
+                </mat-card-content>
+                <mat-card-actions class="comment-card">
+                    <button
+                        *ngIf="currentUserId === comment.userId"
+                        mat-icon-button
+                        color="base"
+                        matTooltip="Delete"
+                        matTooltipPosition="above"
+                        (click)="onDelete(comment)"
+                    >
+                        <mat-icon>delete</mat-icon>
+                    </button>
+                </mat-card-actions>
+            </mat-card>
         </ng-container>
     </ng-container>
 
@@ -159,9 +160,15 @@
                     <img
                         mat-card-avatar
                         alt="User avatar"
-                        [src]="currentUserProfile ? currentUserProfile.avatar : defaultImage"
+                        [src]="
+                            currentUserProfile
+                                ? currentUserProfile.avatar
+                                : defaultImage
+                        "
                     />
-                    <mat-card-title>{{ currentUserProfile.name }}</mat-card-title
+                    <mat-card-title>{{
+                        currentUserProfile.name
+                    }}</mat-card-title
                     ><mat-card-subtitle>You</mat-card-subtitle>
                 </mat-card-header>
                 <mat-card-content class="comment-container_content-card">

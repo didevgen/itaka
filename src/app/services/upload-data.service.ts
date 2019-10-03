@@ -58,7 +58,6 @@ export class UploadDataService {
 
     public uploadTextData(title: string, description: string): Observable<any> {
         const postId = this.db.createId();
-        console.log(postId);
         const sendTextPromise = this.db
             .collection('Posts')
             .doc(postId)
@@ -67,8 +66,8 @@ export class UploadDataService {
                 title,
                 description,
                 contentType: 'text',
-                likes: 0,
-                dislikes: 0,
+                likes: [],
+                dislikes: [],
                 userId: this.userId,
                 postId,
             });
@@ -77,7 +76,6 @@ export class UploadDataService {
     }
     public updateTextData(title: string, description: string): Observable<any> {
         const postId = this.postIdroute;
-        console.log(postId);
         const sendTextPromise = this.db
             .collection('Posts')
             .doc(postId)
@@ -86,8 +84,8 @@ export class UploadDataService {
                 title,
                 description,
                 contentType: 'text',
-                likes: 0,
-                dislikes: 0,
+                likes: [],
+                dislikes: [],
                 userId: this.userId,
                 postId,
             });
