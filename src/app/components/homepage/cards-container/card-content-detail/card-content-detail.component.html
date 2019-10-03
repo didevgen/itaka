@@ -28,7 +28,7 @@
                     <source [src]="media.url" type="audio/mp3" />
                 </audio>
                 <p class="content-page__content-description">
-                    {{ description }}
+                    {{ media.description }}
                 </p>
             </div>
 
@@ -48,7 +48,7 @@
                     </mat-video>
                 </div>
                 <p class="content-page__content-description">
-                    {{ description }}
+                    {{ media.description }}
                 </p>
             </div>
             <div *ngSwitchCase="'text'" class="content-page__text-content">
